@@ -3,28 +3,31 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    private NavMeshAgent myAgent;
+    private PlayerStateManager currentState;
 
     [SerializeField]
-    private Camera myCamera;
-
-    [SerializeField]
-    private LayerMask walkableLayerMask;
+    private CameraController mainCamera;
+    
+    public LayerMask walkableLayerMask;
 
     private void Start()
     {
-        myAgent = GetComponent<NavMeshAgent>();
+        SetState(new ElenaState(this, mainCamera));
     }
 
-    private void LateUpdate()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit myRacycastHit;
-            Ray myRay = myCamera.ScreenPointToRay(Input.mousePosition);
+        currentState.Tick();
+    }
 
-            if (Physics.Raycast(myRay, out myRacycastHit, Mathf.Infinity, walkableLayerMask))
-                myAgent.SetDestination(myRacycastHit.point);
-        }
+    public void SetState(PlayerStateManager playerState)
+    {
+        if (currentState != null)
+            currentState.OnStateExit();
+
+        currentState = playerState;
+
+        if (currentState != null)
+            currentState.OnStateEnter();
     }
 }

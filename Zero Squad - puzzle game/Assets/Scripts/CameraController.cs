@@ -1,19 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject characterToWatch;
 
-    public GameObject player;
     private Vector3 offset;
 
     private void Start()
     {
-        offset = transform.position - player.transform.position;
+        offset = transform.position - characterToWatch.transform.position;
     }
 
     private void LateUpdate()
     {
-        transform.position = player.transform.position + offset;
+        transform.position = Vector3.Lerp(transform.position, characterToWatch.transform.position + offset, 0.1f);
+    }
+
+    public void SetCharacter(GameObject newCharacter)
+    {
+        characterToWatch = newCharacter;
     }
 }
