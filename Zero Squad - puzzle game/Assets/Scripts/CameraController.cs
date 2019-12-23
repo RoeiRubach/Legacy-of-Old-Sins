@@ -7,6 +7,11 @@ public class CameraController : MonoBehaviour
 
     private Vector3 offset;
 
+    [SerializeField]
+    [Range(0,1)]
+    [Header("Camera 'jump' to character")]
+    private float lerpingSpeed = 0.1f;
+
     private void Start()
     {
         offset = transform.position - characterToWatch.transform.position;
@@ -14,7 +19,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = Vector3.Lerp(transform.position, characterToWatch.transform.position + offset, 0.1f);
+        transform.position = Vector3.Lerp(transform.position, characterToWatch.transform.position + offset, lerpingSpeed);
     }
 
     public void SetCharacter(GameObject newCharacter)
