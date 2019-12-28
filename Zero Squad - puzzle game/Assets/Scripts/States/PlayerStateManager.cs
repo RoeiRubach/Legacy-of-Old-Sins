@@ -21,7 +21,7 @@ public abstract class PlayerStateManager
 
     #region Game state methods 
 
-    public abstract void Tick();
+    public abstract void Handle();
 
     public abstract void OnStateEnter();
 

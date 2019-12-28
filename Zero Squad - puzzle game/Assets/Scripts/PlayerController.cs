@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,12 +11,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        SetState(new ElenaState(this, mainCamera));
+        SetState(new DouglasState(this, mainCamera));
     }
 
     private void Update()
     {
-        currentState.Tick();
+        currentState.Handle();
     }
 
     public void SetState(PlayerStateManager playerState)

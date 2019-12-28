@@ -9,7 +9,7 @@ public class DouglasState : PlayerStateManager
     {
     }
 
-    public override void Tick()
+    public override void Handle()
     {
         PointAndClickMovement();
         SwitchCharacters();
@@ -33,11 +33,11 @@ public class DouglasState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             playerController.SetState(new ElenaState(playerController, cameraController));
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             playerController.SetState(new HectorState(playerController, cameraController));
         }

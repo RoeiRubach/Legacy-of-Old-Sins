@@ -1,15 +1,15 @@
 ﻿using UnityEngine.AI;
 using UnityEngine;
 
-public class ElenaState : PlayerStateManager
+public class HectorState : PlayerStateManager
 {
-    string elenaName = "Elena";
+    string hectorName = "Hector";
 
-    public ElenaState(PlayerController character, CameraController camera) : base(character, camera)
+    public HectorState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
 
-    public override void Tick()
+    public override void Handle()
     {
         PointAndClickMovement();
         SwitchCharacters();
@@ -17,29 +17,29 @@ public class ElenaState : PlayerStateManager
 
     public override void OnStateEnter()
     {
-        myCurrentCharacter = GameObject.FindWithTag(elenaName);
+        myCurrentCharacter = GameObject.FindWithTag(hectorName);
         cameraController.SetCharacter(myCurrentCharacter);
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
-        Debug.Log("Elena is now in control");
+        Debug.Log("Hector is now in control");
     }
-    
+
     public override void OnStateExit()
     {
         myCurrentCharacter = null;
         myCurrentAgent = null;
 
-        Debug.Log("Elena is out of control");
+        Debug.Log("Hector is out of control");
     }
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             playerController.SetState(new DouglasState(playerController, cameraController));
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            playerController.SetState(new HectorState(playerController, cameraController));
+            playerController.SetState(new ElenaState(playerController, cameraController));
         }
     }
 }
