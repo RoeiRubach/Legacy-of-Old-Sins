@@ -19,6 +19,7 @@ public class CameraController : MonoBehaviour
 
     private void LateUpdate()
     {
+        // Smoothly repositioning the camera's position to the desired character.
         transform.position = Vector3.Lerp(transform.position, characterToWatch.transform.position + offset, lerpingSpeed);
     }
 

@@ -5,13 +5,22 @@ public class DouglasState : PlayerStateManager
 {
     string douglasName = "Douglas";
 
+    private bool isUsingSkill;
+
     public DouglasState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
 
     public override void Handle()
     {
-        PointAndClickMovement();
+        //(!isUsingSkill) ? PointAndClickMovement() : TurnTowardTheCursor();
+        
+        if (!isUsingSkill)
+            PointAndClickMovement();
+        else
+            TurnTowardTheCursor();
+
+        SpaceKeyToEnterOrExitSkill();
         SwitchCharacters();
     }
 
@@ -29,6 +38,12 @@ public class DouglasState : PlayerStateManager
         myCurrentAgent = null;
 
         Debug.Log("Douglas is out of control");
+    }
+
+    public override void SpaceKeyToEnterOrExitSkill()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            isUsingSkill = !isUsingSkill ? true : false;
     }
 
     private void SwitchCharacters()
