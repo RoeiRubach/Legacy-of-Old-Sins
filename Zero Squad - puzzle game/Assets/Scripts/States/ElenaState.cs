@@ -20,7 +20,7 @@ public class ElenaState : PlayerStateManager
         else
             TurnTowardTheCursor();
 
-        SpaceKeyToEnterOrExitSkill();
+        EnterOrExitSkillMode();
         SwitchCharacters();
     }
 
@@ -40,7 +40,7 @@ public class ElenaState : PlayerStateManager
         Debug.Log("Elena is out of control");
     }
 
-    public override void SpaceKeyToEnterOrExitSkill()
+    public override void EnterOrExitSkillMode()
     {
         if (Input.GetKeyDown(KeyCode.Space))
             isUsingSkill = !isUsingSkill ? true : false;

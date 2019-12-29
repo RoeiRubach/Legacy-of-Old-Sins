@@ -19,12 +19,16 @@ public abstract class PlayerStateManager
 
     #endregion
 
-    #region Game state methods 
+    #region Game state abstract methods
 
     public abstract void Handle();
     public abstract void OnStateEnter();
     public abstract void OnStateExit();
-    public abstract void SpaceKeyToEnterOrExitSkill();
+    public abstract void EnterOrExitSkillMode();
+
+    #endregion
+
+    #region Game state virtual methods 
 
     public virtual void PointAndClickMovement()
     {
