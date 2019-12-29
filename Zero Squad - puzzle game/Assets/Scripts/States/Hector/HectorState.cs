@@ -44,6 +44,9 @@ public class HectorState : PlayerStateManager
         cameraController.SetCharacter(myCurrentCharacter);
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
         hectorShield = myCurrentCharacter.transform.GetChild(2).gameObject;
+
+        if (hectorShield.activeSelf)
+            isUsingSkill = true;
     }
 
     public override void EnterOrExitSkillMode()

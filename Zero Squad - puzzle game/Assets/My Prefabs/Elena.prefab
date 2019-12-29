@@ -2825,8 +2825,10 @@ GameObject:
   - component: {fileID: 752046402669424037}
   - component: {fileID: 752046402669424036}
   - component: {fileID: 752046402669424039}
+  - component: {fileID: 8748091818275771004}
   - component: {fileID: 752046402669424035}
   - component: {fileID: 752046402669424038}
+  - component: {fileID: 4098496}
   m_Layer: 0
   m_Name: Elena
   m_TagString: Elena
@@ -2882,6 +2884,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flag3D: {fileID: 2050917611459942283, guid: 5cc6ee228a5d7c342969adb38f6900ba, type: 3}
+--- !u!114 &8748091818275771004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752046402669424034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa2679366503f749b53338e5bcc8f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elenaOGMaterial: {fileID: 8230915274996237305, guid: b16e246c9c54e9e4899851f4dd39cf04,
+    type: 3}
+  stealthMode: {fileID: 2100000, guid: f79e4c75294b5ea4da39b24c00510255, type: 2}
+  elenaClothesMaterial:
+  - {fileID: 752046402114299478}
+  - {fileID: 752046401680292191}
+  - {fileID: 752046400698829388}
+  - {fileID: 752046402005278933}
 --- !u!195 &752046402669424035
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3000,6 +3022,21 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &4098496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752046402669424034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa2679366503f749b53338e5bcc8f5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elenaOGMaterial: {fileID: 0}
+  stealthMode: {fileID: 0}
+  elenaClothesMaterial: []
 --- !u!1 &752046402696444420
 GameObject:
   m_ObjectHideFlags: 0

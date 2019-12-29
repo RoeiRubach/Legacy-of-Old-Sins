@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 328062226683157801}
   m_Layer: 0
   m_Name: Hector Shield
-  m_TagString: Untagged
+  m_TagString: Hector Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

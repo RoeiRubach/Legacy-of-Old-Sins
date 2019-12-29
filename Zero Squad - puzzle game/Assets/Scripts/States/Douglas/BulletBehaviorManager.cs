@@ -7,7 +7,7 @@ public class BulletBehaviorManager : MonoBehaviour
 
     private float bulletLifeTime = 7f;
 
-    private void Update()
+    private void FixedUpdate()
     {
         transform.position += transform.forward * (Time.deltaTime * bulletSpeed);
 
@@ -18,6 +18,9 @@ public class BulletBehaviorManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
+        if (!other.gameObject.CompareTag("Hector Shield"))
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -7,6 +7,8 @@ public class ElenaState : PlayerStateManager
 
     private bool isUsingSkill;
 
+    private ElenaStealthManager elenaStealthManager;
+
     public ElenaState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
@@ -38,17 +40,28 @@ public class ElenaState : PlayerStateManager
         Debug.Log("Elena is out of control");
     }
 
-    public override void EnterOrExitSkillMode()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            isUsingSkill = !isUsingSkill ? true : false;
-    }
-
     private void ElenaInitialization()
     {
         myCurrentCharacter = GameObject.FindWithTag(elenaName);
         cameraController.SetCharacter(myCurrentCharacter);
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        elenaStealthManager = myCurrentCharacter.GetComponent<ElenaStealthManager>();
+
+        if (elenaStealthManager.IsElenaUsingStealth())
+            isUsingSkill = true;
+    }
+
+    public override void EnterOrExitSkillMode()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isUsingSkill = !isUsingSkill ? true : false;
+
+            if (isUsingSkill)
+                elenaStealthManager.CallStealthMode();
+            else
+                elenaStealthManager.OffStealthMode();
+        }
     }
 
     private void SwitchCharacters()
