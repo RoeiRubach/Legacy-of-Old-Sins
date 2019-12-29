@@ -13,12 +13,12 @@ public class HectorState : PlayerStateManager
 
     public override void Handle()
     {
-        //(!isUsingSkill) ? PointAndClickMovement() : TurnTowardTheCursor();
-
         if (!isUsingSkill)
             PointAndClickMovement();
         else
+        {
             TurnTowardTheCursor();
+        }
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -26,9 +26,7 @@ public class HectorState : PlayerStateManager
 
     public override void OnStateEnter()
     {
-        myCurrentCharacter = GameObject.FindWithTag(hectorName);
-        cameraController.SetCharacter(myCurrentCharacter);
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        HectorInitialization();
         Debug.Log("Hector is now in control");
     }
 
@@ -44,6 +42,13 @@ public class HectorState : PlayerStateManager
     {
         if (Input.GetKeyDown(KeyCode.Space))
             isUsingSkill = !isUsingSkill ? true : false;
+    }
+
+    private void HectorInitialization()
+    {
+        myCurrentCharacter = GameObject.FindWithTag(hectorName);
+        cameraController.SetCharacter(myCurrentCharacter);
+        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
     }
 
     private void SwitchCharacters()

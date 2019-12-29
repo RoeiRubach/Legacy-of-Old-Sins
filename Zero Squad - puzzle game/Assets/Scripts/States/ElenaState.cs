@@ -13,12 +13,12 @@ public class ElenaState : PlayerStateManager
 
     public override void Handle()
     {
-        //(!isUsingSkill) ? PointAndClickMovement() : TurnTowardTheCursor();
-
         if (!isUsingSkill)
             PointAndClickMovement();
         else
+        {
             TurnTowardTheCursor();
+        }
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -26,9 +26,7 @@ public class ElenaState : PlayerStateManager
 
     public override void OnStateEnter()
     {
-        myCurrentCharacter = GameObject.FindWithTag(elenaName);
-        cameraController.SetCharacter(myCurrentCharacter);
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        ElenaInitialization();
         Debug.Log("Elena is now in control");
     }
 
@@ -44,6 +42,13 @@ public class ElenaState : PlayerStateManager
     {
         if (Input.GetKeyDown(KeyCode.Space))
             isUsingSkill = !isUsingSkill ? true : false;
+    }
+
+    private void ElenaInitialization()
+    {
+        myCurrentCharacter = GameObject.FindWithTag(elenaName);
+        cameraController.SetCharacter(myCurrentCharacter);
+        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
     }
 
     private void SwitchCharacters()

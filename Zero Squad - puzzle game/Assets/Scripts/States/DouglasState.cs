@@ -6,6 +6,10 @@ public class DouglasState : PlayerStateManager
     string douglasName = "Douglas";
 
     private bool isUsingSkill;
+    
+    private GameObject douglasShotgun;
+
+    private DouglasShootingManager douglasShootingManager;
 
     public DouglasState(PlayerController character, CameraController camera) : base(character, camera)
     {
@@ -13,12 +17,13 @@ public class DouglasState : PlayerStateManager
 
     public override void Handle()
     {
-        //(!isUsingSkill) ? PointAndClickMovement() : TurnTowardTheCursor();
-        
         if (!isUsingSkill)
             PointAndClickMovement();
         else
+        {
             TurnTowardTheCursor();
+            DouglasPointAndClickShooting();
+        }
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -26,9 +31,7 @@ public class DouglasState : PlayerStateManager
 
     public override void OnStateEnter()
     {
-        myCurrentCharacter = GameObject.FindWithTag(douglasName);
-        cameraController.SetCharacter(myCurrentCharacter);
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        DouglasInitialization();
         Debug.Log("Douglas is now in control");
     }
 
@@ -40,10 +43,36 @@ public class DouglasState : PlayerStateManager
         Debug.Log("Douglas is out of control");
     }
 
+    private void DouglasInitialization()
+    {
+        myCurrentCharacter = GameObject.FindWithTag(douglasName);
+        cameraController.SetCharacter(myCurrentCharacter);
+        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
+
+        douglasShotgun = myCurrentCharacter.transform.GetChild(2).gameObject;
+        douglasShotgun.SetActive(false);
+    }
+
     public override void EnterOrExitSkillMode()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             isUsingSkill = !isUsingSkill ? true : false;
+
+            if (!douglasShotgun.activeSelf)
+                douglasShotgun.SetActive(true);
+            else
+                douglasShotgun.SetActive(false);
+        }
+    }
+
+    public void DouglasPointAndClickShooting()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            douglasShootingManager.CallSimpleShoot();
+        }
     }
 
     private void SwitchCharacters()
