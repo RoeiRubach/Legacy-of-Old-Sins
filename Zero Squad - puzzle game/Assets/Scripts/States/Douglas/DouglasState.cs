@@ -51,7 +51,6 @@ public class DouglasState : PlayerStateManager
         douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
 
         douglasShotgun = myCurrentCharacter.transform.GetChild(2).gameObject;
-        douglasShotgun.SetActive(false);
     }
 
     public override void EnterOrExitSkillMode()

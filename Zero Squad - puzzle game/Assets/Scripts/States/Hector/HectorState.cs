@@ -7,6 +7,8 @@ public class HectorState : PlayerStateManager
 
     private bool isUsingSkill;
 
+    private GameObject hectorShield;
+
     public HectorState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
@@ -16,9 +18,7 @@ public class HectorState : PlayerStateManager
         if (!isUsingSkill)
             PointAndClickMovement();
         else
-        {
             TurnTowardTheCursor();
-        }
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -38,17 +38,25 @@ public class HectorState : PlayerStateManager
         Debug.Log("Hector is out of control");
     }
 
-    public override void EnterOrExitSkillMode()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            isUsingSkill = !isUsingSkill ? true : false;
-    }
-
     private void HectorInitialization()
     {
         myCurrentCharacter = GameObject.FindWithTag(hectorName);
         cameraController.SetCharacter(myCurrentCharacter);
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        hectorShield = myCurrentCharacter.transform.GetChild(2).gameObject;
+    }
+
+    public override void EnterOrExitSkillMode()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isUsingSkill = !isUsingSkill ? true : false;
+
+            if (!hectorShield.activeSelf)
+                hectorShield.SetActive(true);
+            else
+                hectorShield.SetActive(false);
+        }
     }
 
     private void SwitchCharacters()

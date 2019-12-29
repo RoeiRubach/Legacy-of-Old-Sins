@@ -392,7 +392,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 6719215422917688860, guid: c486e204dba3eac4bae57b28fa40566a, type: 3}
-  speed: 100
   bulletHolder: {fileID: 1788648537}
 --- !u!195 &4478138913197905985
 NavMeshAgent:
@@ -524,9 +523,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e048c2b53204fd41b5b2aebaa7b9bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 0}
-  speed: 20
-  bulletHolder: {fileID: 0}
+  bullet: {fileID: 6719215422917688860, guid: c486e204dba3eac4bae57b28fa40566a, type: 3}
+  bulletHolder: {fileID: 1788648537}
 --- !u!1 &4478138913237852289
 GameObject:
   m_ObjectHideFlags: 0
@@ -3136,6 +3134,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6133239763775834670, guid: 98336532fe2b5e74cad91604fbae2a72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7153682998573807677, guid: 98336532fe2b5e74cad91604fbae2a72,
         type: 3}
