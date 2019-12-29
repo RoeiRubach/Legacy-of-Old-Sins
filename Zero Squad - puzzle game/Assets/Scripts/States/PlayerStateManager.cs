@@ -40,6 +40,15 @@ public abstract class PlayerStateManager
         }
     }
 
+    /// <summary>
+    /// Stops and reset the current character's destination (if it has one).
+    /// Creates an "imaginary" plane and casting a ray on it with the cursor.
+    /// 
+    /// Determine the point where the cursor ray intersects the plane.
+    /// This will be the point that the object must look towards to be looking at the mouse.
+    /// Raycasting to a Plane object only gives me a distance, so I have to take the distance,
+    /// then find the point along that ray that meets that distance.This will be the point to look at.
+    /// </summary>
     public virtual void TurnTowardTheCursor()
     {
         if (myCurrentAgent.hasPath)
@@ -53,12 +62,6 @@ public abstract class PlayerStateManager
 
         // Generate a ray from the cursor position
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        /* Determine the point where the cursor ray intersects the plane.
-            This will be the point that the object must look towards to be looking at the mouse.
-            Raycasting to a Plane object only gives me a distance, so I have to take the distance,
-            then find the point along that ray that meets that distance. This will be the point
-            to look at. */
 
         float hitdist = 0.0f;
 
@@ -77,5 +80,6 @@ public abstract class PlayerStateManager
             //myCurrentCharacter.transform.rotation = Quaternion.Slerp(myCurrentCharacter.transform.rotation, targetRotation, 2.5f * Time.deltaTime);
         }
     }
+
     #endregion
 }
