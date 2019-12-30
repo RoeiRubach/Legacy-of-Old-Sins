@@ -64,7 +64,10 @@ public class DouglasState : PlayerStateManager
         douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
         if (douglasShotgun.activeSelf)
+        {
             isUsingSkill = true;
+            douglasAgentPlacement.SetActive(false);
+        }
 
         initializationComplete = true;
     }
@@ -83,7 +86,7 @@ public class DouglasState : PlayerStateManager
             else
             {
                 douglasShotgun.SetActive(false);
-                douglasAgentPlacement.SetActive(false);
+                myCurrentAgent.enabled = true;
             }
         }
     }

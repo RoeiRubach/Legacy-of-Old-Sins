@@ -59,7 +59,10 @@ public class ElenaState : PlayerStateManager
         elenaAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
 
         if (elenaStealthManager.IsElenaUsingStealth())
+        {
             isUsingSkill = true;
+            elenaAgentPlacement.SetActive(false);
+        }
 
         initializationComplete = true;
     }
@@ -78,7 +81,7 @@ public class ElenaState : PlayerStateManager
             else
             {
                 elenaStealthManager.OffStealthMode();
-                elenaAgentPlacement.SetActive(false);
+                myCurrentAgent.enabled = true;
             }
         }
     }

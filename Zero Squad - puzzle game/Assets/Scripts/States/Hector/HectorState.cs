@@ -58,7 +58,10 @@ public class HectorState : PlayerStateManager
         hectorAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
         if (hectorShield.activeSelf)
+        {
             isUsingSkill = true;
+            hectorAgentPlacement.SetActive(false);
+        }
 
         initializationComplete = true;
     }
@@ -77,7 +80,7 @@ public class HectorState : PlayerStateManager
             else
             {
                 hectorShield.SetActive(false);
-                hectorAgentPlacement.SetActive(false);
+                myCurrentAgent.enabled = true;
             }
         }
     }
