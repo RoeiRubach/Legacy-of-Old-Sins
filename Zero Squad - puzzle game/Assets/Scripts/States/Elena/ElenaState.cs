@@ -7,6 +7,8 @@ public class ElenaState : PlayerStateManager
 
     private bool isUsingSkill;
 
+    private GameObject elenaAgentPlacement;
+
     private ElenaStealthManager elenaStealthManager;
 
     public ElenaState(PlayerController character, CameraController camera) : base(character, camera)
@@ -18,9 +20,7 @@ public class ElenaState : PlayerStateManager
         if (!isUsingSkill)
             PointAndClickMovement();
         else
-        {
             TurnTowardTheCursor();
-        }
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -34,8 +34,14 @@ public class ElenaState : PlayerStateManager
 
     public override void OnStateExit()
     {
+        if (isUsingSkill)
+            elenaAgentPlacement.SetActive(true);
+        else
+            myCurrentAgent.enabled = true;
+
         myCurrentCharacter = null;
         myCurrentAgent = null;
+        initializationComplete = false;
 
         Debug.Log("Elena is out of control");
     }
@@ -43,24 +49,37 @@ public class ElenaState : PlayerStateManager
     private void ElenaInitialization()
     {
         myCurrentCharacter = GameObject.FindWithTag(elenaName);
+
         cameraController.SetCharacter(myCurrentCharacter);
+
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+
         elenaStealthManager = myCurrentCharacter.GetComponent<ElenaStealthManager>();
+
+        elenaAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
 
         if (elenaStealthManager.IsElenaUsingStealth())
             isUsingSkill = true;
+
+        initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete)
         {
             isUsingSkill = !isUsingSkill ? true : false;
 
             if (isUsingSkill)
+            {
+                myCurrentAgent.enabled = false;
                 elenaStealthManager.CallStealthMode();
+            }
             else
+            {
                 elenaStealthManager.OffStealthMode();
+                elenaAgentPlacement.SetActive(false);
+            }
         }
     }
 

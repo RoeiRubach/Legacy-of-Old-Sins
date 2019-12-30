@@ -17,6 +17,9 @@ public abstract class PlayerStateManager
     protected GameObject myCurrentCharacter;
     protected NavMeshAgent myCurrentAgent;
 
+    protected float invokeSpeedManager = 0.2f;
+    protected bool initializationComplete;
+
     #endregion
 
     #region Game state abstract methods

@@ -8,6 +8,7 @@ public class DouglasState : PlayerStateManager
     private bool isUsingSkill;
     
     private GameObject douglasShotgun;
+    private GameObject douglasAgentPlacement;
 
     private DouglasShootingManager douglasShootingManager;
 
@@ -37,8 +38,14 @@ public class DouglasState : PlayerStateManager
 
     public override void OnStateExit()
     {
+        if (isUsingSkill)
+            douglasAgentPlacement.SetActive(true);
+        else
+            myCurrentAgent.enabled = true;
+
         myCurrentCharacter = null;
         myCurrentAgent = null;
+        initializationComplete = false;
 
         Debug.Log("Douglas is out of control");
     }
@@ -46,34 +53,38 @@ public class DouglasState : PlayerStateManager
     private void DouglasInitialization()
     {
         myCurrentCharacter = GameObject.FindWithTag(douglasName);
-        cameraController.SetCharacter(myCurrentCharacter);
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
-        douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
 
+        cameraController.SetCharacter(myCurrentCharacter);
+
+        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+
+        douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
         douglasShotgun = myCurrentCharacter.transform.GetChild(2).gameObject;
+
+        douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
         if (douglasShotgun.activeSelf)
             isUsingSkill = true;
+
+        initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete)
         {
             isUsingSkill = !isUsingSkill ? true : false;
 
             if (!douglasShotgun.activeSelf)
+            {
+                myCurrentAgent.enabled = false;
                 douglasShotgun.SetActive(true);
+            }
             else
+            {
                 douglasShotgun.SetActive(false);
-        }
-    }
-
-    public void DouglasPointAndClickShooting()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            douglasShootingManager.CallSimpleShoot();
+                douglasAgentPlacement.SetActive(false);
+            }
         }
     }
 
@@ -86,6 +97,14 @@ public class DouglasState : PlayerStateManager
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             playerController.SetState(new HectorState(playerController, cameraController));
+        }
+    }
+
+    public void DouglasPointAndClickShooting()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            douglasShootingManager.CallSimpleShoot();
         }
     }
 }
