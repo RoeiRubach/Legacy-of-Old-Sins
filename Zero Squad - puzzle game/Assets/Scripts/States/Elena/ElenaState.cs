@@ -15,7 +15,7 @@ public class ElenaState : PlayerStateManager
     {
     }
 
-    public override void Handle()
+    public override void UpdateHandle()
     {
         if (!isUsingSkill)
             PointAndClickMovement();
@@ -36,9 +36,9 @@ public class ElenaState : PlayerStateManager
     {
         if (isUsingSkill)
             elenaAgentPlacement.SetActive(true);
-        else
-            myCurrentAgent.enabled = true;
 
+        playerController.elenaSkillButtonController();
+        playerController.ElenaIconSelectedOFF();
         myCurrentCharacter = null;
         myCurrentAgent = null;
         initializationComplete = false;
@@ -58,10 +58,14 @@ public class ElenaState : PlayerStateManager
 
         elenaAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
 
+        playerController.elenaSkillButtonController();
+        playerController.ElenaIconSelectedON();
+
         if (elenaStealthManager.IsElenaUsingStealth())
         {
             isUsingSkill = true;
             elenaAgentPlacement.SetActive(false);
+            playerController.elenaOnSkillMode();
         }
 
         initializationComplete = true;
@@ -69,19 +73,22 @@ public class ElenaState : PlayerStateManager
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete)
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
         {
+            enterSkillViaButton = false;
             isUsingSkill = !isUsingSkill ? true : false;
 
             if (isUsingSkill)
             {
                 myCurrentAgent.enabled = false;
                 elenaStealthManager.CallStealthMode();
+                playerController.elenaOnSkillMode();
             }
             else
             {
                 elenaStealthManager.OffStealthMode();
                 myCurrentAgent.enabled = true;
+                playerController.elenaOffSkillMode();
             }
         }
     }

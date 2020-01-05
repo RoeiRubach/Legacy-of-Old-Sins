@@ -19,12 +19,13 @@ public abstract class PlayerStateManager
 
     protected float invokeSpeedManager = 0.2f;
     protected bool initializationComplete;
+    public bool enterSkillViaButton;
 
     #endregion
 
     #region Game state abstract methods
 
-    public abstract void Handle();
+    public abstract void UpdateHandle();
     public abstract void OnStateEnter();
     public abstract void OnStateExit();
     public abstract void EnterOrExitSkillMode();
