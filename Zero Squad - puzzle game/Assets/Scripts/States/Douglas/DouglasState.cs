@@ -16,7 +16,7 @@ public class DouglasState : PlayerStateManager
     {
     }
 
-    public override void Handle()
+    public override void UpdateHandle()
     {
         if (!isUsingSkill)
             PointAndClickMovement();
@@ -40,9 +40,9 @@ public class DouglasState : PlayerStateManager
     {
         if (isUsingSkill)
             douglasAgentPlacement.SetActive(true);
-        else
-            myCurrentAgent.enabled = true;
 
+        playerController.douglasSkillButtonController();
+        playerController.DouglasIconSelectedOFF();
         myCurrentCharacter = null;
         myCurrentAgent = null;
         initializationComplete = false;
@@ -63,10 +63,14 @@ public class DouglasState : PlayerStateManager
 
         douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
+        playerController.douglasSkillButtonController();
+        playerController.DouglasIconSelectedON();
+
         if (douglasShotgun.activeSelf)
         {
             isUsingSkill = true;
             douglasAgentPlacement.SetActive(false);
+            playerController.douglasOnSkillMode();
         }
 
         initializationComplete = true;
@@ -74,17 +78,20 @@ public class DouglasState : PlayerStateManager
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete)
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
         {
+            enterSkillViaButton = false;
             isUsingSkill = !isUsingSkill ? true : false;
 
             if (!douglasShotgun.activeSelf)
             {
+                playerController.douglasOnSkillMode();
                 myCurrentAgent.enabled = false;
                 douglasShotgun.SetActive(true);
             }
             else
             {
+                playerController.douglasOffSkillMode();
                 douglasShotgun.SetActive(false);
                 myCurrentAgent.enabled = true;
             }
