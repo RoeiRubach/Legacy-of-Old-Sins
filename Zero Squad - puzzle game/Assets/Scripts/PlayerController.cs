@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    private const int maxHP = 10;
+
     private PlayerStateManager currentState;
 
     [SerializeField]
@@ -10,10 +12,18 @@ public class PlayerController : MonoBehaviour
     
     public LayerMask walkableLayerMask;
 
+    [SerializeField]
+    private Sprite[] hpBars;
+
     #region Douglas attributes
     [Space(height: 20)]
 
     [Header("Douglas attributes", order = 1)]
+    [SerializeField]
+    private Image douglasHP;
+
+    private int douglasCurrentHP = maxHP; 
+
     [Header("Douglas icon properties", order = 2)]
     [SerializeField]
     private Image douglasIconPlaceHolder;
@@ -34,6 +44,11 @@ public class PlayerController : MonoBehaviour
     [Space(height:20)]
 
     [Header("Elena attributes", order = 1)]
+    [SerializeField]
+    private Image elenaHP;
+
+    private int elenaCurrentHP = maxHP;
+
     [Header("Elena icon properties", order = 2)]
     [SerializeField]
     private Image elenaIconPlaceHolder;
@@ -54,6 +69,11 @@ public class PlayerController : MonoBehaviour
     [Space(height: 20)]
 
     [Header("Hector attributes", order = 1)]
+    [SerializeField]
+    private Image hectorHP;
+
+    private int hectorCurrentHP = maxHP;
+
     [Header("Hector icon properties", order = 2)]
     [SerializeField]
     private Image hectorIconPlaceHolder;
@@ -123,6 +143,18 @@ public class PlayerController : MonoBehaviour
         douglasSkillPlaceHolder.GetComponent<Image>().sprite = douglasSelectedSkillSprite;
     }
 
+    [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
+    public void DouglasTakingDamage()
+    {
+        if (douglasCurrentHP > 0)
+        {
+            douglasCurrentHP--;
+            douglasHP.GetComponent<Image>().sprite = hpBars[douglasCurrentHP];
+        }
+        else
+            print("Douglas is already dead you sick fuck");
+    }
+
     #endregion
 
     #region Elena UI manager
@@ -155,6 +187,18 @@ public class PlayerController : MonoBehaviour
     public void elenaOnSkillMode()
     {
         elenaSkillPlaceHolder.GetComponent<Image>().sprite = elenaSelectedSkillSprite;
+    }
+
+    [ContextMenu("Apply damage to Elena - PLAYMODE ONLY!")]
+    public void ElenaTakingDamage()
+    {
+        if (elenaCurrentHP > 0)
+        {
+            elenaCurrentHP--;
+            elenaHP.GetComponent<Image>().sprite = hpBars[elenaCurrentHP];
+        }
+        else
+            print("Elena is already dead you sick fuck");
     }
 
 
@@ -191,6 +235,19 @@ public class PlayerController : MonoBehaviour
     {
         hectorSkillPlaceHolder.GetComponent<Image>().sprite = hectorSelectedSkillSprite;
     }
+
+    [ContextMenu("Apply damage to Hector - PLAYMODE ONLY!")]
+    public void HectorTakingDamage()
+    {
+        if (hectorCurrentHP > 0)
+        {
+            hectorCurrentHP--;
+            hectorHP.GetComponent<Image>().sprite = hpBars[hectorCurrentHP];
+        }
+        else
+            print("Hector is already dead you sick fuck");
+    }
+
     #endregion
 
     public void EnterSkillViaButton()
