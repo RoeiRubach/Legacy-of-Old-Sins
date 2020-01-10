@@ -41,8 +41,10 @@ public class DouglasState : PlayerStateManager
         if (isUsingSkill)
             douglasAgentPlacement.SetActive(true);
 
-        playerController.douglasSkillButtonController();
+        playerController.DouglasSkillButtonController();
         playerController.DouglasIconSelectedOFF();
+        playerController.DouglasButtonInteractivitySetter();
+
         myCurrentCharacter = null;
         myCurrentAgent = null;
         initializationComplete = false;
@@ -63,14 +65,15 @@ public class DouglasState : PlayerStateManager
 
         douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
-        playerController.douglasSkillButtonController();
+        playerController.DouglasSkillButtonController();
         playerController.DouglasIconSelectedON();
+        playerController.DouglasButtonInteractivitySetter();
 
         if (douglasShotgun.activeSelf)
         {
             isUsingSkill = true;
             douglasAgentPlacement.SetActive(false);
-            playerController.douglasOnSkillMode();
+            playerController.DouglasOnSkillMode();
         }
 
         initializationComplete = true;
@@ -85,13 +88,13 @@ public class DouglasState : PlayerStateManager
 
             if (!douglasShotgun.activeSelf)
             {
-                playerController.douglasOnSkillMode();
+                playerController.DouglasOnSkillMode();
                 myCurrentAgent.enabled = false;
                 douglasShotgun.SetActive(true);
             }
             else
             {
-                playerController.douglasOffSkillMode();
+                playerController.DouglasOffSkillMode();
                 douglasShotgun.SetActive(false);
                 myCurrentAgent.enabled = true;
             }

@@ -395,7 +395,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -413,7 +413,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: b2ea4d0cf7fbd8248b16480cd5775360,
       type: 3}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: a0121ae286a4a344e9d959396d1ee2c8, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -436,75 +436,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1627731768}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 828694102}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 7583c3602aca30f419d6d8712bff9cb8,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 184973339}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: a0121ae286a4a344e9d959396d1ee2c8,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1916899908}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 910181275}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 809270848}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
@@ -781,7 +712,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -799,7 +730,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 283380d6ade8abb4d95678c65e94addd,
       type: 3}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: e9b3a3161f5dfb247abe33773e101b38, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -915,7 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -933,7 +864,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 106af997cca79ba4a923a5505a528667,
       type: 3}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: 1dc25e0d0d9c93a4e9b5454e76169721, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -949,75 +880,6 @@ MonoBehaviour:
       - m_Target: {fileID: 882905577}
         m_MethodName: SwitchToElenaStateViaButton
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1627731768}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 828694102}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 1dc25e0d0d9c93a4e9b5454e76169721,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 184973339}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: edb50428156accf4c82bea338ffd9fea,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1916899908}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 910181275}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 809270848}
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1147,6 +1009,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d854a335593124fbac8f89697570af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  douglasHP: {fileID: 1686041970}
+  douglasButtonRef: {fileID: 1627731767}
+  douglasIconPlaceHolder: {fileID: 1627731768}
+  douglasStandardIconSprite: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6,
+    type: 3}
+  douglasSelectedIconSprite: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621,
+    type: 3}
+  douglasSkillPlaceHolder: {fileID: 1916899911}
+  douglasStandardSkillSprite: {fileID: 21300000, guid: 200a62e28112b7947923364affeb5252,
+    type: 3}
+  douglasSelectedSkillSprite: {fileID: 21300000, guid: 2b51ba481dbea0449a73d4494a799f2d,
+    type: 3}
+  elenaHP: {fileID: 1167604289}
+  elenaButtonRef: {fileID: 828694101}
+  elenaIconPlaceHolder: {fileID: 828694102}
+  elenaStandardIconSprite: {fileID: 21300000, guid: 7583c3602aca30f419d6d8712bff9cb8,
+    type: 3}
+  elenaSelectedIconSprite: {fileID: 21300000, guid: 1dc25e0d0d9c93a4e9b5454e76169721,
+    type: 3}
+  elenaSkillPlaceHolder: {fileID: 910181278}
+  elenaStandardSkillSprite: {fileID: 21300000, guid: 128b24da5fb6acb45a15b91cc709f7d0,
+    type: 3}
+  elenaSelectedSkillSprite: {fileID: 21300000, guid: 558eae465e703f64f8fc2fa3100c58c3,
+    type: 3}
+  hectorHP: {fileID: 1037156353}
+  hectorButtonRef: {fileID: 184973338}
+  hectorIconPlaceHolder: {fileID: 184973339}
+  hectorStandardIconSprite: {fileID: 21300000, guid: edb50428156accf4c82bea338ffd9fea,
+    type: 3}
+  hectorSelectedIconSprite: {fileID: 21300000, guid: a0121ae286a4a344e9d959396d1ee2c8,
+    type: 3}
+  hectorSkillPlaceHolder: {fileID: 809270851}
+  hectorStandardSkillSprite: {fileID: 21300000, guid: 45a7ecc2dad072648bb765e0abb830f1,
+    type: 3}
+  hectorSelectedSkillSprite: {fileID: 21300000, guid: e9b3a3161f5dfb247abe33773e101b38,
+    type: 3}
   mainCamera: {fileID: 963194229}
   walkableLayerMask:
     serializedVersion: 2
@@ -1163,39 +1061,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 25680511e87015247bc5e0168c6bc365, type: 3}
   - {fileID: 21300000, guid: fd0ac06fcdbac3047b71dd3d1c1b3742, type: 3}
   - {fileID: 21300000, guid: 248706144d7c34846ae1588d9b9e42da, type: 3}
-  douglasHP: {fileID: 1686041970}
-  douglasIconPlaceHolder: {fileID: 1627731768}
-  douglasStandardIconSprite: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6,
-    type: 3}
-  douglasSelectedIconSprite: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621,
-    type: 3}
-  douglasSkillPlaceHolder: {fileID: 1916899911}
-  douglasStandardSkillSprite: {fileID: 21300000, guid: 200a62e28112b7947923364affeb5252,
-    type: 3}
-  douglasSelectedSkillSprite: {fileID: 21300000, guid: 2b51ba481dbea0449a73d4494a799f2d,
-    type: 3}
-  elenaHP: {fileID: 1167604289}
-  elenaIconPlaceHolder: {fileID: 828694102}
-  elenaStandardIconSprite: {fileID: 21300000, guid: 7583c3602aca30f419d6d8712bff9cb8,
-    type: 3}
-  elenaSelectedIconSprite: {fileID: 21300000, guid: 1dc25e0d0d9c93a4e9b5454e76169721,
-    type: 3}
-  elenaSkillPlaceHolder: {fileID: 910181278}
-  elenaStandardSkillSprite: {fileID: 21300000, guid: 128b24da5fb6acb45a15b91cc709f7d0,
-    type: 3}
-  elenaSelectedSkillSprite: {fileID: 21300000, guid: 558eae465e703f64f8fc2fa3100c58c3,
-    type: 3}
-  hectorHP: {fileID: 1037156353}
-  hectorIconPlaceHolder: {fileID: 184973339}
-  hectorStandardIconSprite: {fileID: 21300000, guid: edb50428156accf4c82bea338ffd9fea,
-    type: 3}
-  hectorSelectedIconSprite: {fileID: 21300000, guid: a0121ae286a4a344e9d959396d1ee2c8,
-    type: 3}
-  hectorSkillPlaceHolder: {fileID: 809270851}
-  hectorStandardSkillSprite: {fileID: 21300000, guid: 45a7ecc2dad072648bb765e0abb830f1,
-    type: 3}
-  hectorSelectedSkillSprite: {fileID: 21300000, guid: e9b3a3161f5dfb247abe33773e101b38,
-    type: 3}
 --- !u!1 &910181275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1247,7 +1112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1265,7 +1130,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 809c3c5b0ac46434180637160481b9d8,
       type: 3}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: 558eae465e703f64f8fc2fa3100c58c3, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -2467,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -2485,7 +2350,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: 175d6f0fd5830c04e901a9db512ae3b7,
       type: 3}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -2501,75 +2366,6 @@ MonoBehaviour:
       - m_Target: {fileID: 882905577}
         m_MethodName: SwitchToDouglasStateViaButton
         m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1627731768}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 828694102}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: 7583c3602aca30f419d6d8712bff9cb8,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 184973339}
-        m_MethodName: set_sprite
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 21300000, guid: edb50428156accf4c82bea338ffd9fea,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1916899908}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 910181275}
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 809270848}
-        m_MethodName: SetActive
-        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2600,7 +2396,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3167,7 +2963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -3185,7 +2981,7 @@ MonoBehaviour:
     m_HighlightedSprite: {fileID: 21300000, guid: ecb0ebbdad6f861429560b7580b9fcaf,
       type: 3}
     m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 21300000, guid: 2b51ba481dbea0449a73d4494a799f2d, type: 3}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3359,6 +3155,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 752046402669424038, guid: 3605bb26d1fc75d4184bb35a9309559a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b824645f9779cff4fbfc586d3aa29aa2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3605bb26d1fc75d4184bb35a9309559a, type: 3}
 --- !u!1001 &4478138914518924078
@@ -3497,5 +3298,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5533275719750634738, guid: b47fd9c75f4941f4ba6561a908319d0f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b824645f9779cff4fbfc586d3aa29aa2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b47fd9c75f4941f4ba6561a908319d0f, type: 3}

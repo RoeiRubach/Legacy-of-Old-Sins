@@ -55,7 +55,7 @@ public abstract class PlayerStateManager
     /// Determine the point where the cursor ray intersects the plane.
     /// This will be the point that the object must look towards to be looking at the mouse.
     /// Raycasting to a Plane object only gives me a distance, so I have to take the distance,
-    /// then find the point along that ray that meets that distance.This will be the point to look at.
+    /// then find the point along that ray that meets that distance. This will be the point to look at.
     /// </summary>
     public virtual void TurnTowardTheCursor()
     {

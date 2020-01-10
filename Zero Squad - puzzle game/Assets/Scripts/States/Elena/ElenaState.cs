@@ -37,8 +37,10 @@ public class ElenaState : PlayerStateManager
         if (isUsingSkill)
             elenaAgentPlacement.SetActive(true);
 
-        playerController.elenaSkillButtonController();
+        playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedOFF();
+        playerController.ElenaButtonInteractivitySetter();
+
         myCurrentCharacter = null;
         myCurrentAgent = null;
         initializationComplete = false;
@@ -58,14 +60,15 @@ public class ElenaState : PlayerStateManager
 
         elenaAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
 
-        playerController.elenaSkillButtonController();
+        playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedON();
+        playerController.ElenaButtonInteractivitySetter();
 
         if (elenaStealthManager.IsElenaUsingStealth())
         {
             isUsingSkill = true;
             elenaAgentPlacement.SetActive(false);
-            playerController.elenaOnSkillMode();
+            playerController.ElenaOnSkillMode();
         }
 
         initializationComplete = true;
@@ -82,13 +85,13 @@ public class ElenaState : PlayerStateManager
             {
                 myCurrentAgent.enabled = false;
                 elenaStealthManager.CallStealthMode();
-                playerController.elenaOnSkillMode();
+                playerController.ElenaOnSkillMode();
             }
             else
             {
                 elenaStealthManager.OffStealthMode();
                 myCurrentAgent.enabled = true;
-                playerController.elenaOffSkillMode();
+                playerController.ElenaOffSkillMode();
             }
         }
     }
