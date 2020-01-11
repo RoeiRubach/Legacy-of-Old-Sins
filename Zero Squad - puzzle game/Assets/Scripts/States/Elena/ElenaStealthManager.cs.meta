@@ -3,7 +3,9 @@ guid: 4fa2679366503f749b53338e5bcc8f5a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - elenaOGMaterial: {fileID: 2100000, guid: d7487b77d983a574492803a5582e4b77, type: 2}
+  - stealthMode: {fileID: 2100000, guid: f79e4c75294b5ea4da39b24c00510255, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
