@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 5325713255147755625}
   - component: {fileID: 5325713255147755626}
   m_Layer: 5
-  m_Name: HP bar
+  m_Name: Elena HP bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -298,8 +298,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: EnterSkillViaButton
         m_Mode: 1
         m_Arguments:
@@ -555,8 +554,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: SwitchToDouglasStateViaButton
         m_Mode: 1
         m_Arguments:
@@ -581,7 +579,7 @@ GameObject:
   - component: {fileID: 5325713255695193944}
   - component: {fileID: 5325713255695193945}
   m_Layer: 5
-  m_Name: HP bar
+  m_Name: Douglas HP bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,8 +763,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: SwitchToHectorStateViaButton
         m_Mode: 1
         m_Arguments:
@@ -791,7 +788,7 @@ GameObject:
   - component: {fileID: 5325713256359273001}
   - component: {fileID: 5325713256359273002}
   m_Layer: 5
-  m_Name: HP bar
+  m_Name: Hector HP bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -975,8 +972,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: SwitchToElenaStateViaButton
         m_Mode: 1
         m_Arguments:
@@ -1109,8 +1105,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: EnterSkillViaButton
         m_Mode: 1
         m_Arguments:
@@ -1281,8 +1276,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-          type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: EnterSkillViaButton
         m_Mode: 1
         m_Arguments:
