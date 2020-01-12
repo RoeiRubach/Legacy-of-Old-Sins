@@ -2132,6 +2132,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5006512735489581142}
     m_Modifications:
+    - target: {fileID: 6249829361900564112, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield holder
+      objectReference: {fileID: 0}
     - target: {fileID: 6249829361900564113, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2186,11 +2191,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6249829361900564112, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield holder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf0f71bc72b7fb4b9eb973bc747f061, type: 3}
@@ -2739,6 +2739,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5006512736382397153}
     m_Modifications:
+    - target: {fileID: 5006533531441372192, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
+        type: 3}
+      propertyPath: m_Name
+      value: Shotgun holder
+      objectReference: {fileID: 0}
     - target: {fileID: 5006533531441372195, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2793,11 +2798,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5006533531441372192, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
-        type: 3}
-      propertyPath: m_Name
-      value: Shotgun holder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56eb7ac65a2985847af52fe68a3f6dd5, type: 3}
@@ -3390,6 +3390,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4893792890276904095, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
+        type: 3}
+      propertyPath: m_Name
+      value: Managers
+      objectReference: {fileID: 0}
     - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
         type: 3}
       propertyPath: douglasHP
@@ -3455,11 +3460,6 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 383903839}
-    - target: {fileID: 4893792890276904095, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-        type: 3}
-      propertyPath: m_Name
-      value: Managers
-      objectReference: {fileID: 0}
     - target: {fileID: 4893792890276904080, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4685,16 +4685,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8399397262446420127, guid: ce23f441d9294564fafed59683a9e1a8,
-        type: 3}
-      propertyPath: characterToWatch
-      value: 
-      objectReference: {fileID: 8296172668145391858}
     - target: {fileID: 8399397262446420123, guid: ce23f441d9294564fafed59683a9e1a8,
         type: 3}
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 8399397262446420127, guid: ce23f441d9294564fafed59683a9e1a8,
+        type: 3}
+      propertyPath: characterToWatch
+      value: 
+      objectReference: {fileID: 8296172668145391858}
     - target: {fileID: 8399397262446420126, guid: ce23f441d9294564fafed59683a9e1a8,
         type: 3}
       propertyPath: m_LocalPosition.x
