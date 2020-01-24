@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: fc3dc597888f240458d04b71c437f6ff
+guid: e68d3cdd983fadb45a9a17dd19ad5523
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: Douglas_Run
+    second: Hector_Idle_Move
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,11 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Douglas_Run
+      name: Hector_Idle_Move
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 19
+      lastFrame: 279
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
