@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public enum TransitionParameter
+public enum CharactersTransitionParameter
 {
     _isMoving,
 }
@@ -11,7 +11,7 @@ public abstract class PlayerStateManager
     protected PlayerController playerController;
     protected CameraController cameraController;
 
-    public PlayerStateManager(PlayerController character, CameraController camera)
+    protected PlayerStateManager(PlayerController character, CameraController camera)
     {
         this.playerController = character;
         this.cameraController = camera;
@@ -40,7 +40,7 @@ public abstract class PlayerStateManager
 
     #region Game state virtual methods 
 
-    public virtual void PointAndClickMovement()
+    protected virtual void PointAndClickMovement()
     {
         if (Input.GetMouseButtonDown(1))
         {
@@ -52,12 +52,12 @@ public abstract class PlayerStateManager
             if (Physics.Raycast(myRay, out myRacycastHit, Mathf.Infinity, playerController.walkableLayerMask))
             {
                 myCurrentAgent.SetDestination(myRacycastHit.point);
-                animator.SetBool(TransitionParameter._isMoving.ToString(), true);
+                animator.SetBool(CharactersTransitionParameter._isMoving.ToString(), true);
             }
         }
 
         else if (!myCurrentAgent.hasPath)
-            animator.SetBool(TransitionParameter._isMoving.ToString(), false);
+            animator.SetBool(CharactersTransitionParameter._isMoving.ToString(), false);
     }
 
     /// <summary>
@@ -69,13 +69,13 @@ public abstract class PlayerStateManager
     /// Raycasting to a Plane object only gives me a distance, so I have to take the distance,
     /// then find the point along that ray that meets that distance. This will be the point to look at.
     /// </summary>
-    public virtual void TurnTowardTheCursor()
+    protected virtual void TurnTowardTheCursor()
     {
         if (myCurrentAgent.hasPath)
         {
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
-            animator.SetBool(TransitionParameter._isMoving.ToString(), false);
+            animator.SetBool(CharactersTransitionParameter._isMoving.ToString(), false);
         }
 
         myCurrentAgent.enabled = false;
