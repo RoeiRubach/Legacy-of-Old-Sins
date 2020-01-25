@@ -6,18 +6,18 @@ public partial class PlayerController
     #region Hector attributes
     [Space(height: 20)]
 
-    [Header("Hector attributes", order = 1)]
+    [Header("Hector attributes:", order = 1)]
     [SerializeField] private Image _hectorHP;
     [SerializeField] private Button _hectorButtonRef;
 
     private int _hectorCurrentHP = _maxHP;
 
-    [Header("Hector icon properties", order = 2)]
+    [Header("Hector icon properties:", order = 2)]
     [SerializeField] private Image _hectorIconPlaceHolder;
 
     [SerializeField] private Sprite _hectorStandardIconSprite, _hectorSelectedIconSprite;
 
-    [Header("Hector skill properties", order = 3)]
+    [Header("Hector skill properties:", order = 3)]
     [SerializeField] private Image _hectorSkillPlaceHolder;
 
     [SerializeField] private Sprite _hectorStandardSkillSprite, _hectorSelectedSkillSprite;

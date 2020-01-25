@@ -5,19 +5,19 @@ public partial class PlayerController
 {
     #region Douglas attributes
 
-    [Header("Douglas attributes", order = 0)]
+    [Header("Douglas attributes:", order = 0)]
     [SerializeField] private Image _douglasHP;
     [SerializeField] private Button _douglasButtonRef;
 
     private int _douglasCurrentHP = _maxHP;
 
-    [Header("Douglas icon properties", order = 1)]
+    [Header("Douglas icon properties:", order = 1)]
     [SerializeField] private Image _douglasIconPlaceHolder;
 
     [SerializeField] private Sprite _douglasStandardIconSprite;
     [SerializeField] private Sprite _douglasSelectedIconSprite;
 
-    [Header("Douglas skill properties", order = 2)]
+    [Header("Douglas skill properties:", order = 2)]
     [SerializeField] private Image _douglasSkillPlaceHolder;
 
     [SerializeField] private Sprite _douglasStandardSkillSprite;

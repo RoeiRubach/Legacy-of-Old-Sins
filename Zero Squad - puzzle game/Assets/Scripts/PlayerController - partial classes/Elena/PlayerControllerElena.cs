@@ -6,18 +6,18 @@ public partial class PlayerController
     #region Elena attributes
     [Space(height: 20)]
 
-    [Header("Elena attributes", order = 1)]
+    [Header("Elena attributes:", order = 1)]
     [SerializeField] private Image _elenaHP;
     [SerializeField] private Button _elenaButtonRef;
 
     private int _elenaCurrentHP = _maxHP;
 
-    [Header("Elena icon properties", order = 2)]
+    [Header("Elena icon properties:", order = 2)]
     [SerializeField] private Image _elenaIconPlaceHolder;
 
     [SerializeField] private Sprite _elenaStandardIconSprite, _elenaSelectedIconSprite;
 
-    [Header("Elena skill properties", order = 3)]
+    [Header("Elena skill properties:", order = 3)]
     [SerializeField] private Image _elenaSkillPlaceHolder;
 
     [SerializeField] private Sprite _elenaStandardSkillSprite, _elenaSelectedSkillSprite;

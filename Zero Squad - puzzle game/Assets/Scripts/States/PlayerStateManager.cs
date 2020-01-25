@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public enum CharactersTransitionParameter
+public enum CharactersTransitionParameters
 {
     _isMoving,
 }
@@ -52,12 +52,12 @@ public abstract class PlayerStateManager
             if (Physics.Raycast(myRay, out myRacycastHit, Mathf.Infinity, playerController.walkableLayerMask))
             {
                 myCurrentAgent.SetDestination(myRacycastHit.point);
-                animator.SetBool(CharactersTransitionParameter._isMoving.ToString(), true);
+                animator.SetBool(CharactersTransitionParameters._isMoving.ToString(), true);
             }
         }
 
         else if (!myCurrentAgent.hasPath)
-            animator.SetBool(CharactersTransitionParameter._isMoving.ToString(), false);
+            animator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public abstract class PlayerStateManager
         {
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
-            animator.SetBool(CharactersTransitionParameter._isMoving.ToString(), false);
+            animator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
         }
 
         myCurrentAgent.enabled = false;

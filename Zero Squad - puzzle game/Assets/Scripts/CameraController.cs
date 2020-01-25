@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField]
     [Range(0,1)]
-    [Header("Camera 'jump' to character")]
+    [Header("Camera 'jump' to character:")]
     private float _lerpingSpeed = 0.1f;
 
     private void Start()

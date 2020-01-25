@@ -8,10 +8,10 @@ public partial class PlayerController : MonoBehaviour
 
     [SerializeField] private CameraController _mainCamera;
     
-    [Header("LayerMask", order = 0)]
+    [Header("LayerMask:", order = 0)]
     public LayerMask walkableLayerMask;
 
-    [Header("HP bars pool", order = 1)]
+    [Header("HP bars pool:", order = 1)]
     [SerializeField] private Sprite[] _hpBars;
 
     private void Start()
