@@ -4,55 +4,54 @@ using UnityEngine.AI;
 [RequireComponent(typeof(LineRenderer))]
 public class PathLineCaster : MonoBehaviour
 {
-    private NavMeshAgent agentToLinePath;
+    private NavMeshAgent _agentToLinePath;
 
-    private LineRenderer lineRenderer;
+    private LineRenderer _lineRenderer;
 
-    [SerializeField]
-    private GameObject flag3D;
+    [SerializeField] private GameObject _flag3D;
 
-    private GameObject flagClone;
+    private GameObject _flagClone;
 
-    private Vector3 destinationClone;
+    private Vector3 _destinationClone;
 
     private void Start()
     {
-        agentToLinePath = GetComponent<NavMeshAgent>();
-        lineRenderer = GetComponent<LineRenderer>();
+        _agentToLinePath = GetComponent<NavMeshAgent>();
+        _lineRenderer = GetComponent<LineRenderer>();
     }
 
     private void Update()
     {
-        if (agentToLinePath.hasPath)
+        if (_agentToLinePath.hasPath)
         {
-            lineRenderer.positionCount = agentToLinePath.path.corners.Length;
-            lineRenderer.SetPositions(agentToLinePath.path.corners);
-            lineRenderer.enabled = true;
+            _lineRenderer.positionCount = _agentToLinePath.path.corners.Length;
+            _lineRenderer.SetPositions(_agentToLinePath.path.corners);
+            _lineRenderer.enabled = true;
 
-            FlagInstantiateManager();
+            FlagInstantiateController();
         }
         else
         {
-            lineRenderer.enabled = false;
+            _lineRenderer.enabled = false;
 
             DestroyFlagCloneIfNotNull();
         }
     }
 
-    private void FlagInstantiateManager()
+    private void FlagInstantiateController()
     {
-        if ((destinationClone != agentToLinePath.destination))
+        if ((_destinationClone != _agentToLinePath.destination))
         {
             DestroyFlagCloneIfNotNull();
 
-            destinationClone = agentToLinePath.destination;
-            flagClone = Instantiate(flag3D, agentToLinePath.destination, flag3D.transform.rotation);
+            _destinationClone = _agentToLinePath.destination;
+            _flagClone = Instantiate(_flag3D, _agentToLinePath.destination, _flag3D.transform.rotation);
         }
     }
 
     private void DestroyFlagCloneIfNotNull()
     {
-        if (flagClone != null)
-            Destroy(flagClone);
+        if (_flagClone != null)
+            Destroy(_flagClone);
     }
 }

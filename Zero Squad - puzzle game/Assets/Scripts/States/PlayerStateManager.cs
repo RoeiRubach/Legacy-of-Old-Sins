@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
+public enum TransitionParameter
+{
+    _isMoving,
+}
+
 public abstract class PlayerStateManager
 {
     protected PlayerController playerController;
@@ -16,6 +21,7 @@ public abstract class PlayerStateManager
 
     protected GameObject myCurrentCharacter;
     protected NavMeshAgent myCurrentAgent;
+    protected Animator animator;
 
     protected float invokeSpeedManager = 0.2f;
     protected bool initializationComplete;
@@ -44,8 +50,14 @@ public abstract class PlayerStateManager
             Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(myRay, out myRacycastHit, Mathf.Infinity, playerController.walkableLayerMask))
+            {
                 myCurrentAgent.SetDestination(myRacycastHit.point);
+                animator.SetBool(TransitionParameter._isMoving.ToString(), true);
+            }
         }
+
+        else if (!myCurrentAgent.hasPath)
+            animator.SetBool(TransitionParameter._isMoving.ToString(), false);
     }
 
     /// <summary>
@@ -63,7 +75,10 @@ public abstract class PlayerStateManager
         {
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
+            animator.SetBool(TransitionParameter._isMoving.ToString(), false);
         }
+
+        myCurrentAgent.enabled = false;
 
         // Generate a plane that intersects the transform's position with an upwards normal.
         Plane playerPlane = new Plane(Vector3.up, myCurrentCharacter.transform.position);

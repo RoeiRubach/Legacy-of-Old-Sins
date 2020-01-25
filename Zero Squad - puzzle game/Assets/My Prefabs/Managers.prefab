@@ -43,47 +43,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d854a335593124fbac8f89697570af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  douglasHP: {fileID: 0}
-  douglasButtonRef: {fileID: 0}
-  douglasIconPlaceHolder: {fileID: 0}
-  douglasStandardIconSprite: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6,
+  _douglasHP: {fileID: 0}
+  _douglasButtonRef: {fileID: 0}
+  _douglasIconPlaceHolder: {fileID: 0}
+  _douglasStandardIconSprite: {fileID: 21300000, guid: de50242686ef6d744a34b148c229e5c6,
     type: 3}
-  douglasSelectedIconSprite: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621,
+  _douglasSelectedIconSprite: {fileID: 21300000, guid: 36353bf9d0f536b42a01055495495621,
     type: 3}
-  douglasSkillPlaceHolder: {fileID: 0}
-  douglasStandardSkillSprite: {fileID: 21300000, guid: 200a62e28112b7947923364affeb5252,
+  _douglasSkillPlaceHolder: {fileID: 0}
+  _douglasStandardSkillSprite: {fileID: 21300000, guid: 200a62e28112b7947923364affeb5252,
     type: 3}
-  douglasSelectedSkillSprite: {fileID: 21300000, guid: 2b51ba481dbea0449a73d4494a799f2d,
+  _douglasSelectedSkillSprite: {fileID: 21300000, guid: 2b51ba481dbea0449a73d4494a799f2d,
     type: 3}
-  elenaHP: {fileID: 0}
-  elenaButtonRef: {fileID: 0}
-  elenaIconPlaceHolder: {fileID: 0}
-  elenaStandardIconSprite: {fileID: 21300000, guid: 7583c3602aca30f419d6d8712bff9cb8,
+  _elenaHP: {fileID: 0}
+  _elenaButtonRef: {fileID: 0}
+  _elenaIconPlaceHolder: {fileID: 0}
+  _elenaStandardIconSprite: {fileID: 21300000, guid: 7583c3602aca30f419d6d8712bff9cb8,
     type: 3}
-  elenaSelectedIconSprite: {fileID: 21300000, guid: 1dc25e0d0d9c93a4e9b5454e76169721,
+  _elenaSelectedIconSprite: {fileID: 21300000, guid: 1dc25e0d0d9c93a4e9b5454e76169721,
     type: 3}
-  elenaSkillPlaceHolder: {fileID: 0}
-  elenaStandardSkillSprite: {fileID: 21300000, guid: 128b24da5fb6acb45a15b91cc709f7d0,
+  _elenaSkillPlaceHolder: {fileID: 0}
+  _elenaStandardSkillSprite: {fileID: 21300000, guid: 128b24da5fb6acb45a15b91cc709f7d0,
     type: 3}
-  elenaSelectedSkillSprite: {fileID: 21300000, guid: 558eae465e703f64f8fc2fa3100c58c3,
+  _elenaSelectedSkillSprite: {fileID: 21300000, guid: 558eae465e703f64f8fc2fa3100c58c3,
     type: 3}
-  hectorHP: {fileID: 0}
-  hectorButtonRef: {fileID: 0}
-  hectorIconPlaceHolder: {fileID: 0}
-  hectorStandardIconSprite: {fileID: 21300000, guid: edb50428156accf4c82bea338ffd9fea,
+  _hectorHP: {fileID: 0}
+  _hectorButtonRef: {fileID: 0}
+  _hectorIconPlaceHolder: {fileID: 0}
+  _hectorStandardIconSprite: {fileID: 21300000, guid: edb50428156accf4c82bea338ffd9fea,
     type: 3}
-  hectorSelectedIconSprite: {fileID: 21300000, guid: a0121ae286a4a344e9d959396d1ee2c8,
+  _hectorSelectedIconSprite: {fileID: 21300000, guid: a0121ae286a4a344e9d959396d1ee2c8,
     type: 3}
-  hectorSkillPlaceHolder: {fileID: 0}
-  hectorStandardSkillSprite: {fileID: 21300000, guid: 45a7ecc2dad072648bb765e0abb830f1,
+  _hectorSkillPlaceHolder: {fileID: 0}
+  _hectorStandardSkillSprite: {fileID: 21300000, guid: 45a7ecc2dad072648bb765e0abb830f1,
     type: 3}
-  hectorSelectedSkillSprite: {fileID: 21300000, guid: e9b3a3161f5dfb247abe33773e101b38,
+  _hectorSelectedSkillSprite: {fileID: 21300000, guid: e9b3a3161f5dfb247abe33773e101b38,
     type: 3}
-  mainCamera: {fileID: 0}
+  _mainCamera: {fileID: 0}
   walkableLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  hpBars:
+  _hpBars:
   - {fileID: 21300000, guid: a39c04ecfba613e40baf0e365dc60fc3, type: 3}
   - {fileID: 21300000, guid: 842df5eec14ae224b9a30e9f22c7d4b6, type: 3}
   - {fileID: 21300000, guid: e7386a2cb9fcace478ca2fd504a61d69, type: 3}

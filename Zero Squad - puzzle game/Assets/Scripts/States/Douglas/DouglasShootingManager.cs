@@ -3,37 +3,36 @@
 public class DouglasShootingManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject bullet;
-    private GameObject bulletClone;
+    private GameObject _bullet;
+    private GameObject _bulletClone;
 
-    [SerializeField]
-    private Transform bulletHolder;
+    [SerializeField] private Transform _bulletHolder;
 
-    private float shootingDelay = 1f;
+    private float _shootingDelay = 1f;
 
-    private bool isAllowedToShoot = true;
+    private bool _isAllowedToShoot = true;
 
     public void CallSimpleShoot()
     {
-        if (isAllowedToShoot)
+        if (_isAllowedToShoot)
         {
-            bulletClone = Instantiate(bullet, bulletHolder.transform);
-            bulletClone.transform.parent = null;
+            _bulletClone = Instantiate(_bullet, _bulletHolder.transform);
+            _bulletClone.transform.parent = null;
 
-            shootingDelay = 1f;
-            isAllowedToShoot = false;
+            _shootingDelay = 1f;
+            _isAllowedToShoot = false;
         }
     }
 
     public void Update()
     {
-        if (!isAllowedToShoot)
+        if (!_isAllowedToShoot)
         {
-            shootingDelay -= Time.deltaTime;
+            _shootingDelay -= Time.deltaTime;
 
-            if (shootingDelay <= 0)
+            if (_shootingDelay <= 0)
             {
-                isAllowedToShoot = true;
+                _isAllowedToShoot = true;
             }
         }
     }

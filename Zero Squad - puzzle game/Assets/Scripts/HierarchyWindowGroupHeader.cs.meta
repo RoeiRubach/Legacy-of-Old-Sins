@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: adef64adff8a12640b0753d5e19f09a9
+guid: 0c0eec3248cd29948a003bcd12b6d901
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - flag3D: {fileID: 2050917611459942283, guid: 5cc6ee228a5d7c342969adb38f6900ba,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

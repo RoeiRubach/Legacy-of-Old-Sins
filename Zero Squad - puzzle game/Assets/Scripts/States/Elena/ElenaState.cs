@@ -5,11 +5,11 @@ public class ElenaState : PlayerStateManager
 {
     string elenaName = "Elena";
 
-    private bool isUsingSkill;
+    private bool _isUsingSkill;
 
-    private GameObject elenaAgentPlacement;
+    private GameObject _elenaAgentPlacement;
 
-    private ElenaStealthManager elenaStealthManager;
+    private ElenaStealthManager _elenaStealthManager;
 
     public ElenaState(PlayerController character, CameraController camera) : base(character, camera)
     {
@@ -17,7 +17,7 @@ public class ElenaState : PlayerStateManager
 
     public override void UpdateHandle()
     {
-        if (!isUsingSkill)
+        if (!_isUsingSkill)
             PointAndClickMovement();
         else
             TurnTowardTheCursor();
@@ -34,8 +34,8 @@ public class ElenaState : PlayerStateManager
 
     public override void OnStateExit()
     {
-        if (isUsingSkill)
-            elenaAgentPlacement.SetActive(true);
+        if (_isUsingSkill)
+            _elenaAgentPlacement.SetActive(true);
 
         playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedOFF();
@@ -43,6 +43,7 @@ public class ElenaState : PlayerStateManager
 
         myCurrentCharacter = null;
         myCurrentAgent = null;
+        animator = null;
         initializationComplete = false;
 
         Debug.Log("Elena is out of control");
@@ -52,22 +53,24 @@ public class ElenaState : PlayerStateManager
     {
         myCurrentCharacter = GameObject.FindWithTag(elenaName);
 
+        animator = myCurrentCharacter.GetComponent<Animator>();
+
         cameraController.SetCharacter(myCurrentCharacter);
 
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
 
-        elenaStealthManager = myCurrentCharacter.GetComponent<ElenaStealthManager>();
+        _elenaStealthManager = myCurrentCharacter.GetComponent<ElenaStealthManager>();
 
-        elenaAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
+        _elenaAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
 
         playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedON();
         playerController.ElenaButtonInteractivitySetter();
 
-        if (elenaStealthManager.IsElenaUsingStealth())
+        if (_elenaStealthManager.IsElenaUsingStealth())
         {
-            isUsingSkill = true;
-            elenaAgentPlacement.SetActive(false);
+            _isUsingSkill = true;
+            _elenaAgentPlacement.SetActive(false);
             playerController.ElenaOnSkillMode();
         }
 
@@ -79,17 +82,16 @@ public class ElenaState : PlayerStateManager
         if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
         {
             enterSkillViaButton = false;
-            isUsingSkill = !isUsingSkill ? true : false;
+            _isUsingSkill = !_isUsingSkill ? true : false;
 
-            if (isUsingSkill)
+            if (_isUsingSkill)
             {
-                myCurrentAgent.enabled = false;
-                elenaStealthManager.CallStealthMode();
+                _elenaStealthManager.CallStealthMode();
                 playerController.ElenaOnSkillMode();
             }
             else
             {
-                elenaStealthManager.OffStealthMode();
+                _elenaStealthManager.OffStealthMode();
                 myCurrentAgent.enabled = true;
                 playerController.ElenaOffSkillMode();
             }

@@ -2,37 +2,34 @@
 
 public class ElenaStealthManager : MonoBehaviour
 {
-    [SerializeField]
-    private Material elenaOGMaterial;
+    [SerializeField] private Material _elenaOGMaterial;
 
-    [SerializeField]
-    private Material stealthMode;
+    [SerializeField] private Material _stealthMode;
 
-    [SerializeField]
-    private SkinnedMeshRenderer[] elenaClothesMaterial;
+    [SerializeField] private SkinnedMeshRenderer[] _elenaClothesMaterial;
 
-    private bool isInStealthMode;
+    private bool _isInStealthMode;
 
     public void CallStealthMode()
     {
-        for (int i = 0; i < elenaClothesMaterial.Length; i++)
+        for (int i = 0; i < _elenaClothesMaterial.Length; i++)
         {
-            elenaClothesMaterial[i].material = stealthMode;
-            isInStealthMode = true;
+            _elenaClothesMaterial[i].material = _stealthMode;
+            _isInStealthMode = true;
         }
     }
 
     public void OffStealthMode()
     {
-        for (int i = 0; i < elenaClothesMaterial.Length; i++)
+        for (int i = 0; i < _elenaClothesMaterial.Length; i++)
         {
-            elenaClothesMaterial[i].material = elenaOGMaterial;
-            isInStealthMode = false;
+            _elenaClothesMaterial[i].material = _elenaOGMaterial;
+            _isInStealthMode = false;
         }
     }
 
     public bool IsElenaUsingStealth()
     {
-        return isInStealthMode;
+        return _isInStealthMode;
     }
 }

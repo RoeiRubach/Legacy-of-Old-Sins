@@ -6,26 +6,22 @@ public partial class PlayerController
     #region Douglas attributes
 
     [Header("Douglas attributes", order = 0)]
-    [SerializeField]
-    private Image douglasHP;
-    [SerializeField]
-    private Button douglasButtonRef;
+    [SerializeField] private Image _douglasHP;
+    [SerializeField] private Button _douglasButtonRef;
 
-    private int douglasCurrentHP = maxHP;
+    private int _douglasCurrentHP = _maxHP;
 
     [Header("Douglas icon properties", order = 1)]
-    [SerializeField]
-    private Image douglasIconPlaceHolder;
+    [SerializeField] private Image _douglasIconPlaceHolder;
 
-    [SerializeField]
-    private Sprite douglasStandardIconSprite, douglasSelectedIconSprite;
+    [SerializeField] private Sprite _douglasStandardIconSprite;
+    [SerializeField] private Sprite _douglasSelectedIconSprite;
 
     [Header("Douglas skill properties", order = 2)]
-    [SerializeField]
-    private Image douglasSkillPlaceHolder;
+    [SerializeField] private Image _douglasSkillPlaceHolder;
 
-    [SerializeField]
-    private Sprite douglasStandardSkillSprite, douglasSelectedSkillSprite;
+    [SerializeField] private Sprite _douglasStandardSkillSprite;
+    [SerializeField] private Sprite _douglasSelectedSkillSprite;
 
     #endregion
 
@@ -33,46 +29,46 @@ public partial class PlayerController
 
     public void DouglasButtonInteractivitySetter()
     {
-        douglasButtonRef.interactable = douglasButtonRef.IsInteractable() ? false : true;
+        _douglasButtonRef.interactable = _douglasButtonRef.IsInteractable() ? false : true;
     }
 
     public void SwitchToDouglasStateViaButton()
     {
-        SetState(new DouglasState(this, mainCamera));
+        SetState(new DouglasState(this, _mainCamera));
     }
 
     public void DouglasIconSelectedON()
     {
-        douglasIconPlaceHolder.GetComponent<Image>().sprite = douglasSelectedIconSprite;
+        _douglasIconPlaceHolder.GetComponent<Image>().sprite = _douglasSelectedIconSprite;
     }
 
     public void DouglasIconSelectedOFF()
     {
-        douglasIconPlaceHolder.GetComponent<Image>().sprite = douglasStandardIconSprite;
+        _douglasIconPlaceHolder.GetComponent<Image>().sprite = _douglasStandardIconSprite;
     }
 
     public void DouglasSkillButtonController()
     {
-        douglasSkillPlaceHolder.enabled = !douglasSkillPlaceHolder.isActiveAndEnabled ? true : false;
+        _douglasSkillPlaceHolder.enabled = !_douglasSkillPlaceHolder.isActiveAndEnabled ? true : false;
     }
 
     public void DouglasOffSkillMode()
     {
-        douglasSkillPlaceHolder.GetComponent<Image>().sprite = douglasStandardSkillSprite;
+        _douglasSkillPlaceHolder.GetComponent<Image>().sprite = _douglasStandardSkillSprite;
     }
 
     public void DouglasOnSkillMode()
     {
-        douglasSkillPlaceHolder.GetComponent<Image>().sprite = douglasSelectedSkillSprite;
+        _douglasSkillPlaceHolder.GetComponent<Image>().sprite = _douglasSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
     public void DouglasTakingDamage()
     {
-        if (douglasCurrentHP > 0)
+        if (_douglasCurrentHP > 0)
         {
-            douglasCurrentHP--;
-            douglasHP.GetComponent<Image>().sprite = hpBars[douglasCurrentHP];
+            _douglasCurrentHP--;
+            _douglasHP.GetComponent<Image>().sprite = _hpBars[_douglasCurrentHP];
         }
         else
             print("Douglas is already dead you sick fuck");

@@ -5,12 +5,12 @@ public class DouglasState : PlayerStateManager
 {
     string douglasName = "Douglas";
 
-    private bool isUsingSkill;
+    private bool _isUsingSkill;
     
-    private GameObject douglasShotgun;
-    private GameObject douglasAgentPlacement;
+    private GameObject _douglasShotgun;
+    private GameObject _douglasAgentPlacement;
 
-    private DouglasShootingManager douglasShootingManager;
+    private DouglasShootingManager _douglasShootingManager;
 
     public DouglasState(PlayerController character, CameraController camera) : base(character, camera)
     {
@@ -18,7 +18,7 @@ public class DouglasState : PlayerStateManager
 
     public override void UpdateHandle()
     {
-        if (!isUsingSkill)
+        if (!_isUsingSkill)
             PointAndClickMovement();
         else
         {
@@ -38,8 +38,8 @@ public class DouglasState : PlayerStateManager
 
     public override void OnStateExit()
     {
-        if (isUsingSkill)
-            douglasAgentPlacement.SetActive(true);
+        if (_isUsingSkill)
+            _douglasAgentPlacement.SetActive(true);
 
         playerController.DouglasSkillButtonController();
         playerController.DouglasIconSelectedOFF();
@@ -47,6 +47,7 @@ public class DouglasState : PlayerStateManager
 
         myCurrentCharacter = null;
         myCurrentAgent = null;
+        animator = null;
         initializationComplete = false;
 
         Debug.Log("Douglas is out of control");
@@ -56,23 +57,25 @@ public class DouglasState : PlayerStateManager
     {
         myCurrentCharacter = GameObject.FindWithTag(douglasName);
 
+        animator = myCurrentCharacter.GetComponent<Animator>();
+
         cameraController.SetCharacter(myCurrentCharacter);
 
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
 
-        douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
-        douglasShotgun = myCurrentCharacter.transform.GetChild(2).gameObject;
+        _douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
+        _douglasShotgun = myCurrentCharacter.transform.GetChild(2).gameObject;
 
-        douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
+        _douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
         playerController.DouglasSkillButtonController();
         playerController.DouglasIconSelectedON();
         playerController.DouglasButtonInteractivitySetter();
 
-        if (douglasShotgun.activeSelf)
+        if (_douglasShotgun.activeSelf)
         {
-            isUsingSkill = true;
-            douglasAgentPlacement.SetActive(false);
+            _isUsingSkill = true;
+            _douglasAgentPlacement.SetActive(false);
             playerController.DouglasOnSkillMode();
         }
 
@@ -84,18 +87,17 @@ public class DouglasState : PlayerStateManager
         if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
         {
             enterSkillViaButton = false;
-            isUsingSkill = !isUsingSkill ? true : false;
+            _isUsingSkill = !_isUsingSkill ? true : false;
 
-            if (!douglasShotgun.activeSelf)
+            if (!_douglasShotgun.activeSelf)
             {
                 playerController.DouglasOnSkillMode();
-                myCurrentAgent.enabled = false;
-                douglasShotgun.SetActive(true);
+                _douglasShotgun.SetActive(true);
             }
             else
             {
                 playerController.DouglasOffSkillMode();
-                douglasShotgun.SetActive(false);
+                _douglasShotgun.SetActive(false);
                 myCurrentAgent.enabled = true;
             }
         }
@@ -117,7 +119,7 @@ public class DouglasState : PlayerStateManager
     {
         if (Input.GetMouseButtonDown(0))
         {
-            douglasShootingManager.CallSimpleShoot();
+            _douglasShootingManager.CallSimpleShoot();
         }
     }
 }

@@ -2,43 +2,41 @@
 
 public partial class PlayerController : MonoBehaviour
 {
-    private const int maxHP = 10;
+    private const int _maxHP = 10;
 
-    private PlayerStateManager currentState;
+    private PlayerStateManager _currentState;
 
-    [SerializeField]
-    private CameraController mainCamera;
+    [SerializeField] private CameraController _mainCamera;
     
     [Header("LayerMask", order = 0)]
     public LayerMask walkableLayerMask;
 
     [Header("HP bars pool", order = 1)]
-    [SerializeField]
-    private Sprite[] hpBars;
+    [SerializeField] private Sprite[] _hpBars;
 
     private void Start()
     {
-        SetState(new DouglasState(this, mainCamera));
+        SetState(new DouglasState(this, _mainCamera));
     }
 
     private void Update()
     {
-        currentState.UpdateHandle();
+        _currentState.UpdateHandle();
     }
 
     public void SetState(PlayerStateManager playerState)
     {
-        if (currentState != null)
-            currentState.OnStateExit();
+        if (_currentState != null)
+            _currentState.OnStateExit();
 
-        currentState = playerState;
+        _currentState = playerState;
 
-        if (currentState != null)
-            currentState.OnStateEnter();
+        if (_currentState != null)
+            _currentState.OnStateEnter();
     }
 
     public void EnterSkillViaButton()
     {
-        currentState.enterSkillViaButton = !currentState.enterSkillViaButton ? true : false;
+        _currentState.enterSkillViaButton = !_currentState.enterSkillViaButton ? true : false;
     }
 }

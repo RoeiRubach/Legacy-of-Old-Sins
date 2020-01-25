@@ -2,17 +2,16 @@
 
 public class BulletBehaviorManager : MonoBehaviour
 {
-    [SerializeField]
-    private float bulletSpeed;
+    [SerializeField] private float _bulletSpeed;
 
-    private float bulletLifeTime = 7f;
+    private float _bulletLifeTime = 7f;
 
     private void FixedUpdate()
     {
-        transform.position += transform.forward * (Time.deltaTime * bulletSpeed);
+        transform.position += transform.forward * (Time.deltaTime * _bulletSpeed);
 
-        bulletLifeTime -= Time.deltaTime;
-        if (bulletLifeTime <= 0)
+        _bulletLifeTime -= Time.deltaTime;
+        if (_bulletLifeTime <= 0)
             Destroy(gameObject);
     }
 

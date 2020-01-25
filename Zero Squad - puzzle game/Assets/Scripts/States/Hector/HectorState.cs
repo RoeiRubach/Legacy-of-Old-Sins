@@ -5,10 +5,10 @@ public class HectorState : PlayerStateManager
 {
     string hectorName = "Hector";
 
-    private bool isUsingSkill;
+    private bool _isUsingSkill;
 
-    private GameObject hectorShield;
-    private GameObject hectorAgentPlacement;
+    private GameObject _hectorShield;
+    private GameObject _hectorAgentPlacement;
 
     public HectorState(PlayerController character, CameraController camera) : base(character, camera)
     {
@@ -16,7 +16,7 @@ public class HectorState : PlayerStateManager
 
     public override void UpdateHandle()
     {
-        if (!isUsingSkill)
+        if (!_isUsingSkill)
             PointAndClickMovement();
         else
             TurnTowardTheCursor();
@@ -33,8 +33,8 @@ public class HectorState : PlayerStateManager
 
     public override void OnStateExit()
     {
-        if (isUsingSkill)
-            hectorAgentPlacement.SetActive(true);
+        if (_isUsingSkill)
+            _hectorAgentPlacement.SetActive(true);
 
         playerController.HectorSkillButtonController();
         playerController.HectorIconSelectedOFF();
@@ -42,6 +42,7 @@ public class HectorState : PlayerStateManager
 
         myCurrentCharacter = null;
         myCurrentAgent = null;
+        animator = null;
         initializationComplete = false;
 
         Debug.Log("Hector is out of control");
@@ -51,22 +52,24 @@ public class HectorState : PlayerStateManager
     {
         myCurrentCharacter = GameObject.FindWithTag(hectorName);
 
+        animator = myCurrentCharacter.GetComponent<Animator>();
+
         cameraController.SetCharacter(myCurrentCharacter);
 
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
 
-        hectorShield = myCurrentCharacter.transform.GetChild(2).gameObject;
+        _hectorShield = myCurrentCharacter.transform.GetChild(2).gameObject;
 
-        hectorAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
+        _hectorAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
         playerController.HectorSkillButtonController();
         playerController.HectorIconSelectedON();
         playerController.HectorButtonInteractivitySetter();
 
-        if (hectorShield.activeSelf)
+        if (_hectorShield.activeSelf)
         {
-            isUsingSkill = true;
-            hectorAgentPlacement.SetActive(false);
+            _isUsingSkill = true;
+            _hectorAgentPlacement.SetActive(false);
             playerController.HectorOnSkillMode();
         }
 
@@ -78,17 +81,16 @@ public class HectorState : PlayerStateManager
         if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
         {
             enterSkillViaButton = false;
-            isUsingSkill = !isUsingSkill ? true : false;
+            _isUsingSkill = !_isUsingSkill ? true : false;
 
-            if (!hectorShield.activeSelf)
+            if (!_hectorShield.activeSelf)
             {
-                myCurrentAgent.enabled = false;
-                hectorShield.SetActive(true);
+                _hectorShield.SetActive(true);
                 playerController.HectorOnSkillMode();
             }
             else
             {
-                hectorShield.SetActive(false);
+                _hectorShield.SetActive(false);
                 myCurrentAgent.enabled = true;
                 playerController.HectorOffSkillMode();
             }
