@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyTargetDetecting : MonoBehaviour
 {
@@ -6,67 +7,65 @@ public class EnemyTargetDetecting : MonoBehaviour
     private string _elenaName = "Elena";
     private string _hectorName = "Hector";
 
+    private float _delayTime = 1f;
+
     private bool _isDouglasBeenSeen, _isElenaBeenSeen, _isHectorBeenSeen;
 
-    private MindlessPossessed mindlessPossessedRef;
+    private MindlessPossessed _mindlessPossessedRef;
+
+    private NavMeshHit _navMeshHit;
 
     private void Start()
     {
-        mindlessPossessedRef = GetComponentInParent<MindlessPossessed>();
+        _mindlessPossessedRef = GetComponentInParent<MindlessPossessed>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!mindlessPossessedRef._isPlayerSpotted)
+        if (!_mindlessPossessedRef.IsPlayerSpotted)
         {
             if (other.CompareTag(_douglasName))
             {
-                mindlessPossessedRef._targetDetected = other.transform;
-                _isDouglasBeenSeen = true;
-                mindlessPossessedRef._isPlayerSpotted = true;
-                Debug.Log("Douglas got triggered");
+                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                    DouglasBeenSpotted(other);
             }
             else if (other.CompareTag(_elenaName))
             {
-                mindlessPossessedRef._targetDetected = other.transform;
-                _isElenaBeenSeen = true;
-                mindlessPossessedRef._isPlayerSpotted = true;
-                Debug.Log("Elena got triggered");
+                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                    ElenaBeenSpotted(other);
             }
             else if (other.CompareTag(_hectorName))
             {
-                mindlessPossessedRef._targetDetected = other.transform;
-                _isHectorBeenSeen = true;
-                mindlessPossessedRef._isPlayerSpotted = true;
-                Debug.Log("Hector got triggered");
+                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                    HectorBeenSpotted(other);
             }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (!mindlessPossessedRef._isPlayerSpotted)
+        if (!_mindlessPossessedRef.IsPlayerSpotted)
         {
             if (other.CompareTag(_douglasName))
             {
-                mindlessPossessedRef._targetDetected = other.transform;
-                _isDouglasBeenSeen = true;
-                mindlessPossessedRef._isPlayerSpotted = true;
-                Debug.Log("Douglas got triggered on stay");
+                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                    DouglasBeenSpotted(other);
+                else
+                    DouglasOutOfSight();
             }
             else if (other.CompareTag(_elenaName))
             {
-                mindlessPossessedRef._targetDetected = other.transform;
-                _isElenaBeenSeen = true;
-                mindlessPossessedRef._isPlayerSpotted = true;
-                Debug.Log("Elena got triggered on stay");
+                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                    ElenaBeenSpotted(other);
+                else
+                    ElenaOutOfSight();
             }
             else if (other.CompareTag(_hectorName))
             {
-                mindlessPossessedRef._targetDetected = other.transform;
-                _isHectorBeenSeen = true;
-                mindlessPossessedRef._isPlayerSpotted = true;
-                Debug.Log("Hector got triggered on stay");
+                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                    HectorBeenSpotted(other);
+                else
+                    HectorOutOfSight();
             }
         }
     }
@@ -77,34 +76,73 @@ public class EnemyTargetDetecting : MonoBehaviour
         {
             if (other.CompareTag(_douglasName))
             {
-                _isDouglasBeenSeen = false;
-                Invoke("SetPlayerSpottedWithDelay", 3f);
-                Debug.Log("Douglas got out of trigger");
+                DouglasOutOfSight();
             }
         }
         else if (_isElenaBeenSeen)
         {
             if (other.CompareTag(_elenaName))
             {
-                _isElenaBeenSeen = false;
-                Invoke("SetPlayerSpottedWithDelay", 3f);
-                Debug.Log("Elena got out of trigger");
+                ElenaOutOfSight();
             }
         }
         else if (_isHectorBeenSeen)
         {
             if (other.CompareTag(_hectorName))
             {
-                _isHectorBeenSeen = false;
-                Invoke("SetPlayerSpottedWithDelay", 3f);
-                Debug.Log("Hector got out of trigger");
+                HectorOutOfSight();
             }
         }
     }
 
-    private void SetPlayerSpottedWithDelay()
+    private void DouglasBeenSpotted(Collider _douglas)
     {
-        mindlessPossessedRef._targetDetected = null;
-        mindlessPossessedRef._isPlayerSpotted = false;
+        _mindlessPossessedRef.TargetDetected = _douglas.transform;
+        _isDouglasBeenSeen = true;
+        _mindlessPossessedRef.IsPlayerSpotted = true;
+        Debug.Log("Douglas got triggered");
+    }
+
+    private void ElenaBeenSpotted(Collider _elena)
+    {
+        _mindlessPossessedRef.TargetDetected = _elena.transform;
+        _isElenaBeenSeen = true;
+        _mindlessPossessedRef.IsPlayerSpotted = true;
+        Debug.Log("Elena got triggered");
+    }
+
+    private void HectorBeenSpotted(Collider _hector)
+    {
+        _mindlessPossessedRef.TargetDetected = _hector.transform;
+        _isHectorBeenSeen = true;
+        _mindlessPossessedRef.IsPlayerSpotted = true;
+        Debug.Log("Hector got triggered");
+    }
+
+    private void DouglasOutOfSight()
+    {
+        _isDouglasBeenSeen = false;
+        Invoke("SetOffPlayerSpottedWithDelay", _delayTime);
+        Debug.Log("Douglas got out of trigger");
+    }
+
+    private void ElenaOutOfSight()
+    {
+        _isElenaBeenSeen = false;
+        Invoke("SetOffPlayerSpottedWithDelay", _delayTime);
+        Debug.Log("Elena got out of trigger");
+    }
+
+    private void HectorOutOfSight()
+    {
+        _isHectorBeenSeen = false;
+        Invoke("SetOffPlayerSpottedWithDelay", _delayTime);
+        Debug.Log("Hector got out of trigger");
+    }
+
+    private void SetOffPlayerSpottedWithDelay()
+    {
+        _mindlessPossessedRef.TargetDetected = null;
+        _mindlessPossessedRef.IsPlayerSpotted = false;
     }
 }

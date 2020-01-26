@@ -4,6 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - _enemyConeVision: {fileID: 4300000, guid: 687d21fc72e51324cbb1c3078c72718e, type: 2}
   - _enemyEyesPrefab: {fileID: 3965499986164381701, guid: 700950b13640b124894ea1c379d96326,
       type: 3}
   executionOrder: 0

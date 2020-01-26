@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &963212269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963212270}
+  - component: {fileID: 963212273}
+  - component: {fileID: 963212272}
+  - component: {fileID: 963212271}
+  m_Layer: 0
+  m_Name: Enemy vision(Clone)
+  m_TagString: Enemy Vision
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &963212270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963212269}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.6, z: -1}
+  m_LocalScale: {x: 9, y: 3, z: 4}
+  m_Children: []
+  m_Father: {fileID: 4960477312361705240}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &963212273
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963212269}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 687d21fc72e51324cbb1c3078c72718e, type: 2}
+--- !u!54 &963212272
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963212269}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &963212271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963212269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d64803b2de1a04ba794a3e1c1544ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &89191822046994903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,8 +2818,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4960477312361705240}
   - component: {fileID: 3052635794396185186}
-  - component: {fileID: 8768938767225182949}
-  - component: {fileID: 3434466485807599307}
+  - component: {fileID: 7282333292861264108}
+  - component: {fileID: 8866293156800371267}
   - component: {fileID: 120914511759196661}
   m_Layer: 0
   m_Name: Mindless possessed
@@ -2766,6 +2841,7 @@ Transform:
   m_Children:
   - {fileID: 2206298675275440671}
   - {fileID: 5495828663872582310}
+  - {fileID: 963212270}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -2788,7 +2864,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8768938767225182949
+--- !u!114 &7282333292861264108
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2800,19 +2876,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f09c5c1803e3649a224a83ad1fe923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyHP: 2
+  _enemyHP: 0
   _walkingSpeed: 0.3
-  _runningSpeed: 1.25
-  _turningSpeed: 3
-  _enemyEyes: {x: 0, y: 1.6, z: 0}
-  _visionScale: {x: 10, y: 3, z: 5.5}
-  _enemyConeVision: {fileID: 4300000, guid: 687d21fc72e51324cbb1c3078c72718e, type: 2}
-  _isPlayerSpotted: 0
-  _isAttacking: 0
+  _runningSpeed: 1.5
+  _turningSpeed: 1.1
+  IsPlayerSpotted: 0
   _firstDestination: {fileID: 0}
   _secondDestination: {fileID: 0}
-  _targetDetected: {fileID: 0}
---- !u!114 &3434466485807599307
+  TargetDetected: {fileID: 0}
+--- !u!114 &8866293156800371267
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2824,6 +2896,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7819e823492b9fa4788fcb23f0280a71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyVisionInstructions: There's an 'Enemy vision' game object as a child. Change
+    its transform as you like. If a player walks in it, the enemy will detect the
+    player.
   _enemyEyesPrefab: {fileID: 3965499986164381701, guid: 700950b13640b124894ea1c379d96326,
     type: 3}
 --- !u!195 &120914511759196661
