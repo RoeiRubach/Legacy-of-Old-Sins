@@ -26,17 +26,17 @@ public class EnemyTargetDetecting : MonoBehaviour
         {
             if (other.CompareTag(_douglasName))
             {
-                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                if (IsCharacterOnDetectedArea(other))
                     DouglasBeenSpotted(other);
             }
             else if (other.CompareTag(_elenaName))
             {
-                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                if (IsCharacterOnDetectedArea(other))
                     ElenaBeenSpotted(other);
             }
             else if (other.CompareTag(_hectorName))
             {
-                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                if (IsCharacterOnDetectedArea(other))
                     HectorBeenSpotted(other);
             }
         }
@@ -48,24 +48,45 @@ public class EnemyTargetDetecting : MonoBehaviour
         {
             if (other.CompareTag(_douglasName))
             {
-                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                if (IsCharacterOnDetectedArea(other))
                     DouglasBeenSpotted(other);
-                else
-                    DouglasOutOfSight();
             }
             else if (other.CompareTag(_elenaName))
             {
-                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                if (IsCharacterOnDetectedArea(other))
                     ElenaBeenSpotted(other);
-                else
-                    ElenaOutOfSight();
             }
             else if (other.CompareTag(_hectorName))
             {
-                if (!NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed")))
+                if (IsCharacterOnDetectedArea(other))
                     HectorBeenSpotted(other);
-                else
+            }
+        }
+        else
+        {
+            if (other.CompareTag(_douglasName))
+            {
+                if (!IsCharacterOnDetectedArea(other))
+                {
+                    _mindlessPossessedRef.IsPlayerSpotted = false;
+                    DouglasOutOfSight();
+                }
+            }
+            else if (other.CompareTag(_elenaName))
+            {
+                if (!IsCharacterOnDetectedArea(other))
+                {
+                    _mindlessPossessedRef.IsPlayerSpotted = false;
+                    ElenaOutOfSight();
+                }
+            }
+            else if (other.CompareTag(_hectorName))
+            {
+                if (!IsCharacterOnDetectedArea(other))
+                {
+                    _mindlessPossessedRef.IsPlayerSpotted = false;
                     HectorOutOfSight();
+                }
             }
         }
     }
@@ -75,23 +96,17 @@ public class EnemyTargetDetecting : MonoBehaviour
         if (_isDouglasBeenSeen)
         {
             if (other.CompareTag(_douglasName))
-            {
                 DouglasOutOfSight();
-            }
         }
         else if (_isElenaBeenSeen)
         {
             if (other.CompareTag(_elenaName))
-            {
                 ElenaOutOfSight();
-            }
         }
         else if (_isHectorBeenSeen)
         {
             if (other.CompareTag(_hectorName))
-            {
                 HectorOutOfSight();
-            }
         }
     }
 
@@ -144,5 +159,10 @@ public class EnemyTargetDetecting : MonoBehaviour
     {
         _mindlessPossessedRef.TargetDetected = null;
         _mindlessPossessedRef.IsPlayerSpotted = false;
+    }
+
+    private bool IsCharacterOnDetectedArea(Collider other)
+    {
+        return !NavMesh.SamplePosition(other.transform.position, out _navMeshHit, 0.1f, NavMesh.GetAreaFromName("Mindless possessed"));
     }
 }
