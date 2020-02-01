@@ -4,6 +4,7 @@ using UnityEngine.AI;
 public enum CharactersTransitionParameters
 {
     _isMoving,
+    _isSkillMode
 }
 
 public abstract class PlayerStateManager
@@ -21,7 +22,7 @@ public abstract class PlayerStateManager
 
     protected GameObject myCurrentCharacter;
     protected NavMeshAgent myCurrentAgent;
-    protected Animator animator;
+    protected Animator myCurrentAnimator;
 
     protected float invokeSpeedManager = 0.2f;
     protected bool initializationComplete;
@@ -42,6 +43,8 @@ public abstract class PlayerStateManager
 
     protected virtual void PointAndClickMovement()
     {
+        myCurrentAnimator.SetBool(CharactersTransitionParameters._isSkillMode.ToString(), false);
+
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit myRacycastHit;
@@ -52,12 +55,12 @@ public abstract class PlayerStateManager
             if (Physics.Raycast(myRay, out myRacycastHit, Mathf.Infinity, playerController.walkableLayerMask))
             {
                 myCurrentAgent.SetDestination(myRacycastHit.point);
-                animator.SetBool(CharactersTransitionParameters._isMoving.ToString(), true);
+                myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), true);
             }
         }
 
         else if (!myCurrentAgent.hasPath)
-            animator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
+            myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
     }
 
     /// <summary>
@@ -71,12 +74,9 @@ public abstract class PlayerStateManager
     /// </summary>
     protected virtual void TurnTowardTheCursor()
     {
-        if (myCurrentAgent.hasPath)
-        {
-            myCurrentAgent.isStopped = true;
-            myCurrentAgent.ResetPath();
-            animator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
-        }
+        myCurrentAnimator.SetBool(CharactersTransitionParameters._isSkillMode.ToString(), true);
+
+        ResetAIPath();
 
         myCurrentAgent.enabled = false;
 
@@ -98,11 +98,17 @@ public abstract class PlayerStateManager
             Quaternion targetRotation = Quaternion.LookRotation(targetPoint - myCurrentCharacter.transform.position);
 
             myCurrentCharacter.transform.rotation = targetRotation;
-
-            // Smoothly rotate towards the target point.
-            //myCurrentCharacter.transform.rotation = Quaternion.Slerp(myCurrentCharacter.transform.rotation, targetRotation, 2.5f * Time.deltaTime);
         }
     }
-
     #endregion
+
+    private void ResetAIPath()
+    {
+        if (myCurrentAgent.hasPath)
+        {
+            myCurrentAgent.isStopped = true;
+            myCurrentAgent.ResetPath();
+            myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
+        }
+    }
 }

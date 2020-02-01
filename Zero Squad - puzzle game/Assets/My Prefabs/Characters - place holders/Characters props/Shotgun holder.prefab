@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5006533531441372195}
   m_Layer: 0
   m_Name: Shotgun holder
-  m_TagString: Untagged
+  m_TagString: Douglas Shotgun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23,14 +23,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5006533531441372192}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1, y: 1.05, z: 0.4}
+  m_LocalRotation: {x: 0.21991628, y: 0.7852488, z: 0.54994017, w: 0.18051906}
+  m_LocalPosition: {x: -0.14077154, y: -0.1929422, z: 0.087378934}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1736613659099549180}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -51.654003, y: 122.130005, z: 61.250004}
 --- !u!1001 &8889907911435122113
 PrefabInstance:
   m_ObjectHideFlags: 0

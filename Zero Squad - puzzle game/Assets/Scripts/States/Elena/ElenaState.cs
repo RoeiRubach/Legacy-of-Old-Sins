@@ -43,7 +43,7 @@ public class ElenaState : PlayerStateManager
 
         myCurrentCharacter = null;
         myCurrentAgent = null;
-        animator = null;
+        myCurrentAnimator = null;
         initializationComplete = false;
 
         Debug.Log("Elena is out of control");
@@ -53,7 +53,7 @@ public class ElenaState : PlayerStateManager
     {
         myCurrentCharacter = GameObject.FindWithTag(elenaName);
 
-        animator = myCurrentCharacter.GetComponent<Animator>();
+        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 
         cameraController.SetCharacter(myCurrentCharacter);
 

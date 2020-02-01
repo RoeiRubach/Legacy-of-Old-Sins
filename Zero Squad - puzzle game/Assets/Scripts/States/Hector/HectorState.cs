@@ -42,7 +42,7 @@ public class HectorState : PlayerStateManager
 
         myCurrentCharacter = null;
         myCurrentAgent = null;
-        animator = null;
+        myCurrentAnimator = null;
         initializationComplete = false;
 
         Debug.Log("Hector is out of control");
@@ -52,7 +52,7 @@ public class HectorState : PlayerStateManager
     {
         myCurrentCharacter = GameObject.FindWithTag(hectorName);
 
-        animator = myCurrentCharacter.GetComponent<Animator>();
+        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 
         cameraController.SetCharacter(myCurrentCharacter);
 

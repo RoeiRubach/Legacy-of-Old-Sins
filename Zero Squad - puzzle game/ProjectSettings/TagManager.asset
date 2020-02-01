@@ -11,6 +11,7 @@ TagManager:
   - Enemy Vision
   - Bullet
   - Enemy
+  - Douglas Shotgun
   layers:
   - Default
   - TransparentFX

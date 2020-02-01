@@ -22,6 +22,7 @@ public class DouglasState : PlayerStateManager
             PointAndClickMovement();
         else
         {
+            myCurrentAnimator.SetBool("_isShooting", false);
             TurnTowardTheCursor();
             DouglasPointAndClickShooting();
         }
@@ -47,7 +48,7 @@ public class DouglasState : PlayerStateManager
 
         myCurrentCharacter = null;
         myCurrentAgent = null;
-        animator = null;
+        myCurrentAnimator = null;
         initializationComplete = false;
 
         Debug.Log("Douglas is out of control");
@@ -57,16 +58,16 @@ public class DouglasState : PlayerStateManager
     {
         myCurrentCharacter = GameObject.FindWithTag(douglasName);
 
-        animator = myCurrentCharacter.GetComponent<Animator>();
+        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 
         cameraController.SetCharacter(myCurrentCharacter);
 
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
 
         _douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
-        _douglasShotgun = myCurrentCharacter.transform.GetChild(2).gameObject;
+        _douglasShotgun = _douglasShootingManager.DouglasShotgunRef;
 
-        _douglasAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
+        _douglasAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
 
         playerController.DouglasSkillButtonController();
         playerController.DouglasIconSelectedON();
@@ -76,8 +77,10 @@ public class DouglasState : PlayerStateManager
         {
             _isUsingSkill = true;
             _douglasAgentPlacement.SetActive(false);
-            playerController.DouglasOnSkillMode();
+            playerController.DouglasSpriteOnSkillMode();
         }
+        else
+            _douglasShootingManager.enabled = false;
 
         initializationComplete = true;
     }
@@ -91,12 +94,14 @@ public class DouglasState : PlayerStateManager
 
             if (!_douglasShotgun.activeSelf)
             {
-                playerController.DouglasOnSkillMode();
+                playerController.DouglasSpriteOnSkillMode();
+                _douglasShootingManager.enabled = true;
                 _douglasShotgun.SetActive(true);
             }
             else
             {
-                playerController.DouglasOffSkillMode();
+                playerController.DouglasSpriteOffSkillMode();
+                _douglasShootingManager.enabled = false;
                 _douglasShotgun.SetActive(false);
                 myCurrentAgent.enabled = true;
             }
@@ -115,11 +120,12 @@ public class DouglasState : PlayerStateManager
         }
     }
 
-    public void DouglasPointAndClickShooting()
+    private void DouglasPointAndClickShooting()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            _douglasShootingManager.CallSimpleShoot();
+            if (_douglasShootingManager.CallSimpleShoot())
+                myCurrentAnimator.SetBool("_isShooting", true);
         }
     }
 }

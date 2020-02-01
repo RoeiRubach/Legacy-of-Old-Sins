@@ -52,12 +52,12 @@ public partial class PlayerController
         _douglasSkillPlaceHolder.enabled = !_douglasSkillPlaceHolder.isActiveAndEnabled ? true : false;
     }
 
-    public void DouglasOffSkillMode()
+    public void DouglasSpriteOffSkillMode()
     {
         _douglasSkillPlaceHolder.GetComponent<Image>().sprite = _douglasStandardSkillSprite;
     }
 
-    public void DouglasOnSkillMode()
+    public void DouglasSpriteOnSkillMode()
     {
         _douglasSkillPlaceHolder.GetComponent<Image>().sprite = _douglasSelectedSkillSprite;
     }
