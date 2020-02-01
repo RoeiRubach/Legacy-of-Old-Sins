@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 
-public class BulletBehaviorManager : MonoBehaviour
+public class BulletBehavior : MonoBehaviour
 {
     [SerializeField] private float _bulletSpeed;
 
+    private string _hectorShield = "Hector Shield", _enemyTag = "Enemy";
     private float _bulletLifeTime = 7f;
 
     private void FixedUpdate()
@@ -17,9 +18,10 @@ public class BulletBehaviorManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Hector Shield"))
-        {
+        if (other.gameObject.CompareTag(_enemyTag))
             Destroy(gameObject);
-        }
+
+        else if (!other.gameObject.CompareTag(_hectorShield))
+            Destroy(gameObject);
     }
 }

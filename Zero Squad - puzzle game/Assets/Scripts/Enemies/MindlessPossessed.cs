@@ -6,14 +6,10 @@ public class MindlessPossessed : EnemyBase
 {
     EnemyDestinations _enemyDestinations;
     private float _waitSeconds = 3f, _stoppingDistanceNoTarget, _stoppingDistanceTargeted = 2f;
-
-    [HideInInspector] public bool IsPlayerSpotted;
     private bool _isPlayerEscape;
     private Vector3 _destinationToGoTo, _startPosition;
     
     [SerializeField] private Transform _firstDestination, _secondDestination;
-
-    [HideInInspector] public Transform TargetDetected;
 
     private void Start()
     {
@@ -24,41 +20,53 @@ public class MindlessPossessed : EnemyBase
 
     private void Update()
     {
-        float _distanceToDestination = Vector3.Distance(_destinationToGoTo, transform.position);
-
-        if (!IsPlayerSpotted)
+        if (!IsEnemyGotKilled())
         {
-            if (_isPlayerEscape)
-                ResetEnemyRoaming();
+            float _distanceToDestination = Vector3.Distance(_destinationToGoTo, transform.position);
 
-            SetPropertiesToRoamMode();
+            if (!IsPlayerSpotted)
+                RoamingState(_distanceToDestination);
 
-            if (_distanceToDestination <= _enemyMeshAgent.stoppingDistance + 1f)
+            else
             {
-                _isEnemyRoaming = false;
-                _enemyMeshAgent.isStopped = true;
-                _enemyMeshAgent.ResetPath();
+                SetPropertiesChaseState();
+                AttackingState(_distanceToDestination);
             }
+        }
+        else
+            Destroy(gameObject, _destroyTimer);
+    }
 
-            RoamingDestinationController();
+    private void RoamingState(float distanceToDestination)
+    {
+        if (_isPlayerEscape)
+            ResetEnemyRoaming();
+
+        SetPropertiesRoamState();
+
+        if (distanceToDestination <= _enemyMeshAgent.stoppingDistance + 1f)
+        {
+            _isEnemyRoaming = false;
+            ResetAIPath();
+        }
+
+        RoamingDestinationController();
+    }
+
+    private void AttackingState(float distanceToDestination)
+    {
+        if (distanceToDestination <= _enemyMeshAgent.stoppingDistance)
+        {
+            _enemyAnimator.SetBool(EnemyTransitionParameters._isMoving.ToString(), false);
+            _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), true);
+            ResetAIPath();
+
+            FaceTarget();
         }
         else
         {
-            SetPropertiesToAttackMode();
-
-            if (_distanceToDestination <= _enemyMeshAgent.stoppingDistance)
-            {
-                _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), true);
-                _enemyMeshAgent.isStopped = true;
-                _enemyMeshAgent.ResetPath();
-
-                FaceTarget();
-            }
-            else
-            {
-                _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), false);
-                _isPlayerEscape = true;
-            }
+            _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), false);
+            _isPlayerEscape = true;
         }
     }
 
@@ -66,8 +74,7 @@ public class MindlessPossessed : EnemyBase
     {
         _isPlayerEscape = false;
         _isEnemyRoaming = true;
-        _enemyMeshAgent.isStopped = true;
-        _enemyMeshAgent.ResetPath();
+        ResetAIPath();
         _enemyDestinations = EnemyDestinations._firstDestination;
         _destinationToGoTo = _startPosition;
     }
@@ -103,7 +110,7 @@ public class MindlessPossessed : EnemyBase
             _enemyAnimator.SetBool(EnemyTransitionParameters._isMoving.ToString(), true);
     }
 
-    private void SetPropertiesToRoamMode()
+    private void SetPropertiesRoamState()
     {
         _enemyMeshAgent.speed = _walkingSpeed;
         _enemyMeshAgent.stoppingDistance = 0f;
@@ -113,22 +120,14 @@ public class MindlessPossessed : EnemyBase
         _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), false);
     }
 
-    private void SetPropertiesToAttackMode()
+    private void SetPropertiesChaseState()
     {
         _enemyMeshAgent.speed = _runningSpeed;
         _enemyMeshAgent.stoppingDistance = 1.3f;
         _destinationToGoTo = TargetDetected.position;
         _enemyMeshAgent.SetDestination(_destinationToGoTo);
 
-        _enemyAnimator.SetBool(EnemyTransitionParameters._isMoving.ToString(), false);
         _enemyAnimator.SetBool(EnemyTransitionParameters._isPlayerBeenSeen.ToString(), true);
-    }
-
-    private void FaceTarget()
-    {
-        Vector3 _targetDirection = (TargetDetected.position - transform.position).normalized;
-        Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_targetDirection.x, 0, _targetDirection.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _turningSpeed);
     }
 
     private IEnumerator SetNewDestination(Vector3 newDestination, EnemyDestinations enemyDestinations)

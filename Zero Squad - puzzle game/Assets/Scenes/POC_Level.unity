@@ -8506,16 +8506,16 @@ PrefabInstance:
         type: 3}
       propertyPath: _firstDestination
       value: 
-      objectReference: {fileID: 532690666}
+      objectReference: {fileID: 1347941131}
     - target: {fileID: 7282333292861264108, guid: e0272e559b1a3ff4ca7257820f77c167,
         type: 3}
       propertyPath: _secondDestination
       value: 
-      objectReference: {fileID: 1347941131}
+      objectReference: {fileID: 532690666}
     - target: {fileID: 7282333292861264108, guid: e0272e559b1a3ff4ca7257820f77c167,
         type: 3}
-      propertyPath: _enemyHP
-      value: 0
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}

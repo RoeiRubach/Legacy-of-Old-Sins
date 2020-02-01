@@ -63,7 +63,7 @@ public partial class PlayerController
     }
 
     [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
-    public void DouglasTakingDamage()
+    public void DouglasTakingDamageTest()
     {
         if (_douglasCurrentHP > 0)
         {

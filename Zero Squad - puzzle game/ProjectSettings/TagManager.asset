@@ -9,6 +9,8 @@ TagManager:
   - Elena
   - Hector Shield
   - Enemy Vision
+  - Bullet
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - 
   - 
   - Walkable
-  - 
-  - 
+  - Bullet
+  - Enemy Vision
   - 
   - 
   - 
