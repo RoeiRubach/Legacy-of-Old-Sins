@@ -61,7 +61,7 @@ public class MindlessPossessed : EnemyBase
             _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), true);
             ResetAIPath();
 
-            FaceTarget();
+            FaceTarget(TargetDetected);
         }
         else
         {
@@ -98,10 +98,12 @@ public class MindlessPossessed : EnemyBase
 
                     case EnemyDestinations._firstDestination:
                         StartCoroutine(SetNewDestination(_secondDestination.position, EnemyDestinations._secondDestination));
+                        FaceTarget(_secondDestination);
                         break;
 
                     case EnemyDestinations._secondDestination:
                         StartCoroutine(SetNewDestination(_firstDestination.position, EnemyDestinations._firstDestination));
+                        FaceTarget(_firstDestination);
                         break;
                 }
             }

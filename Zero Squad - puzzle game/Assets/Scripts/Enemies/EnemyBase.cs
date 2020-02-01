@@ -68,7 +68,7 @@ public abstract class EnemyBase : MonoBehaviour
         _enemyMeshAgent.ResetPath();
     }
 
-    protected virtual void FaceTarget()
+    protected virtual void FaceTarget(Transform TargetDetected)
     {
         Vector3 _targetDirection = (TargetDetected.position - transform.position).normalized;
         Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_targetDirection.x, 0, _targetDirection.z));
