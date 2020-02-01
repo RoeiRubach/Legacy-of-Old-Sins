@@ -21,6 +21,7 @@ public abstract class EnemyBase : MonoBehaviour
 {
     [HideInInspector] public Transform TargetDetected;
     [HideInInspector] public bool IsPlayerSpotted;
+    [HideInInspector] public bool IsAttacking { get; protected set; }
 
     [Header("Enemy's attributes:", order = 0)]
     [SerializeField] protected int _enemyHP;

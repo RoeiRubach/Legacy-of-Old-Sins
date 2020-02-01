@@ -52,6 +52,9 @@ public class PathLineCaster : MonoBehaviour
     private void DestroyFlagCloneIfNotNull()
     {
         if (_flagClone != null)
+        {
+            GetComponent<Animator>().SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
             Destroy(_flagClone);
+        }
     }
 }

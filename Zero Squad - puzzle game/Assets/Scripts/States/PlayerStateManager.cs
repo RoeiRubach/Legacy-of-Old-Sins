@@ -23,10 +23,9 @@ public abstract class PlayerStateManager
     protected GameObject myCurrentCharacter;
     protected NavMeshAgent myCurrentAgent;
     protected Animator myCurrentAnimator;
-
-    protected float invokeSpeedManager = 0.2f;
-    protected bool initializationComplete;
-    public bool enterSkillViaButton;
+    
+    protected bool _initializationComplete;
+    public bool EnterSkillViaButton;
 
     #endregion
 
@@ -108,7 +107,6 @@ public abstract class PlayerStateManager
         {
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
-            //myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
         }
     }
 }

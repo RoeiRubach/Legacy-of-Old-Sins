@@ -44,7 +44,7 @@ public class ElenaState : PlayerStateManager
         myCurrentCharacter = null;
         myCurrentAgent = null;
         myCurrentAnimator = null;
-        initializationComplete = false;
+        _initializationComplete = false;
 
         Debug.Log("Elena is out of control");
     }
@@ -74,14 +74,14 @@ public class ElenaState : PlayerStateManager
             playerController.ElenaOnSkillMode();
         }
 
-        initializationComplete = true;
+        _initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
+        if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
         {
-            enterSkillViaButton = false;
+            EnterSkillViaButton = false;
             _isUsingSkill = !_isUsingSkill ? true : false;
 
             if (_isUsingSkill)

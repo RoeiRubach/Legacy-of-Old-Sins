@@ -37,6 +37,6 @@ public partial class PlayerController : MonoBehaviour
 
     public void EnterSkillViaButton()
     {
-        _currentState.enterSkillViaButton = !_currentState.enterSkillViaButton ? true : false;
+        _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
     }
 }

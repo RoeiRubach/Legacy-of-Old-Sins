@@ -49,7 +49,7 @@ public class DouglasState : PlayerStateManager
         myCurrentCharacter = null;
         myCurrentAgent = null;
         myCurrentAnimator = null;
-        initializationComplete = false;
+        _initializationComplete = false;
 
         Debug.Log("Douglas is out of control");
     }
@@ -82,14 +82,14 @@ public class DouglasState : PlayerStateManager
         else
             _douglasShootingManager.enabled = false;
 
-        initializationComplete = true;
+        _initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
+        if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
         {
-            enterSkillViaButton = false;
+            EnterSkillViaButton = false;
             _isUsingSkill = !_isUsingSkill ? true : false;
 
             if (!_douglasShotgun.activeSelf)

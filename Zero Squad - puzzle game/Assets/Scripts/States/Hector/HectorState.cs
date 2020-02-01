@@ -43,7 +43,7 @@ public class HectorState : PlayerStateManager
         myCurrentCharacter = null;
         myCurrentAgent = null;
         myCurrentAnimator = null;
-        initializationComplete = false;
+        _initializationComplete = false;
 
         Debug.Log("Hector is out of control");
     }
@@ -58,7 +58,7 @@ public class HectorState : PlayerStateManager
 
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
 
-        _hectorShield = myCurrentCharacter.transform.GetChild(2).gameObject;
+        _hectorShield = myCurrentCharacter.transform.GetChild(2).transform.GetChild(0).gameObject;
 
         _hectorAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
@@ -73,14 +73,14 @@ public class HectorState : PlayerStateManager
             playerController.HectorOnSkillMode();
         }
 
-        initializationComplete = true;
+        _initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || enterSkillViaButton)
+        if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
         {
-            enterSkillViaButton = false;
+            EnterSkillViaButton = false;
             _isUsingSkill = !_isUsingSkill ? true : false;
 
             if (!_hectorShield.activeSelf)

@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - Enemy
   - Douglas Shotgun
+  - Shield holder
   layers:
   - Default
   - TransparentFX

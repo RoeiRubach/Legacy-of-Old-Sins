@@ -57,6 +57,7 @@ public class MindlessPossessed : EnemyBase
     {
         if (distanceToDestination <= _enemyMeshAgent.stoppingDistance)
         {
+            IsAttacking = true;
             _enemyAnimator.SetBool(EnemyTransitionParameters._isMoving.ToString(), false);
             _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), true);
             ResetAIPath();
@@ -65,6 +66,7 @@ public class MindlessPossessed : EnemyBase
         }
         else
         {
+            IsAttacking = false;
             _enemyAnimator.SetBool(EnemyTransitionParameters._isAbleToAttack.ToString(), false);
             _isPlayerEscape = true;
         }

@@ -19,7 +19,7 @@ public class DouglasShootingManager : MonoBehaviour
             _bulletClone = Instantiate(_bullet, _bulletHolder.transform);
             _bulletClone.transform.parent = null;
 
-            _shootingDelay = 1.2f;
+            _shootingDelay = 1.1f;
             _isAllowedToShoot = false;
             return true;
         }
@@ -40,6 +40,6 @@ public class DouglasShootingManager : MonoBehaviour
     private void OnDisable()
     {
         _isAllowedToShoot = false;
-        _shootingDelay = 0.875f;
+        _shootingDelay = 0.8f;
     }
 }
