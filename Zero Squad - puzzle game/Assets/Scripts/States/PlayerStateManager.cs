@@ -108,7 +108,7 @@ public abstract class PlayerStateManager
         {
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
-            myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
+            //myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
         }
     }
 }
