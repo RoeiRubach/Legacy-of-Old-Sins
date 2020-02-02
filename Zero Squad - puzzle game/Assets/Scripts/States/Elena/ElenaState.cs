@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ElenaState : PlayerStateManager
 {
-    string elenaName = "Elena";
+    private string elenaName = "Elena";
 
     private bool _isUsingSkill;
 

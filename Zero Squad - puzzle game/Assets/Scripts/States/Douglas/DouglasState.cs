@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DouglasState : PlayerStateManager
 {
-    string douglasName = "Douglas";
+    private string douglasName = "Douglas";
 
     private bool _isUsingSkill;
     

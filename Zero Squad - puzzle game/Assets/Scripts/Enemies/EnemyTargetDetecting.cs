@@ -130,7 +130,7 @@ public class EnemyTargetDetecting : MonoBehaviour
                 DouglasOutOfSight();
             }
         }
-        else if (other.CompareTag(_elenaName) || elenaStealthManager.IsInStealthMode)
+        else if (other.CompareTag(_elenaName) || _isElenaBeenSpotted)
         {
             if (!IsCharacterOnDetectedArea(other) || elenaStealthManager.IsInStealthMode)
             {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HectorState : PlayerStateManager
 {
-    string hectorName = "Hector";
+    private string hectorName = "Hector";
 
     private bool _isUsingSkill;
 
