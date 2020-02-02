@@ -11,6 +11,7 @@ public class EnemyTargetDetecting : MonoBehaviour
     private bool _isDouglasBeenSpotted, _isElenaBeenSpotted, _isHectorBeenSpotted;
 
     private MindlessPossessed _mindlessPossessedRef;
+    private ElenaStealthManager elenaStealthManager;
 
     private NavMeshHit _navMeshHit;
 
@@ -129,9 +130,9 @@ public class EnemyTargetDetecting : MonoBehaviour
                 DouglasOutOfSight();
             }
         }
-        else if (other.CompareTag(_elenaName))
+        else if (other.CompareTag(_elenaName) || elenaStealthManager.IsInStealthMode)
         {
-            if (!IsCharacterOnDetectedArea(other))
+            if (!IsCharacterOnDetectedArea(other) || elenaStealthManager.IsInStealthMode)
             {
                 _mindlessPossessedRef.IsPlayerSpotted = false;
                 ElenaOutOfSight();
@@ -157,6 +158,7 @@ public class EnemyTargetDetecting : MonoBehaviour
 
     private void ElenaBeenSpotted(Collider _elena)
     {
+        elenaStealthManager = _elena.GetComponentInParent<ElenaStealthManager>();
         _mindlessPossessedRef.TargetDetected = _elena.transform;
         _isElenaBeenSpotted = true;
         _mindlessPossessedRef.IsPlayerSpotted = true;

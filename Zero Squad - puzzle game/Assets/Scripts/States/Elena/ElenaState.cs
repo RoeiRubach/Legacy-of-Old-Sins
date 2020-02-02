@@ -76,7 +76,7 @@ public class ElenaState : PlayerStateManager
         playerController.ElenaIconSelectedON();
         playerController.ElenaButtonInteractivitySetter();
 
-        if (_elenaStealthManager.IsElenaUsingStealth())
+        if (_elenaStealthManager.IsInStealthMode)
         {
             _isUsingSkill = true;
             _elenaAgentPlacement.SetActive(false);

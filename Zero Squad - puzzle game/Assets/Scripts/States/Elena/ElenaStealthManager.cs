@@ -11,7 +11,7 @@ public class ElenaStealthManager : MonoBehaviour
 
     [SerializeField] private GameObject _elenaHairRef, _elenaHoodRef;
 
-    private bool _isInStealthMode;
+    [HideInInspector] public bool IsInStealthMode { get; private set; }
 
     public void CallStealthMode()
     {
@@ -26,7 +26,8 @@ public class ElenaStealthManager : MonoBehaviour
 
         _elenaHairRef.SetActive(false);
         _elenaHoodRef.SetActive(true);
-        _isInStealthMode = true;
+        IsInStealthMode = true;
+        GetComponentInChildren<BoxCollider>().enabled = false;
     }
 
     public void OffStealthMode()
@@ -42,11 +43,7 @@ public class ElenaStealthManager : MonoBehaviour
 
         _elenaHairRef.SetActive(true);
         _elenaHoodRef.SetActive(false);
-        _isInStealthMode = false;
-    }
-
-    public bool IsElenaUsingStealth()
-    {
-        return _isInStealthMode;
+        IsInStealthMode = false;
+        GetComponentInChildren<BoxCollider>().enabled = true;
     }
 }
