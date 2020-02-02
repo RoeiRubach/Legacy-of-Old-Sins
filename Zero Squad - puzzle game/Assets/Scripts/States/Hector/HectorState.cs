@@ -10,6 +10,10 @@ public class HectorState : PlayerStateManager
     private GameObject _hectorShield;
     private GameObject _hectorAgentPlacement;
 
+    public HectorState(PlayerController character) : base(character)
+    {
+
+    }
     public HectorState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
@@ -29,6 +33,11 @@ public class HectorState : PlayerStateManager
     {
         HectorInitialization();
         Debug.Log("Hector is now in control");
+    }
+
+    public override void OnTriggerEnter()
+    {
+        playerController.HectorTakingDamage();
     }
 
     public override void OnStateExit()

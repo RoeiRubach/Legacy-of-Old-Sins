@@ -916,8 +916,9 @@ GameObject:
   - component: {fileID: 3828870261908552799}
   - component: {fileID: 7968565476530178896}
   - component: {fileID: 4557814210691782759}
+  - component: {fileID: 859117570200352808}
   m_Layer: 0
-  m_Name: Body
+  m_Name: Hector body
   m_TagString: Hector
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,6 +1035,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6023375, y: 1.8986299, z: 0.41238877}
   m_Center: {x: 0.027581468, y: 0.8492998, z: 0.060442656}
+--- !u!114 &859117570200352808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4557814210691782758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053802cff2ead2d46af381f2e1b333c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &4677803626095410846
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,10 +12,14 @@ public abstract class PlayerStateManager
     protected PlayerController playerController;
     protected CameraController cameraController;
 
+    protected PlayerStateManager(PlayerController character)
+    {
+        playerController = character;
+    }
     protected PlayerStateManager(PlayerController character, CameraController camera)
     {
-        this.playerController = character;
-        this.cameraController = camera;
+        playerController = character;
+        cameraController = camera;
     }
 
     #region Game state properties
@@ -33,6 +37,7 @@ public abstract class PlayerStateManager
 
     public abstract void UpdateHandle();
     public abstract void OnStateEnter();
+    public abstract void OnTriggerEnter();
     public abstract void OnStateExit();
     public abstract void EnterOrExitSkillMode();
 

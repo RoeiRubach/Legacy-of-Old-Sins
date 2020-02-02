@@ -11,6 +11,10 @@ public class ElenaState : PlayerStateManager
 
     private ElenaStealthManager _elenaStealthManager;
 
+    public ElenaState(PlayerController character) : base(character)
+    {
+
+    }
     public ElenaState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
@@ -30,6 +34,11 @@ public class ElenaState : PlayerStateManager
     {
         ElenaInitialization();
         Debug.Log("Elena is now in control");
+    }
+
+    public override void OnTriggerEnter()
+    {
+        playerController.ElenaTakingDamage();
     }
 
     public override void OnStateExit()

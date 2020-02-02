@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 944301331513504684}
   - component: {fileID: 5674336784613537492}
   - component: {fileID: 119439447785198374}
+  - component: {fileID: 42427131}
   m_Layer: 0
-  m_Name: Dougless
+  m_Name: Douglas body
   m_TagString: Douglas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,6 +124,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6023375, y: 1.8986299, z: 0.41238877}
   m_Center: {x: 0.027581468, y: 0.8492998, z: 0.060442656}
+--- !u!114 &42427131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119439447785198369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053802cff2ead2d46af381f2e1b333c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &326180375662175550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,6 +1674,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56eb7ac65a2985847af52fe68a3f6dd5, type: 3}
+--- !u!4 &240370179510771408 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5006533531441372195, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5057314640996008691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4525530396634574381 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8710763447091064030, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
@@ -1669,12 +1689,6 @@ Transform:
 --- !u!1 &240370179510771411 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5006533531441372192, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
-    type: 3}
-  m_PrefabInstance: {fileID: 5057314640996008691}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &240370179510771408 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5006533531441372195, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
     type: 3}
   m_PrefabInstance: {fileID: 5057314640996008691}
   m_PrefabAsset: {fileID: 0}

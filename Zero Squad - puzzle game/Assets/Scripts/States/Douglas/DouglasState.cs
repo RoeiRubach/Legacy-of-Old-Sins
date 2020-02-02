@@ -12,6 +12,10 @@ public class DouglasState : PlayerStateManager
 
     private DouglasShootingManager _douglasShootingManager;
 
+    public DouglasState(PlayerController character) : base(character)
+    {
+
+    }
     public DouglasState(PlayerController character, CameraController camera) : base(character, camera)
     {
     }
@@ -35,6 +39,11 @@ public class DouglasState : PlayerStateManager
     {
         DouglasInitialization();
         Debug.Log("Douglas is now in control");
+    }
+
+    public override void OnTriggerEnter()
+    {
+        playerController.DouglasTakingDamageTest();
     }
 
     public override void OnStateExit()

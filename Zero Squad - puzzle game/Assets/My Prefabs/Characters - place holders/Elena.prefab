@@ -1153,8 +1153,9 @@ GameObject:
   - component: {fileID: 6115526809045940238}
   - component: {fileID: 1110803716641378049}
   - component: {fileID: 6826557552492338232}
+  - component: {fileID: 1822326508802725880}
   m_Layer: 0
-  m_Name: Body
+  m_Name: Elena body
   m_TagString: Elena
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1271,6 +1272,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6023375, y: 1.8986299, z: 0.41238877}
   m_Center: {x: 0.027581468, y: 0.8492998, z: 0.060442656}
+--- !u!114 &1822326508802725880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6826557552492338231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 053802cff2ead2d46af381f2e1b333c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
 --- !u!1 &6883722812789272137
 GameObject:
   m_ObjectHideFlags: 0

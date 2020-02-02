@@ -7062,7 +7062,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _hectorHP
       value: 
-      objectReference: {fileID: 1300877305}
+      objectReference: {fileID: 1918085494}
     - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
         type: 3}
       propertyPath: _hectorButtonRef
@@ -12786,6 +12786,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1221056666}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1918085494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5325713256359273002, guid: 0d1a50669f9e6914796f9ed2b3bf3a09,
+    type: 3}
+  m_PrefabInstance: {fileID: 1415275924}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1920313079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 83774055717255934, guid: a5a4746fb58be2641960fef5cba8ed88,
@@ -14542,6 +14554,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 42427131, guid: cf724829d19006e419025ccb49ae37cd, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1393778132}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf724829d19006e419025ccb49ae37cd, type: 3}
 --- !u!1001 &570423390756457952
@@ -14766,6 +14782,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1822326508802725880, guid: d79f56f79d0fbab4980d064fbbe11fe3,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1393778132}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d79f56f79d0fbab4980d064fbbe11fe3, type: 3}
 --- !u!1001 &1889344813127532458
@@ -15321,6 +15342,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 859117570200352808, guid: 83b51b5023103dc438a2ca7af34c5926,
+        type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1393778132}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83b51b5023103dc438a2ca7af34c5926, type: 3}
 --- !u!1001 &9073277643782135597
