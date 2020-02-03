@@ -14,8 +14,6 @@ public class MindlessPossessed : EnemyBase
     private void Start()
     {
         _startPosition = transform.position;
-        _enemyMeshAgent = GetComponent<NavMeshAgent>();
-        _enemyAnimator = GetComponent<Animator>();
     }
 
     private void Update()

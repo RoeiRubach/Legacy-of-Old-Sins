@@ -44,6 +44,12 @@ public abstract class EnemyBase : MonoBehaviour
     }
 #endif
 
+    protected virtual void Awake()
+    {
+        _enemyMeshAgent = GetComponent<NavMeshAgent>();
+        _enemyAnimator = GetComponent<Animator>();
+    }
+
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_bullet))
