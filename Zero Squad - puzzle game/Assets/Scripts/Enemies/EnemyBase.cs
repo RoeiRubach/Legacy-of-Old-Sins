@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public enum EnemyTransitionParameters
+public enum EnemyAnimationTransitionParameters
 {
     _isMoving,
     _isPlayerBeenSeen,
@@ -16,63 +16,62 @@ public enum EnemyDestinations
     _secondDestination
 }
 
-[RequireComponent(typeof(EnemyVisionRequirement))]
+[RequireComponent(typeof(EnemyVisionRequirement), typeof(EnemyHealth))]
 public abstract class EnemyBase : MonoBehaviour
 {
     [HideInInspector] public Transform TargetDetected;
     [HideInInspector] public bool IsPlayerSpotted;
-    [HideInInspector] public bool IsAttacking { get; protected set; }
+    public bool IsAttacking { get; protected set; }
 
     [Header("Enemy's attributes:", order = 0)]
-    [SerializeField] protected int _enemyHP;
-    [SerializeField] protected float _walkingSpeed, _runningSpeed, _turningSpeed;
+    [SerializeField] protected float _walkingSpeed;
+    [SerializeField] protected float _runningSpeed;
+    protected float _turningSpeed = 1.1f;
 
-    protected GameObject _enemyEyesRef;
-    protected NavMeshAgent _enemyMeshAgent;
-    protected Animator _enemyAnimator;
-    protected bool _isEnemyRoaming;
-    protected float _destroyTimer = 4f;
+    protected EnemyHealth enemyHealth;
+    protected GameObject enemyEyesRef;
+    protected NavMeshAgent enemyMeshAgent;
+    protected Animator enemyAnimator;
+    protected bool isEnemyRoaming;
+    protected float destroyTimer = 4f;
 
     private string _bullet = "Bullet";
 
 #if UNITY_EDITOR
     [ContextMenu("Kill enemy - PLAYMODE ONLY!")]
-    public void EnemyDamageTakingTest()
+    public void EnemyKillingTest()
     {
         ResetAIPath();
-        _enemyAnimator.SetBool(EnemyTransitionParameters._isDead.ToString(), true);
+        enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isDead.ToString(), true);
     }
 #endif
 
     protected virtual void Awake()
     {
-        _enemyMeshAgent = GetComponent<NavMeshAgent>();
-        _enemyAnimator = GetComponent<Animator>();
+        enemyMeshAgent = GetComponent<NavMeshAgent>();
+        enemyAnimator = GetComponent<Animator>();
+        enemyHealth = GetComponent<EnemyHealth>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(_bullet))
         {
-            _enemyHP--;
-
-            if (_enemyHP <= 0)
-            {
-                ResetAIPath();
-                _enemyAnimator.SetBool(EnemyTransitionParameters._isDead.ToString(), true);
-            }
+            enemyHealth.HealthDecreaseViaBullet();
         }
     }
 
-    protected virtual bool IsEnemyGotKilled()
-    {
-        return _enemyAnimator.GetBool(EnemyTransitionParameters._isDead.ToString());
-    }
+    protected virtual bool IsEnemyGotKilled() => enemyHealth.GetEnemyIsKilled();
 
     protected virtual void ResetAIPath()
     {
-        _enemyMeshAgent.isStopped = true;
-        _enemyMeshAgent.ResetPath();
+        enemyMeshAgent.isStopped = true;
+        enemyMeshAgent.ResetPath();
+    }
+
+    protected virtual void SetDeathAnimationTrue()
+    {
+        enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isDead.ToString(), true);
     }
 
     protected virtual void FaceTarget(Transform TargetDetected)
