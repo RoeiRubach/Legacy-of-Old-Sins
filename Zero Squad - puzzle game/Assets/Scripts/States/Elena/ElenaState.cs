@@ -36,9 +36,19 @@ public class ElenaState : PlayerStateManager
         Debug.Log("Elena is now in control");
     }
 
-    public override void OnTriggerEnter()
+    public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
     {
-        playerController.ElenaTakingDamage();
+        switch (tagReceived)
+        {
+            case "Enemy":
+                playerController.ElenaTakingDamage();
+                break;
+            case "HealthRegen":
+                Debug.Log(healthRegenCollectables.HealthToRegen);
+                playerController.ElenaGainingHealth(healthRegenCollectables.HealthToRegen);
+                healthRegenCollectables.CallOnDestroy();
+                break;
+        }
     }
 
     public override void OnStateExit()

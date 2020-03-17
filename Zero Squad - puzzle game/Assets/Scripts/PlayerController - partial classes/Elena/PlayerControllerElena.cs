@@ -38,12 +38,12 @@ public partial class PlayerController
 
     public void ElenaIconSelectedON()
     {
-        _elenaIconPlaceHolder.GetComponent<Image>().sprite = _elenaSelectedIconSprite;
+        _elenaIconPlaceHolder.sprite = _elenaSelectedIconSprite;
     }
 
     public void ElenaIconSelectedOFF()
     {
-        _elenaIconPlaceHolder.GetComponent<Image>().sprite = _elenaStandardIconSprite;
+        _elenaIconPlaceHolder.sprite = _elenaStandardIconSprite;
     }
 
     public void ElenaSkillButtonController()
@@ -53,12 +53,12 @@ public partial class PlayerController
 
     public void ElenaOffSkillMode()
     {
-        _elenaSkillPlaceHolder.GetComponent<Image>().sprite = _elenaStandardSkillSprite;
+        _elenaSkillPlaceHolder.sprite = _elenaStandardSkillSprite;
     }
 
     public void ElenaOnSkillMode()
     {
-        _elenaSkillPlaceHolder.GetComponent<Image>().sprite = _elenaSelectedSkillSprite;
+        _elenaSkillPlaceHolder.sprite = _elenaSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Elena - PLAYMODE ONLY!")]
@@ -67,11 +67,27 @@ public partial class PlayerController
         if (_elenaCurrentHP > 0)
         {
             _elenaCurrentHP--;
-            _elenaHP.GetComponent<Image>().sprite = _hpBars[_elenaCurrentHP];
+            _elenaHP.sprite = _hpBars[_elenaCurrentHP];
         }
         else
             print("Elena is already dead you sick fuck");
-    } 
+    }
 
+    public void ElenaGainingHealth(int regenAmount)
+    {
+        for (int i = 0; i < regenAmount; i++)
+        {
+            if (_hectorCurrentHP < 10)
+            {
+                _elenaCurrentHP++;
+                _elenaHP.sprite = _hpBars[_elenaCurrentHP];
+            }
+            else
+            {
+                print("Hector has full health");
+                break;
+            }
+        }
+    }
     #endregion
 }

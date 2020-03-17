@@ -39,12 +39,12 @@ public partial class PlayerController
 
     public void DouglasIconSelectedON()
     {
-        _douglasIconPlaceHolder.GetComponent<Image>().sprite = _douglasSelectedIconSprite;
+        _douglasIconPlaceHolder.sprite = _douglasSelectedIconSprite;
     }
 
     public void DouglasIconSelectedOFF()
     {
-        _douglasIconPlaceHolder.GetComponent<Image>().sprite = _douglasStandardIconSprite;
+        _douglasIconPlaceHolder.sprite = _douglasStandardIconSprite;
     }
 
     public void DouglasSkillButtonController()
@@ -54,12 +54,12 @@ public partial class PlayerController
 
     public void DouglasSpriteOffSkillMode()
     {
-        _douglasSkillPlaceHolder.GetComponent<Image>().sprite = _douglasStandardSkillSprite;
+        _douglasSkillPlaceHolder.sprite = _douglasStandardSkillSprite;
     }
 
     public void DouglasSpriteOnSkillMode()
     {
-        _douglasSkillPlaceHolder.GetComponent<Image>().sprite = _douglasSelectedSkillSprite;
+        _douglasSkillPlaceHolder.sprite = _douglasSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
@@ -68,11 +68,27 @@ public partial class PlayerController
         if (_douglasCurrentHP > 0)
         {
             _douglasCurrentHP--;
-            _douglasHP.GetComponent<Image>().sprite = _hpBars[_douglasCurrentHP];
+            _douglasHP.sprite = _hpBars[_douglasCurrentHP];
         }
         else
             print("Douglas is already dead you sick fuck");
     }
 
+    public void DouglasGainingHealth(int regenAmount)
+    {
+        for (int i = 0; i < regenAmount; i++)
+        {
+            if (_douglasCurrentHP < 10)
+            {
+                _douglasCurrentHP++;
+                _douglasHP.sprite = _hpBars[_hectorCurrentHP];
+            }
+            else
+            {
+                print("Hector has full health");
+                break;
+            }
+        }
+    }
     #endregion
 }

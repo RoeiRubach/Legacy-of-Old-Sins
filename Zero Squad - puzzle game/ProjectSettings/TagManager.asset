@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - Douglas Shotgun
   - Shield holder
+  - HealthRegen
   layers:
   - Default
   - TransparentFX

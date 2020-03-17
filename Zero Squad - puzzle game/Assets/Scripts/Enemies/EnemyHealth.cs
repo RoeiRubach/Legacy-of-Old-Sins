@@ -15,7 +15,6 @@ public class EnemyHealth : MonoBehaviour
     private void Start()
     {
         _currentHealth = _maxHealth;
-        print(_currentHealth);
     }
 
     private void LateUpdate()

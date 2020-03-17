@@ -43,22 +43,22 @@ public partial class PlayerController
 
     public void HectorIconSelectedON()
     {
-        _hectorIconPlaceHolder.GetComponent<Image>().sprite = _hectorSelectedIconSprite;
+        _hectorIconPlaceHolder.sprite = _hectorSelectedIconSprite;
     }
 
     public void HectorIconSelectedOFF()
     {
-        _hectorIconPlaceHolder.GetComponent<Image>().sprite = _hectorStandardIconSprite;
+        _hectorIconPlaceHolder.sprite = _hectorStandardIconSprite;
     }
 
     public void HectorOffSkillMode()
     {
-        _hectorSkillPlaceHolder.GetComponent<Image>().sprite = _hectorStandardSkillSprite;
+        _hectorSkillPlaceHolder.sprite = _hectorStandardSkillSprite;
     }
 
     public void HectorOnSkillMode()
     {
-        _hectorSkillPlaceHolder.GetComponent<Image>().sprite = _hectorSelectedSkillSprite;
+        _hectorSkillPlaceHolder.sprite = _hectorSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Hector - PLAYMODE ONLY!")]
@@ -67,11 +67,27 @@ public partial class PlayerController
         if (_hectorCurrentHP > 0)
         {
             _hectorCurrentHP--;
-            _hectorHP.GetComponent<Image>().sprite = _hpBars[_hectorCurrentHP];
+            _hectorHP.sprite = _hpBars[_hectorCurrentHP];
         }
         else
             print("Hector is already dead you sick fuck");
     }
-
+    
+    public void HectorGainingHealth(int regenAmount)
+    {
+        for (int i = 0; i < regenAmount; i++)
+        {
+            if (_hectorCurrentHP < 10)
+            {
+                _hectorCurrentHP++;
+                _hectorHP.sprite = _hpBars[_hectorCurrentHP];
+            }
+            else
+            {
+                print("Hector has full health");
+                break;
+            }
+        }
+    }
     #endregion
 }

@@ -37,7 +37,7 @@ public abstract class PlayerStateManager
 
     public abstract void UpdateHandle();
     public abstract void OnStateEnter();
-    public abstract void OnTriggerEnter();
+    public abstract void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables);
     public abstract void OnStateExit();
     public abstract void EnterOrExitSkillMode();
 

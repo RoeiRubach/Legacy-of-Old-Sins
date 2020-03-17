@@ -20,9 +20,7 @@ public class OnTriggerEnterHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
-        {
-            _characterTrigger.OnTriggerEnter();
-        }
+        if (other.CompareTag("Enemy") || other.CompareTag("HealthRegen"))
+            _characterTrigger.OnTriggerEnter(other.tag, other.GetComponent<HealthRegenCollectables>());
     }
 }

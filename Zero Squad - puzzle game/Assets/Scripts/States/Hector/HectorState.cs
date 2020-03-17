@@ -35,9 +35,19 @@ public class HectorState : PlayerStateManager
         Debug.Log("Hector is now in control");
     }
 
-    public override void OnTriggerEnter()
+    public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
     {
-        playerController.HectorTakingDamage();
+        switch (tagReceived)
+        {
+            case "Enemy":
+                playerController.HectorTakingDamage();
+                break;
+            case "HealthRegen":
+                Debug.Log(healthRegenCollectables.HealthToRegen);
+                playerController.HectorGainingHealth(healthRegenCollectables.HealthToRegen);
+                healthRegenCollectables.CallOnDestroy();
+                break;
+        }
     }
 
     public override void OnStateExit()
