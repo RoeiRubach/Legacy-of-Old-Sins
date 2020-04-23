@@ -28,7 +28,8 @@ public partial class PlayerController
 
     public void HectorButtonInteractivitySetter()
     {
-        _hectorButtonRef.interactable = _hectorButtonRef.IsInteractable() ? false : true;
+        if(_hectorButtonRef != null)
+            _hectorButtonRef.interactable = _hectorButtonRef.IsInteractable() ? false : true;
     }
 
     public void SwitchToHectorStateViaButton()
@@ -38,27 +39,32 @@ public partial class PlayerController
 
     public void HectorSkillButtonController()
     {
-        _hectorSkillPlaceHolder.enabled = !_hectorSkillPlaceHolder.isActiveAndEnabled ? true : false;
+        if (_hectorSkillPlaceHolder != null)
+            _hectorSkillPlaceHolder.enabled = !_hectorSkillPlaceHolder.isActiveAndEnabled ? true : false;
     }
 
     public void HectorIconSelectedON()
     {
-        _hectorIconPlaceHolder.sprite = _hectorSelectedIconSprite;
+        if (_hectorIconPlaceHolder != null)
+            _hectorIconPlaceHolder.sprite = _hectorSelectedIconSprite;
     }
 
     public void HectorIconSelectedOFF()
     {
-        _hectorIconPlaceHolder.sprite = _hectorStandardIconSprite;
+        if (_hectorIconPlaceHolder != null)
+            _hectorIconPlaceHolder.sprite = _hectorStandardIconSprite;
     }
 
     public void HectorOffSkillMode()
     {
-        _hectorSkillPlaceHolder.sprite = _hectorStandardSkillSprite;
+        if (_hectorSkillPlaceHolder != null)
+            _hectorSkillPlaceHolder.sprite = _hectorStandardSkillSprite;
     }
 
     public void HectorOnSkillMode()
     {
-        _hectorSkillPlaceHolder.sprite = _hectorSelectedSkillSprite;
+        if (_hectorSkillPlaceHolder != null)
+            _hectorSkillPlaceHolder.sprite = _hectorSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Hector - PLAYMODE ONLY!")]

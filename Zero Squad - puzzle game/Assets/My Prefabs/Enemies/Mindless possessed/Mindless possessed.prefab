@@ -2880,6 +2880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4960477312361705240}
   - component: {fileID: 3052635794396185186}
+  - component: {fileID: 5282723619335403904}
   - component: {fileID: 5266766684601907650}
   - component: {fileID: 8727303088831394960}
   - component: {fileID: 1876705263340277459}
@@ -2929,6 +2930,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5282723619335403904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8254110813915372811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb94fc1c768d2b45a7b56d73b814b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5266766684601907650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2945,7 +2958,6 @@ MonoBehaviour:
   IsPlayerSpotted: 0
   _walkingSpeed: 0.33
   _runningSpeed: 1.5
-  _turningSpeed: 1.1
   _firstDestination: {fileID: 0}
   _secondDestination: {fileID: 0}
 --- !u!114 &8727303088831394960

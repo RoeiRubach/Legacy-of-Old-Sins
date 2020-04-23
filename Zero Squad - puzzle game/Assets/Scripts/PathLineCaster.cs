@@ -56,7 +56,7 @@ public class PathLineCaster : MonoBehaviour
             Destroy(_flagClone);
 
             if (!GetComponent<LineRenderer>().enabled)
-                GetComponent<Animator>().SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
+                GetComponent<Animator>().SetBool(CharactersAnimationTransitionParameters._isMoving.ToString(), false);
         }
     }
 

@@ -92,23 +92,26 @@ public class MindlessPossessed : EnemyBase
                 enemyMeshAgent.stoppingDistance = _stoppingDistanceNoTarget;
                 enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isMoving.ToString(), false);
 
-                switch (_enemyDestinations)
-                { 
-                    case EnemyDestinations._startPosition:
-                        isEnemyRoaming = true;
-                        _enemyDestinations = EnemyDestinations._firstDestination;
-                        _destinationToGoTo = _firstDestination.position;
-                        break;
+                if (_firstDestination != null && _secondDestination != null)
+                {
+                    switch (_enemyDestinations)
+                    {
+                        case EnemyDestinations._startPosition:
+                            isEnemyRoaming = true;
+                            _enemyDestinations = EnemyDestinations._firstDestination;
+                            _destinationToGoTo = _firstDestination.position;
+                            break;
 
-                    case EnemyDestinations._firstDestination:
-                        StartCoroutine(SetNewDestination(_secondDestination.position, EnemyDestinations._secondDestination));
-                        FaceTarget(_secondDestination);
-                        break;
+                        case EnemyDestinations._firstDestination:
+                            StartCoroutine(SetNewDestination(_secondDestination.position, EnemyDestinations._secondDestination));
+                            FaceTarget(_secondDestination);
+                            break;
 
-                    case EnemyDestinations._secondDestination:
-                        StartCoroutine(SetNewDestination(_firstDestination.position, EnemyDestinations._firstDestination));
-                        FaceTarget(_firstDestination);
-                        break;
+                        case EnemyDestinations._secondDestination:
+                            StartCoroutine(SetNewDestination(_firstDestination.position, EnemyDestinations._firstDestination));
+                            FaceTarget(_firstDestination);
+                            break;
+                    }
                 }
             }
         }

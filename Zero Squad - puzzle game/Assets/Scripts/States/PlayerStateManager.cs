@@ -1,16 +1,24 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-public enum CharactersTransitionParameters
+public enum CharactersAnimationTransitionParameters
 {
     _isMoving,
-    _isSkillMode
+    _isSkillMode,
+    _isLifting,
+    _isCarrying,
 }
 
 public abstract class PlayerStateManager
 {
+    protected int runningSpeed = 5, walkingSpeed = 2;
+
     protected PlayerController playerController;
     protected CameraController cameraController;
+
+    protected Transform interactableObject;
+
+    protected bool isPossibleToInteract, isInteracting;
 
     protected PlayerStateManager(PlayerController character)
     {
@@ -43,28 +51,49 @@ public abstract class PlayerStateManager
 
     #endregion
 
-    #region Game state virtual methods 
+    #region Game state virtual methods
 
     protected virtual void PointAndClickMovement()
     {
-        myCurrentAnimator.SetBool(CharactersTransitionParameters._isSkillMode.ToString(), false);
+        myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isSkillMode.ToString(), false);
 
         if (Input.GetMouseButtonDown(1))
         {
-            RaycastHit myRacycastHit;
-
-            // Generate a ray from the cursor position
-            Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(myRay, out myRacycastHit, Mathf.Infinity, playerController.walkableLayerMask))
+            if (!isInteracting)
             {
-                myCurrentAgent.SetDestination(myRacycastHit.point);
-                myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), true);
+                RaycastHit hitInfo;
+
+                // Generate a ray from the cursor position
+                Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                if (Physics.Raycast(myRay, out hitInfo, Mathf.Infinity, playerController.walkableLayerMask))
+                {
+                    if (isPossibleToInteract)
+                    {
+                        isInteracting = true;
+                        myCurrentAgent.SetDestination(CharacterInteractionPlacement());
+                    }
+                    else
+                        myCurrentAgent.SetDestination(hitInfo.point);
+
+                    if (playerController.IsLifting)
+                        myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), true);
+                    else
+                        myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isMoving.ToString(), true);
+                }
             }
         }
 
         else if (!myCurrentAgent.hasPath)
-            myCurrentAnimator.SetBool(CharactersTransitionParameters._isMoving.ToString(), false);
+        {
+            if (isInteracting)
+                CharacterObjectInteraction();
+
+            if (playerController.IsLifting)
+                myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
+            else
+                myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isMoving.ToString(), false);
+        }
     }
 
     /// <summary>
@@ -78,7 +107,7 @@ public abstract class PlayerStateManager
     /// </summary>
     protected virtual void TurnTowardTheCursor()
     {
-        myCurrentAnimator.SetBool(CharactersTransitionParameters._isSkillMode.ToString(), true);
+        myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isSkillMode.ToString(), true);
 
         ResetAIPath();
 
@@ -106,12 +135,37 @@ public abstract class PlayerStateManager
     }
     #endregion
 
-    private void ResetAIPath()
+    protected void ResetAIPath()
     {
         if (myCurrentAgent.hasPath)
         {
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
+        }
+    }
+
+    private Vector3 CharacterInteractionPlacement()
+    {
+        return interactableObject.GetComponent<IInteractable>().CharacterInteractionPlacement();
+    }
+
+    protected virtual void CharacterObjectInteraction()
+    {
+        if (interactableObject.GetComponent<IInteractable>() != null)
+        {
+            if (interactableObject.name == "Bomb")
+            {
+                myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
+                myCurrentAgent.speed = walkingSpeed;
+            }
+            interactableObject.GetComponent<IInteractable>().Interact();
+
+            myCurrentAgent.SetDestination(CharacterInteractionPlacement());
+        }
+        else
+        {
+            isInteracting = false;
+            interactableObject = null;
         }
     }
 }

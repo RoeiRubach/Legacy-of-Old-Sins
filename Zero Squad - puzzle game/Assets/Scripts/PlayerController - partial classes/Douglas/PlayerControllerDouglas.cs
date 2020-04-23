@@ -27,9 +27,10 @@ public partial class PlayerController
 
     #region Douglas UI manager
 
-    public void DouglasButtonInteractivitySetter()
+    public void DouglasButtonInteractivityToggle()
     {
-        _douglasButtonRef.interactable = _douglasButtonRef.IsInteractable() ? false : true;
+        if(_douglasButtonRef != null)
+            _douglasButtonRef.interactable = _douglasButtonRef.IsInteractable() ? false : true;
     }
 
     public void SwitchToDouglasStateViaButton()
@@ -39,31 +40,36 @@ public partial class PlayerController
 
     public void DouglasIconSelectedON()
     {
-        _douglasIconPlaceHolder.sprite = _douglasSelectedIconSprite;
+        if (_douglasIconPlaceHolder != null)
+            _douglasIconPlaceHolder.sprite = _douglasSelectedIconSprite;
     }
 
     public void DouglasIconSelectedOFF()
     {
-        _douglasIconPlaceHolder.sprite = _douglasStandardIconSprite;
+        if(_douglasIconPlaceHolder != null)
+           _douglasIconPlaceHolder.sprite = _douglasStandardIconSprite;
     }
 
-    public void DouglasSkillButtonController()
+    public void DouglasSkillButtonToggle()
     {
-        _douglasSkillPlaceHolder.enabled = !_douglasSkillPlaceHolder.isActiveAndEnabled ? true : false;
+        if (_douglasSkillPlaceHolder != null)
+            _douglasSkillPlaceHolder.enabled = !_douglasSkillPlaceHolder.isActiveAndEnabled ? true : false;
     }
 
     public void DouglasSpriteOffSkillMode()
     {
-        _douglasSkillPlaceHolder.sprite = _douglasStandardSkillSprite;
+        if (_douglasSkillPlaceHolder != null)
+            _douglasSkillPlaceHolder.sprite = _douglasStandardSkillSprite;
     }
 
     public void DouglasSpriteOnSkillMode()
     {
-        _douglasSkillPlaceHolder.sprite = _douglasSelectedSkillSprite;
+        if(_douglasSkillPlaceHolder != null)
+            _douglasSkillPlaceHolder.sprite = _douglasSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
-    public void DouglasTakingDamageTest()
+    public void DouglasTakingDamage()
     {
         if (_douglasCurrentHP > 0)
         {

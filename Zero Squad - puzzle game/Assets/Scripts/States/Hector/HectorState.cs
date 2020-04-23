@@ -118,13 +118,10 @@ public class HectorState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
             playerController.SetState(new DouglasState(playerController, cameraController));
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
+
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.FindGameObjectWithTag("Elena"))
             playerController.SetState(new ElenaState(playerController, cameraController));
-        }
     }
 }

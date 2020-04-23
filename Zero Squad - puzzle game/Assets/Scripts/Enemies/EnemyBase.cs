@@ -16,7 +16,7 @@ public enum EnemyDestinations
     _secondDestination
 }
 
-[RequireComponent(typeof(EnemyVisionRequirement), typeof(EnemyHealth))]
+[RequireComponent(typeof(EnemyVisionRequirement), typeof(EnemyHealth), typeof(EnemyPoolController))]
 public abstract class EnemyBase : MonoBehaviour
 {
     [HideInInspector] public Transform TargetDetected;
@@ -61,7 +61,7 @@ public abstract class EnemyBase : MonoBehaviour
         }
     }
 
-    protected virtual bool IsEnemyGotKilled() => enemyHealth.GetEnemyIsKilled();
+    protected virtual bool IsEnemyGotKilled() => enemyHealth.CheckIfEnemyDead();
 
     protected virtual void ResetAIPath()
     {

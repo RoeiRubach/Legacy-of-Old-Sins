@@ -2,11 +2,12 @@
 
 public partial class PlayerController : MonoBehaviour
 {
+    [HideInInspector] public bool IsLifting;
     private const int _maxHP = 10;
 
     private PlayerStateManager _currentState;
 
-    [SerializeField] private CameraController _mainCamera;
+    private CameraController _mainCamera;
     
     [Header("LayerMask:", order = 0)]
     public LayerMask walkableLayerMask;
@@ -16,6 +17,7 @@ public partial class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        _mainCamera = Camera.main.GetComponent<CameraController>();
         SetState(new DouglasState(this, _mainCamera));
     }
 

@@ -2,7 +2,7 @@
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private GameObject _characterToWatch;
+    private GameObject _characterToWatch;
 
     private Vector3 _offset;
 
@@ -13,6 +13,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        _characterToWatch = GameObject.FindGameObjectWithTag("Douglas");
         _offset = transform.position - _characterToWatch.transform.position;
     }
 

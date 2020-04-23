@@ -119,13 +119,10 @@ public class ElenaState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
+        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
             playerController.SetState(new DouglasState(playerController, cameraController));
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
             playerController.SetState(new HectorState(playerController, cameraController));
-        }
     }
 }

@@ -38,5 +38,6 @@ public class EnemyHealth : MonoBehaviour
             _isKilled = true;
     }
 
-    public bool GetEnemyIsKilled() => _isKilled;
+    public bool CheckIfEnemyDead() => _isKilled;
+    public float GetCurrentHealth() => _currentHealth;
 }

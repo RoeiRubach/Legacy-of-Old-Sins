@@ -28,7 +28,8 @@ public partial class PlayerController
 
     public void ElenaButtonInteractivitySetter()
     {
-        _elenaButtonRef.interactable = _elenaButtonRef.IsInteractable() ? false : true;
+        if(_elenaButtonRef != null)
+            _elenaButtonRef.interactable = _elenaButtonRef.IsInteractable() ? false : true;
     }
 
     public void SwitchToElenaStateViaButton()
@@ -38,27 +39,32 @@ public partial class PlayerController
 
     public void ElenaIconSelectedON()
     {
-        _elenaIconPlaceHolder.sprite = _elenaSelectedIconSprite;
+        if (_elenaIconPlaceHolder != null)
+            _elenaIconPlaceHolder.sprite = _elenaSelectedIconSprite;
     }
 
     public void ElenaIconSelectedOFF()
     {
-        _elenaIconPlaceHolder.sprite = _elenaStandardIconSprite;
+        if (_elenaIconPlaceHolder != null)
+            _elenaIconPlaceHolder.sprite = _elenaStandardIconSprite;
     }
 
     public void ElenaSkillButtonController()
     {
-        _elenaSkillPlaceHolder.enabled = !_elenaSkillPlaceHolder.isActiveAndEnabled ? true : false;
+        if (_elenaSkillPlaceHolder != null)
+            _elenaSkillPlaceHolder.enabled = !_elenaSkillPlaceHolder.isActiveAndEnabled ? true : false;
     }
 
     public void ElenaOffSkillMode()
     {
-        _elenaSkillPlaceHolder.sprite = _elenaStandardSkillSprite;
+        if (_elenaSkillPlaceHolder != null)
+            _elenaSkillPlaceHolder.sprite = _elenaStandardSkillSprite;
     }
 
     public void ElenaOnSkillMode()
     {
-        _elenaSkillPlaceHolder.sprite = _elenaSelectedSkillSprite;
+        if (_elenaSkillPlaceHolder != null)
+            _elenaSkillPlaceHolder.sprite = _elenaSelectedSkillSprite;
     }
 
     [ContextMenu("Apply damage to Elena - PLAYMODE ONLY!")]

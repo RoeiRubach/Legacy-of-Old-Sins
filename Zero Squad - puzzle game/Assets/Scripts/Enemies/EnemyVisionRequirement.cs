@@ -3,7 +3,8 @@
 [ExecuteInEditMode]
 public class EnemyVisionRequirement : MonoBehaviour
 {
-    [TextArea] [SerializeField] private string _enemyVisionInstructions = "There's an 'Enemy vision' game object as a child. Change its transform as you like. If a player walks in it, the enemy will detect the player.";
+    [TextArea]
+    [SerializeField] private string _enemyVisionInstructions = "There's an 'Enemy vision' game object as a child. Change its transform as you like. If a player walks in it, the enemy will detect the player.";
 
     [SerializeField] private GameObject _enemyEyesPrefab;
 
