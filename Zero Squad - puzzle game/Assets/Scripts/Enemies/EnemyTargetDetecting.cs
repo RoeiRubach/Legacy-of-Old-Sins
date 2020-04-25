@@ -53,20 +53,25 @@ public class EnemyTargetDetecting : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
-        if (_isDouglasBeenSpotted)
-        {
-            if (other.CompareTag(_douglasName))
-                DouglasOutOfSight();
-        }
-        else if (_isElenaBeenSpotted)
+        //if (_isDouglasBeenSpotted)
+        //{
+        //    if (other.CompareTag(_douglasName))
+        //        DouglasOutOfSight();
+        //}
+        //else if (_isElenaBeenSpotted)
+        //{
+        //    if (other.CompareTag(_elenaName))
+        //        ElenaOutOfSight();
+        //}
+        //else if (_isHectorBeenSpotted)
+        //{
+        //    if (other.CompareTag(_hectorName))
+        //        HectorOutOfSight();
+        //}
+        if (_isElenaBeenSpotted)
         {
             if (other.CompareTag(_elenaName))
                 ElenaOutOfSight();
-        }
-        else if (_isHectorBeenSpotted)
-        {
-            if (other.CompareTag(_hectorName))
-                HectorOutOfSight();
         }
     }
 
@@ -95,83 +100,102 @@ public class EnemyTargetDetecting : MonoBehaviour
             }
             else
             {
-                other.gameObject.GetComponentInParent<BoxCollider>().enabled = false;
                 SetOffPlayerSpotted();
+                //other.gameObject.GetComponentInParent<BoxCollider>().enabled = false;
+                
+                _mindlessPossessedRef.IsPlayerSpotted = true;
+                _mindlessPossessedRef.TargetDetected = GameObject.FindWithTag(_hectorName).transform;
             }
         }
     }
 
     private void CharactersEnterDetected(Collider other)
     {
-        if (other.CompareTag(_douglasName))
-        {
-            if (IsCharacterOnDetectedArea(other))
-                DouglasBeenSpotted(other);
-        }
-        else if (other.CompareTag(_elenaName))
+        //if (other.CompareTag(_douglasName))
+        //{
+        //    if (IsCharacterOnDetectedArea(other))
+        //        DouglasBeenSpotted(other);
+        //}
+        //else if (other.CompareTag(_elenaName))
+        //{
+        //    if (IsCharacterOnDetectedArea(other))
+        //        ElenaBeenSpotted(other);
+        //}
+        //else if (other.CompareTag(_hectorName))
+        //{
+        //    if (IsCharacterOnDetectedArea(other))
+        //        HectorBeenSpotted(other);
+        //}
+        if (other.CompareTag(_elenaName))
         {
             if (IsCharacterOnDetectedArea(other))
                 ElenaBeenSpotted(other);
-        }
-        else if (other.CompareTag(_hectorName))
-        {
-            if (IsCharacterOnDetectedArea(other))
-                HectorBeenSpotted(other);
         }
     }
 
     private void CharactersOutOfAreaController(Collider other)
     {
-        if (other.CompareTag(_douglasName))
+        //if (other.CompareTag(_douglasName))
+        //{
+        //    if (!IsCharacterOnDetectedArea(other))
+        //    {
+        //        _mindlessPossessedRef.IsPlayerSpotted = false;
+        //        DouglasOutOfSight();
+        //    }
+        //}
+        //else if (other.CompareTag(_elenaName) || _isElenaBeenSpotted)
+        //{
+        //    if (!IsCharacterOnDetectedArea(other) || elenaStealthManager.IsInStealthMode)
+        //    {
+        //        _mindlessPossessedRef.IsPlayerSpotted = false;
+        //        ElenaOutOfSight();
+        //    }
+        //}
+        //else if (other.CompareTag(_hectorName))
+        //{
+        //    if (!IsCharacterOnDetectedArea(other))
+        //    {
+        //        _mindlessPossessedRef.IsPlayerSpotted = false;
+        //        HectorOutOfSight();
+        //    }
+        //}
+        if (other.CompareTag(_elenaName) || _isElenaBeenSpotted)
         {
-            if (!IsCharacterOnDetectedArea(other))
-            {
-                _mindlessPossessedRef.IsPlayerSpotted = false;
-                DouglasOutOfSight();
-            }
-        }
-        else if (other.CompareTag(_elenaName) || _isElenaBeenSpotted)
-        {
-            if (!IsCharacterOnDetectedArea(other) || elenaStealthManager.IsInStealthMode)
-            {
-                _mindlessPossessedRef.IsPlayerSpotted = false;
-                ElenaOutOfSight();
-            }
-        }
-        else if (other.CompareTag(_hectorName))
-        {
-            if (!IsCharacterOnDetectedArea(other))
-            {
-                _mindlessPossessedRef.IsPlayerSpotted = false;
-                HectorOutOfSight();
-            }
+            if (elenaStealthManager != null)
+                if (!IsCharacterOnDetectedArea(other) || elenaStealthManager.IsInStealthMode)
+                {
+                    _mindlessPossessedRef.IsPlayerSpotted = false;
+                    ElenaOutOfSight();
+                }
         }
     }
 
-    private void DouglasBeenSpotted(Collider _douglas)
-    {
-        _mindlessPossessedRef.TargetDetected = _douglas.transform;
-        _isDouglasBeenSpotted = true;
-        _mindlessPossessedRef.IsPlayerSpotted = true;
-        Debug.Log("Douglas got triggered");
-    }
+    //private void DouglasBeenSpotted(Collider _douglas)
+    //{
+    //    _mindlessPossessedRef.TargetDetected = _douglas.transform;
+    //    _isDouglasBeenSpotted = true;
+    //    _mindlessPossessedRef.IsPlayerSpotted = true;
+    //    Debug.Log("Douglas got triggered");
+    //}
 
     private void ElenaBeenSpotted(Collider _elena)
     {
-        elenaStealthManager = _elena.GetComponentInParent<ElenaStealthManager>();
+        if (elenaStealthManager == null)
+            elenaStealthManager = _elena.GetComponentInParent<ElenaStealthManager>();
+
         _mindlessPossessedRef.TargetDetected = _elena.transform;
         _isElenaBeenSpotted = true;
         _mindlessPossessedRef.IsPlayerSpotted = true;
         Debug.Log("Elena got triggered");
     }
 
-    private void HectorBeenSpotted(Collider _hector)
-    {
-        _mindlessPossessedRef.TargetDetected = _hector.transform;
-        _isHectorBeenSpotted = true;
-        _mindlessPossessedRef.IsPlayerSpotted = true;
-        Debug.Log("Hector got triggered");
-    }
+    //private void HectorBeenSpotted(Collider _hector)
+    //{
+    //    _mindlessPossessedRef.TargetDetected = _hector.transform;
+    //    _isHectorBeenSpotted = true;
+    //    _mindlessPossessedRef.IsPlayerSpotted = true;
+    //    Debug.Log("Hector got triggered");
+    //}
 
     private void HectorShieldBeenSpotted(Transform _hectorShield)
     {
@@ -179,12 +203,12 @@ public class EnemyTargetDetecting : MonoBehaviour
         Debug.Log("Hector shield got triggered");
     }
 
-    private void DouglasOutOfSight()
-    {
-        _isDouglasBeenSpotted = false;
-        Invoke("SetOffPlayerSpotted", _delayTime);
-        Debug.Log("Douglas got out of trigger");
-    }
+    //private void DouglasOutOfSight()
+    //{
+    //    _isDouglasBeenSpotted = false;
+    //    Invoke("SetOffPlayerSpotted", _delayTime);
+    //    Debug.Log("Douglas got out of trigger");
+    //}
 
     private void ElenaOutOfSight()
     {
@@ -193,12 +217,12 @@ public class EnemyTargetDetecting : MonoBehaviour
         Debug.Log("Elena got out of trigger");
     }
 
-    private void HectorOutOfSight()
-    {
-        _isHectorBeenSpotted = false;
-        Invoke("SetOffPlayerSpotted", _delayTime);
-        Debug.Log("Hector got out of trigger");
-    }
+    //private void HectorOutOfSight()
+    //{
+    //    _isHectorBeenSpotted = false;
+    //    Invoke("SetOffPlayerSpotted", _delayTime);
+    //    Debug.Log("Hector got out of trigger");
+    //}
 
     private void SetOffPlayerSpotted()
     {

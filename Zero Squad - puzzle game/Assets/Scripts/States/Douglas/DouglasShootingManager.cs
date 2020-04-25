@@ -2,6 +2,8 @@
 
 public class DouglasShootingManager : MonoBehaviour
 {
+    private const float _manualShootingDelay = 1.1f;
+
     [SerializeField] private GameObject _bullet;
     [SerializeField] private Transform _bulletHolder;
 
@@ -18,6 +20,8 @@ public class DouglasShootingManager : MonoBehaviour
         {
             _bulletClone = Instantiate(_bullet, _bulletHolder.transform);
             _bulletClone.transform.parent = null;
+
+            _shootingDelay = _manualShootingDelay;
 
             _isAllowedToShoot = false;
             return true;

@@ -1326,7 +1326,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _turningSpeed: 3
-  _douglasShotgunCompensator: {fileID: 4525530396634574381}
 --- !u!114 &8474828045428177172
 MonoBehaviour:
   m_ObjectHideFlags: 0

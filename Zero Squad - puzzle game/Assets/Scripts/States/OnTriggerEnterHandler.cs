@@ -2,12 +2,14 @@
 
 public class OnTriggerEnterHandler : MonoBehaviour
 {
-    [SerializeField] private PlayerController playerController;
+    private PlayerController playerController;
 
     private PlayerStateManager _characterTrigger;
 
     private void Start()
     {
+        playerController = GameObject.FindObjectOfType<PlayerController>();
+
         if (transform.name.StartsWith("Douglas"))
             _characterTrigger = new DouglasState(playerController);
 
