@@ -82,7 +82,7 @@ public class EnemyTargetDetecting : MonoBehaviour
             if (IsCharacterOnDetectedArea(other))
             {
                 HectorShieldBeenSpotted(other.transform.GetChild(0));
-                other.gameObject.GetComponentInParent<BoxCollider>().enabled = true;
+                //other.gameObject.GetComponentInParent<BoxCollider>().enabled = true;
             }
         }
     }
@@ -129,9 +129,22 @@ public class EnemyTargetDetecting : MonoBehaviour
         if (other.CompareTag(_elenaName))
         {
             if (IsCharacterOnDetectedArea(other))
-                ElenaBeenSpotted(other);
+            {
+                Debug.DrawRay(_mindlessPossessedRef.transform.position + (Vector3.up * 1.5f), DirectionToElena(other.transform) * 7.5f, Color.red);
+
+                RaycastHit hitInfo;
+                if (Physics.Raycast(_mindlessPossessedRef.transform.position, DirectionToElena(other.transform), out hitInfo, 7.5f))
+                {
+                    if (hitInfo.transform.CompareTag(_elenaName))
+                        ElenaBeenSpotted(hitInfo.collider);
+                    else
+                        Debug.Log(hitInfo.transform.name);
+                }
+            }
         }
     }
+
+    private Vector3 DirectionToElena(Transform elenaRef) => (elenaRef.position - _mindlessPossessedRef.transform.position).normalized;
 
     private void CharactersOutOfAreaController(Collider other)
     {
