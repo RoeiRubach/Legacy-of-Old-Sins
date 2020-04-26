@@ -137,8 +137,6 @@ public class EnemyTargetDetecting : MonoBehaviour
                 {
                     if (hitInfo.transform.CompareTag(_elenaName))
                         ElenaBeenSpotted(hitInfo.collider);
-                    else
-                        Debug.Log(hitInfo.transform.name);
                 }
             }
         }

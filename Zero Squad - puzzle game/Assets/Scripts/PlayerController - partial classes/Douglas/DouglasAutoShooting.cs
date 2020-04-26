@@ -28,14 +28,17 @@ public class DouglasAutoShooting : MonoBehaviour
 
             if (distance <= 15)
             {
-                transform.GetComponent<Animator>().SetBool("_isShooting", false);
-                FaceTarget(nearestEnemy.transform);
-
-                _shootingTimer -= Time.deltaTime;
-
-                if (_shootingTimer <= 0)
+                if (IsHavingClearShoot(nearestEnemy.transform))
                 {
-                    DouglasShooting(nearestEnemy.transform);
+                    transform.GetComponent<Animator>().SetBool("_isShooting", false);
+                    FaceTarget(nearestEnemy.transform);
+
+                    _shootingTimer -= Time.deltaTime;
+
+                    if (_shootingTimer <= 0)
+                    {
+                        DouglasShooting(nearestEnemy.transform);
+                    }
                 }
             }
         }
@@ -71,8 +74,23 @@ public class DouglasAutoShooting : MonoBehaviour
 
     public void FaceTarget(Transform TargetDetected)
     {
-        Vector3 _targetDirection = (TargetDetected.position - _douglasRef.position).normalized;
+        Vector3 _targetDirection = DirectionToEnemy(TargetDetected);
         Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_targetDirection.x, 0, _targetDirection.z));
         _douglasRef.transform.rotation = Quaternion.Slerp(_douglasRef.transform.rotation, _lookRotation, Time.deltaTime * _turningSpeed);
     }
+
+    private bool IsHavingClearShoot(Transform target)
+    {
+        Debug.DrawRay(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target) * 12f, Color.red);
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f))
+        {
+            if (hitInfo.transform == target.transform)
+                return true;
+        }
+        return false;
+    }
+
+    private Vector3 DirectionToEnemy(Transform target) => (target.position - _douglasRef.position).normalized;
 }
