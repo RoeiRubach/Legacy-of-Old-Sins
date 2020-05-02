@@ -26,20 +26,26 @@ public class DouglasAutoShooting : MonoBehaviour
         {
             float distance = Vector3.Distance(_douglasRef.position, nearestEnemy.transform.position);
 
-            if (distance <= 15)
+            if (distance <= 12)
             {
-                if (IsHavingClearShoot(nearestEnemy.transform))
+                if (!nearestEnemy.GetComponent<EnemyHealth>().CheckIfEnemyDead())
                 {
-                    transform.GetComponent<Animator>().SetBool("_isShooting", false);
-                    FaceTarget(nearestEnemy.transform);
-
-                    _shootingTimer -= Time.deltaTime;
-
-                    if (_shootingTimer <= 0)
+                    if (IsHavingClearShoot(nearestEnemy.transform))
                     {
-                        DouglasShooting(nearestEnemy.transform);
+                        transform.GetComponent<Animator>().SetBool("_isShooting", false);
+
+                        FaceTarget(nearestEnemy.transform);
+
+                        _shootingTimer -= Time.deltaTime;
+
+                        if (_shootingTimer <= 0)
+                            DouglasShooting(nearestEnemy.transform);
                     }
+                    else
+                        transform.GetComponent<Animator>().SetBool("_isShooting", false);
                 }
+                else
+                    nearestEnemy.GetComponent<EnemyPoolController>().enabled = false;
             }
         }
     }
@@ -47,14 +53,8 @@ public class DouglasAutoShooting : MonoBehaviour
     private void DouglasShooting(Transform nearestEnemy)
     {
         _shootingTimer = _autoShootingDelay;
-
-        if (!nearestEnemy.GetComponent<EnemyHealth>().CheckIfEnemyDead())
-        {
-            nearestEnemy.GetComponent<EnemyHealth>().HealthDecreaseViaBullet();
-            transform.GetComponent<Animator>().SetBool("_isShooting", true);
-        }
-        else
-            nearestEnemy.GetComponent<EnemyPoolController>().enabled = false;
+        nearestEnemy.GetComponent<EnemyHealth>().HealthDecreaseViaBullet();
+        transform.GetComponent<Animator>().SetBool("_isShooting", true);
     }
 
     private void OnEnable()
