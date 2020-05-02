@@ -187,6 +187,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2384344738806840762, guid: d79f56f79d0fbab4980d064fbbe11fe3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d79f56f79d0fbab4980d064fbbe11fe3, type: 3}
 --- !u!1 &8963827 stripped
@@ -853,18 +858,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73d8d8dd817625e4ea2fa06e604f49a2, type: 3}
---- !u!114 &195075026 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-    type: 3}
-  m_PrefabInstance: {fileID: 83855662}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1d854a335593124fbac8f89697570af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &242212950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1430,15 +1423,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 119439447785198374, guid: cf724829d19006e419025ccb49ae37cd,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 42427131, guid: cf724829d19006e419025ccb49ae37cd, type: 3}
-      propertyPath: playerController
-      value: 
-      objectReference: {fileID: 195075026}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf724829d19006e419025ccb49ae37cd, type: 3}
 --- !u!1001 &346721729
@@ -1613,6 +1597,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8719363015215327890, guid: 196f3e2fe57ada74b9750adae4a2815b,
     type: 3}
   m_PrefabInstance: {fileID: 531287913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &542638703 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3369839158441191784, guid: 83b51b5023103dc438a2ca7af34c5926,
+    type: 3}
+  m_PrefabInstance: {fileID: 1047382042}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &545383838 stripped
 Transform:
@@ -2441,10 +2431,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1045707525, guid: 83b51b5023103dc438a2ca7af34c5926, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83b51b5023103dc438a2ca7af34c5926, type: 3}
 --- !u!4 &1064352892 stripped
@@ -3000,11 +2986,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mindless possessed (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8254110813915372811, guid: e0272e559b1a3ff4ca7257820f77c167,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4960477312361705240, guid: e0272e559b1a3ff4ca7257820f77c167,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3060,6 +3041,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _hectorShieldRef
+      value: 
+      objectReference: {fileID: 542638703}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _enemiesShieldHittingSpot
+      value: 
+      objectReference: {fileID: 1749266381}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
 --- !u!1001 &1539750423
@@ -3608,6 +3597,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _hectorShieldRef
+      value: 
+      objectReference: {fileID: 542638703}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _enemiesHittingSpot
+      value: 
+      objectReference: {fileID: 1749266381}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _enemiesShieldHittingSpot
+      value: 
+      objectReference: {fileID: 1749266381}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
 --- !u!1001 &1698341492
@@ -3716,6 +3717,12 @@ Transform:
   m_Father: {fileID: 280250091}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1749266381 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 436109487096346117, guid: 83b51b5023103dc438a2ca7af34c5926,
+    type: 3}
+  m_PrefabInstance: {fileID: 1047382042}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1765599124
 GameObject:
   m_ObjectHideFlags: 0
@@ -4050,12 +4057,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 486417875056075703, guid: 83b51b5023103dc438a2ca7af34c5926,
+    - target: {fileID: 3369839158441191785, guid: 83b51b5023103dc438a2ca7af34c5926,
         type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 3369839158441191785, guid: 83b51b5023103dc438a2ca7af34c5926,
+    - target: {fileID: 486417875056075703, guid: 83b51b5023103dc438a2ca7af34c5926,
         type: 3}
       propertyPath: m_Layer
       value: 2
@@ -4375,6 +4382,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _hectorShieldRef
+      value: 
+      objectReference: {fileID: 542638703}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _enemiesHittingSpot
+      value: 
+      objectReference: {fileID: 1749266381}
+    - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
+      propertyPath: _enemiesShieldHittingSpot
+      value: 
+      objectReference: {fileID: 1749266381}
+    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
 --- !u!1001 &2014765985
@@ -4581,7 +4605,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2107308782
 Transform:
   m_ObjectHideFlags: 0

@@ -10,8 +10,14 @@ public class ElenaStealthManager : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer[] _elenaCapeNHoodArray;
 
     [SerializeField] private GameObject _elenaHairRef, _elenaHoodRef;
+    private CharactersPoolController _charactersPoolController;
 
     [HideInInspector] public bool IsInStealthMode { get; private set; }
+
+    private void Start()
+    {
+        _charactersPoolController = GetComponentInChildren<CharactersPoolController>();
+    }
 
     public void CallStealthMode()
     {
@@ -26,6 +32,10 @@ public class ElenaStealthManager : MonoBehaviour
 
         _elenaHairRef.SetActive(false);
         _elenaHoodRef.SetActive(true);
+
+        if (_charactersPoolController.isActiveAndEnabled)
+            RemoveElenaFromPool();
+
         IsInStealthMode = true;
         GetComponentInChildren<BoxCollider>().enabled = false;
     }
@@ -45,5 +55,15 @@ public class ElenaStealthManager : MonoBehaviour
         _elenaHoodRef.SetActive(false);
         IsInStealthMode = false;
         GetComponentInChildren<BoxCollider>().enabled = true;
+    }
+
+    public void AddElenaToPool()
+    {
+        _charactersPoolController.enabled = true;
+    }
+
+    public void RemoveElenaFromPool()
+    {
+        _charactersPoolController.enabled = false;
     }
 }

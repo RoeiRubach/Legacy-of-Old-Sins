@@ -35,7 +35,10 @@ public class EnemyHealth : MonoBehaviour
         _currentHealth -= 1;
 
         if (_currentHealth <= 0)
+        {
+            GetComponentInParent<BoxCollider>().enabled = false;
             _isKilled = true;
+        }
     }
 
     public bool CheckIfEnemyDead() => _isKilled;

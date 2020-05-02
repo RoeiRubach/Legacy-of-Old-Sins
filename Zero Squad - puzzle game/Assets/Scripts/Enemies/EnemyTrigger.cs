@@ -8,15 +8,8 @@ public class EnemyTrigger : MonoBehaviour
     {
         if (other.transform.CompareTag("Douglas") || other.transform.CompareTag("Hector"))
         {
-            foreach (var enemies in enemiesListeners)
-            {
-                var mp = enemies.GetComponent<MindlessPossessed>();
-                if (mp.TargetDetected == null)
-                {
-                    mp.TargetDetected = other.transform;
-                    mp.IsPlayerSpotted = true;
-                }
-            }
+            if (!other.transform.GetComponent<CharactersPoolController>().isActiveAndEnabled)
+                other.transform.GetComponent<CharactersPoolController>().enabled = true;
         }
     }
 }
