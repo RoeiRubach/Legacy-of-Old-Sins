@@ -45,7 +45,10 @@ public class DouglasAutoShooting : MonoBehaviour
                         transform.GetComponent<Animator>().SetBool("_isShooting", false);
                 }
                 else
+                {
+                    transform.GetComponent<Animator>().SetBool("_isShooting", false);
                     nearestEnemy.GetComponent<EnemyPoolController>().enabled = false;
+                }
             }
         }
     }

@@ -35,8 +35,11 @@ public class DouglasState : PlayerStateManager
             DouglasPointAndClickShooting();
         }
 
-        EnterOrExitSkillMode();
-        SwitchCharacters();
+        if (!isInteracting)
+        {
+            EnterOrExitSkillMode();
+            SwitchCharacters();
+        }
     }
 
     private void HighlightCursorOverInteractableObject()

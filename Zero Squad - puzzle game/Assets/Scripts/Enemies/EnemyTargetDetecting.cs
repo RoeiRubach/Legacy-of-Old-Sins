@@ -34,6 +34,9 @@ public class EnemyTargetDetecting : MonoBehaviour
 
         if (nearestCharacter != null)
         {
+            if (nearestCharacter.transform.CompareTag(_elenaName) && !_isElenaBeenSpotted)
+                return;
+
             _mindlessPossessedRef.IsPlayerSpotted = true;
 
             if (!_mindlessPossessedRef.IsAttacking)
@@ -45,10 +48,7 @@ public class EnemyTargetDetecting : MonoBehaviour
             }
         }
         else
-        {
-            print(CharactersPoolController.GetPoolCount());
             _mindlessPossessedRef.IsPlayerSpotted = false;
-        }
     }
 
     #region On Trigger States
@@ -90,8 +90,10 @@ public class EnemyTargetDetecting : MonoBehaviour
     {
         if (IsCharacterOnDetectedArea(other))
         {
+            Debug.DrawRay(_mindlessPossessedRef.transform.position + (Vector3.up * 1.2f), DirectionToElena(other.transform) * 7.6f, Color.red);
+
             RaycastHit hitInfo;
-            if (Physics.Raycast(_mindlessPossessedRef.transform.position, DirectionToElena(other.transform), out hitInfo, 7.5f))
+            if (Physics.Raycast(_mindlessPossessedRef.transform.position + (Vector3.up * 1.2f), DirectionToElena(other.transform), out hitInfo, 7.6f))
             {
                 if (hitInfo.transform.CompareTag(_elenaName))
                     ElenaBeenSpotted(hitInfo.collider);

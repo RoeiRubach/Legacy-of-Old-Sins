@@ -33,16 +33,4 @@ public class CharactersPoolController : MonoBehaviour
         }
         return result;
     }
-
-    public static int GetPoolCount()
-    {
-        int result = 0;
-        var enumerator = CharactersPoolController.Pool.GetEnumerator();
-
-        while (enumerator.MoveNext())
-        {
-            result++;
-        }
-        return result;
-    }
 }

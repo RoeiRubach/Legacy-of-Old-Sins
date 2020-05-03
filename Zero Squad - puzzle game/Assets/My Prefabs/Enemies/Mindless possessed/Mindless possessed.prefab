@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 963212273}
   - component: {fileID: 963212272}
   - component: {fileID: 963212271}
-  m_Layer: 11
+  m_Layer: 2
   m_Name: Enemy vision(Clone)
   m_TagString: Enemy Vision
   m_Icon: {fileID: 0}
