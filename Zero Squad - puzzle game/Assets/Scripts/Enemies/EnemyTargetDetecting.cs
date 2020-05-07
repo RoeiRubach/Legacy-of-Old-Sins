@@ -16,28 +16,26 @@ public class EnemyTargetDetecting : MonoBehaviour
     private MindlessPossessed _mindlessPossessedRef;
     private ElenaStealthManager _elenaStealthManager;
 
-    private Transform _douglasRef, _hectorRef, _elenaRef;
+    //private Transform _douglasRef, _hectorRef, _elenaRef;
 
     private NavMeshHit _navMeshHit;
 
     private void Start()
     {
         _mindlessPossessedRef = GetComponentInParent<MindlessPossessed>();
-        _douglasRef = GameObject.FindWithTag("Douglas").transform;
-        _hectorRef = GameObject.FindWithTag("Hector").transform;
-        _elenaRef = GameObject.FindWithTag("Elena").transform;
+        //_douglasRef = GameObject.FindWithTag("Douglas").transform;
+        //_hectorRef = GameObject.FindWithTag("Hector").transform;
+        //_elenaRef = GameObject.FindWithTag("Elena").transform;
     }
 
     private void Update()
     {
         var nearestCharacter = CharactersPoolController.FindClosestEnemy(transform.position);
 
-        if (nearestCharacter != null)
+        if (nearestCharacter != null && _mindlessPossessedRef.IsPlayerSpotted)
         {
             if (nearestCharacter.transform.CompareTag(_elenaName) && !_isElenaBeenSpotted)
                 return;
-
-            _mindlessPossessedRef.IsPlayerSpotted = true;
 
             if (!_mindlessPossessedRef.IsAttacking)
                 _mindlessPossessedRef.TargetDetected = nearestCharacter.transform;
@@ -108,6 +106,7 @@ public class EnemyTargetDetecting : MonoBehaviour
 
         _mindlessPossessedRef.TargetDetected = _elena.transform;
         _isElenaBeenSpotted = true;
+        _mindlessPossessedRef.IsPlayerSpotted = true;
         _elenaStealthManager.AddElenaToPool();
         Debug.Log("Elena got triggered");
     }

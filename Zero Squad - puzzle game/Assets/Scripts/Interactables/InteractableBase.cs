@@ -7,11 +7,12 @@ public enum CharactersEnum
     Hector
 }
 
-public class InteractableBase : MonoBehaviour
+[RequireComponent(typeof(Outline))]
+public class InteractableBase : MonoBehaviour, IInteractable
 {
     protected bool isInteract;
 
-    protected Transform interactedCharacterRef;
+    //protected Transform interactedCharacterRef;
 
     [SerializeField] protected Transform characterInteractionPlacement;
     [SerializeField] protected Transform objectPlacement;
@@ -21,9 +22,8 @@ public class InteractableBase : MonoBehaviour
         if (characterInteractionPlacement != null)
             return characterInteractionPlacement.position;
         else
-            return interactedCharacterRef.localPosition;
+            return transform.localPosition;
     }
-
 
     public virtual void Interact()
     {

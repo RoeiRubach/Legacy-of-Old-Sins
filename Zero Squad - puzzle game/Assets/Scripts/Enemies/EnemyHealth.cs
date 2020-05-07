@@ -10,6 +10,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private GameObject _healthBarUI;
     [SerializeField] private Slider _slider;
 
+    private Camera _mainCam;
+
     private bool _isSet, _isKilled;
 
     private void Start()
@@ -21,10 +23,15 @@ public class EnemyHealth : MonoBehaviour
     {
         _slider.value = Mathf.Lerp(_slider.value, CalculateHealth(), 0.55f);
 
-        if (_currentHealth < _maxHealth && !_isSet)
+        if (_currentHealth < _maxHealth)
         {
-            _isSet = true;
-            _healthBarUI.SetActive(true);
+            if (!_isSet)
+            {
+                _isSet = true;
+                _healthBarUI.SetActive(true);
+                _mainCam = Camera.main;
+            }
+            _healthBarUI.transform.LookAt(_mainCam.transform);
         }
     }
 
@@ -38,6 +45,8 @@ public class EnemyHealth : MonoBehaviour
         {
             GetComponentInParent<BoxCollider>().enabled = false;
             _isKilled = true;
+            _healthBarUI.SetActive(false);
+            GetComponent<GameEventSubscriber>()?.OnEventFire();
         }
     }
 

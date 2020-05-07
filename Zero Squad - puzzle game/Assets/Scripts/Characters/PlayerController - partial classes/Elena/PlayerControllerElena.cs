@@ -34,7 +34,8 @@ public partial class PlayerController
 
     public void SwitchToElenaStateViaButton()
     {
-        SetState(new ElenaState(this, _mainCamera));
+        if (GameObject.FindWithTag("Elena"))
+            SetState(new ElenaState(this, _mainCamera));
     }
 
     public void ElenaIconSelectedON()

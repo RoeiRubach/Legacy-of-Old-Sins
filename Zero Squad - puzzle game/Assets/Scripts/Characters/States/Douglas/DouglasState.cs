@@ -53,6 +53,7 @@ public class DouglasState : PlayerStateManager
             {
                 CursorController.Instance.SetInteractableCursor();
                 interactableObject = hitInfo.transform;
+                interactableObject.GetComponent<Outline>().enabled = true;
 
                 if (hitInfo.transform.name == "Bomb")
                     _bombRef = hitInfo.transform;
@@ -61,8 +62,12 @@ public class DouglasState : PlayerStateManager
             }
             else
             {
+                if (interactableObject != null && !isInteracting)
+                {
+                    interactableObject.GetComponent<Outline>().enabled = false;
+                    interactableObject = null;
+                }
                 CursorController.Instance.SetStandardCursor();
-
                 isPossibleToInteract = false;
             }
         }

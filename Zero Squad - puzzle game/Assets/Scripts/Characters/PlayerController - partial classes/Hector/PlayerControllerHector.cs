@@ -34,7 +34,8 @@ public partial class PlayerController
 
     public void SwitchToHectorStateViaButton()
     {
-        SetState(new HectorState(this, _mainCamera));
+        if (GameObject.FindWithTag("Hector"))
+            SetState(new HectorState(this, _mainCamera));
     }
 
     public void HectorSkillButtonController()

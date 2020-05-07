@@ -8,8 +8,17 @@ public class EnemyTrigger : MonoBehaviour
     {
         if (other.transform.CompareTag("Douglas") || other.transform.CompareTag("Hector"))
         {
-            if (!other.transform.GetComponent<CharactersPoolController>().isActiveAndEnabled)
-                other.transform.GetComponent<CharactersPoolController>().enabled = true;
+            //if (!other.transform.GetComponent<CharactersPoolController>().isActiveAndEnabled)
+            //    other.transform.GetComponent<CharactersPoolController>().enabled = true;
+
+            if (enemiesListeners[0] != null)
+            {
+                foreach (var enemies in enemiesListeners)
+                {
+                    enemies.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
+                }
+            }
+            Destroy(gameObject);
         }
     }
 }

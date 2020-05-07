@@ -35,7 +35,8 @@ public partial class PlayerController
 
     public void SwitchToDouglasStateViaButton()
     {
-        SetState(new DouglasState(this, _mainCamera));
+        if (GameObject.FindWithTag("Douglas"))
+            SetState(new DouglasState(this, _mainCamera));
     }
 
     public void DouglasIconSelectedON()

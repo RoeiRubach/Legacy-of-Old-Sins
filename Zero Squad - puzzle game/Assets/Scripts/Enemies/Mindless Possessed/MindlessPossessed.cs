@@ -123,7 +123,7 @@ public class MindlessPossessed : EnemyBase
     {
         enemyMeshAgent.speed = _walkingSpeed;
         enemyMeshAgent.stoppingDistance = 0f;
-        enemyMeshAgent.SetDestination(_destinationToGoTo);
+        //enemyMeshAgent.SetDestination(_destinationToGoTo);
 
         enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isPlayerBeenSeen.ToString(), false);
         enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isAbleToAttack.ToString(), false);

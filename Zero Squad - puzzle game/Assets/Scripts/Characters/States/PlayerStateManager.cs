@@ -158,6 +158,9 @@ public abstract class PlayerStateManager
                 myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
                 myCurrentAgent.speed = walkingSpeed;
             }
+            else if (interactableObject.name == "Health Pack")
+                HealthPackInteraction();
+
             interactableObject.GetComponent<IInteractable>().Interact();
 
             myCurrentAgent.SetDestination(CharacterInteractionPlacement());
@@ -167,5 +170,27 @@ public abstract class PlayerStateManager
             isInteracting = false;
             interactableObject = null;
         }
+    }
+
+    private void HealthPackInteraction()
+    {
+        var healthRegenCollectables = interactableObject.GetComponent<HealthRegenCollectables>();
+        Debug.Log(healthRegenCollectables.HealthToRegen);
+
+        switch (myCurrentCharacter.tag)
+        {
+            case "Douglas":
+                playerController.DouglasGainingHealth(healthRegenCollectables.HealthToRegen);
+                break;
+            case "Elena":
+                playerController.ElenaGainingHealth(healthRegenCollectables.HealthToRegen);
+                break;
+            case "Hector":
+                playerController.HectorGainingHealth(healthRegenCollectables.HealthToRegen);
+                break;
+        }
+
+        isInteracting = false;
+        healthRegenCollectables.CallOnDestroy();
     }
 }
