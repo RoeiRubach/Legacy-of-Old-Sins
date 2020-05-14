@@ -2,11 +2,6 @@
 
 public class Cabinet : InteractableBase, IDouglasInteractables
 {
-    private void Start()
-    {
-        //interactedCharacterRef = GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()).transform;
-    }
-
     private void Update()
     {
         if (isInteract)
@@ -15,9 +10,9 @@ public class Cabinet : InteractableBase, IDouglasInteractables
 
             float disctance = Vector3.Distance(objectPlacement.position, transform.position);
 
-            if (disctance <= 0.05f)
+            if (disctance <= 0.035f)
             {
-                GetComponent<GameEventSubscriber>().OnEventFire();
+                GetComponent<GameEventSubscriber>()?.OnEventFire();
                 isInteract = false;
                 Destroy(GetComponent<Cabinet>());
                 Destroy(GetComponent<Outline>());

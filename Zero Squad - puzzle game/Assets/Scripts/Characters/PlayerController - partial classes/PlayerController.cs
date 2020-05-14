@@ -41,4 +41,14 @@ public partial class PlayerController : MonoBehaviour
     {
         _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
     }
+
+    public void SwitchToHectorTutorial()
+    {
+        Invoke("InvokeHectorSwitch", 1f);
+    }
+
+    private void InvokeHectorSwitch()
+    {
+        SetState(new HectorState(this, _mainCamera));
+    }
 }

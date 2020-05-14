@@ -27,8 +27,11 @@ public class MindlessPossessed : EnemyBase
 
             else
             {
-                SetPropertiesChaseState();
-                AttackingState(_distanceToDestination);
+                if (TargetDetected != null)
+                {
+                    SetPropertiesChaseState();
+                    AttackingState(_distanceToDestination);
+                }
             }
         }
         else

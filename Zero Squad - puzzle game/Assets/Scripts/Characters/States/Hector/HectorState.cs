@@ -21,12 +21,39 @@ public class HectorState : PlayerStateManager
     public override void UpdateHandle()
     {
         if (!_isUsingSkill)
+        {
+            HighlightCursorOverInteractableObject();
             PointAndClickMovement();
+        }
         else
             TurnTowardTheCursor();
 
         EnterOrExitSkillMode();
         SwitchCharacters();
+    }
+
+    private void HighlightCursorOverInteractableObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        {
+            if (hitInfo.collider.GetComponent<IHectorInteractables>() != null)
+            {
+                CursorController.Instance.SetInteractableCursor();
+                interactableObject = hitInfo.transform;
+                interactableObject.GetComponent<Outline>().enabled = true;
+                
+                isPossibleToInteract = true;
+            }
+            else
+            {
+                ResetInteractable();
+                CursorController.Instance.SetStandardCursor();
+                isPossibleToInteract = false;
+            }
+        }
     }
 
     public override void OnStateEnter()
@@ -70,6 +97,9 @@ public class HectorState : PlayerStateManager
     private void HectorInitialization()
     {
         myCurrentCharacter = GameObject.FindWithTag(hectorName);
+
+        if (myCurrentCharacter.name != hectorName)
+            myCurrentCharacter = GameObject.Find(hectorName);
 
         myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 

@@ -18,7 +18,7 @@ public abstract class PlayerStateManager
 
     protected Transform interactableObject;
 
-    protected bool isPossibleToInteract, isInteracting;
+    protected bool isPossibleToInteract, isInteracting, isCabinetInteracting;
 
     protected PlayerStateManager(PlayerController character)
     {
@@ -59,7 +59,7 @@ public abstract class PlayerStateManager
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (!isInteracting)
+            if (!isCabinetInteracting)
             {
                 RaycastHit hitInfo;
 
@@ -74,7 +74,11 @@ public abstract class PlayerStateManager
                         myCurrentAgent.SetDestination(CharacterInteractionPlacement());
                     }
                     else
+                    {
+                        isInteracting = false;
+                        ResetInteractable();
                         myCurrentAgent.SetDestination(hitInfo.point);
+                    }
 
                     if (playerController.IsLifting)
                         myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), true);
@@ -135,6 +139,15 @@ public abstract class PlayerStateManager
     }
     #endregion
 
+    protected void ResetInteractable()
+    {
+        if (interactableObject != null && !isInteracting)
+        {
+            interactableObject.GetComponent<Outline>().enabled = false;
+            interactableObject = null;
+        }
+    }
+
     protected void ResetAIPath()
     {
         if (myCurrentAgent.hasPath)
@@ -153,20 +166,34 @@ public abstract class PlayerStateManager
     {
         if (interactableObject.GetComponent<IInteractable>() != null)
         {
-            if (interactableObject.name == "Bomb")
+            float dis = Vector3.Distance(myCurrentCharacter.transform.position, CharacterInteractionPlacement());
+
+            if (dis <= 2.3f)
             {
-                myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
-                myCurrentAgent.speed = walkingSpeed;
+                if (interactableObject.name == "Bomb")
+                {
+                    myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
+                    myCurrentAgent.speed = walkingSpeed;
+                }
+                else if (interactableObject.name == "Cabinet")
+                    isCabinetInteracting = true;
+
+                else if (interactableObject.name == "Health Pack")
+                    HealthPackInteraction();
+
+                interactableObject.GetComponent<IInteractable>().Interact();
+
+                myCurrentAgent.SetDestination(CharacterInteractionPlacement());
             }
-            else if (interactableObject.name == "Health Pack")
-                HealthPackInteraction();
-
-            interactableObject.GetComponent<IInteractable>().Interact();
-
-            myCurrentAgent.SetDestination(CharacterInteractionPlacement());
+            else
+            {
+                isInteracting = false;
+                ResetInteractable();
+            }
         }
         else
         {
+            isCabinetInteracting = false;
             isInteracting = false;
             interactableObject = null;
         }

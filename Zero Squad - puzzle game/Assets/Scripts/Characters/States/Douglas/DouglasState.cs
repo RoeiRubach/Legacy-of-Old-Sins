@@ -35,7 +35,7 @@ public class DouglasState : PlayerStateManager
             DouglasPointAndClickShooting();
         }
 
-        if (!isInteracting)
+        if (!isCabinetInteracting)
         {
             EnterOrExitSkillMode();
             SwitchCharacters();
@@ -62,11 +62,7 @@ public class DouglasState : PlayerStateManager
             }
             else
             {
-                if (interactableObject != null && !isInteracting)
-                {
-                    interactableObject.GetComponent<Outline>().enabled = false;
-                    interactableObject = null;
-                }
+                ResetInteractable();
                 CursorController.Instance.SetStandardCursor();
                 isPossibleToInteract = false;
             }
@@ -145,6 +141,9 @@ public class DouglasState : PlayerStateManager
     {
         if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
         {
+            isInteracting = false;
+            ResetInteractable();
+
             if (!playerController.IsLifting)
             {
                 EnterSkillViaButton = false;
