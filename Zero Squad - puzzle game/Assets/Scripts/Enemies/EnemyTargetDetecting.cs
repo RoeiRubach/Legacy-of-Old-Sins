@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyTargetDetecting : MonoBehaviour
 {
@@ -25,21 +24,30 @@ public class EnemyTargetDetecting : MonoBehaviour
     {
         var nearestCharacter = CharactersPoolController.FindClosestEnemy(transform.position);
 
-        if (nearestCharacter != null && _enemyBaseRef.IsPlayerSpotted && _enemyBaseRef && _enemyBaseRef.IsAbleToReachTarget)
+        if (nearestCharacter != null)
         {
-            if (nearestCharacter.transform.CompareTag(_elenaName) && !IsElenaBeenSpotted)
-                return;
+            if (_enemyBaseRef.IsPlayerSpotted || (IsElenaBeenSpotted && !_elenaStealthManager.IsInStealthMode))
+            {
+                //if (nearestCharacter.transform.CompareTag(_elenaName) && !IsElenaBeenSpotted)
+                //    return;
 
-            if (!_enemyBaseRef.IsAttacking)
-                _enemyBaseRef.TargetDetected = nearestCharacter.transform;
+                if (!_enemyBaseRef.IsAttacking)
+                    _enemyBaseRef.TargetDetected = nearestCharacter.transform;
+                else
+                {
+                    if (nearestCharacter.transform != _enemiesShieldHittingSpot)
+                        _enemyBaseRef.TargetDetected = nearestCharacter.transform;
+                }
+            }
             else
             {
-                if (nearestCharacter.transform != _enemiesShieldHittingSpot)
-                    _enemyBaseRef.TargetDetected = nearestCharacter.transform;
+                _enemyBaseRef.TargetDetected = null;
+                _enemyBaseRef.IsPlayerSpotted = false;
+
+                if(_elenaStealthManager != null)
+                    ElenaOutOfSight();
             }
         }
-        else
-            _enemyBaseRef.IsPlayerSpotted = false;
     }
 
     #region On Trigger States
@@ -87,14 +95,14 @@ public class EnemyTargetDetecting : MonoBehaviour
         }
     }
 
-    private void ElenaBeenSpotted(Collider _elena)
+    private void ElenaBeenSpotted(Collider elena)
     {
         if (_elenaStealthManager == null)
-            _elenaStealthManager = _elena.GetComponentInParent<ElenaStealthManager>();
+            _elenaStealthManager = elena.GetComponentInParent<ElenaStealthManager>();
 
-        _enemyBaseRef.TargetDetected = _elena.transform;
+        _enemyBaseRef.TargetDetected = elena.transform;
         IsElenaBeenSpotted = true;
-        _enemyBaseRef.IsPlayerSpotted = true;
+        //_enemyBaseRef.IsPlayerSpotted = true;
         _elenaStealthManager.AddElenaToPool();
         Debug.Log("Elena got triggered");
     }

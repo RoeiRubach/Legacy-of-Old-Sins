@@ -8,12 +8,15 @@ public class MindlessPossessed : EnemyBase
     private float _waitSeconds = 3f, _stoppingDistanceNoTarget, _stoppingDistanceTargeted = 2f;
     private bool _isPlayerEscape;
     private Vector3 _destinationToGoTo, _startPosition;
+    private EnemyTargetDetecting _enemyTargetDetecting;
     
     [SerializeField] private Transform _firstDestination, _secondDestination;
 
     private void Start()
     {
         _startPosition = transform.position;
+        _destinationToGoTo = _startPosition;
+        _enemyTargetDetecting = GetComponentInChildren<EnemyTargetDetecting>();
     }
 
     private void Update()
@@ -21,10 +24,9 @@ public class MindlessPossessed : EnemyBase
         if (!IsEnemyGotKilled())
         {
             float _distanceToDestination = Vector3.Distance(_destinationToGoTo, transform.position);
-
-            if (!IsPlayerSpotted)
+            
+            if (!IsPlayerSpotted && !_enemyTargetDetecting.IsElenaBeenSpotted)
                 RoamingState(_distanceToDestination);
-
             else
             {
                 if (TargetDetected != null)
@@ -126,7 +128,7 @@ public class MindlessPossessed : EnemyBase
     {
         enemyMeshAgent.speed = _walkingSpeed;
         enemyMeshAgent.stoppingDistance = 0f;
-        //enemyMeshAgent.SetDestination(_destinationToGoTo);
+        enemyMeshAgent.SetDestination(_destinationToGoTo);
 
         enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isPlayerBeenSeen.ToString(), false);
         enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isAbleToAttack.ToString(), false);

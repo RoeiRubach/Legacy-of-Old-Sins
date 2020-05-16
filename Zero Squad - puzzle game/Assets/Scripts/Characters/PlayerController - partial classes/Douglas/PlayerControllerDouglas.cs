@@ -78,7 +78,10 @@ public partial class PlayerController
             _douglasHP.sprite = _hpBars[_douglasCurrentHP];
         }
         else
-            print("Douglas is already dead you sick fuck");
+        {
+            SceneController.LoadScene();
+        }
+
     }
 
     public void DouglasGainingHealth(int regenAmount)

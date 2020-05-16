@@ -77,7 +77,7 @@ public partial class PlayerController
             _elenaHP.sprite = _hpBars[_elenaCurrentHP];
         }
         else
-            print("Elena is already dead you sick fuck");
+            SceneController.LoadScene();
     }
 
     public void ElenaGainingHealth(int regenAmount)
@@ -91,7 +91,7 @@ public partial class PlayerController
             }
             else
             {
-                print("Hector has full health");
+                print("Elena has full health");
                 break;
             }
         }

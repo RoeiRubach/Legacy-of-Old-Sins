@@ -16,7 +16,7 @@ public class EnemyTrigger : MonoBehaviour
                 foreach (var enemies in enemiesListeners)
                 {
                     if (enemies.gameObject.activeInHierarchy)
-                        enemies.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
+                        enemies.GetComponent<EnemyBase>().IsPlayerSpotted = true;
                 }
             }
             Destroy(gameObject);

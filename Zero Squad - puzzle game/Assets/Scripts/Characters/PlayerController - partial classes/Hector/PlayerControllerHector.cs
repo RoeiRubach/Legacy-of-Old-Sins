@@ -77,7 +77,7 @@ public partial class PlayerController
             _hectorHP.sprite = _hpBars[_hectorCurrentHP];
         }
         else
-            print("Hector is already dead you sick fuck");
+            SceneController.LoadScene();
     }
     
     public void HectorGainingHealth(int regenAmount)
