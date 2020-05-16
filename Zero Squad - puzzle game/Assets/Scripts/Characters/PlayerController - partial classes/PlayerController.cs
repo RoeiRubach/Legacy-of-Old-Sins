@@ -47,8 +47,18 @@ public partial class PlayerController : MonoBehaviour
         Invoke("InvokeHectorSwitch", 1f);
     }
 
+    public void SwitchToElenaTutorial()
+    {
+        Invoke("InvokeElenaSwitch", 1f);
+    }
+
     private void InvokeHectorSwitch()
     {
         SetState(new HectorState(this, _mainCamera));
+    }
+
+    private void InvokeElenaSwitch()
+    {
+        SetState(new ElenaState(this, _mainCamera));
     }
 }

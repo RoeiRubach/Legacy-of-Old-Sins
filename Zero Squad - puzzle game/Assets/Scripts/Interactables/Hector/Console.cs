@@ -1,12 +1,5 @@
-﻿using UnityEngine;
-
-public class Console : InteractableBase, IHectorInteractables
+﻿public class Console : InteractableBase, IHectorInteractables
 {
-    private void Update()
-    {
-        
-    }
-
     public override void Interact()
     {
         GetComponent<GameEventSubscriber>()?.OnEventFire();

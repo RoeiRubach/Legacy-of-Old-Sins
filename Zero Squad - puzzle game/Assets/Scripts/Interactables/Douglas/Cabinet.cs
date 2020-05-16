@@ -2,11 +2,14 @@
 
 public class Cabinet : InteractableBase, IDouglasInteractables
 {
+    [Range(0.01f, 0.018f)]
+    [SerializeField] private float _transitionCabinet = 0.01f;
+
     private void Update()
     {
         if (isInteract)
         {
-            transform.position = Vector3.Lerp(transform.position, objectPlacement.position, 0.01f);
+            transform.position = Vector3.Lerp(transform.position, objectPlacement.position, _transitionCabinet);
 
             float disctance = Vector3.Distance(objectPlacement.position, transform.position);
 

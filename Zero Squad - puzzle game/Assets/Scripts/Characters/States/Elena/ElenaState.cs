@@ -22,12 +22,39 @@ public class ElenaState : PlayerStateManager
     public override void UpdateHandle()
     {
         if (!_isUsingSkill)
+        {
+            HighlightCursorOverInteractableObject();
             PointAndClickMovement();
+        }
         else
             TurnTowardTheCursor();
 
         EnterOrExitSkillMode();
         SwitchCharacters();
+    }
+
+    private void HighlightCursorOverInteractableObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        {
+            if (hitInfo.collider.GetComponent<IElenaInteractables>() != null)
+            {
+                CursorController.Instance.SetInteractableCursor();
+                interactableObject = hitInfo.transform;
+                interactableObject.GetComponent<Outline>().enabled = true;
+
+                isPossibleToInteract = true;
+            }
+            else
+            {
+                ResetInteractable();
+                CursorController.Instance.SetStandardCursor();
+                isPossibleToInteract = false;
+            }
+        }
     }
 
     public override void OnStateEnter()
@@ -71,6 +98,9 @@ public class ElenaState : PlayerStateManager
     private void ElenaInitialization()
     {
         myCurrentCharacter = GameObject.FindWithTag(elenaName);
+
+        if (myCurrentCharacter.name != elenaName)
+            myCurrentCharacter = GameObject.Find(elenaName);
 
         myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 

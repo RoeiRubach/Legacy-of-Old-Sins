@@ -2,6 +2,8 @@
 
 public class DouglasAutoShooting : MonoBehaviour
 {
+    public LayerMask LayerMask;
+
     private const float _autoShootingDelay = 2.2f;
     private float _shootingTimer;
 
@@ -84,12 +86,12 @@ public class DouglasAutoShooting : MonoBehaviour
 
     private bool IsHavingClearShoot(Transform target)
     {
-        Debug.DrawRay(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target) * 12f, Color.red);
+        //Debug.DrawRay(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target) * 12f, Color.red);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f))
+        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f, ~LayerMask))
         {
-            if (hitInfo.transform == target.transform)
+            if (hitInfo.collider.transform == target.transform)
                 return true;
         }
         return false;

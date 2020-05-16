@@ -21,6 +21,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (_slider == null)
+            return;
+
         _slider.value = Mathf.Lerp(_slider.value, CalculateHealth(), 0.55f);
 
         if (_currentHealth < _maxHealth)

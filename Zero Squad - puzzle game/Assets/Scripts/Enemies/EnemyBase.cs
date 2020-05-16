@@ -53,14 +53,6 @@ public abstract class EnemyBase : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag(_bullet))
-        {
-            enemyHealth.HealthDecreaseViaBullet();
-        }
-    }
-
     protected virtual bool IsEnemyGotKilled() => enemyHealth.CheckIfEnemyDead();
 
     protected virtual void ResetAIPath()
@@ -80,4 +72,6 @@ public abstract class EnemyBase : MonoBehaviour
         Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_targetDirection.x, 0, _targetDirection.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _turningSpeed);
     }
+
+    public bool IsAbleToReachTarget => enemyMeshAgent.CalculatePath(transform.position, enemyMeshAgent.path);
 }

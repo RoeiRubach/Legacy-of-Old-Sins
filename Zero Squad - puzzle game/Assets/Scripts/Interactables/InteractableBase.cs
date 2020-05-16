@@ -10,6 +10,8 @@ public enum CharactersEnum
 [RequireComponent(typeof(Outline))]
 public class InteractableBase : MonoBehaviour, IInteractable
 {
+    public bool IsInteract => isInteract;
+
     protected bool isInteract;
 
     //protected Transform interactedCharacterRef;

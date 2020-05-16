@@ -157,52 +157,54 @@ public abstract class PlayerStateManager
         }
     }
 
-    private Vector3 CharacterInteractionPlacement()
-    {
-        return interactableObject.GetComponent<IInteractable>().CharacterInteractionPlacement();
-    }
+    private Vector3 CharacterInteractionPlacement() => interactableObject.GetComponent<IInteractable>().CharacterInteractionPlacement();
 
     protected virtual void CharacterObjectInteraction()
     {
-        if (interactableObject.GetComponent<IInteractable>() != null)
+        if (interactableObject != null)
         {
-            float dis = Vector3.Distance(myCurrentCharacter.transform.position, CharacterInteractionPlacement());
-
-            if (dis <= 2.3f)
+            if (interactableObject.GetComponent<IInteractable>() != null)
             {
-                if (interactableObject.name == "Bomb")
+                float dis = Vector3.Distance(myCurrentCharacter.transform.position, CharacterInteractionPlacement());
+
+                if (dis <= 2.3f)
                 {
-                    myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
-                    myCurrentAgent.speed = walkingSpeed;
+                    interactableObject.GetComponent<IInteractable>().Interact();
+
+                    switch (interactableObject.name)
+                    {
+                        case "Bomb":
+                            myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
+                            myCurrentAgent.speed = walkingSpeed;
+                            break;
+                        case "Cabinet":
+                            isCabinetInteracting = true;
+                            break;
+                        case "Health Pack":
+                            HealthPackInteraction();
+                            break;
+                    }
+
+                    myCurrentAgent.SetDestination(CharacterInteractionPlacement());
                 }
-                else if (interactableObject.name == "Cabinet")
-                    isCabinetInteracting = true;
-
-                else if (interactableObject.name == "Health Pack")
-                    HealthPackInteraction();
-
-                interactableObject.GetComponent<IInteractable>().Interact();
-
-                myCurrentAgent.SetDestination(CharacterInteractionPlacement());
+                else
+                {
+                    isInteracting = false;
+                    ResetInteractable();
+                }
             }
             else
             {
+                isCabinetInteracting = false;
                 isInteracting = false;
-                ResetInteractable();
+                interactableObject = null;
             }
-        }
-        else
-        {
-            isCabinetInteracting = false;
-            isInteracting = false;
-            interactableObject = null;
         }
     }
 
     private void HealthPackInteraction()
     {
-        var healthRegenCollectables = interactableObject.GetComponent<HealthRegenCollectables>();
-        Debug.Log(healthRegenCollectables.HealthToRegen);
+        HealthRegenCollectables healthRegenCollectables = interactableObject.GetComponent<HealthRegenCollectables>();
 
         switch (myCurrentCharacter.tag)
         {
@@ -217,7 +219,8 @@ public abstract class PlayerStateManager
                 break;
         }
 
-        isInteracting = false;
-        healthRegenCollectables.CallOnDestroy();
+        //ResetInteractable();
+        if (healthRegenCollectables.IsInteract)
+            healthRegenCollectables.CallOnDestroy();
     }
 }

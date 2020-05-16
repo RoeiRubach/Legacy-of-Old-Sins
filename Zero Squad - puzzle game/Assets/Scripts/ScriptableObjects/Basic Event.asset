@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0acb2068e24d2ae47b777a574678d76b, type: 3}
-  m_Name: '#1 Cabinet Interaction Room'
+  m_Name: Basic Event
   m_EditorClassIdentifier: 

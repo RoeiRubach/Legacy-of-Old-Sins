@@ -3,13 +3,12 @@
 public class DouglasShootingManager : MonoBehaviour
 {
     private const float _manualShootingDelay = 1.1f;
-
-    [SerializeField] private GameObject _bullet;
+    
     [SerializeField] private Transform _bulletHolder;
 
     public GameObject DouglasShotgunRef;
-
-    private GameObject _bulletClone;
+    public LayerMask LayerMask;
+    
     private float _shootingDelay = 0.875f;
 
     private bool _isAllowedToShoot;
@@ -18,8 +17,19 @@ public class DouglasShootingManager : MonoBehaviour
     {
         if (_isAllowedToShoot)
         {
-            _bulletClone = Instantiate(_bullet, _bulletHolder.transform);
-            _bulletClone.transform.parent = null;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+            
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+            {
+                if (hitInfo.collider.transform.CompareTag("Enemy"))
+                {
+                    if (IsHavingClearShoot(hitInfo.transform))
+                    {
+                        DouglasShooting(hitInfo.transform);
+                    }
+                }
+            }
 
             _shootingDelay = _manualShootingDelay;
 
@@ -45,4 +55,24 @@ public class DouglasShootingManager : MonoBehaviour
         _isAllowedToShoot = false;
         _shootingDelay = 0.8f;
     }
+
+    private void DouglasShooting(Transform nearestEnemy)
+    {
+        nearestEnemy.GetComponent<EnemyHealth>().HealthDecreaseViaBullet();
+        //transform.GetComponent<Animator>().SetBool("_isShooting", true);
+    }
+
+    private bool IsHavingClearShoot(Transform target)
+    {
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~LayerMask))
+        {
+            if (hitInfo.transform == target.transform)
+                return true;
+        }
+        return false;
+    }
+
+    private Vector3 DirectionToEnemy(Transform target) => (target.position - transform.position).normalized;
 }

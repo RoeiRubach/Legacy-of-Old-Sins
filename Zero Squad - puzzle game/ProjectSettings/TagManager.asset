@@ -9,7 +9,6 @@ TagManager:
   - Elena
   - Hector Shield
   - Enemy Vision
-  - Bullet
   - Enemy
   - Douglas Shotgun
   - Shield holder
@@ -24,9 +23,9 @@ TagManager:
   - 
   - 
   - Walkable
-  - Bullet
   - Enemy
   - Characters
+  - 
   - 
   - 
   - 

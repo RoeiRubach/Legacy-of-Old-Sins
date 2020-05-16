@@ -59,11 +59,13 @@ public class ElenaStealthManager : MonoBehaviour
 
     public void AddElenaToPool()
     {
-        _charactersPoolController.enabled = true;
+        if(!_charactersPoolController.enabled)
+            _charactersPoolController.enabled = true;
     }
 
     public void RemoveElenaFromPool()
     {
-        _charactersPoolController.enabled = false;
+        if (_charactersPoolController.enabled)
+            _charactersPoolController.enabled = false;
     }
 }
