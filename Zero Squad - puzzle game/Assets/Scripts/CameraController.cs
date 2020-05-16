@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        _characterToWatch = GameObject.FindGameObjectWithTag("Douglas");
+        _characterToWatch = GameObject.Find("Douglas");
         _offset = transform.position - _characterToWatch.transform.position;
     }
 

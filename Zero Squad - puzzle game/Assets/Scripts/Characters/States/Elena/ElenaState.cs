@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ElenaState : PlayerStateManager
 {
-    private string elenaName = "Elena";
+    private string _elenaName = "Elena";
 
     private bool _isUsingSkill;
 
@@ -97,10 +97,7 @@ public class ElenaState : PlayerStateManager
 
     private void ElenaInitialization()
     {
-        myCurrentCharacter = GameObject.FindWithTag(elenaName);
-
-        if (myCurrentCharacter.name != elenaName)
-            myCurrentCharacter = GameObject.Find(elenaName);
+        myCurrentCharacter = GameObject.Find(_elenaName);
 
         myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 

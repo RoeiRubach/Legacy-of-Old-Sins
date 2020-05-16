@@ -110,7 +110,7 @@ public class DouglasState : PlayerStateManager
 
     private void DouglasInitialization()
     {
-        myCurrentCharacter = GameObject.FindWithTag(_douglasName);
+        myCurrentCharacter = GameObject.Find(_douglasName);
 
         myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 
@@ -190,6 +190,8 @@ public class DouglasState : PlayerStateManager
     {
         if(_douglasShootingManager == null)
             _douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
+
+        Debug.Log("douglas shooting manager - " + _douglasShootingManager);
 
         if(_douglasAutoShooting == null)
             _douglasAutoShooting = myCurrentCharacter.GetComponent<DouglasAutoShooting>();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class HectorState : PlayerStateManager
 {
-    private string hectorName = "Hector";
+    private string _hectorName = "Hector";
 
     private bool _isUsingSkill;
 
@@ -96,10 +96,7 @@ public class HectorState : PlayerStateManager
 
     private void HectorInitialization()
     {
-        myCurrentCharacter = GameObject.FindWithTag(hectorName);
-
-        if (myCurrentCharacter.name != hectorName)
-            myCurrentCharacter = GameObject.Find(hectorName);
+        myCurrentCharacter = GameObject.Find(_hectorName);
 
         myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
 
