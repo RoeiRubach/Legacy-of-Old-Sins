@@ -9,7 +9,8 @@ public partial class PlayerController
     [SerializeField] private Image _douglasHP;
     [SerializeField] private Button _douglasButtonRef;
 
-    private int _douglasCurrentHP = _maxHP;
+    //private int _douglasCurrentHP = _maxHP;
+    private int _douglasCurrentHP = 5;
 
     [Header("Douglas icon properties:", order = 1)]
     [SerializeField] private Image _douglasIconPlaceHolder;

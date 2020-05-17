@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 6010022482414314583}
   - component: {fileID: 8822748784037377065}
   - component: {fileID: 7651523461791805676}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Summoner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

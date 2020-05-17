@@ -24,7 +24,7 @@ public class InteractableBase : MonoBehaviour, IInteractable
         if (characterInteractionPlacement != null)
             return characterInteractionPlacement.position;
         else
-            return transform.localPosition;
+            return transform.position;
     }
 
     public virtual void Interact()
