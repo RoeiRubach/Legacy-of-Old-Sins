@@ -71,12 +71,10 @@ public partial class PlayerController
     [ContextMenu("Apply damage to Elena - PLAYMODE ONLY!")]
     public void ElenaTakingDamage()
     {
-        if (_elenaCurrentHP > 0)
-        {
-            _elenaCurrentHP--;
-            _elenaHP.sprite = _hpBars[_elenaCurrentHP];
-        }
-        else
+        _elenaCurrentHP--;
+        _elenaHP.sprite = _hpBars[_elenaCurrentHP];
+
+        if (_elenaCurrentHP <= 0)
             SceneController.LoadScene();
     }
 

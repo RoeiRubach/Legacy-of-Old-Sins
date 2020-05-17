@@ -72,16 +72,11 @@ public partial class PlayerController
     [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
     public void DouglasTakingDamage()
     {
-        if (_douglasCurrentHP > 0)
-        {
-            _douglasCurrentHP--;
-            _douglasHP.sprite = _hpBars[_douglasCurrentHP];
-        }
-        else
-        {
-            SceneController.LoadScene();
-        }
+        _douglasCurrentHP--;
+        _douglasHP.sprite = _hpBars[_douglasCurrentHP];
 
+        if (_douglasCurrentHP <= 0)
+            SceneController.LoadScene();
     }
 
     public void DouglasGainingHealth(int regenAmount)

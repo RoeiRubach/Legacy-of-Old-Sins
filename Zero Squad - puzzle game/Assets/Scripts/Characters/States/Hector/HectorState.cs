@@ -37,7 +37,7 @@ public class HectorState : PlayerStateManager
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
         {
             if (hitInfo.collider.GetComponent<IHectorInteractables>() != null)
             {
@@ -47,12 +47,12 @@ public class HectorState : PlayerStateManager
                 
                 isPossibleToInteract = true;
             }
-            else
-            {
-                ResetInteractable();
-                CursorController.Instance.SetStandardCursor();
-                isPossibleToInteract = false;
-            }
+        }
+        else
+        {
+            ResetInteractable();
+            CursorController.Instance.SetStandardCursor();
+            isPossibleToInteract = false;
         }
     }
 
@@ -89,7 +89,7 @@ public class HectorState : PlayerStateManager
         myCurrentCharacter = null;
         myCurrentAgent = null;
         myCurrentAnimator = null;
-        _initializationComplete = false;
+        initializationComplete = false;
 
         Debug.Log("Hector is out of control");
     }
@@ -119,12 +119,12 @@ public class HectorState : PlayerStateManager
             playerController.HectorOnSkillMode();
         }
 
-        _initializationComplete = true;
+        initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || EnterSkillViaButton)
         {
             EnterSkillViaButton = false;
             _isUsingSkill = !_isUsingSkill ? true : false;

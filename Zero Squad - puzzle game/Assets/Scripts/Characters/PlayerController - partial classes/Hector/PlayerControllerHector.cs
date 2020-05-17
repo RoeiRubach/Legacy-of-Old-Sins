@@ -71,12 +71,10 @@ public partial class PlayerController
     [ContextMenu("Apply damage to Hector - PLAYMODE ONLY!")]
     public void HectorTakingDamage()
     {
-        if (_hectorCurrentHP > 0)
-        {
-            _hectorCurrentHP--;
-            _hectorHP.sprite = _hpBars[_hectorCurrentHP];
-        }
-        else
+        _hectorCurrentHP--;
+        _hectorHP.sprite = _hpBars[_hectorCurrentHP];
+
+        if (_hectorCurrentHP <= 0)
             SceneController.LoadScene();
     }
     

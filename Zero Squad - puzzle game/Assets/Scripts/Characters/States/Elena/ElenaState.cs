@@ -38,7 +38,7 @@ public class ElenaState : PlayerStateManager
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
         {
             if (hitInfo.collider.GetComponent<IElenaInteractables>() != null)
             {
@@ -48,12 +48,12 @@ public class ElenaState : PlayerStateManager
 
                 isPossibleToInteract = true;
             }
-            else
-            {
-                ResetInteractable();
-                CursorController.Instance.SetStandardCursor();
-                isPossibleToInteract = false;
-            }
+        }
+        else
+        {
+            ResetInteractable();
+            CursorController.Instance.SetStandardCursor();
+            isPossibleToInteract = false;
         }
     }
 
@@ -90,7 +90,7 @@ public class ElenaState : PlayerStateManager
         myCurrentCharacter = null;
         myCurrentAgent = null;
         myCurrentAnimator = null;
-        _initializationComplete = false;
+        initializationComplete = false;
 
         Debug.Log("Elena is out of control");
     }
@@ -120,12 +120,12 @@ public class ElenaState : PlayerStateManager
             playerController.ElenaOnSkillMode();
         }
 
-        _initializationComplete = true;
+        initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || EnterSkillViaButton)
         {
             EnterSkillViaButton = false;
             _isUsingSkill = !_isUsingSkill ? true : false;

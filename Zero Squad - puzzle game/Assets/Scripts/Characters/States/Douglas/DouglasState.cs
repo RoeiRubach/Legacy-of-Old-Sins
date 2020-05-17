@@ -47,7 +47,7 @@ public class DouglasState : PlayerStateManager
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
         {
             if (hitInfo.collider.GetComponent<IDouglasInteractables>() != null)
             {
@@ -60,12 +60,12 @@ public class DouglasState : PlayerStateManager
 
                 isPossibleToInteract = true;
             }
-            else
-            {
-                ResetInteractable();
-                CursorController.Instance.SetStandardCursor();
-                isPossibleToInteract = false;
-            }
+        }
+        else
+        {
+            ResetInteractable();
+            CursorController.Instance.SetStandardCursor();
+            isPossibleToInteract = false;
         }
     }
 
@@ -103,7 +103,7 @@ public class DouglasState : PlayerStateManager
         myCurrentCharacter = null;
         myCurrentAgent = null;
         myCurrentAnimator = null;
-        _initializationComplete = false;
+        initializationComplete = false;
 
         Debug.Log("Douglas is out of control");
     }
@@ -134,12 +134,12 @@ public class DouglasState : PlayerStateManager
         else
             _douglasShootingManager.enabled = false;
 
-        _initializationComplete = true;
+        initializationComplete = true;
     }
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && _initializationComplete || EnterSkillViaButton)
+        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || EnterSkillViaButton)
         {
             isInteracting = false;
             ResetInteractable();

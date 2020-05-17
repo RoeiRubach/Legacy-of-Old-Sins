@@ -35,8 +35,8 @@ public abstract class PlayerStateManager
     protected GameObject myCurrentCharacter;
     protected NavMeshAgent myCurrentAgent;
     protected Animator myCurrentAnimator;
-    
-    protected bool _initializationComplete;
+
+    protected bool initializationComplete;
     public bool EnterSkillViaButton;
 
     #endregion
@@ -66,7 +66,7 @@ public abstract class PlayerStateManager
                 // Generate a ray from the cursor position
                 Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-                if (Physics.Raycast(myRay, out hitInfo, Mathf.Infinity, playerController.walkableLayerMask))
+                if (Physics.Raycast(myRay, out hitInfo, Mathf.Infinity, playerController.WalkableLayerMask))
                 {
                     if (isPossibleToInteract)
                     {

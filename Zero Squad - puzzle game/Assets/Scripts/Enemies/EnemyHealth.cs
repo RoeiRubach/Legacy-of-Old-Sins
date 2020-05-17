@@ -48,7 +48,8 @@ public class EnemyHealth : MonoBehaviour
         {
             GetComponentInParent<BoxCollider>().enabled = false;
             _isKilled = true;
-            _healthBarUI.SetActive(false);
+            if(_healthBarUI != null && _healthBarUI.activeInHierarchy)
+                _healthBarUI.SetActive(false);
             GetComponent<GameEventSubscriber>()?.OnEventFire();
         }
     }

@@ -3,7 +3,7 @@
 public class Cabinet : InteractableBase, IDouglasInteractables
 {
     [Range(0.01f, 0.018f)]
-    [SerializeField] private float _transitionCabinet = 0.01f;
+    [SerializeField] private float _transitionCabinet = 0.018f;
 
     private void Update()
     {

@@ -7,7 +7,8 @@ public class DouglasShootingManager : MonoBehaviour
     [SerializeField] private Transform _bulletHolder;
 
     public GameObject DouglasShotgunRef;
-    public LayerMask LayerMask;
+    public LayerMask AvoidLayersMasks;
+    public LayerMask EnemyLayerMask;
     
     private float _shootingDelay = 0.875f;
 
@@ -20,7 +21,7 @@ public class DouglasShootingManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
             
-            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
+            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, EnemyLayerMask))
             {
                 if (hitInfo.collider.transform.CompareTag("Enemy"))
                 {
@@ -66,7 +67,7 @@ public class DouglasShootingManager : MonoBehaviour
     {
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~LayerMask))
+        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~AvoidLayersMasks))
         {
             if (hitInfo.transform == target.transform)
                 return true;
