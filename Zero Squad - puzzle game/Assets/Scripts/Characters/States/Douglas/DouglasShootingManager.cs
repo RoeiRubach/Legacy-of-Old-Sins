@@ -71,6 +71,8 @@ public class DouglasShootingManager : MonoBehaviour
         {
             if (hitInfo.transform == target.transform)
                 return true;
+            else
+                print(hitInfo.transform.name);
         }
         return false;
     }

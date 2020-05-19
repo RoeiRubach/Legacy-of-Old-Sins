@@ -10,7 +10,6 @@ public class HealthRegenCollectables : InteractableBase, IDouglasInteractables, 
     public void CallOnDestroy()
     {
         GetComponent<GameEventSubscriber>()?.OnEventFire();
-        isInteract = false;
         Destroy(GetComponent<HealthRegenCollectables>());
         Destroy(GetComponent<Outline>());
         Destroy(gameObject);

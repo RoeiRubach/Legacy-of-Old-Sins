@@ -51,14 +51,17 @@ public class DouglasState : PlayerStateManager
         {
             if (hitInfo.collider.GetComponent<IDouglasInteractables>() != null)
             {
-                CursorController.Instance.SetInteractableCursor();
-                interactableObject = hitInfo.transform;
-                interactableObject.GetComponent<Outline>().enabled = true;
+                if (!isInteracting)
+                {
+                    CursorController.Instance.SetInteractableCursor();
+                    interactableObject = hitInfo.transform;
+                    interactableObject.GetComponent<Outline>().enabled = true;
 
-                if (hitInfo.transform.name == "Bomb")
-                    _bombRef = hitInfo.transform;
+                    if (hitInfo.transform.name == "Bomb")
+                        _bombRef = hitInfo.transform;
 
-                isPossibleToInteract = true;
+                    isPossibleToInteract = true;
+                }
             }
         }
         else

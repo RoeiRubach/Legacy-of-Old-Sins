@@ -95,7 +95,7 @@ public class MindlessPossessed : EnemyBase
             if (!isEnemyRoaming)
             {
                 enemyMeshAgent.stoppingDistance = _stoppingDistanceNoTarget;
-                enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isMoving.ToString(), false);
+                enemyAnimator?.SetBool(EnemyAnimationTransitionParameters._isMoving.ToString(), false);
 
                 if (_firstDestination != null && _secondDestination != null)
                 {

@@ -183,6 +183,10 @@ public abstract class PlayerStateManager
                         case "Health Pack":
                             HealthPackInteraction();
                             break;
+                        case "Switch":
+                            isInteracting = false;
+                            //ResetInteractable();
+                            break;
                     }
 
                     myCurrentAgent.SetDestination(CharacterInteractionPlacement());
