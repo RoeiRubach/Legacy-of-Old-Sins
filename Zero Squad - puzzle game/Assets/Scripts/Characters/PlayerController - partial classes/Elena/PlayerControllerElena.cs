@@ -88,10 +88,7 @@ public partial class PlayerController
                 _elenaHP.sprite = _hpBars[_elenaCurrentHP];
             }
             else
-            {
-                print("Elena has full health");
                 break;
-            }
         }
     }
     #endregion

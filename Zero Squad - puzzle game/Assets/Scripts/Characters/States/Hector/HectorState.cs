@@ -59,7 +59,7 @@ public class HectorState : PlayerStateManager
     public override void OnStateEnter()
     {
         HectorInitialization();
-        Debug.Log("Hector is now in control");
+        //Debug.Log("Hector is now in control");
     }
 
     public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
@@ -91,7 +91,7 @@ public class HectorState : PlayerStateManager
         myCurrentAnimator = null;
         initializationComplete = false;
 
-        Debug.Log("Hector is out of control");
+        //Debug.Log("Hector is out of control");
     }
 
     private void HectorInitialization()

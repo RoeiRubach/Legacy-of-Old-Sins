@@ -88,10 +88,7 @@ public partial class PlayerController
                 _hectorHP.sprite = _hpBars[_hectorCurrentHP];
             }
             else
-            {
-                print("Hector has full health");
                 break;
-            }
         }
     }
     #endregion

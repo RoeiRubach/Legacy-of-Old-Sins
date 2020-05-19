@@ -60,7 +60,7 @@ public class ElenaState : PlayerStateManager
     public override void OnStateEnter()
     {
         ElenaInitialization();
-        Debug.Log("Elena is now in control");
+        //Debug.Log("Elena is now in control");
     }
 
     public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
@@ -92,7 +92,7 @@ public class ElenaState : PlayerStateManager
         myCurrentAnimator = null;
         initializationComplete = false;
 
-        Debug.Log("Elena is out of control");
+        //Debug.Log("Elena is out of control");
     }
 
     private void ElenaInitialization()

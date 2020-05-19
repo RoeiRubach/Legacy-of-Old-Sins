@@ -75,7 +75,7 @@ public class DouglasState : PlayerStateManager
     public override void OnStateEnter()
     {
         DouglasInitialization();
-        Debug.Log("Douglas is now in control");
+        //Debug.Log("Douglas is now in control");
     }
 
     public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
@@ -108,7 +108,7 @@ public class DouglasState : PlayerStateManager
         myCurrentAnimator = null;
         initializationComplete = false;
 
-        Debug.Log("Douglas is out of control");
+        //Debug.Log("Douglas is out of control");
     }
 
     private void DouglasInitialization()
@@ -193,8 +193,6 @@ public class DouglasState : PlayerStateManager
     {
         if(_douglasShootingManager == null)
             _douglasShootingManager = myCurrentCharacter.GetComponent<DouglasShootingManager>();
-
-        Debug.Log("douglas shooting manager - " + _douglasShootingManager);
 
         if(_douglasAutoShooting == null)
             _douglasAutoShooting = myCurrentCharacter.GetComponent<DouglasAutoShooting>();
