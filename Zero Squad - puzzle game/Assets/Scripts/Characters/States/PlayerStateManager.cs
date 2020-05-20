@@ -183,6 +183,7 @@ public abstract class PlayerStateManager
                         case "Health Pack":
                             HealthPackInteraction();
                             break;
+                        case "Summoner":
                         case "Switch":
                             isInteracting = false;
                             //ResetInteractable();
