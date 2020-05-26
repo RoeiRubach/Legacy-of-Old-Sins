@@ -21,6 +21,7 @@ public class MindlessPossessed : EnemyBase
 
     private void Update()
     {
+        //TODO add a timer after chasing when elena enter's stealth/escape (default - 1 sec) 
         if (!IsEnemyGotKilled())
         {
             float _distanceToDestination = Vector3.Distance(_destinationToGoTo, transform.position);

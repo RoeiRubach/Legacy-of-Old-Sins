@@ -79,6 +79,7 @@ public class EnemyTargetDetecting : MonoBehaviour
     {
         if (IsElenaBeenSpotted)
         {
+            //TODO add a timer
             if (other.CompareTag(_elenaName))
                 ElenaOutOfSight();
         }
@@ -102,7 +103,7 @@ public class EnemyTargetDetecting : MonoBehaviour
 
         _enemyBaseRef.TargetDetected = elena.transform;
         IsElenaBeenSpotted = true;
-        //_enemyBaseRef.IsPlayerSpotted = true;
+
         _elenaStealthManager.AddElenaToPool();
         Debug.Log("Elena got triggered");
     }
