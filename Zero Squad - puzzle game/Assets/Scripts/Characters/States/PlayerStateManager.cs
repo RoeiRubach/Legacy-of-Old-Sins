@@ -11,7 +11,8 @@ public enum CharactersAnimationTransitionParameters
 
 public abstract class PlayerStateManager
 {
-    protected int runningSpeed = 5, walkingSpeed = 2;
+    protected float stealthRunningSpeed = 3f;
+    protected int runningSpeed = 5, bombWalkingSpeed = 2;
 
     protected PlayerController playerController;
     protected CameraController cameraController;
@@ -114,7 +115,6 @@ public abstract class PlayerStateManager
         myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isSkillMode.ToString(), true);
 
         ResetAIPath();
-
         myCurrentAgent.enabled = false;
 
         // Generate a plane that intersects the transform's position with an upwards normal.
@@ -175,7 +175,7 @@ public abstract class PlayerStateManager
                     {
                         case "Bomb":
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
-                            myCurrentAgent.speed = walkingSpeed;
+                            myCurrentAgent.speed = bombWalkingSpeed;
                             break;
                         case "Cabinet":
                             isCabinetInteracting = true;

@@ -21,13 +21,12 @@ public class ElenaState : PlayerStateManager
 
     public override void UpdateHandle()
     {
+        PointAndClickMovement();
+
         if (!_isUsingSkill)
-        {
             HighlightCursorOverInteractableObject();
-            PointAndClickMovement();
-        }
         else
-            TurnTowardTheCursor();
+            myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isSkillMode.ToString(), true);
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -138,11 +137,14 @@ public class ElenaState : PlayerStateManager
 
                 if (_isUsingSkill)
                 {
+                    ResetAIPath();
+                    myCurrentAgent.speed = stealthRunningSpeed;
                     _elenaStealthManager.CallStealthMode();
                     playerController.ElenaOnSkillMode();
                 }
                 else
                 {
+                    myCurrentAgent.speed = runningSpeed;
                     _elenaStealthManager.OffStealthMode();
                     myCurrentAgent.enabled = true;
                     playerController.ElenaOffSkillMode();
