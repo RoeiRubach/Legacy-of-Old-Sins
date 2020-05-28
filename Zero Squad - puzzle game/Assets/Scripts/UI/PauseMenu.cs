@@ -21,24 +21,24 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        _pauseMenuUI.SetActive(false);
-        _onGameUI.SetActive(true);
+        _pauseMenuUI?.SetActive(false);
+        _onGameUI?.SetActive(true);
         Time.timeScale = 1f;
         IsGamePaused = false;
     }
 
     public void PauseGame()
     {
-        _onGameUI.SetActive(false);
-        _pauseMenuUI.SetActive(true);
+        _onGameUI?.SetActive(false);
+        _pauseMenuUI?.SetActive(true);
         Time.timeScale = 0f;
         IsGamePaused = true;
     }
 
     public void EnterOptionsMenu()
     {
-        _pauseMenuUI.SetActive(false);
-        _optionsMenuUI.SetActive(true);
+        _pauseMenuUI?.SetActive(false);
+        _optionsMenuUI?.SetActive(true);
     }
 
     public void ExitGame()

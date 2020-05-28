@@ -34,6 +34,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected Animator enemyAnimator;
     protected bool isEnemyRoaming;
     protected float destroyTimer = 4f;
+    protected Transform _elenaKillSummonerPlacement;
 
     private string _bullet = "Bullet";
 
@@ -53,7 +54,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
-    protected virtual bool IsEnemyGotKilled() => enemyHealth.CheckIfEnemyDead();
+    protected virtual bool IsEnemyGotKilled() => enemyHealth.CheckIfEnemyDead;
 
     protected virtual void ResetAIPath()
     {

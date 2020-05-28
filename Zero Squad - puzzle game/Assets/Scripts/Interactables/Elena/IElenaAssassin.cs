@@ -1,0 +1,3 @@
+﻿public interface IElenaAssassin : IInteractable
+{
+}

@@ -3,20 +3,27 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private float _maxHealth;
+    [SerializeField] private int _maxHealth;
 
-    private float _currentHealth;
+    private int _currentHealth = 10;
 
     [SerializeField] private GameObject _healthBarUI;
     [SerializeField] private Slider _slider;
+    [SerializeField] private bool _isShield;
 
     private Camera _mainCam;
 
+    private GameObject _shieldRef;
     private bool _isSet, _isKilled;
+    private float _regenerateTimer = 0;
+
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+    }
 
     private void Start()
     {
-        _currentHealth = _maxHealth;
     }
 
     private void LateUpdate()
@@ -32,13 +39,14 @@ public class EnemyHealth : MonoBehaviour
             {
                 _isSet = true;
                 _healthBarUI.SetActive(true);
-                _mainCam = Camera.main;
+                if(_mainCam == null)
+                    _mainCam = Camera.main;
             }
             _healthBarUI.transform.LookAt(_mainCam.transform);
         }
     }
 
-    private float CalculateHealth() => _currentHealth / _maxHealth;
+    private float CalculateHealth() => (float)_currentHealth / _maxHealth;
 
     public void HealthDecreaseViaBullet()
     {
@@ -46,14 +54,35 @@ public class EnemyHealth : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            GetComponentInParent<BoxCollider>().enabled = false;
-            _isKilled = true;
-            if(_healthBarUI != null && _healthBarUI.activeInHierarchy)
-                _healthBarUI.SetActive(false);
-            GetComponent<GameEventSubscriber>()?.OnEventFire();
+            if (_isShield)
+            {
+                ToggleHealthBarOFF();
+                GetComponent<GameEventSubscriber>()?.OnEventFire();
+            }
+            else
+            {
+                GetComponentInParent<BoxCollider>().enabled = false;
+                _isKilled = true;
+                ToggleHealthBarOFF();
+                GetComponent<GameEventSubscriber>()?.OnEventFire();
+            }
         }
     }
 
-    public bool CheckIfEnemyDead() => _isKilled;
-    public float GetCurrentHealth() => _currentHealth;
+    public void ShieldHealthRegenerate()
+    {
+        _isSet = false;
+        ToggleHealthBarOFF();
+        _currentHealth += 1;
+    }
+
+    private void ToggleHealthBarOFF()
+    {
+        if (_healthBarUI != null && _healthBarUI.activeSelf)
+            _healthBarUI.SetActive(false);
+    }
+
+    public bool CheckIfEnemyDead => _isKilled;
+    public int GetCurrentHealth => _currentHealth;
+    public int GetMaxHealth => _maxHealth;
 }

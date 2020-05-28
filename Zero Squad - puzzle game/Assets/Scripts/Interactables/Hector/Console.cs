@@ -1,4 +1,4 @@
-﻿public class Console : InteractableBase, IHectorInteractables
+﻿public class Console : InteractableBase, IHectorTech, IHectorInteractables
 {
     public override void Interact()
     {

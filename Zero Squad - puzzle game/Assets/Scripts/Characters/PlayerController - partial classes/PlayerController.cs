@@ -43,14 +43,20 @@ public partial class PlayerController : MonoBehaviour
         _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
     }
 
+    public void HectorShieldGotDestroy()
+    {
+        InvokeHectorSwitch();
+        _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
+    }
+
     public void SwitchToHectorTutorial()
     {
-        Invoke("InvokeHectorSwitch", 1f);
+        Invoke("InvokeHectorSwitch", 0.5f);
     }
 
     public void SwitchToElenaTutorial()
     {
-        Invoke("InvokeElenaSwitch", 1f);
+        Invoke("InvokeElenaSwitch", 0.5f);
     }
 
     private void InvokeHectorSwitch()

@@ -42,7 +42,11 @@ public class ElenaState : PlayerStateManager
         {
             if (hitInfo.collider.GetComponent<IElenaInteractables>() != null)
             {
-                CursorController.Instance.SetInteractableCursor();
+                if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
+                    CursorController.Instance.SetAssassinCursor();
+                else
+                    CursorController.Instance.SetInteractableCursor();
+
                 interactableObject = hitInfo.transform;
                 interactableObject.GetComponent<Outline>().enabled = true;
 
@@ -125,21 +129,24 @@ public class ElenaState : PlayerStateManager
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || EnterSkillViaButton)
+        if (initializationComplete)
         {
-            EnterSkillViaButton = false;
-            _isUsingSkill = !_isUsingSkill ? true : false;
+            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
+            {
+                EnterSkillViaButton = false;
+                _isUsingSkill = !_isUsingSkill ? true : false;
 
-            if (_isUsingSkill)
-            {
-                _elenaStealthManager.CallStealthMode();
-                playerController.ElenaOnSkillMode();
-            }
-            else
-            {
-                _elenaStealthManager.OffStealthMode();
-                myCurrentAgent.enabled = true;
-                playerController.ElenaOffSkillMode();
+                if (_isUsingSkill)
+                {
+                    _elenaStealthManager.CallStealthMode();
+                    playerController.ElenaOnSkillMode();
+                }
+                else
+                {
+                    _elenaStealthManager.OffStealthMode();
+                    myCurrentAgent.enabled = true;
+                    playerController.ElenaOffSkillMode();
+                }
             }
         }
     }

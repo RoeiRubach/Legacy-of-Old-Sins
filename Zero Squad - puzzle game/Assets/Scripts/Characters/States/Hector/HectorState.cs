@@ -8,6 +8,7 @@ public class HectorState : PlayerStateManager
     private bool _isUsingSkill;
 
     private GameObject _hectorShield;
+    private Transform _hectorEnemyHittingSpot;
     private GameObject _hectorAgentPlacement;
 
     public HectorState(PlayerController character) : base(character)
@@ -41,7 +42,10 @@ public class HectorState : PlayerStateManager
         {
             if (hitInfo.collider.GetComponent<IHectorInteractables>() != null)
             {
-                CursorController.Instance.SetInteractableCursor();
+                if(hitInfo.collider.GetComponent<IHectorTech>() != null)
+                    CursorController.Instance.SetTechCursor();
+                else
+                    CursorController.Instance.SetInteractableCursor();
                 interactableObject = hitInfo.transform;
                 interactableObject.GetComponent<Outline>().enabled = true;
                 
@@ -103,8 +107,9 @@ public class HectorState : PlayerStateManager
         cameraController.SetCharacter(myCurrentCharacter);
 
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
-
+        
         _hectorShield = myCurrentCharacter.transform.GetChild(2).transform.GetChild(0).gameObject;
+        _hectorEnemyHittingSpot = _hectorShield.transform.GetChild(0);
 
         _hectorAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
@@ -124,21 +129,27 @@ public class HectorState : PlayerStateManager
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || EnterSkillViaButton)
+        if (initializationComplete)
         {
-            EnterSkillViaButton = false;
-            _isUsingSkill = !_isUsingSkill ? true : false;
+            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
+            {
+                if (_hectorEnemyHittingSpot.GetComponent<EnemyHealth>().GetCurrentHealth > 0 || _hectorShield.activeSelf)
+                {
+                    EnterSkillViaButton = false;
+                    _isUsingSkill = !_isUsingSkill ? true : false;
 
-            if (!_hectorShield.activeSelf)
-            {
-                _hectorShield.SetActive(true);
-                playerController.HectorOnSkillMode();
-            }
-            else
-            {
-                _hectorShield.SetActive(false);
-                myCurrentAgent.enabled = true;
-                playerController.HectorOffSkillMode();
+                    if (!_hectorShield.activeSelf)
+                    {
+                        _hectorShield.SetActive(true);
+                        playerController.HectorOnSkillMode();
+                    }
+                    else
+                    {
+                        _hectorShield.SetActive(false);
+                        myCurrentAgent.enabled = true;
+                        playerController.HectorOffSkillMode();
+                    }
+                }
             }
         }
     }

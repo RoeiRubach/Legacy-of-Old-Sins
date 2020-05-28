@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4893792890276904081}
   - component: {fileID: 3535591020355753185}
   m_Layer: 0
-  m_Name: Managers
+  m_Name: Characters Manager
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -87,6 +87,9 @@ MonoBehaviour:
   InteractableLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  EnemiesLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   _hpBars:
   - {fileID: 21300000, guid: a39c04ecfba613e40baf0e365dc60fc3, type: 3}
   - {fileID: 21300000, guid: 842df5eec14ae224b9a30e9f22c7d4b6, type: 3}
@@ -113,3 +116,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _standardCursor: {fileID: 2800000, guid: 36ba37e10f3e0184689722bbf985779c, type: 3}
   _HighlightCursor: {fileID: 2800000, guid: d36316f7275b4134daa5925258fb6672, type: 3}
+  _douglasShootingCursor: {fileID: 2800000, guid: 1ba576b1f898c384da22ecc1664f893f,
+    type: 3}
+  _elenaAssassinCursor: {fileID: 2800000, guid: 23646898e6691794b90d5c2652205173,
+    type: 3}
+  _HectorTechCursor: {fileID: 2800000, guid: 7828ac61379890649862516311289ca3, type: 3}

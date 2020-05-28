@@ -292,16 +292,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
-    - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-        type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
-        type: 3}
-      propertyPath: walkableLayerMask.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     - target: {fileID: 4893792890276904080, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -356,6 +346,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
+        type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
+        type: 3}
+      propertyPath: walkableLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
+        type: 3}
+      propertyPath: InteractableLayerMask.m_Bits
+      value: 2560
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5729552258835475434, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a, type: 3}
@@ -1773,6 +1778,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &877875531 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 83855662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1d854a335593124fbac8f89697570af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &883289540
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2081,6 +2098,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hector
       objectReference: {fileID: 0}
+    - target: {fileID: 819133393176398063, guid: 83b51b5023103dc438a2ca7af34c5926,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4397057654013721340, guid: 83b51b5023103dc438a2ca7af34c5926,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2138,19 +2160,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9100518509762660860, guid: 83b51b5023103dc438a2ca7af34c5926,
         type: 3}
-      propertyPath: m_Layer
-      value: 2
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8682878978354323593, guid: 83b51b5023103dc438a2ca7af34c5926,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 3585369381463934348, guid: 83b51b5023103dc438a2ca7af34c5926,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
+    - target: {fileID: 1241766933, guid: 83b51b5023103dc438a2ca7af34c5926, type: 3}
+      propertyPath: _unityEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 877875531}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83b51b5023103dc438a2ca7af34c5926, type: 3}
 --- !u!4 &1064352892 stripped
@@ -2835,6 +2851,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8727303088831394960, guid: e0272e559b1a3ff4ca7257820f77c167,
+        type: 3}
+      propertyPath: _maxHealth
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
       propertyPath: _hectorShieldRef
@@ -4026,11 +4047,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
       propertyPath: _hectorShieldRef
       value: 
@@ -4043,6 +4059,11 @@ PrefabInstance:
       propertyPath: _enemiesShieldHittingSpot
       value: 
       objectReference: {fileID: 1749266381}
+    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
 --- !u!1001 &2014765985
@@ -4921,6 +4942,7 @@ MonoBehaviour:
   _maxHealth: 0
   _healthBarUI: {fileID: 0}
   _slider: {fileID: 0}
+  _isShield: 0
 --- !u!65 &8822748784360401009
 BoxCollider:
   m_ObjectHideFlags: 0

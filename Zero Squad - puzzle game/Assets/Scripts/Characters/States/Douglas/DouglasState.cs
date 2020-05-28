@@ -32,6 +32,8 @@ public class DouglasState : PlayerStateManager
         {
             myCurrentAnimator.SetBool("_isShooting", false);
             TurnTowardTheCursor();
+
+            HighlightCursorOverEnemies();
             DouglasPointAndClickShooting();
         }
 
@@ -45,9 +47,8 @@ public class DouglasState : PlayerStateManager
     private void HighlightCursorOverInteractableObject()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
         {
             if (hitInfo.collider.GetComponent<IDouglasInteractables>() != null)
             {
@@ -69,6 +70,35 @@ public class DouglasState : PlayerStateManager
             ResetInteractable();
             CursorController.Instance.SetStandardCursor();
             isPossibleToInteract = false;
+        }
+    }
+
+    private void HighlightCursorOverEnemies()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        {
+            if (Physics.Raycast(myCurrentCharacter.transform.position + (Vector3.up * 1.2f), DirectionToEnemy(hitInfo.transform), out hitInfo, 9.5f))
+            {
+                if (hitInfo.collider.GetComponent<IDouglasEnemies>() != null)
+                {
+                    if(_douglasShootingManager.DouglasTarget != hitInfo.transform)
+                    {
+                        _douglasShootingManager.DouglasTarget = hitInfo.transform;
+                        CursorController.Instance.SetShootingCursor();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if(_douglasShootingManager.DouglasTarget != null)
+            {
+                _douglasShootingManager.DouglasTarget = null;
+                CursorController.Instance.SetStandardCursor();
+            }
         }
     }
 
@@ -142,40 +172,43 @@ public class DouglasState : PlayerStateManager
 
     public override void EnterOrExitSkillMode()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && initializationComplete || EnterSkillViaButton)
+        if (initializationComplete)
         {
-            isInteracting = false;
-            ResetInteractable();
-
-            if (!playerController.IsLifting)
+            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
             {
-                EnterSkillViaButton = false;
-                _isUsingSkill = !_isUsingSkill ? true : false;
+                isInteracting = false;
+                ResetInteractable();
 
-                if (!_douglasShotgun.activeSelf)
+                if (!playerController.IsLifting)
                 {
-                    playerController.DouglasSpriteOnSkillMode();
-                    _douglasShootingManager.enabled = true;
-                    _douglasShotgun.SetActive(true);
+                    EnterSkillViaButton = false;
+                    _isUsingSkill = !_isUsingSkill ? true : false;
+
+                    if (!_douglasShotgun.activeSelf)
+                    {
+                        playerController.DouglasSpriteOnSkillMode();
+                        _douglasShootingManager.enabled = true;
+                        _douglasShotgun.SetActive(true);
+                    }
+                    else
+                    {
+                        playerController.DouglasSpriteOffSkillMode();
+                        _douglasShootingManager.enabled = false;
+                        _douglasShotgun.SetActive(false);
+                        myCurrentAgent.enabled = true;
+                    }
                 }
                 else
                 {
-                    playerController.DouglasSpriteOffSkillMode();
-                    _douglasShootingManager.enabled = false;
-                    _douglasShotgun.SetActive(false);
-                    myCurrentAgent.enabled = true;
+                    ResetAIPath();
+                    playerController.IsLifting = false;
+                    _bombRef.GetComponent<TriggerBomb>().TriggerBombInSeconds();
+                    _bombRef.parent = null;
+                    _bombRef.GetComponent<Rigidbody>().useGravity = true;
+                    myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
+                    myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
+                    myCurrentAgent.speed = runningSpeed;
                 }
-            }
-            else
-            {
-                ResetAIPath();
-                playerController.IsLifting = false;
-                _bombRef.GetComponent<TriggerBomb>().TriggerBombInSeconds();
-                _bombRef.parent = null;
-                _bombRef.GetComponent<Rigidbody>().useGravity = true;
-                myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
-                myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
-                myCurrentAgent.speed = runningSpeed;
             }
         }
     }
@@ -223,4 +256,6 @@ public class DouglasState : PlayerStateManager
         playerController.DouglasIconSelectedON();
         playerController.DouglasButtonInteractivityToggle();
     }
+
+    private Vector3 DirectionToEnemy(Transform target) => (target.position - myCurrentCharacter.transform.position).normalized;
 }

@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 using System.Collections;
 
-public class MindlessPossessed : EnemyBase
+public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInteractables
 {
     EnemyDestinations _enemyDestinations;
     private float _waitSeconds = 3f, _stoppingDistanceNoTarget, _stoppingDistanceTargeted = 2f;
@@ -14,6 +14,7 @@ public class MindlessPossessed : EnemyBase
 
     private void Start()
     {
+        _elenaKillSummonerPlacement = transform.GetChild(0);
         _startPosition = transform.position;
         _destinationToGoTo = _startPosition;
         _enemyTargetDetecting = GetComponentInChildren<EnemyTargetDetecting>();
@@ -151,5 +152,18 @@ public class MindlessPossessed : EnemyBase
         yield return new WaitForSeconds(_waitSeconds);
         _destinationToGoTo = newDestination;
         _enemyDestinations = enemyDestinations;
+    }
+
+    public void Interact()
+    {
+        if (!transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public Vector3 CharacterInteractionPlacement()
+    {
+        return _elenaKillSummonerPlacement.position;
     }
 }

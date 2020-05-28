@@ -3,13 +3,15 @@
 public class DouglasShootingManager : MonoBehaviour
 {
     private const float _manualShootingDelay = 1.1f;
-    
+
     [SerializeField] private Transform _bulletHolder;
 
     public GameObject DouglasShotgunRef;
     public LayerMask AvoidLayersMasks;
     public LayerMask EnemyLayerMask;
-    
+
+    [HideInInspector] public Transform DouglasTarget = null;
+
     private float _shootingDelay = 0.875f;
 
     private bool _isAllowedToShoot;
@@ -18,19 +20,10 @@ public class DouglasShootingManager : MonoBehaviour
     {
         if (_isAllowedToShoot)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hitInfo;
-            
-            if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, EnemyLayerMask))
-            {
-                if (hitInfo.collider.transform.CompareTag("Enemy"))
-                {
-                    if (IsHavingClearShoot(hitInfo.transform))
-                    {
-                        DouglasShooting(hitInfo.transform);
-                    }
-                }
-            }
+            if (DouglasTarget != null)
+                DouglasShooting(DouglasTarget);
+            else
+                print("DouglasTarget.transform is NULL");
 
             _shootingDelay = _manualShootingDelay;
 

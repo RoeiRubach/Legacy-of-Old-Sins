@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class Summoner : EnemyBase, IElenaInteractables
+public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
 {
     [Range(5f, 20f)]
     [SerializeField] private float _spawnTime;
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
 
     private Vector3 _spawnLocation;
-    private Vector3 _elenaKillSummonerPlacement;
 
     private float _summonTimer;
 
@@ -15,7 +14,7 @@ public class Summoner : EnemyBase, IElenaInteractables
     {
         _summonTimer = 0;
         _spawnLocation = transform.GetChild(0).position;
-        _elenaKillSummonerPlacement = transform.GetChild(1).position;
+        _elenaKillSummonerPlacement = transform.GetChild(1);
     }
     
     private void Update()
@@ -47,6 +46,6 @@ public class Summoner : EnemyBase, IElenaInteractables
 
     public Vector3 CharacterInteractionPlacement()
     {
-        return _elenaKillSummonerPlacement;
+        return _elenaKillSummonerPlacement.position;
     }
 }
