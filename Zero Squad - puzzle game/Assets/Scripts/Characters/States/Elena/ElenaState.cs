@@ -123,7 +123,11 @@ public class ElenaState : PlayerStateManager
                 if (!isInteracting)
                 {
                     if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
+                    {
+                        if (hitInfo.transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
+                            return;
                         CursorController.Instance.SetAssassinCursor();
+                    }
                     else
                         CursorController.Instance.SetInteractableCursor();
 
