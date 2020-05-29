@@ -25,7 +25,6 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
         {
             _summonTimer = _spawnTime;
             var mindless = Instantiate(_mindlessPossessedPrefabRef, _spawnLocation, Quaternion.identity);
-
             mindless.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
         }
     }

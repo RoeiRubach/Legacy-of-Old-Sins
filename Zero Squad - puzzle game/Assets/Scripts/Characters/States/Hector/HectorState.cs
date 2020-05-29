@@ -90,27 +90,17 @@ public class HectorState : PlayerStateManager
         playerController.HectorIconSelectedOFF();
         playerController.HectorButtonInteractivitySetter();
 
-        myCurrentCharacter = null;
-        myCurrentAgent = null;
-        myCurrentAnimator = null;
-        initializationComplete = false;
+        ResetCharactersControl();
 
         //Debug.Log("Hector is out of control");
     }
 
     private void HectorInitialization()
     {
-        myCurrentCharacter = GameObject.Find(_hectorName);
+        CharacterComponentsInitialization(_hectorName);
 
-        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
-
-        cameraController.SetCharacter(myCurrentCharacter);
-
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
-        
         _hectorShield = myCurrentCharacter.transform.GetChild(2).transform.GetChild(0).gameObject;
         _hectorEnemyHittingSpot = _hectorShield.transform.GetChild(0);
-
         _hectorAgentPlacement = myCurrentCharacter.transform.GetChild(3).gameObject;
 
         playerController.HectorSkillButtonController();

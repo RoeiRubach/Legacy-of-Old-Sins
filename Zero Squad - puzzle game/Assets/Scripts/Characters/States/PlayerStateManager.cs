@@ -183,6 +183,7 @@ public abstract class PlayerStateManager
                         case "Health Pack":
                             HealthPackInteraction();
                             break;
+                        case "Mindless possessed":
                         case "Summoner":
                         case "Switch":
                             isInteracting = false;
@@ -205,6 +206,22 @@ public abstract class PlayerStateManager
                 interactableObject = null;
             }
         }
+    }
+
+    protected void ResetCharactersControl()
+    {
+        myCurrentCharacter = null;
+        myCurrentAgent = null;
+        myCurrentAnimator = null;
+        initializationComplete = false;
+    }
+
+    protected void CharacterComponentsInitialization(string characterName)
+    {
+        myCurrentCharacter = GameObject.Find(characterName);
+        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
+        cameraController.SetCharacter(myCurrentCharacter);
+        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
     }
 
     private void HealthPackInteraction()

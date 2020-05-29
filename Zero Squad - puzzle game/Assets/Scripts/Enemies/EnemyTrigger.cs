@@ -15,8 +15,9 @@ public class EnemyTrigger : MonoBehaviour
             {
                 foreach (var enemies in enemiesListeners)
                 {
-                    if (enemies.gameObject.activeInHierarchy)
-                        enemies.GetComponent<EnemyBase>().IsPlayerSpotted = true;
+                    if(enemies != null)
+                        if (enemies.gameObject.activeSelf)
+                            enemies.GetComponent<EnemyBase>().IsPlayerSpotted = true;
                 }
             }
             Destroy(gameObject);

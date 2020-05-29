@@ -14,6 +14,7 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
 
     private void Start()
     {
+        transform.name = "Mindless possessed";
         _elenaKillSummonerPlacement = transform.GetChild(0);
         _startPosition = transform.position;
         _destinationToGoTo = _startPosition;

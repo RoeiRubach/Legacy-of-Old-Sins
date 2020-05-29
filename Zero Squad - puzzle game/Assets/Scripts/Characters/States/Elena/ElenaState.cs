@@ -13,7 +13,6 @@ public class ElenaState : PlayerStateManager
 
     public ElenaState(PlayerController character) : base(character)
     {
-
     }
     public ElenaState(PlayerController character, CameraController camera) : base(character, camera)
     {
@@ -30,6 +29,24 @@ public class ElenaState : PlayerStateManager
 
         EnterOrExitSkillMode();
         SwitchCharacters();
+    }
+
+    protected override void PointAndClickMovement()
+    {
+        base.PointAndClickMovement();
+
+        if (isInteracting)
+        {
+            if (interactableObject.name == "Mindless possessed")
+            {
+                if (interactableObject.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
+                {
+                    isInteracting = false;
+                    ResetInteractable();
+                    ResetAIPath();
+                }
+            }
+        }
     }
 
     private void HighlightCursorOverInteractableObject()
@@ -90,23 +107,14 @@ public class ElenaState : PlayerStateManager
         playerController.ElenaIconSelectedOFF();
         playerController.ElenaButtonInteractivitySetter();
 
-        myCurrentCharacter = null;
-        myCurrentAgent = null;
-        myCurrentAnimator = null;
-        initializationComplete = false;
+        ResetCharactersControl();
 
         //Debug.Log("Elena is out of control");
     }
 
     private void ElenaInitialization()
     {
-        myCurrentCharacter = GameObject.Find(_elenaName);
-
-        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
-
-        cameraController.SetCharacter(myCurrentCharacter);
-
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        CharacterComponentsInitialization(_elenaName);
 
         _elenaStealthManager = myCurrentCharacter.GetComponent<ElenaStealthManager>();
 

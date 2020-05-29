@@ -45,7 +45,9 @@ public class EnemyTargetDetecting : MonoBehaviour
                 _enemyBaseRef.IsPlayerSpotted = false;
 
                 if(_elenaStealthManager != null && IsElenaBeenSpotted)
-                    ElenaOutOfSight();
+                {
+                    InvokeElenaOutOfSight();
+                }
             }
         }
     }
@@ -79,9 +81,8 @@ public class EnemyTargetDetecting : MonoBehaviour
     {
         if (IsElenaBeenSpotted)
         {
-            //TODO add a timer
             if (other.CompareTag(_elenaName))
-                ElenaOutOfSight();
+                InvokeElenaOutOfSight();
         }
     }
     #endregion
@@ -108,11 +109,19 @@ public class EnemyTargetDetecting : MonoBehaviour
         Debug.Log("Elena got triggered");
     }
 
+    private void InvokeElenaOutOfSight()
+    {
+        if (!IsInvoking("ElenaOutOfSight"))
+        {
+            Invoke("ElenaOutOfSight", 1f);
+            Debug.Log("Elena got out of trigger");
+        }
+    }
+
     private void ElenaOutOfSight()
     {
         IsElenaBeenSpotted = false;
         _elenaStealthManager.RemoveElenaFromPool();
-        Debug.Log("Elena got out of trigger");
     }
 
     private Vector3 DirectionToElena(Transform elenaRef) => (elenaRef.position - _enemyBaseRef.transform.position).normalized;

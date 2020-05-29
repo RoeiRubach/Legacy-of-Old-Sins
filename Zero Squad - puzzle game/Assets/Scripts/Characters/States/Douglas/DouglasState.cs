@@ -133,23 +133,14 @@ public class DouglasState : PlayerStateManager
 
         DouglasUIToggleOFF();
 
-        myCurrentCharacter = null;
-        myCurrentAgent = null;
-        myCurrentAnimator = null;
-        initializationComplete = false;
+        ResetCharactersControl();
 
         //Debug.Log("Douglas is out of control");
     }
 
     private void DouglasInitialization()
     {
-        myCurrentCharacter = GameObject.Find(_douglasName);
-
-        myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
-
-        cameraController.SetCharacter(myCurrentCharacter);
-
-        myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+        CharacterComponentsInitialization(_douglasName);
 
         DouglasShootingScriptsInitialization();
 
