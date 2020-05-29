@@ -33,8 +33,8 @@ public class ElenaStealthManager : MonoBehaviour
         _elenaHairRef.SetActive(false);
         _elenaHoodRef.SetActive(true);
 
-        if (_charactersPoolController.isActiveAndEnabled)
-            RemoveElenaFromPool();
+        //if (_charactersPoolController.isActiveAndEnabled)
+        //    RemoveElenaFromPool();
 
         IsInStealthMode = true;
         GetComponentInChildren<BoxCollider>().enabled = false;

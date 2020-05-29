@@ -4,13 +4,10 @@ using UnityEngine;
 public class DouglasState : PlayerStateManager
 {
     private string _douglasName = "Douglas";
-
     private bool _isUsingSkill;
-    
     private GameObject _douglasShotgun;
     private GameObject _douglasAgentPlacement;
     private Transform _bombRef;
-
     private DouglasShootingManager _douglasShootingManager;
     private DouglasAutoShooting _douglasAutoShooting;
 
@@ -41,64 +38,6 @@ public class DouglasState : PlayerStateManager
         {
             EnterOrExitSkillMode();
             SwitchCharacters();
-        }
-    }
-
-    private void HighlightCursorOverInteractableObject()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
-        {
-            if (hitInfo.collider.GetComponent<IDouglasInteractables>() != null)
-            {
-                if (!isInteracting)
-                {
-                    CursorController.Instance.SetInteractableCursor();
-                    interactableObject = hitInfo.transform;
-                    interactableObject.GetComponent<Outline>().enabled = true;
-
-                    if (hitInfo.transform.name == "Bomb")
-                        _bombRef = hitInfo.transform;
-
-                    isPossibleToInteract = true;
-                }
-            }
-        }
-        else
-        {
-            ResetInteractable();
-            CursorController.Instance.SetStandardCursor();
-            isPossibleToInteract = false;
-        }
-    }
-
-    private void HighlightCursorOverEnemies()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
-        {
-            if (Physics.Raycast(myCurrentCharacter.transform.position + (Vector3.up * 1.2f), DirectionToEnemy(hitInfo.transform), out hitInfo, 9.5f))
-            {
-                if (hitInfo.collider.GetComponent<IDouglasEnemies>() != null)
-                {
-                    if(_douglasShootingManager.DouglasTarget != hitInfo.transform)
-                    {
-                        _douglasShootingManager.DouglasTarget = hitInfo.transform;
-                        CursorController.Instance.SetShootingCursor();
-                    }
-                }
-            }
-        }
-        else
-        {
-            if(_douglasShootingManager.DouglasTarget != null)
-            {
-                _douglasShootingManager.DouglasTarget = null;
-                CursorController.Instance.SetStandardCursor();
-            }
         }
     }
 
@@ -138,29 +77,6 @@ public class DouglasState : PlayerStateManager
         //Debug.Log("Douglas is out of control");
     }
 
-    private void DouglasInitialization()
-    {
-        CharacterComponentsInitialization(_douglasName);
-
-        DouglasShootingScriptsInitialization();
-
-        _douglasAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
-
-        DouglasUIToggleON();
-
-        if (_douglasShotgun.activeSelf)
-        {
-            _isUsingSkill = true;
-            _douglasAgentPlacement.SetActive(false);
-            _douglasAutoShooting.enabled = false;
-            playerController.DouglasSpriteOnSkillMode();
-        }
-        else
-            _douglasShootingManager.enabled = false;
-
-        initializationComplete = true;
-    }
-
     public override void EnterOrExitSkillMode()
     {
         if (initializationComplete)
@@ -193,7 +109,7 @@ public class DouglasState : PlayerStateManager
                 {
                     ResetAIPath();
                     playerController.IsLifting = false;
-                    _bombRef.GetComponent<TriggerBomb>().TriggerBombInSeconds();
+                    _bombRef.GetComponent<TriggerBomb>()?.TriggerBombInSeconds();
                     _bombRef.parent = null;
                     _bombRef.GetComponent<Rigidbody>().useGravity = true;
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
@@ -202,6 +118,87 @@ public class DouglasState : PlayerStateManager
                 }
             }
         }
+    }
+
+    private void HighlightCursorOverInteractableObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        {
+            if (hitInfo.collider.GetComponent<IDouglasInteractables>() != null)
+            {
+                if (!isInteracting)
+                {
+                    CursorController.Instance.SetInteractableCursor();
+                    interactableObject = hitInfo.transform;
+                    interactableObject.GetComponent<Outline>().enabled = true;
+
+                    if (hitInfo.transform.name == "Bomb")
+                        _bombRef = hitInfo.transform;
+
+                    isPossibleToInteract = true;
+                }
+            }
+        }
+        else
+        {
+            ResetInteractable();
+            CursorController.Instance.SetStandardCursor();
+            isPossibleToInteract = false;
+        }
+    }
+
+    private void HighlightCursorOverEnemies()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, _douglasShootingManager.EnemyLayerMask))
+        {
+            if (Physics.Raycast(myCurrentCharacter.transform.position + (Vector3.up * 1.2f), DirectionToEnemy(hitInfo.transform), out hitInfo, 9.5f))
+            {
+                if (hitInfo.collider.GetComponent<IDouglasEnemies>() != null)
+                {
+                    if (_douglasShootingManager.DouglasTarget != hitInfo.transform)
+                    {
+                        _douglasShootingManager.DouglasTarget = hitInfo.transform;
+                        CursorController.Instance.SetShootingCursor();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (_douglasShootingManager.DouglasTarget != null)
+            {
+                _douglasShootingManager.DouglasTarget = null;
+                CursorController.Instance.SetStandardCursor();
+            }
+        }
+    }
+
+    private void DouglasInitialization()
+    {
+        CharacterComponentsInitialization(_douglasName);
+
+        DouglasShootingScriptsInitialization();
+
+        _douglasAgentPlacement = myCurrentCharacter.transform.GetChild(2).gameObject;
+
+        DouglasUIToggleON();
+
+        if (_douglasShotgun.activeSelf)
+        {
+            _isUsingSkill = true;
+            _douglasAgentPlacement.SetActive(false);
+            _douglasAutoShooting.enabled = false;
+            playerController.DouglasSpriteOnSkillMode();
+        }
+        else
+            _douglasShootingManager.enabled = false;
+
+        initializationComplete = true;
     }
 
     private void SwitchCharacters()

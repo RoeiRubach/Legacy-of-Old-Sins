@@ -1368,9 +1368,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletHolder: {fileID: 4525530396634574381}
   DouglasShotgunRef: {fileID: 240370179510771411}
-  LayerMask:
+  AvoidLayersMasks:
     serializedVersion: 2
     m_Bits: 1028
+  EnemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  DouglasTarget: {fileID: 0}
 --- !u!195 &8474828045428177174
 NavMeshAgent:
   m_ObjectHideFlags: 0

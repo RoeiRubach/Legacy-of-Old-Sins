@@ -1,14 +1,10 @@
-﻿using UnityEngine.AI;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ElenaState : PlayerStateManager
 {
     private string _elenaName = "Elena";
-
     private bool _isUsingSkill;
-
     private GameObject _elenaAgentPlacement;
-
     private ElenaStealthManager _elenaStealthManager;
 
     public ElenaState(PlayerController character) : base(character)
@@ -25,7 +21,11 @@ public class ElenaState : PlayerStateManager
         if (!_isUsingSkill)
             HighlightCursorOverInteractableObject();
         else
+        {
+            if (isPossibleToInteract)
+                ResetAssassinating();
             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isSkillMode.ToString(), true);
+        }
 
         EnterOrExitSkillMode();
         SwitchCharacters();
@@ -49,31 +49,30 @@ public class ElenaState : PlayerStateManager
         }
     }
 
-    private void HighlightCursorOverInteractableObject()
+    public override void EnterOrExitSkillMode()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        if (initializationComplete)
         {
-            if (hitInfo.collider.GetComponent<IElenaInteractables>() != null)
+            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
             {
-                if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
-                    CursorController.Instance.SetAssassinCursor();
+                EnterSkillViaButton = false;
+                _isUsingSkill = !_isUsingSkill ? true : false;
+
+                if (_isUsingSkill)
+                {
+                    ResetAIPath();
+                    myCurrentAgent.speed = stealthRunningSpeed;
+                    _elenaStealthManager.CallStealthMode();
+                    playerController.ElenaOnSkillMode();
+                }
                 else
-                    CursorController.Instance.SetInteractableCursor();
-
-                interactableObject = hitInfo.transform;
-                interactableObject.GetComponent<Outline>().enabled = true;
-
-                isPossibleToInteract = true;
+                {
+                    myCurrentAgent.speed = runningSpeed;
+                    _elenaStealthManager.OffStealthMode();
+                    myCurrentAgent.enabled = true;
+                    playerController.ElenaOffSkillMode();
+                }
             }
-        }
-        else
-        {
-            ResetInteractable();
-            CursorController.Instance.SetStandardCursor();
-            isPossibleToInteract = false;
         }
     }
 
@@ -112,6 +111,34 @@ public class ElenaState : PlayerStateManager
         //Debug.Log("Elena is out of control");
     }
 
+    private void HighlightCursorOverInteractableObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        {
+            if (hitInfo.collider.GetComponent<IElenaInteractables>() != null)
+            {
+                if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
+                    CursorController.Instance.SetAssassinCursor();
+                else
+                    CursorController.Instance.SetInteractableCursor();
+
+                interactableObject = hitInfo.transform;
+                interactableObject.GetComponent<Outline>().enabled = true;
+
+                isPossibleToInteract = true;
+            }
+        }
+        else
+        {
+            ResetInteractable();
+            CursorController.Instance.SetStandardCursor();
+            isPossibleToInteract = false;
+        }
+    }
+
     private void ElenaInitialization()
     {
         CharacterComponentsInitialization(_elenaName);
@@ -134,33 +161,6 @@ public class ElenaState : PlayerStateManager
         initializationComplete = true;
     }
 
-    public override void EnterOrExitSkillMode()
-    {
-        if (initializationComplete)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
-            {
-                EnterSkillViaButton = false;
-                _isUsingSkill = !_isUsingSkill ? true : false;
-
-                if (_isUsingSkill)
-                {
-                    ResetAIPath();
-                    myCurrentAgent.speed = stealthRunningSpeed;
-                    _elenaStealthManager.CallStealthMode();
-                    playerController.ElenaOnSkillMode();
-                }
-                else
-                {
-                    myCurrentAgent.speed = runningSpeed;
-                    _elenaStealthManager.OffStealthMode();
-                    myCurrentAgent.enabled = true;
-                    playerController.ElenaOffSkillMode();
-                }
-            }
-        }
-    }
-
     private void SwitchCharacters()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
@@ -168,5 +168,12 @@ public class ElenaState : PlayerStateManager
 
         else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
             playerController.SetState(new HectorState(playerController, cameraController));
+    }
+
+    private void ResetAssassinating()
+    {
+        ResetInteractable();
+        CursorController.Instance.SetStandardCursor();
+        isPossibleToInteract = false;
     }
 }

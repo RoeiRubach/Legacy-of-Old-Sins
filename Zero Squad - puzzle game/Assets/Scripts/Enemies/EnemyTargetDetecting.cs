@@ -45,9 +45,7 @@ public class EnemyTargetDetecting : MonoBehaviour
                 _enemyBaseRef.IsPlayerSpotted = false;
 
                 if(_elenaStealthManager != null && IsElenaBeenSpotted)
-                {
                     InvokeElenaOutOfSight();
-                }
             }
         }
     }

@@ -4,12 +4,10 @@ using UnityEngine;
 public class HectorState : PlayerStateManager
 {
     private string _hectorName = "Hector";
-
     private bool _isUsingSkill;
-
     private GameObject _hectorShield;
-    private Transform _hectorEnemyHittingSpot;
     private GameObject _hectorAgentPlacement;
+    private Transform _hectorEnemyHittingSpot;
 
     public HectorState(PlayerController character) : base(character)
     {
@@ -33,30 +31,30 @@ public class HectorState : PlayerStateManager
         SwitchCharacters();
     }
 
-    private void HighlightCursorOverInteractableObject()
+    public override void EnterOrExitSkillMode()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        if (initializationComplete)
         {
-            if (hitInfo.collider.GetComponent<IHectorInteractables>() != null)
+            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
             {
-                if(hitInfo.collider.GetComponent<IHectorTech>() != null)
-                    CursorController.Instance.SetTechCursor();
-                else
-                    CursorController.Instance.SetInteractableCursor();
-                interactableObject = hitInfo.transform;
-                interactableObject.GetComponent<Outline>().enabled = true;
-                
-                isPossibleToInteract = true;
+                if (_hectorEnemyHittingSpot.GetComponent<EnemyHealth>().GetCurrentHealth > 0 || _hectorShield.activeSelf)
+                {
+                    EnterSkillViaButton = false;
+                    _isUsingSkill = !_isUsingSkill ? true : false;
+
+                    if (!_hectorShield.activeSelf)
+                    {
+                        _hectorShield.SetActive(true);
+                        playerController.HectorOnSkillMode();
+                    }
+                    else
+                    {
+                        _hectorShield.SetActive(false);
+                        myCurrentAgent.enabled = true;
+                        playerController.HectorOffSkillMode();
+                    }
+                }
             }
-        }
-        else
-        {
-            ResetInteractable();
-            CursorController.Instance.SetStandardCursor();
-            isPossibleToInteract = false;
         }
     }
 
@@ -95,6 +93,33 @@ public class HectorState : PlayerStateManager
         //Debug.Log("Hector is out of control");
     }
 
+    private void HighlightCursorOverInteractableObject()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, playerController.InteractableLayerMask))
+        {
+            if (hitInfo.collider.GetComponent<IHectorInteractables>() != null)
+            {
+                if(hitInfo.collider.GetComponent<IHectorTech>() != null)
+                    CursorController.Instance.SetTechCursor();
+                else
+                    CursorController.Instance.SetInteractableCursor();
+                interactableObject = hitInfo.transform;
+                interactableObject.GetComponent<Outline>().enabled = true;
+                
+                isPossibleToInteract = true;
+            }
+        }
+        else
+        {
+            ResetInteractable();
+            CursorController.Instance.SetStandardCursor();
+            isPossibleToInteract = false;
+        }
+    }
+
     private void HectorInitialization()
     {
         CharacterComponentsInitialization(_hectorName);
@@ -115,33 +140,6 @@ public class HectorState : PlayerStateManager
         }
 
         initializationComplete = true;
-    }
-
-    public override void EnterOrExitSkillMode()
-    {
-        if (initializationComplete)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
-            {
-                if (_hectorEnemyHittingSpot.GetComponent<EnemyHealth>().GetCurrentHealth > 0 || _hectorShield.activeSelf)
-                {
-                    EnterSkillViaButton = false;
-                    _isUsingSkill = !_isUsingSkill ? true : false;
-
-                    if (!_hectorShield.activeSelf)
-                    {
-                        _hectorShield.SetActive(true);
-                        playerController.HectorOnSkillMode();
-                    }
-                    else
-                    {
-                        _hectorShield.SetActive(false);
-                        myCurrentAgent.enabled = true;
-                        playerController.HectorOffSkillMode();
-                    }
-                }
-            }
-        }
     }
 
     private void SwitchCharacters()
