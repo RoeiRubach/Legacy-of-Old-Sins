@@ -72,7 +72,9 @@ public partial class PlayerController
     public void ElenaTakingDamage()
     {
         _elenaCurrentHP--;
-        _elenaHP.sprite = _hpBars[_elenaCurrentHP];
+
+        if (_elenaHP != null)
+            _elenaHP.sprite = _hpBars[_elenaCurrentHP];
 
         if (_elenaCurrentHP <= 0)
             SceneController.LoadScene();

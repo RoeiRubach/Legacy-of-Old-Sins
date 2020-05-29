@@ -74,7 +74,8 @@ public partial class PlayerController
     public void DouglasTakingDamage()
     {
         _douglasCurrentHP--;
-        _douglasHP.sprite = _hpBars[_douglasCurrentHP];
+        if(_douglasHP != null)
+            _douglasHP.sprite = _hpBars[_douglasCurrentHP];
 
         if (_douglasCurrentHP <= 0)
             SceneController.LoadScene();

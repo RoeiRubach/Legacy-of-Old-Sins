@@ -120,15 +120,19 @@ public class ElenaState : PlayerStateManager
         {
             if (hitInfo.collider.GetComponent<IElenaInteractables>() != null)
             {
-                if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
-                    CursorController.Instance.SetAssassinCursor();
-                else
-                    CursorController.Instance.SetInteractableCursor();
+                if (!isInteracting)
+                {
+                    if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
+                        CursorController.Instance.SetAssassinCursor();
+                    else
+                        CursorController.Instance.SetInteractableCursor();
 
-                interactableObject = hitInfo.transform;
-                interactableObject.GetComponent<Outline>().enabled = true;
+                    if (interactableObject == null)
+                        interactableObject = hitInfo.transform;
+                    interactableObject.GetComponent<Outline>().enabled = true;
 
-                isPossibleToInteract = true;
+                    isPossibleToInteract = true;
+                }
             }
         }
         else
@@ -163,11 +167,14 @@ public class ElenaState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
-            playerController.SetState(new DouglasState(playerController, cameraController));
+        if (!isInteracting)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
+                playerController.SetState(new DouglasState(playerController, cameraController));
 
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
-            playerController.SetState(new HectorState(playerController, cameraController));
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
+                playerController.SetState(new HectorState(playerController, cameraController));
+        }
     }
 
     private void ResetAssassinating()

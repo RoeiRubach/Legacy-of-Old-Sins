@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class EnemyTrigger : MonoBehaviour
 {
-    [SerializeField] private Transform[] enemiesListeners;
+    [SerializeField] private List<MindlessPossessed> enemiesListeners;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -11,13 +12,13 @@ public class EnemyTrigger : MonoBehaviour
             //if (!other.transform.GetComponent<CharactersPoolController>().isActiveAndEnabled)
             //    other.transform.GetComponent<CharactersPoolController>().enabled = true;
 
-            if (enemiesListeners[0] != null)
+            if (enemiesListeners != null)
             {
                 foreach (var enemies in enemiesListeners)
                 {
                     if(enemies != null)
                         if (enemies.gameObject.activeSelf)
-                            enemies.GetComponent<EnemyBase>().IsPlayerSpotted = true;
+                            enemies.IsPlayerSpotted = true;
                 }
             }
             Destroy(gameObject);

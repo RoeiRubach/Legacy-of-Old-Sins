@@ -72,7 +72,8 @@ public partial class PlayerController
     public void HectorTakingDamage()
     {
         _hectorCurrentHP--;
-        _hectorHP.sprite = _hpBars[_hectorCurrentHP];
+        if(_hectorHP != null)
+            _hectorHP.sprite = _hpBars[_hectorCurrentHP];
 
         if (_hectorCurrentHP <= 0)
             SceneController.LoadScene();

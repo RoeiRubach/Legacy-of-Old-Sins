@@ -33,8 +33,8 @@ public class ElenaStealthManager : MonoBehaviour
         _elenaHairRef.SetActive(false);
         _elenaHoodRef.SetActive(true);
 
-        //if (_charactersPoolController.isActiveAndEnabled)
-        //    RemoveElenaFromPool();
+        if (_charactersPoolController.isActiveAndEnabled)
+            InvokeRemoveElenaFromPool();
 
         IsInStealthMode = true;
         GetComponentInChildren<BoxCollider>().enabled = false;
@@ -67,5 +67,14 @@ public class ElenaStealthManager : MonoBehaviour
     {
         if (_charactersPoolController.enabled)
             _charactersPoolController.enabled = false;
+    }
+
+    private void InvokeRemoveElenaFromPool()
+    {
+        if (!IsInvoking("RemoveElenaFromPool"))
+        {
+            Invoke("RemoveElenaFromPool", 1f);
+            Debug.Log("Elena got out of trigger");
+        }
     }
 }

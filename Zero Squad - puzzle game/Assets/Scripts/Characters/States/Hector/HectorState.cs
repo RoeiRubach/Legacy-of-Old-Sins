@@ -102,14 +102,19 @@ public class HectorState : PlayerStateManager
         {
             if (hitInfo.collider.GetComponent<IHectorInteractables>() != null)
             {
-                if(hitInfo.collider.GetComponent<IHectorTech>() != null)
-                    CursorController.Instance.SetTechCursor();
-                else
-                    CursorController.Instance.SetInteractableCursor();
-                interactableObject = hitInfo.transform;
-                interactableObject.GetComponent<Outline>().enabled = true;
-                
-                isPossibleToInteract = true;
+                if (!isInteracting)
+                {
+                    if (hitInfo.collider.GetComponent<IHectorTech>() != null)
+                        CursorController.Instance.SetTechCursor();
+                    else
+                        CursorController.Instance.SetInteractableCursor();
+
+                    if (interactableObject == null)
+                        interactableObject = hitInfo.transform;
+                    interactableObject.GetComponent<Outline>().enabled = true;
+
+                    isPossibleToInteract = true;
+                }
             }
         }
         else

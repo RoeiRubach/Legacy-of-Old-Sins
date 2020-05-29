@@ -131,7 +131,9 @@ public class DouglasState : PlayerStateManager
                 if (!isInteracting)
                 {
                     CursorController.Instance.SetInteractableCursor();
-                    interactableObject = hitInfo.transform;
+
+                    if (interactableObject == null)
+                        interactableObject = hitInfo.transform;
                     interactableObject.GetComponent<Outline>().enabled = true;
 
                     if (hitInfo.transform.name == "Bomb")
