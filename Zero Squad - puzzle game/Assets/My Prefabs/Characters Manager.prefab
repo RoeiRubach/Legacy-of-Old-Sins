@@ -86,10 +86,7 @@ MonoBehaviour:
     m_Bits: 256
   InteractableLayerMask:
     serializedVersion: 2
-    m_Bits: 2048
-  EnemiesLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 2560
   _hpBars:
   - {fileID: 21300000, guid: a39c04ecfba613e40baf0e365dc60fc3, type: 3}
   - {fileID: 21300000, guid: 842df5eec14ae224b9a30e9f22c7d4b6, type: 3}

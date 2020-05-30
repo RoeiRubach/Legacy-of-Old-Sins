@@ -72,13 +72,13 @@ public abstract class PlayerStateManager
                     if (isPossibleToInteract)
                     {
                         isInteracting = true;
-                        myCurrentAgent.SetDestination(CharacterInteractionPlacement());
+                        myCurrentAgent?.SetDestination(CharacterInteractionPlacement());
                     }
                     else
                     {
                         isInteracting = false;
                         ResetInteractable();
-                        myCurrentAgent.SetDestination(hitInfo.point);
+                        myCurrentAgent?.SetDestination(hitInfo.point);
                     }
 
                     if (playerController.IsLifting)

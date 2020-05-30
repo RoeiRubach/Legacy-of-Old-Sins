@@ -100,7 +100,10 @@ public class ElenaState : PlayerStateManager
     public override void OnStateExit()
     {
         if (_isUsingSkill)
+        {
             _elenaAgentPlacement.SetActive(true);
+            myCurrentAgent.enabled = false;
+        }
 
         playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedOFF();
@@ -162,6 +165,7 @@ public class ElenaState : PlayerStateManager
         if (_elenaStealthManager.IsInStealthMode)
         {
             _isUsingSkill = true;
+            myCurrentAgent.enabled = true;
             _elenaAgentPlacement.SetActive(false);
             playerController.ElenaOnSkillMode();
         }
