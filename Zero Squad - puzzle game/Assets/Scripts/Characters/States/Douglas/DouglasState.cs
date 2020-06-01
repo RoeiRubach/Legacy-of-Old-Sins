@@ -71,9 +71,7 @@ public class DouglasState : PlayerStateManager
         }
 
         DouglasUIToggleOFF();
-
         ResetCharactersControl();
-
         //Debug.Log("Douglas is out of control");
     }
 

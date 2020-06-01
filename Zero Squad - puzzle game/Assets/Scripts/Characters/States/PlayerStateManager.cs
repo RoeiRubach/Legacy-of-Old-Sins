@@ -7,6 +7,7 @@ public enum CharactersAnimationTransitionParameters
     _isSkillMode,
     _isLifting,
     _isCarrying,
+    _isPushing
 }
 
 public abstract class PlayerStateManager
@@ -178,6 +179,7 @@ public abstract class PlayerStateManager
                             myCurrentAgent.speed = bombWalkingSpeed;
                             break;
                         case "Cabinet":
+                            myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isPushing.ToString(), true);
                             isCabinetInteracting = true;
                             break;
                         case "Health Pack":
@@ -201,7 +203,11 @@ public abstract class PlayerStateManager
             }
             else
             {
-                isCabinetInteracting = false;
+                if (isCabinetInteracting)
+                {
+                    myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isPushing.ToString(), false);
+                    isCabinetInteracting = false;
+                }
                 isInteracting = false;
                 interactableObject = null;
             }
