@@ -22,10 +22,6 @@ public class EnemyHealth : MonoBehaviour
         _currentHealth = _maxHealth;
     }
 
-    private void Start()
-    {
-    }
-
     private void LateUpdate()
     {
         if (_slider == null)

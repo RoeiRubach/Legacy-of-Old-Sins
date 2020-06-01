@@ -11,6 +11,11 @@ public class GameEventSubscriber : MonoBehaviour
         _unityEvent?.Invoke();
     }
 
+    public void AddListenerMethod(UnityAction call)
+    {
+        _unityEvent.AddListener(call);
+    }
+
     private void OnEnable()
     {
         _gameEvent += this;

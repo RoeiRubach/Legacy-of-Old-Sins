@@ -6,6 +6,11 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     [SerializeField] private float _spawnTime;
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
 
+    [Range(5, 20)]
+    [SerializeField] private int _zombieSpawnLimit;
+
+    private int _zombieSpawnCounter;
+
     private Vector3 _spawnLocation;
 
     private float _summonTimer;
@@ -19,19 +24,28 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     
     private void Update()
     {
+        if(_zombieSpawnCounter < _zombieSpawnLimit)
         _summonTimer -= Time.deltaTime;
 
         if (_summonTimer <= 0)
         {
             _summonTimer = _spawnTime;
             var mindless = Instantiate(_mindlessPossessedPrefabRef, _spawnLocation, Quaternion.identity);
+            mindless.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
             mindless.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
+            _zombieSpawnCounter++;
         }
+    }
+
+    public void SpawnCountDecreasement()
+    {
+        _zombieSpawnCounter--;
     }
 
     public void DestroyThisComponentViaEvent()
     {
         Destroy(GetComponent<Summoner>());
+        Destroy(gameObject);
     }
 
     public void Interact()
