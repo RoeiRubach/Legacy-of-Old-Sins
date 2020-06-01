@@ -3,7 +3,7 @@
 public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
 {
     [Range(5f, 20f)]
-    [SerializeField] private float _spawnTime;
+    [SerializeField] private float _spawnTimer;
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
 
     [Range(5, 20)]
@@ -29,7 +29,7 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
 
         if (_summonTimer <= 0)
         {
-            _summonTimer = _spawnTime;
+            _summonTimer = _spawnTimer;
             var mindless = Instantiate(_mindlessPossessedPrefabRef, _spawnLocation, Quaternion.identity);
             mindless.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
             mindless.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;

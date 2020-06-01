@@ -13,6 +13,7 @@ TagManager:
   - Douglas Shotgun
   - Shield holder
   - HealthRegen
+  - Fire
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Enemy
   - Characters
   - Interactable
-  - 
+  - FireLayer
   - 
   - 
   - 
