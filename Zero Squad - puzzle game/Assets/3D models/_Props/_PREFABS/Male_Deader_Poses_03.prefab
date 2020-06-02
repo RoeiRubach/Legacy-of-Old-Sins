@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1019696457379633878}
   - component: {fileID: 8322008044898181344}
   - component: {fileID: 2324208507790990361}
-  - component: {fileID: 6966139841943893932}
   m_Layer: 0
   m_Name: Male_Deader_Poses_03
   m_TagString: Untagged
@@ -26,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4070666230015502533}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+  m_LocalRotation: {x: 0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: 28.700033, y: 0.122523315, z: -10.091185}
   m_LocalScale: {x: -22.97693, y: -11.073234, z: -100.2026}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.98, y: 0, z: 0}
 --- !u!33 &8322008044898181344
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -79,22 +78,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &6966139841943893932
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4070666230015502533}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 24c8cbad9866330458ff949e3937649f, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

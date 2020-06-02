@@ -58,7 +58,7 @@ public class ElenaState : PlayerStateManager
                 EnterSkillViaButton = false;
                 _isUsingSkill = !_isUsingSkill ? true : false;
 
-                if (_isUsingSkill)
+                if (_isUsingSkill && !_elenaStealthManager.IsStealthOnCooldown)
                 {
                     ResetAIPath();
                     myCurrentAgent.speed = stealthRunningSpeed;
@@ -67,6 +67,7 @@ public class ElenaState : PlayerStateManager
                 }
                 else
                 {
+                    _isUsingSkill = false;
                     myCurrentAgent.speed = runningSpeed;
                     _elenaStealthManager.OffStealthMode();
                     myCurrentAgent.enabled = true;

@@ -1491,13 +1491,14 @@ GameObject:
   - component: {fileID: 7683830871809494081}
   - component: {fileID: 7683830871809494080}
   - component: {fileID: 7683830871809494207}
+  - component: {fileID: 465460841}
   m_Layer: 10
   m_Name: Elena
   m_TagString: Elena
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6699432853743369901
 Transform:
   m_ObjectHideFlags: 0
@@ -1546,6 +1547,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa2679366503f749b53338e5bcc8f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stealthTime: 10
+  _stealthCooldownTime: 2.5
   _elenaBodyNHeadMaterial: {fileID: 2100000, guid: d7487b77d983a574492803a5582e4b77,
     type: 2}
   _elenaCapeNHoodMaterial: {fileID: 2100000, guid: 8f318663e57ec9540b80befc4e6ec3d8,
@@ -1690,6 +1693,46 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &465460841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683830871809494206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4b555b3b8450c4cb3d2a09d6193a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 499e4b8ed0e6dc24f96cc650f1265ad1, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SwitchToElenaStateViaButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: EnterSkillViaButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &7751420775364588007
 GameObject:
   m_ObjectHideFlags: 0
