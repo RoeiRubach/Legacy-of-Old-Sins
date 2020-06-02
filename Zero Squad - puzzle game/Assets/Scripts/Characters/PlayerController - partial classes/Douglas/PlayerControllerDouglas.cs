@@ -69,8 +69,7 @@ public partial class PlayerController
         if(_douglasSkillPlaceHolder != null)
             _douglasSkillPlaceHolder.sprite = _douglasSelectedSkillSprite;
     }
-
-    [ContextMenu("Apply damage to Douglas - PLAYMODE ONLY!")]
+    
     public void DouglasTakingDamage()
     {
         _douglasCurrentHP--;

@@ -87,6 +87,9 @@ public class EnemyTargetDetecting : MonoBehaviour
 
     private void ElenaEnterDetected(Collider other)
     {
+        if (GetComponentInParent<Summoner>())
+            return;
+
         RaycastHit hitInfo;
         if (Physics.Raycast(_enemyBaseRef.transform.position + (Vector3.up * 1.2f), DirectionToElena(other.transform), out hitInfo, 7.6f))
         {

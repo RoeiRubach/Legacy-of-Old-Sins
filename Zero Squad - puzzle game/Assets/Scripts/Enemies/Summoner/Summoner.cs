@@ -25,16 +25,10 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     private void Update()
     {
         if(_zombieSpawnCounter < _zombieSpawnLimit)
-        _summonTimer -= Time.deltaTime;
+            _summonTimer -= Time.deltaTime;
 
         if (_summonTimer <= 0)
-        {
-            _summonTimer = _spawnTimer;
-            var mindless = Instantiate(_mindlessPossessedPrefabRef, _spawnLocation, Quaternion.identity);
-            mindless.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
-            mindless.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
-            _zombieSpawnCounter++;
-        }
+            SpawnMindless();
     }
 
     public void SpawnCountDecreasement()
@@ -60,5 +54,14 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     public Vector3 CharacterInteractionPlacement()
     {
         return _elenaKillSummonerPlacement.position;
+    }
+
+    private void SpawnMindless()
+    {
+        _summonTimer = _spawnTimer;
+        var mindless = Instantiate(_mindlessPossessedPrefabRef, _spawnLocation, Quaternion.identity);
+        mindless.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
+        mindless.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
+        _zombieSpawnCounter++;
     }
 }

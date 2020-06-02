@@ -2,12 +2,9 @@
 
 public class DouglasAutoShooting : MonoBehaviour
 {
-    public LayerMask LayerMask;
-
     private const float _autoShootingDelay = 2.2f;
     private float _shootingTimer;
-
-    float timer = 2;
+    
     [Range(3, 5)]
     [SerializeField] private float _turningSpeed;
 
@@ -71,7 +68,7 @@ public class DouglasAutoShooting : MonoBehaviour
     private void Initialization()
     {
         if (_douglasRef == null)
-            _douglasRef = GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()).transform;
+            _douglasRef = GameObject.Find(CharactersEnum.Douglas.ToString()).transform;
 
         if (_douglasShootingManager == null)
             _douglasShootingManager = transform.GetComponent<DouglasShootingManager>();
@@ -89,7 +86,7 @@ public class DouglasAutoShooting : MonoBehaviour
         //Debug.DrawRay(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target) * 12f, Color.red);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f, ~LayerMask))
+        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f, ~_douglasShootingManager.AvoidLayersMasks))
         {
             if (hitInfo.collider.transform == target.transform)
                 return true;
