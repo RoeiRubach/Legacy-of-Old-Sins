@@ -76,8 +76,8 @@ public partial class PlayerController
         {
             _douglasCurrentHP--;
 
-            if (_elenaHP != null)
-                _douglasHP.sprite = _hpBars[_elenaCurrentHP];
+            if (_douglasHP != null)
+                _douglasHP.sprite = _hpBars[_douglasCurrentHP];
         }
 
         if (_douglasCurrentHP <= 0)
@@ -91,7 +91,7 @@ public partial class PlayerController
             if (_douglasCurrentHP < 10)
             {
                 _douglasCurrentHP++;
-                _douglasHP.sprite = _hpBars[_hectorCurrentHP];
+                _douglasHP.sprite = _hpBars[_douglasCurrentHP];
             }
             else
                 break;

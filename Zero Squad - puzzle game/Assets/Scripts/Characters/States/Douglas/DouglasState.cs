@@ -97,6 +97,7 @@ public class DouglasState : PlayerStateManager
                     }
                     else
                     {
+                        CursorController.Instance.SetStandardCursor();
                         playerController.DouglasSpriteOffSkillMode();
                         _douglasShootingManager.enabled = false;
                         _douglasShotgun.SetActive(false);

@@ -75,8 +75,8 @@ public partial class PlayerController
         {
             _hectorCurrentHP--;
 
-            if (_elenaHP != null)
-                _hectorHP.sprite = _hpBars[_elenaCurrentHP];
+            if (_hectorHP != null)
+                _hectorHP.sprite = _hpBars[_hectorCurrentHP];
         }
 
         if (_hectorCurrentHP <= 0)

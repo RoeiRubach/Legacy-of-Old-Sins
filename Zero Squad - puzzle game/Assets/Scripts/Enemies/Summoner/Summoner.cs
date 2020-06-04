@@ -4,7 +4,7 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
 {
     [Range(5f, 20f)]
     [SerializeField] private float _spawnTimer = 5;
-    [Range(5, 20)]
+    [Range(3, 20)]
     [SerializeField] private int _zombieSpawnLimit = 5;
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
     [SerializeField] private GameObject _ShooterPrefabRef;

@@ -87,13 +87,11 @@ public partial class PlayerController
     {
         for (int i = 0; i < regenAmount; i++)
         {
-            if (_hectorCurrentHP < 10)
+            if (_elenaCurrentHP < 10)
             {
                 _elenaCurrentHP++;
                 _elenaHP.sprite = _hpBars[_elenaCurrentHP];
             }
-            else
-                break;
         }
     }
     #endregion
