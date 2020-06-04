@@ -3083,6 +3083,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3585369381463934348, guid: 83b51b5023103dc438a2ca7af34c5926,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hector Shield
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83b51b5023103dc438a2ca7af34c5926, type: 3}
 --- !u!1001 &1507254207
@@ -4552,6 +4557,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
       propertyPath: _hectorShieldRef
       value: 
@@ -4564,11 +4574,6 @@ PrefabInstance:
       propertyPath: _enemiesShieldHittingSpot
       value: 
       objectReference: {fileID: 1749266381}
-    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
 --- !u!1001 &2014765985

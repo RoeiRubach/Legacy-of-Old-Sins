@@ -4,42 +4,41 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
 {
     [Range(5f, 20f)]
     [SerializeField] private float _spawnTimer = 5;
-    [Range(3, 20)]
-    [SerializeField] private int _zombieSpawnLimit = 5;
+    [Range(2, 20)]
+    [SerializeField] private int _zombieSpawnLimit = 3;
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
     [SerializeField] private GameObject _ShooterPrefabRef;
     [SerializeField] private bool _isShooterSummoning;
     [SerializeField] private Transform[] _shooterPlacements;
 
+    private Transform _shooterSpawnPlacement;
     private int _zombieSpawnCounter;
     private Vector3 _spawnLocation;
     private float _summonTimer;
 
     private void Start()
     {
+        transform.name = "Summoner";
+        _summonTimer = 0;
+        _spawnLocation = transform.GetChild(0).position;
+        _elenaKillSummonerPlacement = transform.GetChild(1);
+
         if (_isShooterSummoning)
         {
             _zombieSpawnLimit = 2;
             _zombieSpawnCounter = _zombieSpawnLimit;
+            //_summonTimer = _spawnTimer;
         }
-
-        _summonTimer = 0;
-        _spawnLocation = transform.GetChild(0).position;
-        _elenaKillSummonerPlacement = transform.GetChild(1);
     }
     
     private void Update()
     {
         if(_zombieSpawnCounter < _zombieSpawnLimit)
-            _summonTimer -= Time.deltaTime;
+        {
+            if ((_summonTimer -= Time.deltaTime) <= 0)
+                SpawnEnemy();
+        }
 
-        if (_summonTimer <= 0)
-            SpawnEnemy();
-    }
-
-    public void SpawnCountDecreasement()
-    {
-        _zombieSpawnCounter--;
     }
 
     public void DestroyThisComponentViaEvent()
@@ -62,6 +61,24 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
         return _elenaKillSummonerPlacement.position;
     }
 
+    private void MindlessSpawnCountDecreasement()
+    {
+        _zombieSpawnCounter--;
+    }
+
+    public void ShooterSpawnCountDecreasement()
+    {
+        _zombieSpawnCounter--;
+        for(int i = 0; i < _shooterPlacements.Length; i++)
+        {
+            if(_shooterPlacements[i].childCount == 0)
+            {
+                _shooterSpawnPlacement = _shooterPlacements[i];
+                break;
+            }
+        }
+    }
+
     private void SpawnEnemy()
     {
         _summonTimer = _spawnTimer;
@@ -77,15 +94,14 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     private void MindlessPossessSpawning()
     {
         var mindless = Instantiate(_mindlessPossessedPrefabRef, _spawnLocation, Quaternion.identity);
-        mindless.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
+        mindless.GetComponent<GameEventSubscriber>().AddListenerMethod(MindlessSpawnCountDecreasement);
         mindless.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
     }
 
     private void ShooterSpawning()
     {
-        var shooter = Instantiate(_ShooterPrefabRef, _spawnLocation, Quaternion.identity);
-
-        //shooter.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
-        //shooter.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
+        var shooter = Instantiate(_ShooterPrefabRef, _spawnLocation, Quaternion.identity, _shooterSpawnPlacement);
+        shooter.GetComponent<GameEventSubscriber>().AddListenerMethod(ShooterSpawnCountDecreasement);
+        shooter.GetComponent<UnityEngine.AI.NavMeshAgent>().SetDestination(_shooterSpawnPlacement.position);
     }
 }

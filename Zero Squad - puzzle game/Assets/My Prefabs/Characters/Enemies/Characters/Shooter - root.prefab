@@ -542,6 +542,7 @@ GameObject:
   - component: {fileID: 5745017860040455871}
   - component: {fileID: 2052575541}
   - component: {fileID: 2052575542}
+  - component: {fileID: 375024837455259508}
   m_Layer: 11
   m_Name: Shooter - root
   m_TagString: Enemy
@@ -681,6 +682,24 @@ MonoBehaviour:
   precomputeOutline: 1
   bakeKeys: []
   bakeValues: []
+--- !u!114 &375024837455259508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745017860040455865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4b555b3b8450c4cb3d2a09d6193a45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameEvent: {fileID: 11400000, guid: 499e4b8ed0e6dc24f96cc650f1265ad1, type: 2}
+  _unityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &5745017860087328778
 GameObject:
   m_ObjectHideFlags: 0

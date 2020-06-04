@@ -90,11 +90,11 @@ public class ElenaState : PlayerStateManager
             case "Enemy":
                 playerController.ElenaTakingDamage();
                 break;
-            case "HealthRegen":
-                Debug.Log(healthRegenCollectables.HealthToRegen);
-                playerController.ElenaGainingHealth(healthRegenCollectables.HealthToRegen);
-                healthRegenCollectables.CallOnDestroy();
-                break;
+            //case "HealthRegen":
+            //    Debug.Log(healthRegenCollectables.HealthToRegen);
+            //    playerController.ElenaGainingHealth(healthRegenCollectables.HealthToRegen);
+            //    healthRegenCollectables.CallOnDestroy();
+            //    break;
         }
     }
 

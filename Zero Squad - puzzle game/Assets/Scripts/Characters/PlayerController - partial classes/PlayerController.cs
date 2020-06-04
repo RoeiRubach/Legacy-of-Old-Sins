@@ -43,10 +43,40 @@ public partial class PlayerController : MonoBehaviour
         _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
     }
 
+    public void ElenaStealthTimerIsOver()
+    {
+        if (!_currentState.IsCabinetInteracting)
+        {
+            CancelInvoke();
+            InvokeElenaSwitch();
+            _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
+        }
+        else
+            InvokeRepeating("InvokeElenaStealthSwitching", 0.5f, 1f);
+    }
+
     public void HectorShieldGotDestroy()
     {
-        InvokeHectorSwitch();
-        _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
+        if (!_currentState.IsCabinetInteracting)
+        {
+            CancelInvoke();
+            InvokeHectorSwitch();
+            _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
+        }
+        else
+            InvokeRepeating("InvokeShieldDestroying", 0.5f, 1f);
+    }
+
+    private void InvokeElenaStealthSwitching()
+    {
+        if (!IsInvoking("ElenaStealthTimerIsOver"))
+            Invoke("ElenaStealthTimerIsOver", 0.5f);
+    }
+
+    private void InvokeShieldDestroying()
+    {
+        if(!IsInvoking("HectorShieldGotDestroy"))
+            Invoke("HectorShieldGotDestroy", 0.5f);
     }
 
     public void SwitchToHectorTutorial()
@@ -81,6 +111,9 @@ public partial class PlayerController : MonoBehaviour
                 break;
             case "Hector":
                 HectorTakingDamage(damageAmount);
+                break;
+            case "Hector Shield":
+                target.GetComponent<EnemyHealth>().HealthDecreaseViaBullet(damageAmount);
                 break;
         }
     }

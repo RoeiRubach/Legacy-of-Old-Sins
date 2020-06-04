@@ -8,13 +8,25 @@ public class DouglasShootingManager : MonoBehaviour
 
     public GameObject DouglasShotgunRef;
     public LayerMask AvoidLayersMasks;
-    public LayerMask EnemyLayerMask;
+    //public LayerMask EnemyLayerMask;
 
     [HideInInspector] public Transform DouglasTarget = null;
 
     private float _shootingDelay = 0.875f;
 
     private bool _isAllowedToShoot;
+
+    public bool IsHavingClearShoot(Transform target)
+    {
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~AvoidLayersMasks))
+        {
+            if (hitInfo.transform == target.transform)
+                return true;
+        }
+        return false;
+    }
 
     public bool CallSimpleShoot()
     {
@@ -55,20 +67,6 @@ public class DouglasShootingManager : MonoBehaviour
     {
         nearestEnemy.GetComponent<EnemyHealth>().HealthDecreaseViaBullet();
         //transform.GetComponent<Animator>().SetBool("_isShooting", true);
-    }
-
-    private bool IsHavingClearShoot(Transform target)
-    {
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~AvoidLayersMasks))
-        {
-            if (hitInfo.transform == target.transform)
-                return true;
-            else
-                print(hitInfo.transform.name);
-        }
-        return false;
     }
 
     private Vector3 DirectionToEnemy(Transform target) => (target.position - transform.position).normalized;

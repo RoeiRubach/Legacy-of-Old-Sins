@@ -4,9 +4,10 @@ public class EnemyBullet : MonoBehaviour
 {
     [Range(1f, 5f)]
     [SerializeField] private int _bulletDamage = 1;
+    [Range(1f, 5f)]
+    [SerializeField] private float _bulletMoveSpeed = 15f;
 
     private Vector3 _shootDirection;
-    private float _moveSpeed = 11f;
     private PlayerController _playerController;
 
     private void Start()
@@ -23,7 +24,7 @@ public class EnemyBullet : MonoBehaviour
 
     private void Update()
     {
-        transform.position += _shootDirection * Time.deltaTime * _moveSpeed;
+        transform.position += _shootDirection * Time.deltaTime * _bulletMoveSpeed;
 
         var nearestEnemy = CharactersPoolController.FindClosestEnemy(transform.position);
         float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);

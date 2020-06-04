@@ -6,9 +6,11 @@ public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInterac
 
     private void Start()
     {
+        transform.name = "Shooter - root";
         _elenaKillSummonerPlacement = transform.GetChild(1);
         _shootingController = GetComponentInChildren<EnemyShooterShootingController>();
         _shootingController.enabled = false;
+        IsPlayerSpotted = true;
     }
 
     private void Update()
@@ -16,7 +18,7 @@ public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInterac
         if (!IsEnemyGotKilled())
         {
             if(!enemyMeshAgent.hasPath)
-                if(TargetDetected != null)
+                if(IsPlayerSpotted)
                     if (!_shootingController.enabled)
                     {
                         _shootingController.enabled = true;

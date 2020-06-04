@@ -44,23 +44,27 @@ public class EnemyHealth : MonoBehaviour
 
     private float CalculateHealth() => (float)_currentHealth / _maxHealth;
 
-    public void HealthDecreaseViaBullet()
+    public void HealthDecreaseViaBullet(int damageAmount = 1)
     {
-        _currentHealth -= 1;
-
-        if (_currentHealth <= 0)
+        for (int i = 0; i < damageAmount; i++)
         {
-            if (_isShield)
+            _currentHealth--;
+            if (_currentHealth <= 0)
             {
-                ToggleHealthBarOFF();
-                GetComponent<GameEventSubscriber>()?.OnEventFire();
-            }
-            else
-            {
-                GetComponentInParent<BoxCollider>().enabled = false;
-                _isKilled = true;
-                ToggleHealthBarOFF();
-                GetComponent<GameEventSubscriber>()?.OnEventFire();
+                if (_isShield)
+                {
+                    ToggleHealthBarOFF();
+                    GetComponent<GameEventSubscriber>()?.OnEventFire();
+                }
+                else
+                {
+                    GetComponentInParent<BoxCollider>().enabled = false;
+                    _isKilled = true;
+                    ToggleHealthBarOFF();
+                    if (transform.parent != null)
+                        transform.parent = null;
+                    GetComponent<GameEventSubscriber>()?.OnEventFire();
+                }
             }
         }
     }

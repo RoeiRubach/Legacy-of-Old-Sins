@@ -34,7 +34,7 @@ public class DouglasState : PlayerStateManager
             DouglasPointAndClickShooting();
         }
 
-        if (!isCabinetInteracting)
+        if (!IsCabinetInteracting)
         {
             EnterOrExitSkillMode();
             SwitchCharacters();
@@ -54,11 +54,11 @@ public class DouglasState : PlayerStateManager
             case "Enemy":
                 playerController.DouglasTakingDamage();
                 break;
-            case "HealthRegen":
-                Debug.Log(healthRegenCollectables.HealthToRegen);
-                playerController.DouglasGainingHealth(healthRegenCollectables.HealthToRegen);
-                healthRegenCollectables.CallOnDestroy();
-                break;
+            //case "HealthRegen":
+            //    Debug.Log(healthRegenCollectables.HealthToRegen);
+            //    playerController.DouglasGainingHealth(healthRegenCollectables.HealthToRegen);
+            //    healthRegenCollectables.CallOnDestroy();
+            //    break;
         }
     }
 
@@ -155,28 +155,26 @@ public class DouglasState : PlayerStateManager
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity, _douglasShootingManager.EnemyLayerMask))
+        if (Physics.Raycast(ray, out hitInfo, Mathf.Infinity))
         {
-            if (Physics.Raycast(myCurrentCharacter.transform.position + (Vector3.up * 1.2f), DirectionToEnemy(hitInfo.transform), out hitInfo, 9.5f))
+            if (_douglasShootingManager.IsHavingClearShoot(hitInfo.transform))
             {
                 if (hitInfo.collider.GetComponent<IDouglasEnemies>() != null)
                 {
-                    if (_douglasShootingManager.DouglasTarget != hitInfo.transform)
-                    {
-                        _douglasShootingManager.DouglasTarget = hitInfo.transform;
-                        CursorController.Instance.SetShootingCursor();
-                    }
+                    _douglasShootingManager.DouglasTarget = hitInfo.transform;
+                    CursorController.Instance.SetShootingCursor();
                 }
             }
+            else
+                if (_douglasShootingManager.DouglasTarget != null)
+                    ResetShootingTarget();
         }
-        else
-        {
-            if (_douglasShootingManager.DouglasTarget != null)
-            {
-                _douglasShootingManager.DouglasTarget = null;
-                CursorController.Instance.SetStandardCursor();
-            }
-        }
+    }
+
+    private void ResetShootingTarget()
+    {
+        _douglasShootingManager.DouglasTarget = null;
+        CursorController.Instance.SetStandardCursor();
     }
 
     private void DouglasInitialization()

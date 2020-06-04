@@ -12,6 +12,7 @@ public enum CharactersAnimationTransitionParameters
 
 public abstract class PlayerStateManager
 {
+    public bool IsCabinetInteracting { get; protected set; }
     protected float stealthRunningSpeed = 3f;
     protected int runningSpeed = 5, bombWalkingSpeed = 2;
 
@@ -20,7 +21,7 @@ public abstract class PlayerStateManager
 
     protected Transform interactableObject;
 
-    protected bool isPossibleToInteract, isInteracting, isCabinetInteracting;
+    protected bool isPossibleToInteract, isInteracting;
 
     protected PlayerStateManager(PlayerController character)
     {
@@ -61,7 +62,7 @@ public abstract class PlayerStateManager
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (!isCabinetInteracting)
+            if (!IsCabinetInteracting)
             {
                 RaycastHit hitInfo;
 
@@ -180,7 +181,7 @@ public abstract class PlayerStateManager
                             break;
                         case "Cabinet":
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isPushing.ToString(), true);
-                            isCabinetInteracting = true;
+                            IsCabinetInteracting = true;
                             break;
                         case "Health Pack":
                             HealthPackInteraction();
@@ -204,10 +205,10 @@ public abstract class PlayerStateManager
             }
             else
             {
-                if (isCabinetInteracting)
+                if (IsCabinetInteracting)
                 {
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isPushing.ToString(), false);
-                    isCabinetInteracting = false;
+                    IsCabinetInteracting = false;
                 }
                 isInteracting = false;
                 interactableObject = null;
@@ -248,8 +249,10 @@ public abstract class PlayerStateManager
                 break;
         }
 
-        //ResetInteractable();
         if (healthRegenCollectables.IsInteract)
+        {
+            ResetInteractable();
             healthRegenCollectables.CallOnDestroy();
+        }
     }
 }

@@ -7,7 +7,7 @@ public class EnemyShooterShootingController : MonoBehaviour
     [Range(1, 5)]
     [SerializeField] private int _bulletDamageAmount = 1;
     [Range(2f, 5f)]
-    [SerializeField] private float _autoShootingDelay = 2.2f;
+    [SerializeField] private float _autoShootingDelay = 3.3f;
     [SerializeField] private LayerMask _avoidLayerMask;
     [SerializeField] private Transform _bulletPrefab;
     [SerializeField] private Transform _gunEndPointPosition;

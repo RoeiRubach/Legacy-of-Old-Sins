@@ -71,11 +71,11 @@ public class HectorState : PlayerStateManager
             case "Enemy":
                 playerController.HectorTakingDamage();
                 break;
-            case "HealthRegen":
-                Debug.Log(healthRegenCollectables.HealthToRegen);
-                playerController.HectorGainingHealth(healthRegenCollectables.HealthToRegen);
-                healthRegenCollectables.CallOnDestroy();
-                break;
+            //case "HealthRegen":
+            //    Debug.Log(healthRegenCollectables.HealthToRegen);
+            //    playerController.HectorGainingHealth(healthRegenCollectables.HealthToRegen);
+            //    healthRegenCollectables.CallOnDestroy();
+            //    break;
         }
     }
 

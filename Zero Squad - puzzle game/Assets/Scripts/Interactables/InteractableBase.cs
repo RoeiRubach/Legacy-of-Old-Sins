@@ -31,7 +31,7 @@ public class InteractableBase : MonoBehaviour, IInteractable
     {
         if (!isInteract)
         {
-            Debug.Log("interacted");
+            //Debug.Log("interacted");
             isInteract = true;
         }
     }
