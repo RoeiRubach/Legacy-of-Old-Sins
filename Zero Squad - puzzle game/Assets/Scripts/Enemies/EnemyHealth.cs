@@ -78,6 +78,12 @@ public class EnemyHealth : MonoBehaviour
             _healthBarUI.SetActive(false);
     }
 
+    public void AssassinateEnemy()
+    {
+        _currentHealth = 0;
+        HealthDecreaseViaBullet();
+    }
+
     public bool CheckIfEnemyDead => _isKilled;
     public int GetCurrentHealth => _currentHealth;
     public int GetMaxHealth => _maxHealth;

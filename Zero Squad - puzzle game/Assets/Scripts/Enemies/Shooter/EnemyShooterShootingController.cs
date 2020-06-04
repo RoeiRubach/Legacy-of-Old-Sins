@@ -9,11 +9,13 @@ public class EnemyShooterShootingController : MonoBehaviour
     [Range(2f, 5f)]
     [SerializeField] private float _autoShootingDelay = 2.2f;
     [SerializeField] private LayerMask _avoidLayerMask;
+    [SerializeField] private Transform _bulletPrefab;
+    [SerializeField] private Transform _gunEndPointPosition;
 
     private float _shootingTimer;
 
     private PlayerController _playerControllerHealth;
-
+    private CharactersPoolController _nearestEnemy;
     private void Start()
     {
         _shootingTimer = _autoShootingDelay;
@@ -22,59 +24,37 @@ public class EnemyShooterShootingController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var nearestEnemy = CharactersPoolController.FindClosestEnemy(transform.position);
+        _nearestEnemy = CharactersPoolController.FindClosestEnemy(transform.position);
 
-        if (nearestEnemy != null)
+        if (_nearestEnemy != null)
         {
-            float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
+            float distance = Vector3.Distance(transform.position, _nearestEnemy.transform.position);
 
             if (distance <= 12)
             {
-                if (IsHavingClearShoot(nearestEnemy.transform))
+                if (IsHavingClearShoot(_nearestEnemy.transform))
                 {
-                    //transform.GetComponent<Animator>().SetBool("_isShooting", false);
+                    FaceTarget(_nearestEnemy.transform);
 
-                    FaceTarget(nearestEnemy.transform);
-
-                    _shootingTimer -= Time.deltaTime;
-
-                    if (_shootingTimer <= 0)
-                        Shoot(nearestEnemy.transform);
+                    if ((_shootingTimer -= Time.deltaTime) <= 0)
+                        SetShootAnimationTrue();
                 }
-                //if (!nearestEnemy.GetComponent<EnemyHealth>().CheckIfEnemyDead)
-                //{
-                //    else
-                //        transform.GetComponent<Animator>().SetBool("_isShooting", false);
-                //}
-                //else
-                //{
-                //    transform.GetComponent<Animator>().SetBool("_isShooting", false);
-                //    nearestEnemy.GetComponent<EnemyPoolController>().enabled = false;
-                //}
             }
         }
     }
 
-    private void Shoot(Transform nearestEnemy)
+    private void SetShootAnimationTrue()
     {
-        _shootingTimer = _autoShootingDelay;
+        GetComponent<Animator>().SetBool(EnemyAnimationTransitionParameters._isAbleToAttack.ToString(), true);
+    }
 
-        for(int i = 0; i < _bulletDamageAmount; i++)
-        {
-            switch (nearestEnemy.tag)
-            {
-                case "Douglas":
-                    _playerControllerHealth.DouglasTakingDamage();
-                    break;
-                case "Elena":
-                    _playerControllerHealth.ElenaTakingDamage();
-                    break;
-                case "Hector":
-                    _playerControllerHealth.HectorTakingDamage();
-                    break;
-            }
-        }
-        ////transform.GetComponent<Animator>().SetBool("_isShooting", true);
+    public void OnAnimationShoot()
+    {
+        GetComponent<Animator>().SetBool(EnemyAnimationTransitionParameters._isAbleToAttack.ToString(), false);
+        Transform bulletTransform = Instantiate(_bulletPrefab, _gunEndPointPosition.position, Quaternion.identity);
+        bulletTransform.GetComponent<EnemyBullet>().SetUp(DirectionToEnemy(_nearestEnemy.transform));
+
+        _shootingTimer = _autoShootingDelay;
     }
 
     private void OnEnable()
@@ -91,8 +71,6 @@ public class EnemyShooterShootingController : MonoBehaviour
 
     private bool IsHavingClearShoot(Transform target)
     {
-        //Debug.DrawRay(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target) * 12f, Color.red);
-
         RaycastHit hitInfo;
         if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f, ~_avoidLayerMask))
         {

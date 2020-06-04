@@ -37,7 +37,7 @@ public class ElenaState : PlayerStateManager
 
         if (isInteracting)
         {
-            if (interactableObject.name == "Mindless possessed")
+            if (interactableObject.name == "Mindless possessed" || interactableObject.name == "Shooter - root")
             {
                 if (interactableObject.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
                 {

@@ -187,6 +187,7 @@ public abstract class PlayerStateManager
                             break;
                         case "Mindless possessed":
                         case "Summoner":
+                        case "Shooter - root":
                         case "Switch":
                             isInteracting = false;
                             //ResetInteractable();

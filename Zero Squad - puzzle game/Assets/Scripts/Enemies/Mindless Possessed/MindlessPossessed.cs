@@ -159,7 +159,7 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
     {
         if (!transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
         {
-            Destroy(gameObject);
+            enemyHealth.AssassinateEnemy();
         }
     }
 

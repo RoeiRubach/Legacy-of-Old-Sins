@@ -70,11 +70,15 @@ public partial class PlayerController
             _douglasSkillPlaceHolder.sprite = _douglasSelectedSkillSprite;
     }
     
-    public void DouglasTakingDamage()
+    public void DouglasTakingDamage(int damageAmount = 1)
     {
-        _douglasCurrentHP--;
-        if(_douglasHP != null)
-            _douglasHP.sprite = _hpBars[_douglasCurrentHP];
+        for (int i = 0; i < damageAmount; i++)
+        {
+            _douglasCurrentHP--;
+
+            if (_elenaHP != null)
+                _douglasHP.sprite = _hpBars[_elenaCurrentHP];
+        }
 
         if (_douglasCurrentHP <= 0)
             SceneController.LoadScene();

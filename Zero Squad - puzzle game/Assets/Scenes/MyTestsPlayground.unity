@@ -1174,6 +1174,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8474828045428177175, guid: cf724829d19006e419025ccb49ae37cd,
+        type: 3}
+      propertyPath: EnemyLayerMask.m_Bits
+      value: 2560
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf724829d19006e419025ccb49ae37cd, type: 3}
 --- !u!1001 &345192121
@@ -1904,7 +1909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &838913831
 Transform:
   m_ObjectHideFlags: 0
@@ -2352,6 +2357,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Elena
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683830871809494206, guid: d79f56f79d0fbab4980d064fbbe11fe3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6699432853743369901, guid: d79f56f79d0fbab4980d064fbbe11fe3,
         type: 3}
@@ -4542,11 +4552,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 963212271, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
       propertyPath: _hectorShieldRef
       value: 
@@ -4559,6 +4564,11 @@ PrefabInstance:
       propertyPath: _enemiesShieldHittingSpot
       value: 
       objectReference: {fileID: 1749266381}
+    - target: {fileID: 4873639323726841967, guid: e0272e559b1a3ff4ca7257820f77c167,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0272e559b1a3ff4ca7257820f77c167, type: 3}
 --- !u!1001 &2014765985
@@ -4777,7 +4787,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2107308782
 Transform:
   m_ObjectHideFlags: 0
@@ -5287,6 +5297,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 277367722609738549, guid: 3b00e47649bf5ae4098baf68a86fb167,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b00e47649bf5ae4098baf68a86fb167, type: 3}
 --- !u!4 &5916069187031607073
@@ -5329,6 +5344,7 @@ MonoBehaviour:
   _ShooterPrefabRef: {fileID: 5745017860040455865, guid: 3b00e47649bf5ae4098baf68a86fb167,
     type: 3}
   _isShooterSummoning: 1
+  _shooterPlacements: []
 --- !u!1001 &6358182781652058448
 PrefabInstance:
   m_ObjectHideFlags: 0

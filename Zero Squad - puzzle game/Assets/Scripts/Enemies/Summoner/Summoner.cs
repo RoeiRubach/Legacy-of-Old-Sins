@@ -9,6 +9,7 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
     [SerializeField] private GameObject _ShooterPrefabRef;
     [SerializeField] private bool _isShooterSummoning;
+    [SerializeField] private Transform[] _shooterPlacements;
 
     private int _zombieSpawnCounter;
     private Vector3 _spawnLocation;
@@ -17,7 +18,10 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     private void Start()
     {
         if (_isShooterSummoning)
+        {
             _zombieSpawnLimit = 2;
+            _zombieSpawnCounter = _zombieSpawnLimit;
+        }
 
         _summonTimer = 0;
         _spawnLocation = transform.GetChild(0).position;
@@ -80,6 +84,7 @@ public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
     private void ShooterSpawning()
     {
         var shooter = Instantiate(_ShooterPrefabRef, _spawnLocation, Quaternion.identity);
+
         //shooter.GetComponent<GameEventSubscriber>().AddListenerMethod(SpawnCountDecreasement);
         //shooter.GetComponent<MindlessPossessed>().IsPlayerSpotted = true;
     }

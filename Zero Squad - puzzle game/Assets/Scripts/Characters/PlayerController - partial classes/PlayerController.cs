@@ -68,4 +68,20 @@ public partial class PlayerController : MonoBehaviour
     {
         SetState(new ElenaState(this, _mainCamera));
     }
+
+    public void DamageACharacter(Transform target, int damageAmount = 1)
+    {
+        switch (target.tag)
+        {
+            case "Douglas":
+                DouglasTakingDamage(damageAmount);
+                break;
+            case "Elena":
+                ElenaTakingDamage(damageAmount);
+                break;
+            case "Hector":
+                HectorTakingDamage(damageAmount);
+                break;
+        }
+    }
 }

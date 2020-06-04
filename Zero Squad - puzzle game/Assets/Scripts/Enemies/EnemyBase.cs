@@ -26,8 +26,8 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("Enemy's attributes:", order = 0)]
     [SerializeField] protected float _walkingSpeed;
     [SerializeField] protected float _runningSpeed;
-    protected float _turningSpeed = 1.1f;
 
+    protected float turningSpeed = 1.3f;
     protected EnemyHealth enemyHealth;
     protected GameObject enemyEyesRef;
     protected NavMeshAgent enemyMeshAgent;
@@ -35,8 +35,6 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool isEnemyRoaming;
     protected float destroyTimer = 4f;
     protected Transform _elenaKillSummonerPlacement;
-
-    private string _bullet = "Bullet";
 
 #if UNITY_EDITOR
     [ContextMenu("Kill enemy - PLAYMODE ONLY!")]
@@ -51,6 +49,8 @@ public abstract class EnemyBase : MonoBehaviour
     {
         enemyMeshAgent = GetComponent<NavMeshAgent>();
         enemyAnimator = GetComponent<Animator>();
+        if (enemyAnimator == null)
+            enemyAnimator = GetModelAnimator();
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
@@ -71,6 +71,18 @@ public abstract class EnemyBase : MonoBehaviour
     {
         Vector3 _targetDirection = (TargetDetected.position - transform.position).normalized;
         Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_targetDirection.x, 0, _targetDirection.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * _turningSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * turningSpeed);
+    }
+
+    private Animator GetModelAnimator()
+    {
+        var children = GetComponentsInChildren<Transform>();
+
+        foreach (var item in children)
+        {
+            if (item.GetComponent<Animator>())
+                return item.GetComponent<Animator>();
+        }
+        return null;
     }
 }

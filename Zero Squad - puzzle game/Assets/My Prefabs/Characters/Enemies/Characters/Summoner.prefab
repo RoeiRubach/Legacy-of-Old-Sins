@@ -255,6 +255,7 @@ MonoBehaviour:
   _maxHealth: 0
   _healthBarUI: {fileID: 0}
   _slider: {fileID: 0}
+  _isShield: 0
 --- !u!114 &3552434217558430386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,9 +284,13 @@ MonoBehaviour:
   IsPlayerSpotted: 0
   _walkingSpeed: 0
   _runningSpeed: 0
-  _spawnTime: 5
+  _spawnTimer: 5
+  _zombieSpawnLimit: 5
   _mindlessPossessedPrefabRef: {fileID: 8254110813915372811, guid: e0272e559b1a3ff4ca7257820f77c167,
     type: 3}
+  _ShooterPrefabRef: {fileID: 5745017860040455865, guid: 3b00e47649bf5ae4098baf68a86fb167,
+    type: 3}
+  _isShooterSummoning: 0
 --- !u!65 &8822748784037377065
 BoxCollider:
   m_ObjectHideFlags: 0
