@@ -90,11 +90,6 @@ public class ElenaState : PlayerStateManager
             case "Enemy":
                 playerController.ElenaTakingDamage();
                 break;
-            //case "HealthRegen":
-            //    Debug.Log(healthRegenCollectables.HealthToRegen);
-            //    playerController.ElenaGainingHealth(healthRegenCollectables.HealthToRegen);
-            //    healthRegenCollectables.CallOnDestroy();
-            //    break;
         }
     }
 
@@ -105,14 +100,14 @@ public class ElenaState : PlayerStateManager
             _elenaAgentPlacement.SetActive(true);
             myCurrentAgent.enabled = false;
         }
+        else
+            ResetAssassinating();
 
         playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedOFF();
         playerController.ElenaButtonInteractivitySetter();
 
         ResetCharactersControl();
-
-        //Debug.Log("Elena is out of control");
     }
 
     private void HighlightCursorOverInteractableObject()
@@ -137,8 +132,8 @@ public class ElenaState : PlayerStateManager
 
                     if (interactableObject == null)
                         interactableObject = hitInfo.transform;
-                    interactableObject.GetComponent<Outline>().enabled = true;
 
+                    interactableObject.GetComponent<Outline>().enabled = true;
                     isPossibleToInteract = true;
                 }
             }

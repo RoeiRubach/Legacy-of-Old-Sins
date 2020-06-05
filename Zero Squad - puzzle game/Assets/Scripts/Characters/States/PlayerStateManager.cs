@@ -159,8 +159,6 @@ public abstract class PlayerStateManager
         }
     }
 
-    private Vector3 CharacterInteractionPlacement() => interactableObject.GetComponent<IInteractable>().CharacterInteractionPlacement();
-
     protected virtual void CharacterObjectInteraction()
     {
         if (interactableObject != null)
@@ -211,7 +209,7 @@ public abstract class PlayerStateManager
                     IsCabinetInteracting = false;
                 }
                 isInteracting = false;
-                interactableObject = null;
+                ResetInteractable();
             }
         }
     }
@@ -251,8 +249,17 @@ public abstract class PlayerStateManager
 
         if (healthRegenCollectables.IsInteract)
         {
+            isInteracting = false;
             ResetInteractable();
             healthRegenCollectables.CallOnDestroy();
         }
+    }
+
+    private Vector3 CharacterInteractionPlacement()
+    {
+        if (interactableObject == null)
+            return myCurrentAgent.transform.position;
+
+        return interactableObject.GetComponent<IInteractable>().CharacterInteractionPlacement();
     }
 }

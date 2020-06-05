@@ -7,6 +7,11 @@ public class HealthRegenCollectables : InteractableBase, IDouglasInteractables, 
 
     public int HealthToRegen => _healthToRegen;
 
+    private void Start()
+    {
+        transform.name = "Health Pack";
+    }
+
     public void CallOnDestroy()
     {
         GetComponent<GameEventSubscriber>()?.OnEventFire();

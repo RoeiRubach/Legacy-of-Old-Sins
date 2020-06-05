@@ -68,6 +68,7 @@ public class DouglasState : PlayerStateManager
         {
             _douglasAgentPlacement.SetActive(true);
             _douglasAutoShooting.enabled = true;
+            ResetShootingTarget();
         }
 
         DouglasUIToggleOFF();

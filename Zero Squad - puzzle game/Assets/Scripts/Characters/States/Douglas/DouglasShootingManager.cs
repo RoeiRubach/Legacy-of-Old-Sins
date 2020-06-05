@@ -34,9 +34,6 @@ public class DouglasShootingManager : MonoBehaviour
         {
             if (DouglasTarget != null)
                 DouglasShooting(DouglasTarget);
-            else
-                Debug.Assert(DouglasTarget != null, "DouglasTarget.transform is NULL");
-                //print("DouglasTarget.transform is NULL");
 
             _shootingDelay = _manualShootingDelay;
 
