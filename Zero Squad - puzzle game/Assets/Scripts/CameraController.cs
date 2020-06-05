@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     [Header("Camera 'jump' to character:")]
     private float _lerpingSpeed = 0.1f;
 
-    private void Start()
+    private void Awake()
     {
         _characterToWatch = GameObject.Find("Douglas");
         _offset = transform.position - _characterToWatch.transform.position;

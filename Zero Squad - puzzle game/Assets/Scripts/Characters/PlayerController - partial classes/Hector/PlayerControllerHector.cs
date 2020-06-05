@@ -67,20 +67,25 @@ public partial class PlayerController
         if (_hectorSkillPlaceHolder != null)
             _hectorSkillPlaceHolder.sprite = _hectorSelectedSkillSprite;
     }
-
-    [ContextMenu("Apply damage to Hector - PLAYMODE ONLY!")]
+    
     public void HectorTakingDamage(int damageAmount = 1)
     {
-        for (int i = 0; i < damageAmount; i++)
+        if(_hectorCurrentHP != 0)
         {
-            _hectorCurrentHP--;
+            for (int i = 0; i < damageAmount; i++)
+            {
+                _hectorCurrentHP--;
 
-            if (_hectorHP != null)
-                _hectorHP.sprite = _hpBars[_hectorCurrentHP];
+                if (_hectorHP != null)
+                    _hectorHP.sprite = _hpBars[_hectorCurrentHP];
+
+                if (_hectorCurrentHP <= 0)
+                {
+                    SceneController.LoadScene();
+                    break;
+                }
+            }
         }
-
-        if (_hectorCurrentHP <= 0)
-            SceneController.LoadScene();
     }
     
     public void HectorGainingHealth(int regenAmount)

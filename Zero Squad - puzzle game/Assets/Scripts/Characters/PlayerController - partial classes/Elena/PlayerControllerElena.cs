@@ -67,20 +67,25 @@ public partial class PlayerController
         if (_elenaSkillPlaceHolder != null)
             _elenaSkillPlaceHolder.sprite = _elenaSelectedSkillSprite;
     }
-
-    [ContextMenu("Apply damage to Elena - PLAYMODE ONLY!")]
+    
     public void ElenaTakingDamage(int damageAmount = 1)
     {
-        for (int i = 0; i < damageAmount; i++)
+        if(_elenaCurrentHP != 0)
         {
-            _elenaCurrentHP--;
+            for (int i = 0; i < damageAmount; i++)
+            {
+                _elenaCurrentHP--;
 
-            if (_elenaHP != null)
-                _elenaHP.sprite = _hpBars[_elenaCurrentHP];
+                if (_elenaHP != null)
+                    _elenaHP.sprite = _hpBars[_elenaCurrentHP];
+
+                if (_elenaCurrentHP <= 0)
+                {
+                    SceneController.LoadScene();
+                    break;
+                }
+            }
         }
-
-        if (_elenaCurrentHP <= 0)
-            SceneController.LoadScene();
     }
 
     public void ElenaGainingHealth(int regenAmount)

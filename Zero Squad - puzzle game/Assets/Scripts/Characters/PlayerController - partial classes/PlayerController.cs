@@ -3,6 +3,8 @@
 public partial class PlayerController : MonoBehaviour
 {
     [HideInInspector] public bool IsLifting;
+    [SerializeField] private Transform[] _charactersRef;
+
     private const int _maxHP = 10;
 
     private PlayerStateManager _currentState;
@@ -15,11 +17,26 @@ public partial class PlayerController : MonoBehaviour
 
     [Header("HP bars pool:", order = 1)]
     [SerializeField] private Sprite[] _hpBars;
-
+    
     private void Start()
     {
         _mainCamera = Camera.main.GetComponent<CameraController>();
         SetState(new DouglasState(this, _mainCamera));
+
+        if (GameManager.Instance.IsReachedCheckPoint)
+        {
+            _douglasCurrentHP = _maxHP;
+            if (_douglasHP != null)
+                _douglasHP.sprite = _hpBars[_douglasCurrentHP];
+
+            for (int i = 0; i < _charactersRef.Length; i++)
+            {
+                _charactersRef[i].gameObject.SetActive(true);
+                _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                _charactersRef[i].position = GameManager.Instance.CharactersPlacements[i];
+                _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+            }
+        }
     }
 
     private void Update()
@@ -92,6 +109,7 @@ public partial class PlayerController : MonoBehaviour
     private void InvokeHectorSwitch()
     {
         SetState(new HectorState(this, _mainCamera));
+        EnterSkillViaButton();
     }
 
     private void InvokeElenaSwitch()

@@ -9,7 +9,6 @@ public partial class PlayerController
     [SerializeField] private Image _douglasHP;
     [SerializeField] private Button _douglasButtonRef;
 
-    //private int _douglasCurrentHP = _maxHP;
     private int _douglasCurrentHP = 5;
 
     [Header("Douglas icon properties:", order = 1)]
@@ -72,16 +71,22 @@ public partial class PlayerController
     
     public void DouglasTakingDamage(int damageAmount = 1)
     {
-        for (int i = 0; i < damageAmount; i++)
+        if(_douglasCurrentHP != 0)
         {
-            _douglasCurrentHP--;
+            for (int i = 0; i < damageAmount; i++)
+            {
+                _douglasCurrentHP--;
 
-            if (_douglasHP != null)
-                _douglasHP.sprite = _hpBars[_douglasCurrentHP];
+                if (_douglasHP != null)
+                    _douglasHP.sprite = _hpBars[_douglasCurrentHP];
+
+                if (_douglasCurrentHP <= 0)
+                {
+                    SceneController.LoadScene();
+                    break;
+                }
+            }
         }
-
-        if (_douglasCurrentHP <= 0)
-            SceneController.LoadScene();
     }
 
     public void DouglasGainingHealth(int regenAmount)
