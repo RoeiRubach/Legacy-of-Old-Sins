@@ -66,7 +66,6 @@ public partial class PlayerController : MonoBehaviour
         {
             CancelInvoke();
             InvokeElenaSwitch();
-            _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
         }
         else
             InvokeRepeating("InvokeElenaStealthSwitching", 0.5f, 1f);
@@ -78,7 +77,6 @@ public partial class PlayerController : MonoBehaviour
         {
             CancelInvoke();
             InvokeHectorSwitch();
-            _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
         }
         else
             InvokeRepeating("InvokeShieldDestroying", 0.5f, 1f);
@@ -115,6 +113,7 @@ public partial class PlayerController : MonoBehaviour
     private void InvokeElenaSwitch()
     {
         SetState(new ElenaState(this, _mainCamera));
+        EnterSkillViaButton();
     }
 
     public void DamageACharacter(Transform target, int damageAmount = 1)
