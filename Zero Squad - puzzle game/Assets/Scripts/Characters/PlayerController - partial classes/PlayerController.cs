@@ -4,6 +4,7 @@ public partial class PlayerController : MonoBehaviour
 {
     [HideInInspector] public bool IsLifting;
     [SerializeField] private Transform[] _charactersRef;
+    [SerializeField] private GameObject _hectorUIRef, _elenaUIRef;
 
     private const int _maxHP = 10;
 
@@ -29,6 +30,8 @@ public partial class PlayerController : MonoBehaviour
             if (_douglasHP != null)
                 _douglasHP.sprite = _hpBars[_douglasCurrentHP];
 
+            _hectorUIRef.SetActive(true);
+            _elenaUIRef.SetActive(true);
             for (int i = 0; i < _charactersRef.Length; i++)
             {
                 _charactersRef[i].gameObject.SetActive(true);
