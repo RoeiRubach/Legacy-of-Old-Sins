@@ -145,7 +145,8 @@ public abstract class PlayerStateManager
     {
         if (interactableObject != null && !isInteracting)
         {
-            interactableObject.GetComponent<Outline>().enabled = false;
+            if(interactableObject.GetComponent<Outline>())
+                interactableObject.GetComponent<Outline>().enabled = false;
             interactableObject = null;
         }
     }

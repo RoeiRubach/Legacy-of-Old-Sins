@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CheckPoint : MonoBehaviour
 {
@@ -13,6 +11,7 @@ public class CheckPoint : MonoBehaviour
             {
                 GameManager.Instance.CharactersPlacements[i] = transform.GetChild(i).position;
             }
+            GetComponent<GameEventSubscriber>()?.OnEventFire();
             Destroy(gameObject);
         }
     }
