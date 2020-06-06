@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Summoner : EnemyBase, IElenaInteractables, IElenaAssassin
+public class Summoner : EnemyBase, IElenaAssassin
 {
     [Range(5f, 20f)]
     [SerializeField] private float _spawnTimer = 5;

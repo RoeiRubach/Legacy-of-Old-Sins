@@ -1,3 +1,3 @@
-﻿public interface IElenaAssassin : IInteractable
+﻿public interface IElenaAssassin : IElenaInteractables
 {
 }

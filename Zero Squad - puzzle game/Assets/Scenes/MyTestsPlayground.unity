@@ -1909,7 +1909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &838913831
 Transform:
   m_ObjectHideFlags: 0
@@ -2012,7 +2012,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &856449641
 Transform:
   m_ObjectHideFlags: 0
@@ -2520,6 +2520,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Elena
+      objectReference: {fileID: 0}
+    - target: {fileID: 7683830871809494206, guid: d79f56f79d0fbab4980d064fbbe11fe3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6699432853743369901, guid: d79f56f79d0fbab4980d064fbbe11fe3,
         type: 3}
@@ -5466,7 +5471,7 @@ GameObject:
   - component: {fileID: 6010022480883464207}
   - component: {fileID: 8822748784360401009}
   - component: {fileID: 7651523463356345524}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Summoner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

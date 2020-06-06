@@ -24,22 +24,23 @@ public partial class PlayerController : MonoBehaviour
         _mainCamera = Camera.main.GetComponent<CameraController>();
         SetState(new DouglasState(this, _mainCamera));
 
-        if (GameManager.Instance.IsReachedCheckPoint)
-        {
-            _douglasCurrentHP = _maxHP;
-            if (_douglasHP != null)
-                _douglasHP.sprite = _hpBars[_douglasCurrentHP];
-
-            _hectorUIRef.SetActive(true);
-            _elenaUIRef.SetActive(true);
-            for (int i = 0; i < _charactersRef.Length; i++)
+        if(GameManager.Instance != null)
+            if (GameManager.Instance.IsReachedCheckPoint)
             {
-                _charactersRef[i].gameObject.SetActive(true);
-                _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
-                _charactersRef[i].position = GameManager.Instance.CharactersPlacements[i];
-                _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                _douglasCurrentHP = _maxHP;
+                if (_douglasHP != null)
+                    _douglasHP.sprite = _hpBars[_douglasCurrentHP];
+
+                _hectorUIRef.SetActive(true);
+                _elenaUIRef.SetActive(true);
+                for (int i = 0; i < _charactersRef.Length; i++)
+                {
+                    _charactersRef[i].gameObject.SetActive(true);
+                    _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
+                    _charactersRef[i].position = GameManager.Instance.CharactersPlacements[i];
+                    _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
+                }
             }
-        }
     }
 
     private void Update()

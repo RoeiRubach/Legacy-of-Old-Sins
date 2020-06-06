@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInteractables
+public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin
 {
     private EnemyShooterShootingController _shootingController;
 
