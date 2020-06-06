@@ -658,6 +658,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8481527451320577670, guid: 0bf50307b57a3924d8da9ff92d0ea44c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481527450953402571, guid: 0bf50307b57a3924d8da9ff92d0ea44c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481527451756569001, guid: 0bf50307b57a3924d8da9ff92d0ea44c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8481527451320577669, guid: 0bf50307b57a3924d8da9ff92d0ea44c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
