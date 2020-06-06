@@ -4,7 +4,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
 {
     public bool IsReachedCheckPoint;
     [HideInInspector] public Vector3[] CharactersPlacements;
-    [Range(1,3)]
+    [Range(1,2)]
     [SerializeField] private int _checkPointToSpawn = 1;
 
     [SerializeField] private Transform[] _firstCheckPoint;
@@ -25,7 +25,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
                     SetCheckPointsLocation(_secondCheckPoint);
                     break;
                 case 3:
-                    SetCheckPointsLocation(_thirdCheckPoint);
+                    //SetCheckPointsLocation(_thirdCheckPoint);
                     break;
             }
     }
