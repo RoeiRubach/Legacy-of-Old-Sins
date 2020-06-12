@@ -439,6 +439,11 @@ PrefabInstance:
       propertyPath: InteractableLayerMask.m_Bits
       value: 2560
       objectReference: {fileID: 0}
+    - target: {fileID: 4893792890276904081, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a,
+        type: 3}
+      propertyPath: AvoidLayersMasks.m_Bits
+      value: 1028
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5729552258835475434, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 41a2414fd60a6f84baf1da2b9a0d9d6a, type: 3}
@@ -5348,12 +5353,12 @@ MonoBehaviour:
   _walkingSpeed: 0
   _runningSpeed: 0
   _spawnTimer: 5
-  _zombieSpawnLimit: 5
+  _zombieSpawnLimit: 1
   _mindlessPossessedPrefabRef: {fileID: 8254110813915372811, guid: e0272e559b1a3ff4ca7257820f77c167,
     type: 3}
   _ShooterPrefabRef: {fileID: 5745017860040455865, guid: 3b00e47649bf5ae4098baf68a86fb167,
     type: 3}
-  _isShooterSummoning: 1
+  _isShooterSummoning: 0
   _shooterPlacements: []
 --- !u!1001 &6358182781652058448
 PrefabInstance:

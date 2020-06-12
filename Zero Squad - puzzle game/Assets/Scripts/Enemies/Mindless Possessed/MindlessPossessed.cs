@@ -2,7 +2,7 @@
 using UnityEngine.AI;
 using System.Collections;
 
-public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInteractables
+public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInteractables, IPuzzleAuthority
 {
     EnemyDestinations _enemyDestinations;
     private float _waitSeconds = 3f, _stoppingDistanceNoTarget, _stoppingDistanceTargeted = 2f;
@@ -23,7 +23,6 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
 
     private void Update()
     {
-        //TODO add a timer after chasing when elena enter's stealth/escape (default - 1 sec) 
         if (!IsEnemyGotKilled())
         {
             float _distanceToDestination = Vector3.Distance(_destinationToGoTo, transform.position);
@@ -41,6 +40,7 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
         }
         else
         {
+            GetComponentInChildren<SphereCollider>().enabled = false;
             ResetAIPath();
             SetDeathAnimationTrue();
             Destroy(gameObject, destroyTimer);
@@ -161,10 +161,11 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
         {
             enemyHealth.AssassinateEnemy();
         }
+        else
+            ElenaState.IsAssassinatingTarget = false;
     }
 
-    public Vector3 CharacterInteractionPlacement()
-    {
-        return _elenaKillSummonerPlacement.position;
-    }
+    public Vector3 CharacterInteractionPlacement() => _elenaKillSummonerPlacement.position;
+
+    public void SetIsPlayerBeenSpottedViaEvent() => IsPlayerSpotted = true;
 }

@@ -15,6 +15,7 @@ public partial class PlayerController : MonoBehaviour
     [Header("LayerMasks:", order = 0)]
     public LayerMask WalkableLayerMask;
     public LayerMask InteractableLayerMask;
+    public LayerMask AvoidLayersMasks;
 
     [Header("HP bars pool:", order = 1)]
     [SerializeField] private Sprite[] _hpBars;

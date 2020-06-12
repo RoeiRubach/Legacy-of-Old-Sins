@@ -2,6 +2,7 @@
 
 public class DouglasAutoShooting : MonoBehaviour
 {
+    private PlayerController _playerController;
     private const float _autoShootingDelay = 2.2f;
     private float _shootingTimer;
     
@@ -10,6 +11,11 @@ public class DouglasAutoShooting : MonoBehaviour
 
     private DouglasShootingManager _douglasShootingManager;
     private Transform _douglasRef;
+
+    private void Awake()
+    {
+        _playerController = FindObjectOfType<PlayerController>();
+    }
 
     private void Start()
     {
@@ -86,7 +92,7 @@ public class DouglasAutoShooting : MonoBehaviour
         //Debug.DrawRay(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target) * 12f, Color.red);
 
         RaycastHit hitInfo;
-        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f, ~_douglasShootingManager.AvoidLayersMasks))
+        if (Physics.Raycast(_douglasRef.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 12f, ~_playerController.AvoidLayersMasks))
         {
             if (hitInfo.collider.transform == target.transform)
                 return true;

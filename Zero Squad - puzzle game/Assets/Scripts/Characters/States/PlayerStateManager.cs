@@ -48,7 +48,7 @@ public abstract class PlayerStateManager
 
     public abstract void UpdateHandle();
     public abstract void OnStateEnter();
-    public abstract void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables);
+    public abstract void OnTriggerEnter(string tagReceived);
     public abstract void OnStateExit();
     public abstract void EnterOrExitSkillMode();
 
@@ -145,8 +145,9 @@ public abstract class PlayerStateManager
     {
         if (interactableObject != null && !isInteracting)
         {
-            if(interactableObject.GetComponent<Outline>())
-                interactableObject.GetComponent<Outline>().enabled = false;
+            Outline interactableOutline = interactableObject.GetComponent<Outline>();
+            if (interactableOutline != null)
+                interactableOutline.enabled = false;
             interactableObject = null;
         }
     }
@@ -158,6 +159,13 @@ public abstract class PlayerStateManager
             myCurrentAgent.isStopped = true;
             myCurrentAgent.ResetPath();
         }
+    }
+
+    protected void ResetInteractableWhenExitCharacter()
+    {
+        if (isInteracting)
+            isInteracting = false;
+        ResetInteractable();
     }
 
     protected virtual void CharacterObjectInteraction()
@@ -189,6 +197,7 @@ public abstract class PlayerStateManager
                         case "Summoner":
                         case "Shooter - root":
                         case "Switch":
+                        case "Console":
                             isInteracting = false;
                             //ResetInteractable();
                             break;

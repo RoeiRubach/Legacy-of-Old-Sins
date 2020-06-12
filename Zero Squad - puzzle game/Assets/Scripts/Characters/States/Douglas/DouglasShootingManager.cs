@@ -2,12 +2,12 @@
 
 public class DouglasShootingManager : MonoBehaviour
 {
+    private PlayerController _playerController;
     private const float _manualShootingDelay = 1.1f;
 
     [SerializeField] private Transform _bulletHolder;
 
     public GameObject DouglasShotgunRef;
-    public LayerMask AvoidLayersMasks;
     //public LayerMask EnemyLayerMask;
 
     [HideInInspector] public Transform DouglasTarget = null;
@@ -16,11 +16,16 @@ public class DouglasShootingManager : MonoBehaviour
 
     private bool _isAllowedToShoot;
 
+    private void Awake()
+    {
+        _playerController = FindObjectOfType<PlayerController>();
+    }
+
     public bool IsHavingClearShoot(Transform target)
     {
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~AvoidLayersMasks))
+        if (Physics.Raycast(transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~_playerController.AvoidLayersMasks))
         {
             if (hitInfo.transform == target.transform)
                 return true;

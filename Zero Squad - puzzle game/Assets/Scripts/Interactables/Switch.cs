@@ -9,7 +9,7 @@ public class Switch : InteractableBase, IDouglasInteractables, IHectorInteractab
             // play correct sound
             GetComponent<GameEventSubscriber>()?.OnEventFire();
             Destroy(GetComponent<Switch>());
-            //Destroy(GetComponent<Outline>());
+            transform.GetChild(0).gameObject.SetActive(false);
         }
         else
         {

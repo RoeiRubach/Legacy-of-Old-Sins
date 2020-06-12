@@ -4,7 +4,7 @@ public class Summoner : EnemyBase, IElenaAssassin
 {
     [Range(5f, 20f)]
     [SerializeField] private float _spawnTimer = 5;
-    [Range(2, 20)]
+    [Range(1, 20)]
     [SerializeField] private int _zombieSpawnLimit = 3;
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
     [SerializeField] private GameObject _ShooterPrefabRef;
@@ -19,7 +19,7 @@ public class Summoner : EnemyBase, IElenaAssassin
     private void Start()
     {
         transform.name = "Summoner";
-        _summonTimer = 0;
+        _summonTimer = _spawnTimer;
         _spawnLocation = transform.GetChild(0).position;
         _elenaKillSummonerPlacement = transform.GetChild(1);
 
@@ -33,12 +33,10 @@ public class Summoner : EnemyBase, IElenaAssassin
     
     private void Update()
     {
-        if(_zombieSpawnCounter < _zombieSpawnLimit)
-        {
-            if ((_summonTimer -= Time.deltaTime) <= 0)
-                SpawnEnemy();
-        }
+        if (_zombieSpawnCounter >= _zombieSpawnLimit) return;
 
+        if ((_summonTimer -= Time.deltaTime) <= 0)
+            SpawnEnemy();
     }
 
     public void DestroyThisComponentViaEvent()
@@ -56,14 +54,18 @@ public class Summoner : EnemyBase, IElenaAssassin
         }
     }
 
-    public Vector3 CharacterInteractionPlacement()
+    public Vector3 CharacterInteractionPlacement() => _elenaKillSummonerPlacement.position;
+
+    public void MindlessSpawnCountDecreasement()
     {
-        return _elenaKillSummonerPlacement.position;
+        if (_zombieSpawnCounter == 0) return;
+        _zombieSpawnCounter--;
     }
 
-    private void MindlessSpawnCountDecreasement()
+    public void SetMindlessSummoningViaEvent()
     {
-        _zombieSpawnCounter--;
+        if (_zombieSpawnCounter == _zombieSpawnLimit) return;
+        _zombieSpawnCounter++;
     }
 
     public void ShooterSpawnCountDecreasement()

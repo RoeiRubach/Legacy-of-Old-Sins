@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class DeadGuyWithAKey : InteractableBase, IDouglasInteractables
+﻿public class DeadGuyWithAKey : InteractableBase, IDouglasInteractables
 {
     public override void Interact()
     {

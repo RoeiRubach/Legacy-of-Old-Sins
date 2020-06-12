@@ -47,18 +47,13 @@ public class DouglasState : PlayerStateManager
         //Debug.Log("Douglas is now in control");
     }
 
-    public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
+    public override void OnTriggerEnter(string tagReceived)
     {
         switch (tagReceived)
         {
             case "Enemy":
                 playerController.DouglasTakingDamage();
                 break;
-            //case "HealthRegen":
-            //    Debug.Log(healthRegenCollectables.HealthToRegen);
-            //    playerController.DouglasGainingHealth(healthRegenCollectables.HealthToRegen);
-            //    healthRegenCollectables.CallOnDestroy();
-            //    break;
         }
     }
 
@@ -72,6 +67,7 @@ public class DouglasState : PlayerStateManager
         }
 
         DouglasUIToggleOFF();
+        ResetInteractableWhenExitCharacter();
         ResetCharactersControl();
         //Debug.Log("Douglas is out of control");
     }

@@ -4,7 +4,8 @@ public class GameManager : SingletonDontDestroy<GameManager>
 {
     public bool IsReachedCheckPoint;
     [HideInInspector] public Vector3[] CharactersPlacements;
-    [Range(1,2)]
+#if UNITY_EDITOR
+    [Range(1, 3)]
     [SerializeField] private int _checkPointToSpawn = 1;
 
     [SerializeField] private Transform[] _firstCheckPoint;
@@ -15,7 +16,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
     {
         base.Awake();
 
-        if(IsReachedCheckPoint)
+        if (IsReachedCheckPoint)
             switch (_checkPointToSpawn)
             {
                 case 1:
@@ -25,7 +26,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
                     SetCheckPointsLocation(_secondCheckPoint);
                     break;
                 case 3:
-                    //SetCheckPointsLocation(_thirdCheckPoint);
+                    SetCheckPointsLocation(_thirdCheckPoint);
                     break;
             }
     }
@@ -37,4 +38,5 @@ public class GameManager : SingletonDontDestroy<GameManager>
             CharactersPlacements[i] = placements[i].position;
         }
     }
+#endif
 }

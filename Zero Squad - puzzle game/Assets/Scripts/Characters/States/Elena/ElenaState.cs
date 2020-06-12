@@ -6,6 +6,7 @@ public class ElenaState : PlayerStateManager
     private bool _isUsingSkill;
     private GameObject _elenaAgentPlacement;
     private ElenaStealthManager _elenaStealthManager;
+    public static bool IsAbleToAssassinTarget, IsAssassinatingTarget;
 
     public ElenaState(PlayerController character) : base(character)
     {
@@ -37,15 +38,23 @@ public class ElenaState : PlayerStateManager
 
         if (isInteracting)
         {
-            if (interactableObject.name == "Mindless possessed" || interactableObject.name == "Shooter - root")
+            if (IsAbleToAssassinTarget)
             {
                 if (interactableObject.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
                 {
+                    IsAbleToAssassinTarget = false;
+                    IsAssassinatingTarget = false;
                     isInteracting = false;
                     ResetInteractable();
                     ResetAIPath();
                 }
+                else
+                    IsAssassinatingTarget = true;
             }
+
+                //if (interactableObject.name == "Mindless possessed" || interactableObject.name == "Shooter - root")
+                //{
+                //}
         }
     }
 
@@ -83,7 +92,7 @@ public class ElenaState : PlayerStateManager
         //Debug.Log("Elena is now in control");
     }
 
-    public override void OnTriggerEnter(string tagReceived, HealthRegenCollectables healthRegenCollectables)
+    public override void OnTriggerEnter(string tagReceived)
     {
         switch (tagReceived)
         {
@@ -106,12 +115,13 @@ public class ElenaState : PlayerStateManager
         playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedOFF();
         playerController.ElenaButtonInteractivitySetter();
-
+        ResetInteractableWhenExitCharacter();
         ResetCharactersControl();
     }
 
     private void HighlightCursorOverInteractableObject()
     {
+        IsAbleToAssassinTarget = false;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         RaycastHit hitInfo;
@@ -123,9 +133,14 @@ public class ElenaState : PlayerStateManager
                 {
                     if (hitInfo.collider.GetComponent<IElenaAssassin>() != null)
                     {
-                        if (hitInfo.transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
+                        if (IsHavingClearSight(hitInfo.transform))
+                        {
+                            if (hitInfo.transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted) return;
+                            IsAbleToAssassinTarget = true;
+                            CursorController.Instance.SetAssassinCursor();
+                        }
+                        else
                             return;
-                        CursorController.Instance.SetAssassinCursor();
                     }
                     else
                         CursorController.Instance.SetInteractableCursor();
@@ -171,14 +186,13 @@ public class ElenaState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (!isInteracting)
-        {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
-                playerController.SetState(new DouglasState(playerController, cameraController));
+        if (IsAssassinatingTarget) return;
 
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
-                playerController.SetState(new HectorState(playerController, cameraController));
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
+            playerController.SetState(new DouglasState(playerController, cameraController));
+
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
+            playerController.SetState(new HectorState(playerController, cameraController));
     }
 
     private void ResetAssassinating()
@@ -187,4 +201,18 @@ public class ElenaState : PlayerStateManager
         CursorController.Instance.SetStandardCursor();
         isPossibleToInteract = false;
     }
+
+    private bool IsHavingClearSight(Transform target)
+    {
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(myCurrentCharacter.transform.position + (Vector3.up * 1.2f), DirectionToEnemy(target), out hitInfo, 10f, ~playerController.AvoidLayersMasks))
+        {
+            if (hitInfo.transform == target.transform)
+                return true;
+        }
+        return false;
+    }
+
+    private Vector3 DirectionToEnemy(Transform target) => (target.position - myCurrentCharacter.transform.position).normalized;
 }

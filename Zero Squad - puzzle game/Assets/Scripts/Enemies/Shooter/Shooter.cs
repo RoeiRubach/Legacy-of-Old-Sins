@@ -33,10 +33,7 @@ public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin
         }
     }
 
-    public Vector3 CharacterInteractionPlacement()
-    {
-        return _elenaKillSummonerPlacement.position;
-    }
+    public Vector3 CharacterInteractionPlacement() => _elenaKillSummonerPlacement.position;
 
     public void Interact()
     {
@@ -44,5 +41,7 @@ public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin
         {
             enemyHealth.AssassinateEnemy();
         }
+        else
+            ElenaState.IsAssassinatingTarget = false;
     }
 }

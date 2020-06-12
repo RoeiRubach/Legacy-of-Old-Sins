@@ -27,7 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float _walkingSpeed;
     [SerializeField] protected float _runningSpeed;
 
-    protected float turningSpeed = 1.3f;
+    protected float turningSpeed = 1.5f;
     protected EnemyHealth enemyHealth;
     protected GameObject enemyEyesRef;
     protected NavMeshAgent enemyMeshAgent;

@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class OnTriggerEnterHandler : MonoBehaviour
+public class OnTriggerEnterHandler : MonoBehaviour, IPuzzleAuthority
 {
     private PlayerController playerController;
 
     private PlayerStateManager _characterTrigger;
 
-    private void Start()
+    private void Awake()
     {
         playerController = GameObject.FindObjectOfType<PlayerController>();
 
@@ -22,7 +22,7 @@ public class OnTriggerEnterHandler : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("HealthRegen"))
-            _characterTrigger.OnTriggerEnter(other.tag, other.GetComponent<HealthRegenCollectables>());
+        if (other.CompareTag("Enemy"))
+            _characterTrigger.OnTriggerEnter(other.tag);
     }
 }
