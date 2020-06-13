@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class DouglasState : PlayerStateManager
 {
-    private string _douglasName = "Douglas";
     private bool _isUsingSkill;
     private GameObject _douglasShotgun;
     private GameObject _douglasAgentPlacement;
@@ -176,7 +175,7 @@ public class DouglasState : PlayerStateManager
 
     private void DouglasInitialization()
     {
-        CharacterComponentsInitialization(_douglasName);
+        CharacterComponentsInitialization(CharactersEnum.Douglas.ToString());
 
         DouglasShootingScriptsInitialization();
 
@@ -199,10 +198,10 @@ public class DouglasState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.Find("Elena"))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.Find(CharactersEnum.Elena.ToString()))
             playerController.SetState(new ElenaState(playerController, cameraController));
 
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.Find("Hector"))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.Find(CharactersEnum.Hector.ToString()))
             playerController.SetState(new HectorState(playerController, cameraController));
     }
 

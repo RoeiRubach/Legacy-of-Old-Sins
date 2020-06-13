@@ -15,7 +15,7 @@ public class CharactersPoolController : MonoBehaviour
         CharactersPoolController.Pool.Remove(this);
     }
 
-    public static CharactersPoolController FindClosestEnemy(Vector3 pos)
+    public static CharactersPoolController FindClosestCharacter(Vector3 pos)
     {
         CharactersPoolController result = null;
         float distance = float.PositiveInfinity;

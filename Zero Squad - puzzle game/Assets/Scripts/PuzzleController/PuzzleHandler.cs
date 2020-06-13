@@ -2,7 +2,6 @@
 
 public class PuzzleHandler : MonoBehaviour
 {
-    private const string _elenaName = "Elena";
     private PuzzleController _puzzleController;
     private AuthorizationPuzzle _authorizationPuzzle;
     private Transform _authorizedCharacter;
@@ -123,7 +122,7 @@ public class PuzzleHandler : MonoBehaviour
     private bool IsEnteredCharacterHasAuthorization(Transform enteredCharacter)
     {
         var hasAuthorization = enteredCharacter.GetComponent<IPuzzleAuthority>();
-        if (hasAuthorization != null && !enteredCharacter.CompareTag(_elenaName))
+        if (hasAuthorization != null && !enteredCharacter.CompareTag(CharactersEnum.Elena.ToString()))
             return true;
         else
             return false;

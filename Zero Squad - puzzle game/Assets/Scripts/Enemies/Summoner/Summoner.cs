@@ -52,6 +52,7 @@ public class Summoner : EnemyBase, IElenaAssassin
             GetComponent<GameEventSubscriber>()?.OnEventFire();
             Destroy(gameObject);
         }
+        ElenaState.IsAssassinatingTarget = false;
     }
 
     public Vector3 CharacterInteractionPlacement() => _elenaKillSummonerPlacement.position;

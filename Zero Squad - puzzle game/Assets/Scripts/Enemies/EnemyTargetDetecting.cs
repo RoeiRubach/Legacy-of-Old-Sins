@@ -2,15 +2,11 @@
 
 public class EnemyTargetDetecting : MonoBehaviour
 {
-    private string _douglasName = "Douglas", _elenaName = "Elena";
-    private string _hectorName = "Hector", _hectorShieldName = "Hector Shield";
-
     private float _delayTime = 0.85f;
-    
     public bool IsElenaBeenSpotted { get; private set; }
     private bool _isHectorShieldSpotted;
 
-    [SerializeField] Transform _enemiesShieldHittingSpot;
+    [SerializeField] private Transform _enemiesShieldHittingSpot;
 
     private EnemyBase _enemyBaseRef;
     private ElenaStealthManager _elenaStealthManager;
@@ -18,11 +14,12 @@ public class EnemyTargetDetecting : MonoBehaviour
     private void Start()
     {
         _enemyBaseRef = GetComponentInParent<EnemyBase>();
+        _enemiesShieldHittingSpot = _enemiesShieldHittingSpot.GetChild(0).GetChild(0);
     }
 
     private void Update()
     {
-        var nearestCharacter = CharactersPoolController.FindClosestEnemy(transform.position);
+        var nearestCharacter = CharactersPoolController.FindClosestCharacter(transform.position);
 
         if (nearestCharacter == null) return;
 
@@ -48,7 +45,7 @@ public class EnemyTargetDetecting : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag(_elenaName))
+        if (other.transform.CompareTag(CharactersEnum.Elena.ToString()))
             ElenaEnterDetected(other);
     }
 
@@ -58,7 +55,7 @@ public class EnemyTargetDetecting : MonoBehaviour
     /// <param name="other"></param>
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.CompareTag(_elenaName) && !IsElenaBeenSpotted)
+        if (other.transform.CompareTag(CharactersEnum.Elena.ToString()) && !IsElenaBeenSpotted)
             ElenaEnterDetected(other);
     }
 
@@ -70,7 +67,7 @@ public class EnemyTargetDetecting : MonoBehaviour
     {
         if (IsElenaBeenSpotted)
         {
-            if (other.CompareTag(_elenaName))
+            if (other.CompareTag(CharactersEnum.Elena.ToString()))
                 InvokeElenaOutOfSight();
         }
     }
@@ -79,13 +76,12 @@ public class EnemyTargetDetecting : MonoBehaviour
     #region Elena's methods
     private void ElenaEnterDetected(Collider other)
     {
-        if (GetComponentInParent<Summoner>())
-            return;
+        if (GetComponentInParent<Summoner>()) return;
 
         RaycastHit hitInfo;
         if (Physics.Raycast(_enemyBaseRef.transform.position + (Vector3.up * 1.2f), DirectionToElena(other.transform), out hitInfo, 7.6f))
         {
-            if (hitInfo.transform.CompareTag(_elenaName))
+            if (hitInfo.transform.CompareTag(CharactersEnum.Elena.ToString()))
                 ElenaBeenSpotted(hitInfo.collider);
         }
     }

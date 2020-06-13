@@ -7,7 +7,8 @@ public class EnemyTrigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Douglas") || other.transform.CompareTag("Hector"))
+        if (other.transform.CompareTag(CharactersEnum.Douglas.ToString()) ||
+            other.transform.CompareTag(CharactersEnum.Hector.ToString()))
         {
             //if (!other.transform.GetComponent<CharactersPoolController>().isActiveAndEnabled)
             //    other.transform.GetComponent<CharactersPoolController>().enabled = true;

@@ -2,7 +2,6 @@
 
 public class ElenaState : PlayerStateManager
 {
-    private string _elenaName = "Elena";
     private bool _isUsingSkill;
     private GameObject _elenaAgentPlacement;
     private ElenaStealthManager _elenaStealthManager;
@@ -51,10 +50,6 @@ public class ElenaState : PlayerStateManager
                 else
                     IsAssassinatingTarget = true;
             }
-
-                //if (interactableObject.name == "Mindless possessed" || interactableObject.name == "Shooter - root")
-                //{
-                //}
         }
     }
 
@@ -163,7 +158,7 @@ public class ElenaState : PlayerStateManager
 
     private void ElenaInitialization()
     {
-        CharacterComponentsInitialization(_elenaName);
+        CharacterComponentsInitialization(CharactersEnum.Elena.ToString());
 
         _elenaStealthManager = myCurrentCharacter.GetComponent<ElenaStealthManager>();
 
@@ -188,10 +183,10 @@ public class ElenaState : PlayerStateManager
     {
         if (IsAssassinatingTarget) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()))
             playerController.SetState(new DouglasState(playerController, cameraController));
 
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag("Hector"))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.FindGameObjectWithTag(CharactersEnum.Hector.ToString()))
             playerController.SetState(new HectorState(playerController, cameraController));
     }
 

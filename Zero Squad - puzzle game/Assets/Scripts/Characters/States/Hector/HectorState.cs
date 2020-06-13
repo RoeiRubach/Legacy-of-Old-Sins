@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class HectorState : PlayerStateManager
 {
-    private string _hectorName = "Hector";
     private bool _isUsingSkill;
     private GameObject _hectorShield;
     private GameObject _hectorAgentPlacement;
@@ -122,7 +121,7 @@ public class HectorState : PlayerStateManager
 
     private void HectorInitialization()
     {
-        CharacterComponentsInitialization(_hectorName);
+        CharacterComponentsInitialization(CharactersEnum.Hector.ToString());
 
         _hectorShield = myCurrentCharacter.transform.GetChild(2).transform.GetChild(0).gameObject;
         _hectorEnemyHittingSpot = _hectorShield.transform.GetChild(0);
@@ -144,10 +143,10 @@ public class HectorState : PlayerStateManager
 
     private void SwitchCharacters()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag("Douglas"))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()))
             playerController.SetState(new DouglasState(playerController, cameraController));
 
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.FindGameObjectWithTag("Elena"))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.FindGameObjectWithTag(CharactersEnum.Elena.ToString()))
             playerController.SetState(new ElenaState(playerController, cameraController));
     }
 }

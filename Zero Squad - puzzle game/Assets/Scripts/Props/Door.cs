@@ -20,12 +20,6 @@ public class Door : MonoBehaviour
         _isDownwards = !_isDownwards ? true : false;
     }
 
-    //private void InvokeIsInvokedOFF()
-    //{
-    //    _isInvoke = false;
-    //    _isDownwards = !_isDownwards ? true : false;
-    //}
-
     private void MoveDoorDownwards()
     {
         if (transform.localPosition.y <= _maxDownwardsMovement)

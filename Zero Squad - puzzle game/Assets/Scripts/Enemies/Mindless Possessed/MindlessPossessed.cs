@@ -158,11 +158,9 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
     public void Interact()
     {
         if (!transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
-        {
             enemyHealth.AssassinateEnemy();
-        }
-        else
-            ElenaState.IsAssassinatingTarget = false;
+
+        ElenaState.IsAssassinatingTarget = false;
     }
 
     public Vector3 CharacterInteractionPlacement() => _elenaKillSummonerPlacement.position;

@@ -38,10 +38,8 @@ public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin
     public void Interact()
     {
         if (!transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
-        {
             enemyHealth.AssassinateEnemy();
-        }
-        else
-            ElenaState.IsAssassinatingTarget = false;
+
+        ElenaState.IsAssassinatingTarget = false;
     }
 }

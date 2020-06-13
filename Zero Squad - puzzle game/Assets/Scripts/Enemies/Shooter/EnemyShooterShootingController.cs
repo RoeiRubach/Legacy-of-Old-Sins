@@ -24,7 +24,7 @@ public class EnemyShooterShootingController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _nearestEnemy = CharactersPoolController.FindClosestEnemy(transform.position);
+        _nearestEnemy = CharactersPoolController.FindClosestCharacter(transform.position);
 
         if (_nearestEnemy != null)
         {

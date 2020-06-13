@@ -35,7 +35,7 @@ public partial class PlayerController
 
     public void SwitchToDouglasStateViaButton()
     {
-        if (GameObject.FindWithTag("Douglas"))
+        if (GameObject.FindWithTag(CharactersEnum.Douglas.ToString()))
             SetState(new DouglasState(this, _mainCamera));
     }
 

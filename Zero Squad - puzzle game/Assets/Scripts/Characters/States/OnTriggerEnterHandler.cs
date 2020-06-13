@@ -10,13 +10,13 @@ public class OnTriggerEnterHandler : MonoBehaviour, IPuzzleAuthority
     {
         playerController = GameObject.FindObjectOfType<PlayerController>();
 
-        if (transform.name.StartsWith("Douglas"))
+        if (transform.name.StartsWith(CharactersEnum.Douglas.ToString()))
             _characterTrigger = new DouglasState(playerController);
 
-        else if (transform.name.StartsWith("Elena"))
+        else if (transform.name.StartsWith(CharactersEnum.Elena.ToString()))
             _characterTrigger = new ElenaState(playerController);
 
-        else if (transform.name.StartsWith("Hector"))
+        else if (transform.name.StartsWith(CharactersEnum.Hector.ToString()))
             _characterTrigger = new HectorState(playerController);
     }
 

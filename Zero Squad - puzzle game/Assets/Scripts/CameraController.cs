@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
 
     private void Awake()
     {
-        _characterToWatch = GameObject.Find("Douglas");
+        _characterToWatch = GameObject.Find(CharactersEnum.Douglas.ToString());
         _offset = transform.position - _characterToWatch.transform.position;
     }
 

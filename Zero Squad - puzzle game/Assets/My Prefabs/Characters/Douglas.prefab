@@ -245,6 +245,36 @@ Transform:
   m_Father: {fileID: 4884148213563869955}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &995459367571725363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6364903835107806954}
+  m_Layer: 10
+  m_Name: Bomb carry placement
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6364903835107806954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995459367571725363}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.4, z: 0.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4884148213563869955}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1139175850791293621
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1333,7 @@ Transform:
   - {fileID: 485630246612472820}
   - {fileID: 4917130359946537349}
   - {fileID: 8647645986178886971}
+  - {fileID: 6364903835107806954}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1337,9 +1368,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4427026b7e07d2149a4b899edbc186b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 1028
   _turningSpeed: 3
 --- !u!114 &8474828045428177172
 MonoBehaviour:
@@ -1368,12 +1396,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletHolder: {fileID: 4525530396634574381}
   DouglasShotgunRef: {fileID: 240370179510771411}
-  AvoidLayersMasks:
-    serializedVersion: 2
-    m_Bits: 1028
-  EnemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 512
   DouglasTarget: {fileID: 0}
 --- !u!195 &8474828045428177174
 NavMeshAgent:
@@ -1395,7 +1417,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.75
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 9
   m_ObstacleAvoidanceType: 4
 --- !u!120 &8474828045428177169
 LineRenderer:
@@ -1729,9 +1751,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56eb7ac65a2985847af52fe68a3f6dd5, type: 3}
---- !u!1 &240370179510771411 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5006533531441372192, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
+--- !u!4 &4525530396634574381 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8710763447091064030, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
     type: 3}
   m_PrefabInstance: {fileID: 5057314640996008691}
   m_PrefabAsset: {fileID: 0}
@@ -1741,9 +1763,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5057314640996008691}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &4525530396634574381 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8710763447091064030, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
+--- !u!1 &240370179510771411 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5006533531441372192, guid: 56eb7ac65a2985847af52fe68a3f6dd5,
     type: 3}
   m_PrefabInstance: {fileID: 5057314640996008691}
   m_PrefabAsset: {fileID: 0}

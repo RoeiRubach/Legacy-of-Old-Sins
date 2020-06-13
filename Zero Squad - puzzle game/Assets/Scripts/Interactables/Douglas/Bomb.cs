@@ -3,18 +3,12 @@ using UnityEngine.AI;
 
 public class Bomb : InteractableBase, IDouglasInteractables
 {
-    private void Start()
-    {
-        //interactedCharacterRef = GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()).transform;
-    }
-
     private void Update()
     {
-        if (isInteract)
-        {
-            LiftBomb();
-            isInteract = false;
-        }
+        if (!isInteract) return;
+
+        LiftBomb();
+        isInteract = false;
     }
 
     private void LiftBomb()
@@ -23,12 +17,14 @@ public class Bomb : InteractableBase, IDouglasInteractables
         Destroy(GetComponent<Bomb>());
         Destroy(GetComponent<NavMeshObstacle>());
         Destroy(GetComponent<Outline>());
+        if (objectPlacement == null)
+            SetObjectPlacement();
         transform.parent = objectPlacement;
         transform.localPosition = Vector3.zero;
     }
 
-    public void TriggerBomb()
+    private void SetObjectPlacement()
     {
-        Destroy(gameObject, 3f);
+        objectPlacement = GameObject.Find("Bomb carry placement").transform;
     }
 }

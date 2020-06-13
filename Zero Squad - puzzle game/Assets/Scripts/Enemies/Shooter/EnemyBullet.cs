@@ -26,7 +26,7 @@ public class EnemyBullet : MonoBehaviour
     {
         transform.position += _shootDirection * Time.deltaTime * _bulletMoveSpeed;
 
-        var nearestEnemy = CharactersPoolController.FindClosestEnemy(transform.position);
+        var nearestEnemy = CharactersPoolController.FindClosestCharacter(transform.position);
         float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
 
         if(distance <= 1.65f)
