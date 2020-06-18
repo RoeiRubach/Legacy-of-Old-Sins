@@ -1,5 +1,4 @@
-﻿using UnityEngine.AI;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DouglasState : PlayerStateManager
 {
@@ -43,7 +42,7 @@ public class DouglasState : PlayerStateManager
     public override void OnStateEnter()
     {
         DouglasInitialization();
-        //Debug.Log("Douglas is now in control");
+        ShowPopupNeeded("Move bomb");
     }
 
     public override void OnTriggerEnter(string tagReceived)
@@ -67,8 +66,8 @@ public class DouglasState : PlayerStateManager
 
         DouglasUIToggleOFF();
         ResetInteractableWhenExitCharacter();
+        SavePopupNeeded("Move bomb");
         ResetCharactersControl();
-        //Debug.Log("Douglas is out of control");
     }
 
     public override void EnterOrExitSkillMode()
@@ -102,6 +101,11 @@ public class DouglasState : PlayerStateManager
                 }
                 else
                 {
+                    if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
+                    {
+                        TutorialPopUpsController.Instance.HideFirstChild();
+                        TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
+                    }
                     ResetAIPath();
                     playerController.IsLifting = false;
                     _bombRef.GetComponent<TriggerBomb>()?.TriggerBombInSeconds();
@@ -110,6 +114,11 @@ public class DouglasState : PlayerStateManager
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
                     myCurrentAgent.speed = runningSpeed;
+                }
+                if (TutorialPopUpsController.Instance.MyTutorialHandler["Shotgun"])
+                {
+                    TutorialPopUpsController.Instance.DestroyFirstChild();
+                    TutorialPopUpsController.Instance.DisplayFirstChild();
                 }
             }
         }
@@ -199,10 +208,24 @@ public class DouglasState : PlayerStateManager
     private void SwitchCharacters()
     {
         if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.Find(CharactersEnum.Elena.ToString()))
+        {
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])
+            {
+                TutorialPopUpsController.Instance.DestroyFirstChild();
+                TutorialPopUpsController.Instance.DisplayFirstChild();
+            }
             playerController.SetState(new ElenaState(playerController, cameraController));
+        }
 
         else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.Find(CharactersEnum.Hector.ToString()))
+        {
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Selections"])
+            {
+                TutorialPopUpsController.Instance.DestroyFirstChild();
+                TutorialPopUpsController.Instance.DisplayFirstChild();
+            }
             playerController.SetState(new HectorState(playerController, cameraController));
+        }
     }
 
     private void DouglasShootingScriptsInitialization()

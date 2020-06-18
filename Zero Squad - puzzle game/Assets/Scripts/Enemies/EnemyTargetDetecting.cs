@@ -96,7 +96,7 @@ public class EnemyTargetDetecting : MonoBehaviour
         IsElenaBeenSpotted = true;
 
         _elenaStealthManager.AddElenaToPool();
-        Debug.Log("Elena got triggered");
+        //Debug.Log("Elena got triggered");
     }
 
     private void InvokeElenaOutOfSight()
@@ -104,7 +104,7 @@ public class EnemyTargetDetecting : MonoBehaviour
         if (!IsInvoking("ElenaOutOfSight"))
         {
             Invoke("ElenaOutOfSight", 1.1f);
-            Debug.Log("Elena got out of trigger");
+            //Debug.Log("Elena got out of trigger");
         }
     }
 

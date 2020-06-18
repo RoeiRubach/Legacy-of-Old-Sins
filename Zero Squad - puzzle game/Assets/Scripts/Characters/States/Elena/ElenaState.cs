@@ -64,6 +64,8 @@ public class ElenaState : PlayerStateManager
 
                 if (_isUsingSkill && !_elenaStealthManager.IsStealthOnCooldown)
                 {
+                    if (IsElenaAboutToBackstab())
+                        ResetAssassinating();
                     ResetAIPath();
                     myCurrentAgent.speed = stealthRunningSpeed;
                     _elenaStealthManager.CallStealthMode();
@@ -77,6 +79,11 @@ public class ElenaState : PlayerStateManager
                     myCurrentAgent.enabled = true;
                     playerController.ElenaOffSkillMode();
                 }
+                if (TutorialPopUpsController.Instance.MyTutorialHandler["Stealth mode"])
+                {
+                    TutorialPopUpsController.Instance.DestroyFirstChild();
+                    TutorialPopUpsController.Instance.DisplayFirstChild();
+                }
             }
         }
     }
@@ -84,7 +91,8 @@ public class ElenaState : PlayerStateManager
     public override void OnStateEnter()
     {
         ElenaInitialization();
-        //Debug.Log("Elena is now in control");
+        ShowPopupNeeded("Stealth mode");
+        ShowPopupNeeded("Backstab");
     }
 
     public override void OnTriggerEnter(string tagReceived)
@@ -104,14 +112,22 @@ public class ElenaState : PlayerStateManager
             _elenaAgentPlacement.SetActive(true);
             myCurrentAgent.enabled = false;
         }
-        else
+
+        if (IsElenaAboutToBackstab())
             ResetAssassinating();
 
         playerController.ElenaSkillButtonController();
         playerController.ElenaIconSelectedOFF();
         playerController.ElenaButtonInteractivitySetter();
         ResetInteractableWhenExitCharacter();
+        SavePopupNeeded("Stealth mode");
+        SavePopupNeeded("Backstab");
         ResetCharactersControl();
+    }
+
+    private bool IsElenaAboutToBackstab()
+    {
+        return (IsAbleToAssassinTarget || IsAssassinatingTarget);
     }
 
     private void HighlightCursorOverInteractableObject()
@@ -192,7 +208,10 @@ public class ElenaState : PlayerStateManager
 
     private void ResetAssassinating()
     {
+        IsAbleToAssassinTarget = false;
+        IsAssassinatingTarget = false;
         ResetInteractable();
+        ResetAIPath();
         CursorController.Instance.SetStandardCursor();
         isPossibleToInteract = false;
     }

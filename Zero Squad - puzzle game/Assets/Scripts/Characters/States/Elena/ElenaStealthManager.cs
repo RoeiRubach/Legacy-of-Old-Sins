@@ -106,7 +106,7 @@ public class ElenaStealthManager : MonoBehaviour
         if (!IsInvoking("RemoveElenaFromPool"))
         {
             Invoke("RemoveElenaFromPool", 1f);
-            Debug.Log("Elena got out of trigger");
+            //Debug.Log("Elena got out of trigger");
         }
     }
 }

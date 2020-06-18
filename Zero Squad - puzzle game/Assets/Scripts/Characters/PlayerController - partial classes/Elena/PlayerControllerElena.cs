@@ -35,7 +35,16 @@ public partial class PlayerController
     public void SwitchToElenaStateViaButton()
     {
         if (GameObject.FindWithTag("Elena"))
+        {
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])
+            {
+                TutorialPopUpsController.Instance.DestroyFirstChild();
+                TutorialPopUpsController.Instance.DisplayFirstChild();
+                SwitchToCharacterTutorial switchToCharacterTutorial = FindObjectOfType<SwitchToCharacterTutorial>();
+                switchToCharacterTutorial.ContinueOnTutorial();
+            }
             SetState(new ElenaState(this, _mainCamera));
+        }
     }
 
     public void ElenaIconSelectedON()

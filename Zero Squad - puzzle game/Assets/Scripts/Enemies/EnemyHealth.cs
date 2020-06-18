@@ -3,23 +3,30 @@ using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth;
-
-    private int _currentHealth = 10;
+    public int MaxHealth = 3;
+    public bool IsKilled
+    {
+        get;
+        private set;
+    }
+    public int CurrentHealth
+    {
+        get;
+        private set;
+    }
 
     [SerializeField] private GameObject _healthBarUI;
     [SerializeField] private Slider _slider;
     [SerializeField] private bool _isShield;
 
     private Camera _mainCam;
-
     private GameObject _shieldRef;
-    private bool _isSet, _isKilled;
+    private bool _isSet;
     private float _regenerateTimer = 0;
 
     private void Awake()
     {
-        _currentHealth = _maxHealth;
+        CurrentHealth = MaxHealth;
     }
 
     private void LateUpdate()
@@ -29,27 +36,27 @@ public class EnemyHealth : MonoBehaviour
 
         _slider.value = Mathf.Lerp(_slider.value, CalculateHealth(), 0.55f);
 
-        if (_currentHealth < _maxHealth)
+        if (CurrentHealth < MaxHealth)
         {
             if (!_isSet)
             {
                 _isSet = true;
                 _healthBarUI.SetActive(true);
-                if(_mainCam == null)
+                if (_mainCam == null)
                     _mainCam = Camera.main;
             }
             _healthBarUI.transform.LookAt(_mainCam.transform);
         }
     }
 
-    private float CalculateHealth() => (float)_currentHealth / _maxHealth;
+    private float CalculateHealth() => (float)CurrentHealth / MaxHealth;
 
     public void HealthDecreaseViaBullet(int damageAmount = 1)
     {
         for (int i = 0; i < damageAmount; i++)
         {
-            _currentHealth--;
-            if (_currentHealth <= 0)
+            CurrentHealth--;
+            if (CurrentHealth <= 0)
             {
                 if (_isShield)
                 {
@@ -59,7 +66,7 @@ public class EnemyHealth : MonoBehaviour
                 else
                 {
                     GetComponentInParent<BoxCollider>().enabled = false;
-                    _isKilled = true;
+                    IsKilled = true;
                     ToggleHealthBarOFF();
                     if (transform.parent != null)
                         transform.parent = null;
@@ -73,7 +80,7 @@ public class EnemyHealth : MonoBehaviour
     {
         _isSet = false;
         ToggleHealthBarOFF();
-        _currentHealth += 1;
+        CurrentHealth += 1;
     }
 
     private void ToggleHealthBarOFF()
@@ -84,11 +91,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void AssassinateEnemy()
     {
-        _currentHealth = 0;
+        CurrentHealth = 0;
         HealthDecreaseViaBullet();
     }
-
-    public bool CheckIfEnemyDead => _isKilled;
-    public int GetCurrentHealth => _currentHealth;
-    public int GetMaxHealth => _maxHealth;
 }

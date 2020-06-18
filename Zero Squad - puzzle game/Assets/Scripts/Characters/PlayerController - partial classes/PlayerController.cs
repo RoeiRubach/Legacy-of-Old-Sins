@@ -10,6 +10,8 @@ public partial class PlayerController : MonoBehaviour
 
     private PlayerStateManager _currentState;
 
+    public PlayerStateManager GetCurrentStateRef() => _currentState;
+
     private CameraController _mainCamera;
     
     [Header("LayerMasks:", order = 0)]
@@ -60,9 +62,16 @@ public partial class PlayerController : MonoBehaviour
             _currentState.OnStateEnter();
     }
 
-    public void EnterSkillViaButton()
+    public void EnterSkillViaButton(string tutorialPopUp = null)
     {
         _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
+
+        if (tutorialPopUp == null) return;
+        if (TutorialPopUpsController.Instance.MyTutorialHandler[tutorialPopUp])
+        {
+            TutorialPopUpsController.Instance.DestroyFirstChild();
+            TutorialPopUpsController.Instance.DisplayFirstChild();
+        }
     }
 
     public void ElenaStealthTimerIsOver()
@@ -71,6 +80,7 @@ public partial class PlayerController : MonoBehaviour
         {
             CancelInvoke();
             InvokeElenaSwitch();
+            EnterSkillViaButton();
         }
         else
             InvokeRepeating("InvokeElenaStealthSwitching", 0.5f, 1f);
@@ -82,6 +92,7 @@ public partial class PlayerController : MonoBehaviour
         {
             CancelInvoke();
             InvokeHectorSwitch();
+            EnterSkillViaButton();
         }
         else
             InvokeRepeating("InvokeShieldDestroying", 0.5f, 1f);
@@ -99,27 +110,13 @@ public partial class PlayerController : MonoBehaviour
             Invoke("HectorShieldGotDestroy", 0.5f);
     }
 
-    public void SwitchToHectorTutorial()
-    {
-        Invoke("InvokeHectorSwitch", 0.5f);
-    }
+    public void SwitchToHectorTutorial() => Invoke("InvokeHectorSwitch", 0.5f);
 
-    public void SwitchToElenaTutorial()
-    {
-        Invoke("InvokeElenaSwitch", 0.5f);
-    }
+    public void SwitchToElenaTutorial() => Invoke("InvokeElenaSwitch", 0.5f);
 
-    private void InvokeHectorSwitch()
-    {
-        SetState(new HectorState(this, _mainCamera));
-        EnterSkillViaButton();
-    }
+    private void InvokeHectorSwitch() => SetState(new HectorState(this, _mainCamera));
 
-    private void InvokeElenaSwitch()
-    {
-        SetState(new ElenaState(this, _mainCamera));
-        EnterSkillViaButton();
-    }
+    private void InvokeElenaSwitch() => SetState(new ElenaState(this, _mainCamera));
 
     public void DamageACharacter(Transform target, int damageAmount = 1)
     {

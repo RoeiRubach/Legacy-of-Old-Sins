@@ -11,6 +11,7 @@ public class TriggerBomb : MonoBehaviour
     private Transform[] _charactersRef;
     private Door _doorRef;
     private BombSpawner _bombSpawner;
+    private Transform _finalCheckPoint;
     
     private float _bombExplotionRadius = 3.25f;
 
@@ -24,6 +25,7 @@ public class TriggerBomb : MonoBehaviour
             _charactersRef[i] = _charactersHolder.GetChild(i);
         }
         _doorRef = GameObject.Find("BombTheDoor").GetComponent<Door>();
+        _finalCheckPoint = GameObject.Find("FinalCheckPoint").transform;
         _bombSpawner = FindObjectOfType<BombSpawner>();
     }
 
@@ -61,6 +63,7 @@ public class TriggerBomb : MonoBehaviour
         if (IsCloseEnoughToDamage(distance))
         {
             _doorRef.Invoke();
+            _finalCheckPoint.GetComponent<BoxCollider>().enabled = true;
             Destroy(_bombSpawner.gameObject);
         }
         else

@@ -4,7 +4,9 @@ public class CheckPoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Douglas") || (other.transform.CompareTag("Elena") || (other.transform.CompareTag("Hector"))))
+        if (other.transform.CompareTag(CharactersEnum.Douglas.ToString()) ||
+            (other.transform.CompareTag(CharactersEnum.Elena.ToString()) ||
+            (other.transform.CompareTag(CharactersEnum.Hector.ToString()))))
         {
             GameManager.Instance.IsReachedCheckPoint = true;
             for (int i = 0; i < GameManager.Instance.CharactersPlacements.Length; i++)

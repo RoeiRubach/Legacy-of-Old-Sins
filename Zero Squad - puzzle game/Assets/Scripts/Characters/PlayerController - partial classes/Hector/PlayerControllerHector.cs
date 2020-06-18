@@ -35,7 +35,16 @@ public partial class PlayerController
     public void SwitchToHectorStateViaButton()
     {
         if (GameObject.FindWithTag("Hector"))
+        {
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Selections"])
+            {
+                TutorialPopUpsController.Instance.DestroyFirstChild();
+                TutorialPopUpsController.Instance.DisplayFirstChild();
+                SwitchToCharacterTutorial switchToCharacterTutorial = FindObjectOfType<SwitchToCharacterTutorial>();
+                switchToCharacterTutorial.ContinueOnTutorial();
+            }
             SetState(new HectorState(this, _mainCamera));
+        }
     }
 
     public void HectorSkillButtonController()

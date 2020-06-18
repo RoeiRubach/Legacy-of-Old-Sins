@@ -54,7 +54,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyHealth = GetComponent<EnemyHealth>();
     }
 
-    protected virtual bool IsEnemyGotKilled() => enemyHealth.CheckIfEnemyDead;
+    protected virtual bool IsEnemyGotKilled() => enemyHealth.IsKilled;
 
     protected virtual void ResetAIPath()
     {

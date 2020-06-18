@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e3190d25e530e45846b3eac7909ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 2
+  MaxHealth: 2
   _healthBarUI: {fileID: 6467278026569169770}
   _slider: {fileID: 6467278027494970168}
   _isShield: 0
@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turningSpeed: 3
   _bulletDamageAmount: 1
-  _autoShootingDelay: 2.2
+  _autoShootingDelay: 5
   _avoidLayerMask:
     serializedVersion: 2
     m_Bits: 516

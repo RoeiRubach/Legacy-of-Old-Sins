@@ -16,7 +16,7 @@ public class RegenerateShield : MonoBehaviour
     {
         if (!_shieldRef.activeInHierarchy)
         {
-            if (_ShieldHealth.GetCurrentHealth < _ShieldHealth.GetMaxHealth)
+            if (_ShieldHealth.CurrentHealth < _ShieldHealth.MaxHealth)
             {
                 if ((_regenerateTimer += Time.deltaTime) > _regenerateHealthTimer)
                 {

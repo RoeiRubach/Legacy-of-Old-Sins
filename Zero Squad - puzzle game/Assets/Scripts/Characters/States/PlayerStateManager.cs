@@ -13,16 +13,13 @@ public enum CharactersAnimationTransitionParameters
 public abstract class PlayerStateManager
 {
     public bool IsCabinetInteracting { get; protected set; }
+
     protected float stealthRunningSpeed = 3f;
     protected int runningSpeed = 5, bombWalkingSpeed = 2;
-
     protected PlayerController playerController;
     protected CameraController cameraController;
-
     protected Transform interactableObject;
-
     protected bool isPossibleToInteract, isInteracting;
-
     protected PlayerStateManager(PlayerController character)
     {
         playerController = character;
@@ -66,7 +63,6 @@ public abstract class PlayerStateManager
             {
                 RaycastHit hitInfo;
 
-                // Generate a ray from the cursor position
                 Ray myRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
                 if (Physics.Raycast(myRay, out hitInfo, Mathf.Infinity, playerController.WalkableLayerMask))
@@ -88,6 +84,11 @@ public abstract class PlayerStateManager
                     else
                         myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isMoving.ToString(), true);
                 }
+            }
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Movement"])
+            {
+                TutorialPopUpsController.Instance.DestroyFirstChild();
+                TutorialPopUpsController.Instance.DisplayFirstChild();
             }
         }
 
@@ -185,8 +186,15 @@ public abstract class PlayerStateManager
                         case "Bomb":
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
                             myCurrentAgent.speed = bombWalkingSpeed;
+                            if(TutorialPopUpsController.Instance.MyTutorialHandler["Move bomb"])
+                            {
+                                TutorialPopUpsController.Instance.DestroyFirstChild();
+                                TutorialPopUpsController.Instance.DisplayFirstChild();
+                            }
                             break;
                         case "Cabinet":
+                            if (TutorialPopUpsController.Instance.MyTutorialHandler[interactableObject.name])
+                                TutorialPopUpsController.Instance.DestroyFirstChild();
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isPushing.ToString(), true);
                             IsCabinetInteracting = true;
                             break;
@@ -195,6 +203,10 @@ public abstract class PlayerStateManager
                             break;
                         case "Mindless possessed":
                         case "Summoner":
+                            if (TutorialPopUpsController.Instance.MyTutorialHandler["Backstab"])
+                                TutorialPopUpsController.Instance.DestroyFirstChild();
+                            isInteracting = false;
+                            break;
                         case "Shooter - root":
                         case "Switch":
                         case "Console":
@@ -238,6 +250,18 @@ public abstract class PlayerStateManager
         myCurrentAnimator = myCurrentCharacter.GetComponent<Animator>();
         cameraController.SetCharacter(myCurrentCharacter);
         myCurrentAgent = myCurrentCharacter.GetComponent<NavMeshAgent>();
+    }
+
+    protected void SavePopupNeeded(string popUp)
+    {
+        if (TutorialPopUpsController.Instance.MyTutorialHandler[popUp])
+            TutorialPopUpsController.Instance.HideFirstChild();
+    }
+
+    protected void ShowPopupNeeded(string popUp)
+    {
+        if (TutorialPopUpsController.Instance.MyTutorialHandler[popUp])
+            TutorialPopUpsController.Instance.DisplayFirstChild();
     }
 
     private void HealthPackInteraction()

@@ -1,5 +1,4 @@
-﻿using UnityEngine.AI;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class HectorState : PlayerStateManager
 {
@@ -36,7 +35,7 @@ public class HectorState : PlayerStateManager
         {
             if (Input.GetKeyDown(KeyCode.Space) || EnterSkillViaButton)
             {
-                if (_hectorEnemyHittingSpot.GetComponent<EnemyHealth>().GetCurrentHealth > 0 || _hectorShield.activeSelf)
+                if (_hectorEnemyHittingSpot.GetComponent<EnemyHealth>().CurrentHealth > 0 || _hectorShield.activeSelf)
                 {
                     EnterSkillViaButton = false;
                     _isUsingSkill = !_isUsingSkill ? true : false;
@@ -53,6 +52,11 @@ public class HectorState : PlayerStateManager
                         playerController.HectorOffSkillMode();
                     }
                 }
+                if (TutorialPopUpsController.Instance.MyTutorialHandler["Shield mode"])
+                {
+                    TutorialPopUpsController.Instance.DestroyFirstChild();
+                    TutorialPopUpsController.Instance.DisplayFirstChild();
+                }
             }
         }
     }
@@ -60,6 +64,7 @@ public class HectorState : PlayerStateManager
     public override void OnStateEnter()
     {
         HectorInitialization();
+        ShowPopupNeeded("Hack consoles");
         //Debug.Log("Hector is now in control");
     }
 
@@ -82,6 +87,7 @@ public class HectorState : PlayerStateManager
         playerController.HectorIconSelectedOFF();
         playerController.HectorButtonInteractivitySetter();
         ResetInteractableWhenExitCharacter();
+        SavePopupNeeded("Hack consoles");
         ResetCharactersControl();
 
         //Debug.Log("Hector is out of control");
@@ -144,9 +150,19 @@ public class HectorState : PlayerStateManager
     private void SwitchCharacters()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()))
+        {
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Shield mode"]) return;
             playerController.SetState(new DouglasState(playerController, cameraController));
+        }
 
         else if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.FindGameObjectWithTag(CharactersEnum.Elena.ToString()))
+        {
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])
+            {
+                TutorialPopUpsController.Instance.DestroyFirstChild();
+                TutorialPopUpsController.Instance.DisplayFirstChild();
+            }
             playerController.SetState(new ElenaState(playerController, cameraController));
+        }
     }
 }

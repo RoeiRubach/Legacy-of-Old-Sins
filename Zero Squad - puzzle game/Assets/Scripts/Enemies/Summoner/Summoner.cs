@@ -9,6 +9,7 @@ public class Summoner : EnemyBase, IElenaAssassin
     [SerializeField] private GameObject _mindlessPossessedPrefabRef;
     [SerializeField] private GameObject _ShooterPrefabRef;
     [SerializeField] private bool _isShooterSummoning;
+    [SerializeField] private bool _isEarlySpawnNeeded;
     [SerializeField] private Transform[] _shooterPlacements;
 
     private Transform _shooterSpawnPlacement;
@@ -19,7 +20,10 @@ public class Summoner : EnemyBase, IElenaAssassin
     private void Start()
     {
         transform.name = "Summoner";
-        _summonTimer = _spawnTimer;
+        if (_isEarlySpawnNeeded)
+            _summonTimer = _spawnTimer / 2;
+        else
+            _summonTimer = _spawnTimer;
         _spawnLocation = transform.GetChild(0).position;
         _elenaKillSummonerPlacement = transform.GetChild(1);
 

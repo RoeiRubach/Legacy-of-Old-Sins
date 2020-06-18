@@ -3,6 +3,7 @@
 public class GameManager : SingletonDontDestroy<GameManager>
 {
     public bool IsReachedCheckPoint;
+    [HideInInspector] public bool IsReachedFinalCheckPoint;
     [HideInInspector] public Vector3[] CharactersPlacements;
 
 #if UNITY_EDITOR
@@ -31,6 +32,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
                     break;
                 case 3:
                     _checkPoints[2].SetActive(true);
+                    IsReachedFinalCheckPoint = true;
                     SetCheckPointsLocation(_thirdCheckPoint);
                     break;
             }

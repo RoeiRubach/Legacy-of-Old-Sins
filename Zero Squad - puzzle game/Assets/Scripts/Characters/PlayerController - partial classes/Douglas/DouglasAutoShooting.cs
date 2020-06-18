@@ -33,7 +33,7 @@ public class DouglasAutoShooting : MonoBehaviour
 
             if (distance <= 12)
             {
-                if (!nearestEnemy.GetComponent<EnemyHealth>().CheckIfEnemyDead)
+                if (!nearestEnemy.GetComponent<EnemyHealth>().IsKilled)
                 {
                     if (IsHavingClearShoot(nearestEnemy.transform))
                     {
