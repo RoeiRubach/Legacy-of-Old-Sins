@@ -34,6 +34,8 @@ public partial class PlayerController
 
     public void SwitchToHectorStateViaButton()
     {
+        if (IsLifting) return;
+
         if (GameObject.FindWithTag("Hector"))
         {
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Selections"])

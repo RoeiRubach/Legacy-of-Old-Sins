@@ -34,6 +34,8 @@ public partial class PlayerController
 
     public void SwitchToElenaStateViaButton()
     {
+        if (IsLifting) return;
+
         if (GameObject.FindWithTag("Elena"))
         {
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])

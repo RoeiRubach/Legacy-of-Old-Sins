@@ -35,7 +35,8 @@ public class DouglasState : PlayerStateManager
         if (!IsCabinetInteracting)
         {
             EnterOrExitSkillMode();
-            SwitchCharacters();
+            if (!playerController.IsLifting)
+                SwitchCharacters();
         }
     }
 

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LOSMainMenu.unity
+    guid: dd42bc879fcfd504e8a96fedbaf56522
+  - enabled: 1
     path: Assets/Scenes/Legacy of Old Sins.unity
     guid: 6045e2181fd8fe240b37e99d2cd4799f
   m_configObjects: {}
