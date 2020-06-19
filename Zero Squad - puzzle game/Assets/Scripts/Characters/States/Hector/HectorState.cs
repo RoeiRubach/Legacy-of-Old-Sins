@@ -52,6 +52,8 @@ public class HectorState : PlayerStateManager
                         playerController.HectorOffSkillMode();
                     }
                 }
+
+                if (GameManager.Instance.IsReachedFinalCheckPoint) return;
                 if (TutorialPopUpsController.Instance.MyTutorialHandler["Shield mode"])
                 {
                     TutorialPopUpsController.Instance.DestroyFirstChild();
@@ -151,18 +153,22 @@ public class HectorState : PlayerStateManager
     {
         if (Input.GetKeyDown(KeyCode.Alpha1) && GameObject.FindGameObjectWithTag(CharactersEnum.Douglas.ToString()))
         {
-            if (TutorialPopUpsController.Instance.MyTutorialHandler["Shield mode"]) return;
             playerController.SetState(new DouglasState(playerController, cameraController));
+
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
+            if (TutorialPopUpsController.Instance.MyTutorialHandler["Shield mode"]) return;
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.FindGameObjectWithTag(CharactersEnum.Elena.ToString()))
         {
+            playerController.SetState(new ElenaState(playerController, cameraController));
+
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])
             {
                 TutorialPopUpsController.Instance.DestroyFirstChild();
                 TutorialPopUpsController.Instance.DisplayFirstChild();
             }
-            playerController.SetState(new ElenaState(playerController, cameraController));
         }
     }
 }

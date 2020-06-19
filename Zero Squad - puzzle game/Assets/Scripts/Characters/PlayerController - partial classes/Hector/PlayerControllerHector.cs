@@ -38,6 +38,8 @@ public partial class PlayerController
 
         if (GameObject.FindWithTag("Hector"))
         {
+            SetState(new HectorState(this, _mainCamera));
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Selections"])
             {
                 TutorialPopUpsController.Instance.DestroyFirstChild();
@@ -45,7 +47,6 @@ public partial class PlayerController
                 SwitchToCharacterTutorial switchToCharacterTutorial = FindObjectOfType<SwitchToCharacterTutorial>();
                 switchToCharacterTutorial.ContinueOnTutorial();
             }
-            SetState(new HectorState(this, _mainCamera));
         }
     }
 

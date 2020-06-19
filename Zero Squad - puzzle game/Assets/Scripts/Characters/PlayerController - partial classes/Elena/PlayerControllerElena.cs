@@ -38,6 +38,9 @@ public partial class PlayerController
 
         if (GameObject.FindWithTag("Elena"))
         {
+            SetState(new ElenaState(this, _mainCamera));
+
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])
             {
                 TutorialPopUpsController.Instance.DestroyFirstChild();
@@ -45,7 +48,6 @@ public partial class PlayerController
                 SwitchToCharacterTutorial switchToCharacterTutorial = FindObjectOfType<SwitchToCharacterTutorial>();
                 switchToCharacterTutorial.ContinueOnTutorial();
             }
-            SetState(new ElenaState(this, _mainCamera));
         }
     }
 

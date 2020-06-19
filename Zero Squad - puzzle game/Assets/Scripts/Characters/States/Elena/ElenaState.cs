@@ -79,6 +79,7 @@ public class ElenaState : PlayerStateManager
                     myCurrentAgent.enabled = true;
                     playerController.ElenaOffSkillMode();
                 }
+                if (GameManager.Instance.IsReachedFinalCheckPoint) return;
                 if (TutorialPopUpsController.Instance.MyTutorialHandler["Stealth mode"])
                 {
                     TutorialPopUpsController.Instance.DestroyFirstChild();

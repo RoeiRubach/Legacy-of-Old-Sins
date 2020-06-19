@@ -85,6 +85,7 @@ public abstract class PlayerStateManager
                         myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isMoving.ToString(), true);
                 }
             }
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Movement"])
             {
                 TutorialPopUpsController.Instance.DestroyFirstChild();
@@ -186,26 +187,33 @@ public abstract class PlayerStateManager
                         case "Bomb":
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
                             myCurrentAgent.speed = bombWalkingSpeed;
-                            if(TutorialPopUpsController.Instance.MyTutorialHandler["Move bomb"])
+                            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
+                            if (TutorialPopUpsController.Instance.MyTutorialHandler["Move bomb"])
                             {
                                 TutorialPopUpsController.Instance.DestroyFirstChild();
                                 TutorialPopUpsController.Instance.DisplayFirstChild();
                             }
                             break;
                         case "Cabinet":
-                            if (TutorialPopUpsController.Instance.MyTutorialHandler[interactableObject.name])
-                                TutorialPopUpsController.Instance.DestroyFirstChild();
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isPushing.ToString(), true);
                             IsCabinetInteracting = true;
+                            if (!GameManager.Instance.IsReachedFinalCheckPoint)
+                            {
+                                if (TutorialPopUpsController.Instance.MyTutorialHandler[interactableObject.name])
+                                    TutorialPopUpsController.Instance.DestroyFirstChild();
+                            }
                             break;
                         case "Health Pack":
                             HealthPackInteraction();
                             break;
                         case "Mindless possessed":
                         case "Summoner":
-                            if (TutorialPopUpsController.Instance.MyTutorialHandler["Backstab"])
-                                TutorialPopUpsController.Instance.DestroyFirstChild();
                             isInteracting = false;
+                            if (!GameManager.Instance.IsReachedFinalCheckPoint)
+                            {
+                                if (TutorialPopUpsController.Instance.MyTutorialHandler["Backstab"])
+                                    TutorialPopUpsController.Instance.DestroyFirstChild();
+                            }
                             break;
                         case "Shooter - root":
                         case "Switch":
@@ -254,12 +262,14 @@ public abstract class PlayerStateManager
 
     protected void SavePopupNeeded(string popUp)
     {
+        if (GameManager.Instance.IsReachedFinalCheckPoint) return;
         if (TutorialPopUpsController.Instance.MyTutorialHandler[popUp])
             TutorialPopUpsController.Instance.HideFirstChild();
     }
 
     protected void ShowPopupNeeded(string popUp)
     {
+        if (GameManager.Instance.IsReachedFinalCheckPoint) return;
         if (TutorialPopUpsController.Instance.MyTutorialHandler[popUp])
             TutorialPopUpsController.Instance.DisplayFirstChild();
     }

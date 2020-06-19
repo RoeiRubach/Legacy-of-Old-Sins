@@ -1,20 +1,31 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
 {
-    private Queue<Transform> _images = new Queue<Transform>();
+    public bool IsShowingPopup { get; private set; }
     public Dictionary<string, bool> MyTutorialHandler = new Dictionary<string, bool>();
+    private Queue<Transform> _images = new Queue<Transform>();
     private PlayerController _playerController;
+    private Image currentPopup;
 
     private void Start()
     {
-        for(int i = 0; i < transform.childCount; i++)
+        if (GameManager.Instance.IsReachedFinalCheckPoint)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+            return;
+        }
+        for (int i = 0; i < transform.childCount; i++)
         {
             var curChild = transform.GetChild(i);
             _images.Enqueue(curChild);
             MyTutorialHandler.Add(curChild.name, false);
         }
+        if (_images.Count == 0) return;
+
+        currentPopup = _images.Peek().GetComponent<Image>();
         MyTutorialHandler["Movement"] = true;
 
         if (GameManager.Instance.IsReachedCheckPoint)
@@ -23,18 +34,53 @@ public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
 
     public void DestroyFirstChild()
     {
+        if (_images.Count == 0) return;
+
         MyTutorialHandler[_images.Peek().name] = false;
         Destroy(_images.Dequeue().gameObject);
-        if(!_images.Peek().name.Equals("Move bomb"))
+
+        if (_images.Count == 0) return;
+        currentPopup = _images.Peek().GetComponent<Image>();
+        if (!_images.Peek().name.Equals("Move bomb"))
             MyTutorialHandler[_images.Peek().name] = true;
     }
     public void DisplayFirstChild()
     {
+        if (_images.Count == 0) return;
         _images.Peek().gameObject.SetActive(true);
+        if (currentPopup == null) return;
+
+        currentPopup.enabled = true;
     }
     public void HideFirstChild()
     {
-        _images.Peek().gameObject.SetActive(false);
+        if (_images.Count == 0) return;
+        if (!_images.Peek().gameObject.activeSelf) return;
+        if (currentPopup == null)
+        {
+            _images.Peek().gameObject.SetActive(false);
+            return;
+        }
+
+        currentPopup.enabled = false;
+    }
+    public void SavePopUpForPauseMenu()
+    {
+        if (_images.Count == 0) return;
+        if (!_images.Peek().gameObject.activeSelf) return;
+        if (currentPopup == null)
+        {
+            _images.Peek().gameObject.SetActive(false);
+            IsShowingPopup = true;
+            return;
+        }
+        if (currentPopup.enabled)
+        {
+            IsShowingPopup = true;
+            HideFirstChild();
+            return;
+        }
+        IsShowingPopup = false;
     }
 
     public void SetDouglasBombBoolTrue()
@@ -47,6 +93,8 @@ public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
 
     public void CheckPointTutorialInitialize(string popup)
     {
+        if (_images.Count == 0) return;
+
         int queueCount = _images.Count;
         for (int i = 0; i < queueCount; i++)
         {

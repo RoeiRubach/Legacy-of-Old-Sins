@@ -6,6 +6,11 @@ public class GameManager : SingletonDontDestroy<GameManager>
     [HideInInspector] public bool IsReachedFinalCheckPoint;
     [HideInInspector] public Vector3[] CharactersPlacements;
 
+    public void SetReachFinalCheckPointViaEvent()
+    {
+        IsReachedFinalCheckPoint = true;
+    }
+
 #if UNITY_EDITOR
     [Range(1, 3)]
     [SerializeField] private int _checkPointToSpawn = 1;
@@ -31,7 +36,7 @@ public class GameManager : SingletonDontDestroy<GameManager>
                     SetCheckPointsLocation(_secondCheckPoint);
                     break;
                 case 3:
-                    _checkPoints[2].SetActive(true);
+                    _checkPoints[2].GetComponent<BoxCollider>().enabled = true;
                     IsReachedFinalCheckPoint = true;
                     SetCheckPointsLocation(_thirdCheckPoint);
                     break;

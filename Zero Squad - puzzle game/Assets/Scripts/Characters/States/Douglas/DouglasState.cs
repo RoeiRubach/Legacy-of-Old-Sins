@@ -102,11 +102,6 @@ public class DouglasState : PlayerStateManager
                 }
                 else
                 {
-                    if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
-                    {
-                        TutorialPopUpsController.Instance.HideFirstChild();
-                        TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
-                    }
                     ResetAIPath();
                     playerController.IsLifting = false;
                     _bombRef.GetComponent<TriggerBomb>()?.TriggerBombInSeconds();
@@ -115,7 +110,14 @@ public class DouglasState : PlayerStateManager
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
                     myCurrentAgent.speed = runningSpeed;
+                    if(GameManager.Instance.IsReachedFinalCheckPoint) return;
+                    if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
+                    {
+                        TutorialPopUpsController.Instance.HideFirstChild();
+                        TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
+                    }
                 }
+                if (GameManager.Instance.IsReachedFinalCheckPoint) return;
                 if (TutorialPopUpsController.Instance.MyTutorialHandler["Shotgun"])
                 {
                     TutorialPopUpsController.Instance.DestroyFirstChild();
@@ -210,22 +212,26 @@ public class DouglasState : PlayerStateManager
     {
         if (Input.GetKeyDown(KeyCode.Alpha2) && GameObject.Find(CharactersEnum.Elena.ToString()))
         {
+            playerController.SetState(new ElenaState(playerController, cameraController));
+
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Select Elena"])
             {
                 TutorialPopUpsController.Instance.DestroyFirstChild();
                 TutorialPopUpsController.Instance.DisplayFirstChild();
             }
-            playerController.SetState(new ElenaState(playerController, cameraController));
         }
 
         else if (Input.GetKeyDown(KeyCode.Alpha3) && GameObject.Find(CharactersEnum.Hector.ToString()))
         {
+            playerController.SetState(new HectorState(playerController, cameraController));
+
+            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
             if (TutorialPopUpsController.Instance.MyTutorialHandler["Selections"])
             {
                 TutorialPopUpsController.Instance.DestroyFirstChild();
                 TutorialPopUpsController.Instance.DisplayFirstChild();
             }
-            playerController.SetState(new HectorState(playerController, cameraController));
         }
     }
 

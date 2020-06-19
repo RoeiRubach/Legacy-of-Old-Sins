@@ -6,7 +6,6 @@ public class PauseMenu : MonoBehaviour
 
     [SerializeField] private GameObject _onGameUI;
     [SerializeField] private GameObject _pauseMenuUI;
-    [SerializeField] private GameObject _optionsMenuUI;
 
     private void Update()
     {
@@ -21,6 +20,8 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        if (TutorialPopUpsController.Instance.IsShowingPopup)
+            TutorialPopUpsController.Instance.DisplayFirstChild();
         _pauseMenuUI?.SetActive(false);
         _onGameUI?.SetActive(true);
         Time.timeScale = 1f;
@@ -29,16 +30,11 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        TutorialPopUpsController.Instance.SavePopUpForPauseMenu();
         _onGameUI?.SetActive(false);
         _pauseMenuUI?.SetActive(true);
         Time.timeScale = 0f;
         IsGamePaused = true;
-    }
-
-    public void EnterOptionsMenu()
-    {
-        _pauseMenuUI?.SetActive(false);
-        _optionsMenuUI?.SetActive(true);
     }
 
     public void ExitGame()

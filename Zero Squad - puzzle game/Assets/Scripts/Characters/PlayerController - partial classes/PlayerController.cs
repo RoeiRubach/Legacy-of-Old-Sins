@@ -67,6 +67,7 @@ public partial class PlayerController : MonoBehaviour
         _currentState.EnterSkillViaButton = !_currentState.EnterSkillViaButton ? true : false;
 
         if (tutorialPopUp == null) return;
+        if (GameManager.Instance.IsReachedFinalCheckPoint) return;
         if (TutorialPopUpsController.Instance.MyTutorialHandler[tutorialPopUp])
         {
             TutorialPopUpsController.Instance.DestroyFirstChild();
