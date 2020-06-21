@@ -5,7 +5,6 @@ public class DouglasState : PlayerStateManager
     private bool _isUsingSkill;
     private GameObject _douglasShotgun;
     private GameObject _douglasAgentPlacement;
-    private Transform _bombRef;
     private DouglasShootingManager _douglasShootingManager;
     private DouglasAutoShooting _douglasAutoShooting;
 
@@ -104,17 +103,20 @@ public class DouglasState : PlayerStateManager
                 {
                     ResetAIPath();
                     playerController.IsLifting = false;
-                    _bombRef.GetComponent<TriggerBomb>()?.TriggerBombInSeconds();
-                    _bombRef.parent = null;
-                    _bombRef.GetComponent<Rigidbody>().useGravity = true;
+                    playerController.BombRef.GetComponent<TriggerBomb>()?.TriggerBombInSeconds();
+                    playerController.BombRef.transform.parent = null;
+                    playerController.BombRef.GetComponent<Rigidbody>().useGravity = true;
+                    playerController.BombRef = null;
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
                     myCurrentAgent.speed = runningSpeed;
-                    if(GameManager.Instance.IsReachedFinalCheckPoint) return;
-                    if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
+                    if (GameManager.Instance.IsReachedFinalCheckPoint)
                     {
-                        TutorialPopUpsController.Instance.HideFirstChild();
-                        TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
+                        if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
+                        {
+                            TutorialPopUpsController.Instance.HideFirstChild();
+                            TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
+                        }
                     }
                 }
                 if (GameManager.Instance.IsReachedFinalCheckPoint) return;
@@ -142,9 +144,6 @@ public class DouglasState : PlayerStateManager
                     if (interactableObject == null)
                         interactableObject = hitInfo.transform;
                     interactableObject.GetComponent<Outline>().enabled = true;
-
-                    if (hitInfo.transform.name == "Bomb")
-                        _bombRef = hitInfo.transform;
 
                     isPossibleToInteract = true;
                 }

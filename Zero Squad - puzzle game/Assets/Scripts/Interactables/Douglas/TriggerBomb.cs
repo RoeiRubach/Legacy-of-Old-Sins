@@ -6,12 +6,14 @@ public class TriggerBomb : MonoBehaviour
     [SerializeField] private int _bombTimer = 3;
     [Range(3, 5)]
     [SerializeField] private int _bombDamage = 3;
+    [SerializeField] private GameObject _explosionPrefab;
     private PlayerController _playerController;
     private Transform _charactersHolder;
     private Transform[] _charactersRef;
     private Door _doorRef;
     private BombSpawner _bombSpawner;
     private Transform _finalCheckPoint;
+    private Animator _bombAnimator;
     
     private float _bombExplotionRadius = 3.25f;
 
@@ -27,12 +29,12 @@ public class TriggerBomb : MonoBehaviour
         _doorRef = GameObject.Find("BombTheDoor").GetComponent<Door>();
         _finalCheckPoint = GameObject.Find("FinalCheckPoint").transform;
         _bombSpawner = FindObjectOfType<BombSpawner>();
+        _bombAnimator = GetComponent<Animator>();
     }
 
     public void TriggerBombInSeconds()
     {
-        Invoke("DamageAnyCloseEntity", _bombTimer);
-        Destroy(gameObject, _bombTimer);
+        Invoke("TriggerBombExplosion", _bombTimer);
     }
 
 #if UNITY_EDITOR
@@ -42,6 +44,24 @@ public class TriggerBomb : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _bombExplotionRadius);
     }
 #endif
+
+    private void TriggerBombExplosion()
+    {
+        if (GetComponent<Animator>())
+            _bombAnimator.SetTrigger("BombExplode");
+        else
+        {
+            BombExplosion();
+            Destroy(gameObject, 0.5f);
+        }
+    }
+
+    public void BombExplosion()
+    {
+        Instantiate(_explosionPrefab, transform);
+        DamageAnyCloseEntity();
+        Destroy(GetComponentInParent<Bomb>());
+    }
 
     private void DamageAnyCloseEntity()
     {

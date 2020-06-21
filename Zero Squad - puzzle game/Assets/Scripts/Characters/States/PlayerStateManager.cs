@@ -187,11 +187,13 @@ public abstract class PlayerStateManager
                         case "Bomb":
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
                             myCurrentAgent.speed = bombWalkingSpeed;
-                            if (GameManager.Instance.IsReachedFinalCheckPoint) return;
-                            if (TutorialPopUpsController.Instance.MyTutorialHandler["Move bomb"])
+                            if (!GameManager.Instance.IsReachedFinalCheckPoint)
                             {
-                                TutorialPopUpsController.Instance.DestroyFirstChild();
-                                TutorialPopUpsController.Instance.DisplayFirstChild();
+                                if (TutorialPopUpsController.Instance.MyTutorialHandler["Move bomb"])
+                                {
+                                    TutorialPopUpsController.Instance.DestroyFirstChild();
+                                    TutorialPopUpsController.Instance.DisplayFirstChild();
+                                }
                             }
                             break;
                         case "Cabinet":

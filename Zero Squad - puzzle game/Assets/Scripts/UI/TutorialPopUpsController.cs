@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
 {
-    public bool IsShowingPopup { get; private set; }
     public Dictionary<string, bool> MyTutorialHandler = new Dictionary<string, bool>();
     private Queue<Transform> _images = new Queue<Transform>();
     private PlayerController _playerController;
@@ -17,6 +16,7 @@ public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
             transform.GetChild(0).gameObject.SetActive(false);
             return;
         }
+
         for (int i = 0; i < transform.childCount; i++)
         {
             var curChild = transform.GetChild(i);
@@ -63,24 +63,6 @@ public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
         }
 
         currentPopup.enabled = false;
-    }
-    public void SavePopUpForPauseMenu()
-    {
-        if (_images.Count == 0) return;
-        if (!_images.Peek().gameObject.activeSelf) return;
-        if (currentPopup == null)
-        {
-            _images.Peek().gameObject.SetActive(false);
-            IsShowingPopup = true;
-            return;
-        }
-        if (currentPopup.enabled)
-        {
-            IsShowingPopup = true;
-            HideFirstChild();
-            return;
-        }
-        IsShowingPopup = false;
     }
 
     public void SetDouglasBombBoolTrue()

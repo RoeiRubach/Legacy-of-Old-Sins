@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 public class Bomb : InteractableBase, IDouglasInteractables
 {
+    [SerializeField] private GameObject _bombCarryPrefab;
+
+    private void Start()
+    {
+        transform.name = "Bomb";
+    }
+
     private void Update()
     {
         if (!isInteract) return;
@@ -13,14 +19,16 @@ public class Bomb : InteractableBase, IDouglasInteractables
 
     private void LiftBomb()
     {
-        FindObjectOfType<PlayerController>().IsLifting = true;
-        Destroy(GetComponent<Bomb>());
-        Destroy(GetComponent<NavMeshObstacle>());
-        Destroy(GetComponent<Outline>());
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        playerController.IsLifting = true;
         if (objectPlacement == null)
             SetObjectPlacement();
-        transform.parent = objectPlacement;
-        transform.localPosition = Vector3.zero;
+        GetComponentInChildren<Animator>().SetBool("DouglasLifingBomb", true);
+        playerController.BombRef = Instantiate(_bombCarryPrefab, objectPlacement);
+        //transform.parent = objectPlacement;
+        //transform.localPosition = Vector3.zero;
+        Destroy(GetComponent<Bomb>());
+        Destroy(GetComponent<Outline>());
     }
 
     private void SetObjectPlacement()

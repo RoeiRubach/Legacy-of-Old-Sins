@@ -2,6 +2,7 @@
 
 public partial class PlayerController : MonoBehaviour
 {
+    [HideInInspector] public GameObject BombRef { get; set; }
     [HideInInspector] public bool IsLifting;
     [SerializeField] private Transform[] _charactersRef;
     [SerializeField] private GameObject _hectorUIRef, _elenaUIRef;
