@@ -58,7 +58,7 @@ public class TriggerBomb : MonoBehaviour
 
     public void BombExplosion()
     {
-        Instantiate(_explosionPrefab, transform);
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         DamageAnyCloseEntity();
         Destroy(GetComponentInParent<Bomb>());
     }

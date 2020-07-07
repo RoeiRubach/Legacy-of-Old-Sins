@@ -66,6 +66,7 @@ public class ElenaState : PlayerStateManager
                 {
                     if (IsElenaAboutToBackstab())
                         ResetAssassinating();
+                    playerController.ElenaSFX.PlayRandomSkillClip();
                     ResetAIPath();
                     myCurrentAgent.speed = stealthRunningSpeed;
                     _elenaStealthManager.CallStealthMode();
@@ -101,6 +102,7 @@ public class ElenaState : PlayerStateManager
         switch (tagReceived)
         {
             case "Enemy":
+                playerController.ElenaSFX.PlayRandomHitClip();
                 playerController.ElenaTakingDamage();
                 break;
         }
@@ -126,10 +128,7 @@ public class ElenaState : PlayerStateManager
         ResetCharactersControl();
     }
 
-    private bool IsElenaAboutToBackstab()
-    {
-        return (IsAbleToAssassinTarget || IsAssassinatingTarget);
-    }
+    private bool IsElenaAboutToBackstab() => (IsAbleToAssassinTarget || IsAssassinatingTarget);
 
     private void HighlightCursorOverInteractableObject()
     {
@@ -194,6 +193,7 @@ public class ElenaState : PlayerStateManager
         }
 
         initializationComplete = true;
+        playerController.ElenaSFX.PlayRandomSelectedClip();
     }
 
     private void SwitchCharacters()

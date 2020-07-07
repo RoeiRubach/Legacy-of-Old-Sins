@@ -185,6 +185,7 @@ public abstract class PlayerStateManager
                     switch (interactableObject.name)
                     {
                         case "Bomb":
+                            playerController.DouglasSFX.StartBombCarryingLoop();
                             myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), true);
                             myCurrentAgent.speed = bombWalkingSpeed;
                             if (!GameManager.Instance.IsReachedFinalCheckPoint)
@@ -208,8 +209,10 @@ public abstract class PlayerStateManager
                         case "Health Pack":
                             HealthPackInteraction();
                             break;
+                        case "Shooter - root":
                         case "Mindless possessed":
                         case "Summoner":
+                            playerController.ElenaSFX.PlayElenaBackstab();
                             isInteracting = false;
                             if (!GameManager.Instance.IsReachedFinalCheckPoint)
                             {
@@ -217,11 +220,9 @@ public abstract class PlayerStateManager
                                     TutorialPopUpsController.Instance.DestroyFirstChild();
                             }
                             break;
-                        case "Shooter - root":
                         case "Switch":
                         case "Console":
                             isInteracting = false;
-                            //ResetInteractable();
                             break;
                     }
 
@@ -283,12 +284,15 @@ public abstract class PlayerStateManager
         switch (myCurrentCharacter.tag)
         {
             case "Douglas":
+                playerController.DouglasSFX.PlayCollectHealthPackClip();
                 playerController.DouglasGainingHealth(healthRegenCollectables.HealthToRegen);
                 break;
             case "Elena":
+                playerController.ElenaSFX.PlayCollectHealthPackClip();
                 playerController.ElenaGainingHealth(healthRegenCollectables.HealthToRegen);
                 break;
             case "Hector":
+                playerController.HectorSFX.PlayCollectHealthPackClip();
                 playerController.HectorGainingHealth(healthRegenCollectables.HealthToRegen);
                 break;
         }

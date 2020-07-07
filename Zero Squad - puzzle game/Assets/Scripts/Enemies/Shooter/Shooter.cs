@@ -6,6 +6,7 @@ public class Shooter : EnemyBase, IDouglasEnemies, IElenaAssassin
 
     private void Start()
     {
+        MindlessShooterSFX = GetComponent<MindlessShooterSFX>();
         transform.name = "Shooter - root";
         _elenaKillSummonerPlacement = transform.GetChild(1);
         _shootingController = GetComponentInChildren<EnemyShooterShootingController>();

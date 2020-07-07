@@ -1,24 +1,19 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     public int MaxHealth = 3;
-    public bool IsKilled
-    {
-        get;
-        private set;
-    }
-    public int CurrentHealth
-    {
-        get;
-        private set;
-    }
+    public bool IsKilled { get; private set; }
+    public int CurrentHealth { get; private set; }
 
     [SerializeField] private GameObject _healthBarUI;
     [SerializeField] private Slider _slider;
     [SerializeField] private bool _isShield;
 
+    private MindlessShooterSFX _mindlessShooterSFX;
+    //private SummonerSFX _summonerSFX;
     private Camera _mainCam;
     private GameObject _shieldRef;
     private bool _isSet;
@@ -55,6 +50,7 @@ public class EnemyHealth : MonoBehaviour
     {
         for (int i = 0; i < damageAmount; i++)
         {
+            PlayHitClip();
             CurrentHealth--;
             if (CurrentHealth <= 0)
             {
@@ -68,12 +64,17 @@ public class EnemyHealth : MonoBehaviour
                     GetComponentInParent<BoxCollider>().enabled = false;
                     IsKilled = true;
                     ToggleHealthBarOFF();
-                    if (transform.parent != null)
-                        transform.parent = null;
+                    transform.parent = null;
                     GetComponent<GameEventSubscriber>()?.OnEventFire();
                 }
             }
         }
+    }
+
+    private void PlayHitClip()
+    {
+        if (TryGetComponent(out _mindlessShooterSFX))
+            _mindlessShooterSFX.PlayRandomHitClip();
     }
 
     public void ShieldHealthRegenerate()

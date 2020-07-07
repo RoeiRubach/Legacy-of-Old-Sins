@@ -27,6 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected float _walkingSpeed;
     [SerializeField] protected float _runningSpeed;
 
+    public MindlessShooterSFX MindlessShooterSFX { get; protected set; }
     protected float turningSpeed = 1.5f;
     protected EnemyHealth enemyHealth;
     protected GameObject enemyEyesRef;
@@ -64,7 +65,11 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void SetDeathAnimationTrue()
     {
-        enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isDead.ToString(), true);
+        if (!enemyAnimator.GetBool(EnemyAnimationTransitionParameters._isDead.ToString()))
+        {
+            MindlessShooterSFX.PlayRandomDeathClip();
+            enemyAnimator.SetBool(EnemyAnimationTransitionParameters._isDead.ToString(), true);
+        }
     }
 
     protected virtual void FaceTarget(Transform TargetDetected)

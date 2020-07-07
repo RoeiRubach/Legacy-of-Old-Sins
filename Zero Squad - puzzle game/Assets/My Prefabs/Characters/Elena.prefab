@@ -1491,7 +1491,9 @@ GameObject:
   - component: {fileID: 7683830871809494081}
   - component: {fileID: 7683830871809494080}
   - component: {fileID: 7683830871809494207}
+  - component: {fileID: 1959036751604854228}
   - component: {fileID: 465460841}
+  - component: {fileID: 2704536682534910750}
   m_Layer: 10
   m_Name: Elena
   m_TagString: Elena
@@ -1691,8 +1693,41 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.75
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 13
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1959036751604854228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683830871809494206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908fc8ba3e17fcb4f96b2530957ce3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterDeaths:
+  - {fileID: 8300000, guid: 5773ffeea0042b64d99e264c20faa7ba, type: 3}
+  _characterHits:
+  - {fileID: 8300000, guid: 9aed01bb7d501a14382d137cea8a3e78, type: 3}
+  - {fileID: 8300000, guid: 3d9192e2084a252409b20ef2c081f135, type: 3}
+  - {fileID: 8300000, guid: 34b2d6d1c5e6054408dad40933464045, type: 3}
+  - {fileID: 8300000, guid: ea3601cb67e9e3a4baac3a4a2f0e481f, type: 3}
+  _characterSelecteds:
+  - {fileID: 8300000, guid: fb87fbbd1257bcb4ca31e76f35d3f2f3, type: 3}
+  - {fileID: 8300000, guid: b65b4853cbc1e03479d855b934b6fa81, type: 3}
+  - {fileID: 8300000, guid: d926822f414a88c42a9521fd6c37d12c, type: 3}
+  - {fileID: 8300000, guid: 623e77811d9caf64989257ee60b03a3c, type: 3}
+  _characterSkillModeSwitching:
+  - {fileID: 8300000, guid: eb54c940ad65dda44a447ee2957ce188, type: 3}
+  - {fileID: 8300000, guid: b91c9edbff916164195afa19963d6381, type: 3}
+  - {fileID: 8300000, guid: cf01c81c076de8b4a87803e14121260f, type: 3}
+  - {fileID: 8300000, guid: b91dcf3691ec0324a90a1706b10023ab, type: 3}
+  _collectHealthPack: {fileID: 8300000, guid: 530c7105b74e93b418518299756cb126, type: 3}
+  _elenaFirstEncounter: {fileID: 8300000, guid: 19b7f125a7415d541a492d0128e065c4,
+    type: 3}
+  _elenaBackstab: {fileID: 8300000, guid: d604f41072d18f74fbac092d78f5a17a, type: 3}
 --- !u!114 &465460841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1710,18 +1745,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: SwitchToElenaStateViaButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: EnterSkillViaButton
+        m_MethodName: ElenaStealthTimerIsOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1733,6 +1757,102 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!82 &2704536682534910750
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683830871809494206}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 12
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7751420775364588007
 GameObject:
   m_ObjectHideFlags: 0

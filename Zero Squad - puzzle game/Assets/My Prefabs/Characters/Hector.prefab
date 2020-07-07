@@ -105,14 +105,16 @@ GameObject:
   - component: {fileID: 6021171287487076230}
   - component: {fileID: 819133393176398050}
   - component: {fileID: 819133393176398061}
+  - component: {fileID: 3805093384256921308}
   - component: {fileID: 819133393176398060}
+  - component: {fileID: 2627599065900573258}
   m_Layer: 10
   m_Name: Hector
   m_TagString: Hector
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4397057654013721340
 Transform:
   m_ObjectHideFlags: 0
@@ -183,8 +185,49 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.75
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 9
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3805093384256921308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819133393176398063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8bcf062762cee447a155948ab59b7d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterDeaths:
+  - {fileID: 8300000, guid: a8198dd69a92266468508a1b680656ee, type: 3}
+  - {fileID: 8300000, guid: 37f647080d3e4474a809eb77bcb02ffd, type: 3}
+  - {fileID: 8300000, guid: b39b6febe3e284248b7cebfcb20a253a, type: 3}
+  _characterHits:
+  - {fileID: 8300000, guid: 15b4e6d54c7bc3f4eaaab11eaf8cb506, type: 3}
+  - {fileID: 8300000, guid: aaf5a92091a6c0141b00f7c70986a567, type: 3}
+  - {fileID: 8300000, guid: 2c391775c1445ca4ebbc4d4f59adc82d, type: 3}
+  - {fileID: 8300000, guid: 2760e0a9ccd0f1c4ca32b8c78d6b62de, type: 3}
+  _characterSelecteds:
+  - {fileID: 8300000, guid: d824a02192b8d4c4fbd63a4cb6229de0, type: 3}
+  - {fileID: 8300000, guid: e29136be3186daf44a5c61bccc9f0c5e, type: 3}
+  - {fileID: 8300000, guid: fe5fdfe79836fca468be5c608c8f9380, type: 3}
+  - {fileID: 8300000, guid: ef9ef2cb7e4dd124e8b4a78a1abde20e, type: 3}
+  - {fileID: 8300000, guid: 0b1cacb4a2016784ca50833c920c6188, type: 3}
+  - {fileID: 8300000, guid: 8600e99fd01cf984da312ffce0a07c6d, type: 3}
+  - {fileID: 8300000, guid: b72cc69b833a57b4799a135833a141f4, type: 3}
+  _characterSkillModeSwitching:
+  - {fileID: 8300000, guid: 1aace0bd3d770ce408d51f22d415a3a4, type: 3}
+  - {fileID: 8300000, guid: 04bf892d0f5fbfb468e637ba2cf66f23, type: 3}
+  - {fileID: 8300000, guid: 1719375ea5b6a6342873592808b5cd2b, type: 3}
+  - {fileID: 8300000, guid: c904a0930d2bb674da4de7096fb524b8, type: 3}
+  - {fileID: 8300000, guid: b6d7e22fa7628ea4ba6ce1c49e57df04, type: 3}
+  _collectHealthPack: {fileID: 8300000, guid: 530c7105b74e93b418518299756cb126, type: 3}
+  _hectorFirstEncounter: {fileID: 8300000, guid: 7db12e16b669f4c4d9ec2dcde244a4d1,
+    type: 3}
+  _hectorShieldOff: {fileID: 8300000, guid: f09faa3fbcf04c142b63a5d1b55f3d5d, type: 3}
+  _activationSequenceComplete: {fileID: 8300000, guid: 7964266e1d321eb45bd40c7a1a01b716,
+    type: 3}
 --- !u!120 &819133393176398060
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -281,6 +324,102 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!82 &2627599065900573258
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819133393176398063}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 14
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &821787896480119946
 GameObject:
   m_ObjectHideFlags: 0
@@ -790,6 +929,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2627599065900573258}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 33e5c3243a9af174ab1b272255e76c7a,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1833654914
@@ -804,7 +955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20e3190d25e530e45846b3eac7909ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 10
+  MaxHealth: 10
   _healthBarUI: {fileID: 1619611790656496445}
   _slider: {fileID: 1619611791892122479}
   _isShield: 1
@@ -2123,25 +2274,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9111511202206003708, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.525
-      objectReference: {fileID: 0}
     - target: {fileID: 447053952424365573, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
         type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 447053952424365573, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
+    - target: {fileID: 9111511202206003708, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_LocalPosition.x
+      value: 0.525
       objectReference: {fileID: 0}
     - target: {fileID: 5313686919313179253, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313686919313179253, guid: cdf0f71bc72b7fb4b9eb973bc747f061,
+        type: 3}
+      propertyPath: m_TagString
+      value: Hector Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdf0f71bc72b7fb4b9eb973bc747f061, type: 3}

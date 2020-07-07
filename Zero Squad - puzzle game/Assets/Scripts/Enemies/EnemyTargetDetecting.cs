@@ -2,14 +2,13 @@
 
 public class EnemyTargetDetecting : MonoBehaviour
 {
-    private float _delayTime = 0.85f;
     public bool IsElenaBeenSpotted { get; private set; }
-    private bool _isHectorShieldSpotted;
-
+    public ElenaStealthManager ElenaStealthManager { get; private set; }
     [SerializeField] private Transform _enemiesShieldHittingSpot;
 
+    private float _delayTime = 0.85f;
+    private bool _isHectorShieldSpotted;
     private EnemyBase _enemyBaseRef;
-    private ElenaStealthManager _elenaStealthManager;
 
     private void Start()
     {
@@ -19,11 +18,11 @@ public class EnemyTargetDetecting : MonoBehaviour
 
     private void Update()
     {
-        var nearestCharacter = CharactersPoolController.FindClosestCharacter(transform.position);
+        var nearestCharacter = CharactersPoolController.FindClosestCharacter(transform.position, this, ElenaStealthManager);
 
         if (nearestCharacter == null) return;
 
-        if (_enemyBaseRef.IsPlayerSpotted || (IsElenaBeenSpotted && !_elenaStealthManager.IsInStealthMode))
+        if (_enemyBaseRef.IsPlayerSpotted)
         {
             SetElenaOffSightIfInStealth();
             SetTargetIfNotAttackingAlready(nearestCharacter.transform);
@@ -33,7 +32,7 @@ public class EnemyTargetDetecting : MonoBehaviour
             _enemyBaseRef.TargetDetected = null;
             _enemyBaseRef.IsPlayerSpotted = false;
 
-            if (_elenaStealthManager != null && IsElenaBeenSpotted)
+            if (ElenaStealthManager != null && IsElenaBeenSpotted)
                 InvokeElenaOutOfSight();
         }
     }
@@ -88,36 +87,34 @@ public class EnemyTargetDetecting : MonoBehaviour
 
     private void ElenaBeenSpotted(Collider elena)
     {
-        if (_elenaStealthManager == null)
-            _elenaStealthManager = elena.GetComponentInParent<ElenaStealthManager>();
+        if (ElenaStealthManager == null)
+            ElenaStealthManager = elena.GetComponentInParent<ElenaStealthManager>();
 
         CancelInvoke("ElenaOutOfSight");
+        _enemyBaseRef.MindlessShooterSFX.PlayRandomDetecedElenaClip();
         _enemyBaseRef.TargetDetected = elena.transform;
         IsElenaBeenSpotted = true;
 
-        _elenaStealthManager.AddElenaToPool();
-        //Debug.Log("Elena got triggered");
+        ElenaStealthManager.AddElenaToPool();
     }
 
     private void InvokeElenaOutOfSight()
     {
         if (!IsInvoking("ElenaOutOfSight"))
-        {
             Invoke("ElenaOutOfSight", 1.1f);
-            //Debug.Log("Elena got out of trigger");
-        }
     }
 
     private void ElenaOutOfSight()
     {
         IsElenaBeenSpotted = false;
-        _elenaStealthManager.RemoveElenaFromPool();
+        _enemyBaseRef.MindlessShooterSFX.PlayRandomLostElenaClip();
+        ElenaStealthManager.RemoveElenaFromPool();
     }
 
     private void SetElenaOffSightIfInStealth()
     {
-        if (_elenaStealthManager != null)
-            if (_elenaStealthManager.IsInStealthMode && IsElenaBeenSpotted)
+        if (ElenaStealthManager != null)
+            if (ElenaStealthManager.IsInStealthMode && IsElenaBeenSpotted)
                 InvokeElenaOutOfSight();
     }
 
@@ -127,7 +124,13 @@ public class EnemyTargetDetecting : MonoBehaviour
     private void SetTargetIfNotAttackingAlready(Transform nearestCharacter)
     {
         if (!_enemyBaseRef.IsAttacking)
-            _enemyBaseRef.TargetDetected = nearestCharacter;
+        {
+            if(_enemyBaseRef.TargetDetected != nearestCharacter)
+            {
+                _enemyBaseRef.MindlessShooterSFX.PlayRandomCharacterTriggerClip();
+                _enemyBaseRef.TargetDetected = nearestCharacter;
+            }
+        }
         else
         {
             if (nearestCharacter != _enemiesShieldHittingSpot)

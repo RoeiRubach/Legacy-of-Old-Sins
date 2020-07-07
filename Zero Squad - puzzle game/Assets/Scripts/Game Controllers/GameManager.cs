@@ -3,6 +3,7 @@
 public class GameManager : SingletonDontDestroy<GameManager>
 {
     public bool IsReachedCheckPoint;
+    public int CheckPointNumber { get; set; }
     [HideInInspector] public bool IsReachedFinalCheckPoint;
     [HideInInspector] public Vector3[] CharactersPlacements;
 
@@ -29,15 +30,18 @@ public class GameManager : SingletonDontDestroy<GameManager>
             {
                 case 1:
                     _checkPoints[0].SetActive(true);
+                    MusicAudioController.Instance.SwitchGameMusic();
                     SetCheckPointsLocation(_firstCheckPoint);
                     break;
                 case 2:
                     _checkPoints[1].SetActive(true);
+                    MusicAudioController.Instance.SwitchGameMusic(1);
                     SetCheckPointsLocation(_secondCheckPoint);
                     break;
                 case 3:
                     _checkPoints[2].GetComponent<BoxCollider>().enabled = true;
                     IsReachedFinalCheckPoint = true;
+                    MusicAudioController.Instance.SwitchGameMusic(2);
                     SetCheckPointsLocation(_thirdCheckPoint);
                     break;
             }

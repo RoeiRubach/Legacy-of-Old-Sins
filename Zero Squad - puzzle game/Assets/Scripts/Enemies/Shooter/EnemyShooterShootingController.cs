@@ -13,18 +13,20 @@ public class EnemyShooterShootingController : MonoBehaviour
     [SerializeField] private Transform _gunEndPointPosition;
 
     private float _shootingTimer;
-
     private PlayerController _playerControllerHealth;
     private CharactersPoolController _nearestEnemy;
-    private void Start()
+    private EnemyTargetDetecting _enemyTargetDetecting;
+
+    private void Awake()
     {
         _shootingTimer = _autoShootingDelay;
         _playerControllerHealth = FindObjectOfType<PlayerController>();
+        _enemyTargetDetecting = GetComponentInChildren<EnemyTargetDetecting>();
     }
 
     private void FixedUpdate()
     {
-        _nearestEnemy = CharactersPoolController.FindClosestCharacter(transform.position);
+        _nearestEnemy = CharactersPoolController.FindClosestCharacter(transform.position, _enemyTargetDetecting, _enemyTargetDetecting.ElenaStealthManager);
 
         if (_nearestEnemy != null)
         {

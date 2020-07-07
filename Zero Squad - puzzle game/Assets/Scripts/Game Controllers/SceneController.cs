@@ -48,12 +48,14 @@ public class SceneController : SingletonDontDestroy<SceneController>
 
         _blackImageFader.color = new Color(0, 0, 0, 1);
 
+        MusicAudioController.Instance.SwitchGameMusic(MusicAudioController.Instance.MusicToPlay);
+
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(_buildIndex);
         while (!asyncOperation.isDone)
             yield return null;
 
         yield return new WaitForSeconds(_transitionWaitTime);
-        
+
         for (float t = 0; t < 1; t += Time.deltaTime / _faderDuration)
         {
             _blackImageFader.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, t));

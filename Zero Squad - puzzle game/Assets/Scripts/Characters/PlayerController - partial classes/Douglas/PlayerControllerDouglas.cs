@@ -82,7 +82,8 @@ public partial class PlayerController
 
                 if (_douglasCurrentHP <= 0)
                 {
-                    SceneController.LoadScene();
+                    DouglasSFX.PlayRandomDeathClip();
+                    SceneController.LoadScene(_buildIndex: 1);
                     break;
                 }
             }

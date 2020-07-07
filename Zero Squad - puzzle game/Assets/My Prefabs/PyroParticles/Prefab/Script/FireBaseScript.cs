@@ -88,6 +88,7 @@ namespace DigitalRuby.PyroParticles
         {
             if (AudioSource != null)
             {
+                AudioSource.volume = SFXAudioCotroller.Instance.GetSFXAudioVolume();
                 AudioSource.Play();
             }
 

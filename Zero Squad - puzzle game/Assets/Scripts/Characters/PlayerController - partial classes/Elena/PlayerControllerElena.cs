@@ -10,7 +10,7 @@ public partial class PlayerController
     [SerializeField] private Image _elenaHP;
     [SerializeField] private Button _elenaButtonRef;
 
-    private int _elenaCurrentHP = _maxHP;
+    private int _elenaCurrentHP = MAX_HP;
 
     [Header("Elena icon properties:", order = 2)]
     [SerializeField] private Image _elenaIconPlaceHolder;
@@ -94,7 +94,8 @@ public partial class PlayerController
 
                 if (_elenaCurrentHP <= 0)
                 {
-                    SceneController.LoadScene();
+                    ElenaSFX.PlayRandomDeathClip();
+                    SceneController.LoadScene(_buildIndex: 1);
                     break;
                 }
             }

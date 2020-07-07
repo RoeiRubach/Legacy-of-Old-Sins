@@ -8,7 +8,7 @@ public class OnTriggerEnterHandler : MonoBehaviour, IPuzzleAuthority
 
     private void Awake()
     {
-        playerController = GameObject.FindObjectOfType<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
 
         if (transform.name.StartsWith(CharactersEnum.Douglas.ToString()))
             _characterTrigger = new DouglasState(playerController);

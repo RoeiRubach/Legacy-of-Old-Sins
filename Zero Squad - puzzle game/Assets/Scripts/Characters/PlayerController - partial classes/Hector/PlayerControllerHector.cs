@@ -10,7 +10,7 @@ public partial class PlayerController
     [SerializeField] private Image _hectorHP;
     [SerializeField] private Button _hectorButtonRef;
 
-    private int _hectorCurrentHP = _maxHP;
+    private int _hectorCurrentHP = MAX_HP;
 
     [Header("Hector icon properties:", order = 2)]
     [SerializeField] private Image _hectorIconPlaceHolder;
@@ -93,7 +93,8 @@ public partial class PlayerController
 
                 if (_hectorCurrentHP <= 0)
                 {
-                    SceneController.LoadScene();
+                    HectorSFX.PlayRandomDeathClip();
+                    SceneController.LoadScene(_buildIndex: 1);
                     break;
                 }
             }

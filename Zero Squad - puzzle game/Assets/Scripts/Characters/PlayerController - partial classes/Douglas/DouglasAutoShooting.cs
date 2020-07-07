@@ -62,6 +62,7 @@ public class DouglasAutoShooting : MonoBehaviour
     {
         _shootingTimer = _autoShootingDelay;
         nearestEnemy.GetComponent<EnemyHealth>().HealthDecreaseViaBullet();
+        _playerController.DouglasSFX.PlayShotCast();
         transform.GetComponent<Animator>().SetBool("_isShooting", true);
     }
 

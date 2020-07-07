@@ -2,24 +2,17 @@
 
 public class DouglasShootingManager : MonoBehaviour
 {
-    private PlayerController _playerController;
-    private const float _manualShootingDelay = 1.1f;
-
-    [SerializeField] private Transform _bulletHolder;
-
-    public GameObject DouglasShotgunRef;
-    //public LayerMask EnemyLayerMask;
+    private const float MANUAL_SHOOTING_DELAY = 1.1f;
 
     [HideInInspector] public Transform DouglasTarget = null;
+    public GameObject DouglasShotgunRef;
+    [SerializeField] private Transform _bulletHolder;
 
     private float _shootingDelay = 0.875f;
-
+    private PlayerController _playerController;
     private bool _isAllowedToShoot;
 
-    private void Awake()
-    {
-        _playerController = FindObjectOfType<PlayerController>();
-    }
+    private void Awake() => _playerController = FindObjectOfType<PlayerController>();
 
     public bool IsHavingClearShoot(Transform target)
     {
@@ -40,7 +33,7 @@ public class DouglasShootingManager : MonoBehaviour
             if (DouglasTarget != null)
                 DouglasShooting(DouglasTarget);
 
-            _shootingDelay = _manualShootingDelay;
+            _shootingDelay = MANUAL_SHOOTING_DELAY;
 
             _isAllowedToShoot = false;
             return true;

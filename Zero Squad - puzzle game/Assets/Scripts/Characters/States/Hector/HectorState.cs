@@ -42,11 +42,13 @@ public class HectorState : PlayerStateManager
 
                     if (!_hectorShield.activeSelf)
                     {
+                        playerController.HectorSFX.PlayRandomSkillClip();
                         _hectorShield.SetActive(true);
                         playerController.HectorOnSkillMode();
                     }
                     else
                     {
+                        playerController.HectorSFX.PlayHectorShieldOFF();
                         _hectorShield.SetActive(false);
                         myCurrentAgent.enabled = true;
                         playerController.HectorOffSkillMode();
@@ -75,6 +77,7 @@ public class HectorState : PlayerStateManager
         switch (tagReceived)
         {
             case "Enemy":
+                playerController.HectorSFX.PlayRandomHitClip();
                 playerController.HectorTakingDamage();
                 break;
         }
@@ -147,6 +150,7 @@ public class HectorState : PlayerStateManager
         }
 
         initializationComplete = true;
+        playerController.HectorSFX.PlayRandomSelectedClip();
     }
 
     private void SwitchCharacters()

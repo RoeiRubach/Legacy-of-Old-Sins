@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 using System.Collections;
 
 public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IElenaInteractables, IPuzzleAuthority
@@ -9,11 +8,12 @@ public class MindlessPossessed : EnemyBase, IDouglasEnemies, IElenaAssassin, IEl
     private bool _isPlayerEscape;
     private Vector3 _destinationToGoTo, _startPosition;
     private EnemyTargetDetecting _enemyTargetDetecting;
-    
+
     [SerializeField] private Transform _firstDestination, _secondDestination;
 
     private void Start()
     {
+        MindlessShooterSFX = GetComponent<MindlessShooterSFX>();
         transform.name = "Mindless possessed";
         _elenaKillSummonerPlacement = transform.GetChild(0);
         _startPosition = transform.position;

@@ -12,13 +12,16 @@ public class Summoner : EnemyBase, IElenaAssassin
     [SerializeField] private bool _isEarlySpawnNeeded;
     [SerializeField] private Transform[] _shooterPlacements;
 
+    private SummonerSFX _summonerSFX;
     private Transform _shooterSpawnPlacement;
-    private int _zombieSpawnCounter;
     private Vector3 _spawnLocation;
+    private bool _isClipPlayable = true;
+    private int _zombieSpawnCounter;
     private float _summonTimer;
 
     private void Start()
     {
+        _summonerSFX = GetComponent<SummonerSFX>();
         transform.name = "Summoner";
         if (_isEarlySpawnNeeded)
             _summonTimer = _spawnTimer / 2;
@@ -31,7 +34,6 @@ public class Summoner : EnemyBase, IElenaAssassin
         {
             _zombieSpawnLimit = 2;
             _zombieSpawnCounter = _zombieSpawnLimit;
-            //_summonTimer = _spawnTimer;
         }
     }
     
@@ -39,8 +41,14 @@ public class Summoner : EnemyBase, IElenaAssassin
     {
         if (_zombieSpawnCounter >= _zombieSpawnLimit) return;
 
-        if ((_summonTimer -= Time.deltaTime) <= 0)
-            SpawnEnemy();
+        _summonTimer -= Time.deltaTime;
+        if (_summonTimer <= 5)
+        {
+            PlaySummoningClip();
+
+            if (_summonTimer <= 0)
+                SpawnEnemy();
+        }
     }
 
     public void DestroyThisComponentViaEvent()
@@ -54,6 +62,7 @@ public class Summoner : EnemyBase, IElenaAssassin
         if (!transform.GetComponentInChildren<EnemyTargetDetecting>().IsElenaBeenSpotted)
         {
             GetComponent<GameEventSubscriber>()?.OnEventFire();
+            _summonerSFX.PlayDeathClip();
             Destroy(gameObject);
         }
         ElenaState.IsAssassinatingTarget = false;
@@ -89,6 +98,7 @@ public class Summoner : EnemyBase, IElenaAssassin
     private void SpawnEnemy()
     {
         _summonTimer = _spawnTimer;
+        _isClipPlayable = true;
 
         if (_isShooterSummoning)
             ShooterSpawning();
@@ -96,6 +106,15 @@ public class Summoner : EnemyBase, IElenaAssassin
             MindlessPossessSpawning();
 
         _zombieSpawnCounter++;
+    }
+
+    private void PlaySummoningClip()
+    {
+        if (_isClipPlayable)
+        {
+            _summonerSFX.PlayRandomSummonClip();
+            _isClipPlayable = false;
+        }
     }
 
     private void MindlessPossessSpawning()

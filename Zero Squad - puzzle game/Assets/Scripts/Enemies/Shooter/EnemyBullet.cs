@@ -2,6 +2,7 @@
 
 public class EnemyBullet : MonoBehaviour
 {
+    private const float BULLET_IMPACT_DISTANCE = 1.65f;
     [Range(1f, 5f)]
     [SerializeField] private int _bulletDamage = 1;
     [Range(1f, 5f)]
@@ -10,10 +11,7 @@ public class EnemyBullet : MonoBehaviour
     private Vector3 _shootDirection;
     private PlayerController _playerController;
 
-    private void Start()
-    {
-        _playerController = FindObjectOfType<PlayerController>();
-    }
+    private void Awake() => _playerController = FindObjectOfType<PlayerController>();
 
     public void SetUp(Vector3 shootDirection)
     {
@@ -29,7 +27,7 @@ public class EnemyBullet : MonoBehaviour
         var nearestEnemy = CharactersPoolController.FindClosestCharacter(transform.position);
         float distance = Vector3.Distance(transform.position, nearestEnemy.transform.position);
 
-        if(distance <= 1.65f)
+        if(distance <= BULLET_IMPACT_DISTANCE)
         {
             _playerController.DamageACharacter(nearestEnemy.transform, _bulletDamage);
             Destroy(gameObject);

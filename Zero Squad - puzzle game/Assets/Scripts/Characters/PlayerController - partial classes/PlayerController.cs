@@ -2,19 +2,22 @@
 
 public partial class PlayerController : MonoBehaviour
 {
-    [HideInInspector] public GameObject BombRef { get; set; }
+    private const int MAX_HP = 10; 
+
     [HideInInspector] public bool IsLifting;
+    public GameObject BombRef { get; set; }
     [SerializeField] private Transform[] _charactersRef;
     [SerializeField] private GameObject _hectorUIRef, _elenaUIRef;
-
-    private const int _maxHP = 10;
 
     private PlayerStateManager _currentState;
 
     public PlayerStateManager GetCurrentStateRef() => _currentState;
 
     private CameraController _mainCamera;
-    
+    public DouglasSFX DouglasSFX { get; private set; }
+    public ElenaSFX ElenaSFX { get; private set; }
+    public HectorSFX HectorSFX { get; private set; }
+
     [Header("LayerMasks:", order = 0)]
     public LayerMask WalkableLayerMask;
     public LayerMask InteractableLayerMask;
@@ -25,13 +28,14 @@ public partial class PlayerController : MonoBehaviour
     
     private void Start()
     {
+        DouglasSFX = (DouglasSFX)FindObjectOfType(typeof(DouglasSFX));
         _mainCamera = Camera.main.GetComponent<CameraController>();
         SetState(new DouglasState(this, _mainCamera));
 
         if(GameManager.Instance != null)
             if (GameManager.Instance.IsReachedCheckPoint)
             {
-                _douglasCurrentHP = _maxHP;
+                _douglasCurrentHP = MAX_HP;
                 if (_douglasHP != null)
                     _douglasHP.sprite = _hpBars[_douglasCurrentHP];
 
@@ -44,6 +48,9 @@ public partial class PlayerController : MonoBehaviour
                     _charactersRef[i].position = GameManager.Instance.CharactersPlacements[i];
                     _charactersRef[i].GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = true;
                 }
+                MusicAudioController.Instance.SwitchGameMusic(GameManager.Instance.CheckPointNumber);
+                SetElenaSFXComponent();
+                SetHectorSFXComponent();
             }
     }
 
@@ -62,6 +69,10 @@ public partial class PlayerController : MonoBehaviour
         if (_currentState != null)
             _currentState.OnStateEnter();
     }
+
+    public void SetElenaSFXComponent() => ElenaSFX = (ElenaSFX)FindObjectOfType(typeof(ElenaSFX));
+
+    public void SetHectorSFXComponent() => HectorSFX = (HectorSFX)FindObjectOfType(typeof(HectorSFX));
 
     public void EnterSkillViaButton(string tutorialPopUp = null)
     {

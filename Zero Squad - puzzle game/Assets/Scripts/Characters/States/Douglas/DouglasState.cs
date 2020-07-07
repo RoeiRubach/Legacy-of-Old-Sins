@@ -50,6 +50,7 @@ public class DouglasState : PlayerStateManager
         switch (tagReceived)
         {
             case "Enemy":
+                playerController.DouglasSFX.PlayRandomHitClip();
                 playerController.DouglasTakingDamage();
                 break;
         }
@@ -86,6 +87,7 @@ public class DouglasState : PlayerStateManager
 
                     if (!_douglasShotgun.activeSelf)
                     {
+                        playerController.DouglasSFX.PlayRandomSkillClip();
                         playerController.DouglasSpriteOnSkillMode();
                         _douglasShootingManager.enabled = true;
                         _douglasShotgun.SetActive(true);
@@ -102,6 +104,7 @@ public class DouglasState : PlayerStateManager
                 else
                 {
                     ResetAIPath();
+                    playerController.DouglasSFX.StopBombCarryingLoop();
                     playerController.IsLifting = false;
                     playerController.BombRef.GetComponent<TriggerBomb>()?.TriggerBombInSeconds();
                     playerController.BombRef.transform.parent = null;
@@ -205,6 +208,7 @@ public class DouglasState : PlayerStateManager
             _douglasShootingManager.enabled = false;
 
         initializationComplete = true;
+        playerController.DouglasSFX.PlayRandomSelectedClip();
     }
 
     private void SwitchCharacters()
@@ -251,7 +255,10 @@ public class DouglasState : PlayerStateManager
         if (Input.GetMouseButtonDown(0))
         {
             if (_douglasShootingManager.CallSimpleShoot())
+            {
+                playerController.DouglasSFX.PlayShotCast();
                 myCurrentAnimator.SetBool("_isShooting", true);
+            }
         }
     }
 

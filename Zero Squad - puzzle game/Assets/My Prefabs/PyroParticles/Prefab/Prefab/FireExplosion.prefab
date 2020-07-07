@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edb4b036759befb44adb7543192710db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSource: {fileID: 0}
+  AudioSource: {fileID: 8229636}
   StartTime: 0.25
   StopTime: 0.5
   Duration: 0.35
