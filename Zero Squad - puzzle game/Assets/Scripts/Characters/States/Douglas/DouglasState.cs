@@ -113,13 +113,11 @@ public class DouglasState : PlayerStateManager
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isLifting.ToString(), false);
                     myCurrentAnimator.SetBool(CharactersAnimationTransitionParameters._isCarrying.ToString(), false);
                     myCurrentAgent.speed = runningSpeed;
-                    if (GameManager.Instance.IsReachedFinalCheckPoint)
+                    if (GameManager.Instance.IsReachedFinalCheckPoint) return;
+                    if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
                     {
-                        if (TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"])
-                        {
-                            TutorialPopUpsController.Instance.HideFirstChild();
-                            TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
-                        }
+                        TutorialPopUpsController.Instance.HideFirstChild();
+                        TutorialPopUpsController.Instance.MyTutorialHandler["Drop bomb"] = false;
                     }
                 }
                 if (GameManager.Instance.IsReachedFinalCheckPoint) return;

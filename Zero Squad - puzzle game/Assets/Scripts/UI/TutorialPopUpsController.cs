@@ -11,6 +11,7 @@ public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
 
     private void Start()
     {
+        _playerController = GameObject.Find("Characters Manager").GetComponent<PlayerController>();
         if (GameManager.Instance.IsReachedFinalCheckPoint)
         {
             transform.GetChild(0).gameObject.SetActive(false);
@@ -68,7 +69,6 @@ public class TutorialPopUpsController : Singleton<TutorialPopUpsController>
     public void SetDouglasBombBoolTrue()
     {
         MyTutorialHandler[_images.Peek().name] = true;
-        _playerController = GameObject.Find("Characters Manager").GetComponent<PlayerController>();
         if (_playerController.GetCurrentStateRef() is DouglasState)
             DisplayFirstChild();
     }

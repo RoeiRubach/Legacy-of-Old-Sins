@@ -42,6 +42,7 @@ public class MusicAudioController : SingletonDontDestroy<MusicAudioController>
     {
         StopAllCoroutines();
         MusicToPlay = musicToPlay;
+        print(MusicToPlay);
         StartCoroutine(FadeOutMusic());
     }
 

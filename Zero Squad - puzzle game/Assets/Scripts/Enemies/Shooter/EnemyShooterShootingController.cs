@@ -21,7 +21,7 @@ public class EnemyShooterShootingController : MonoBehaviour
     {
         _shootingTimer = _autoShootingDelay;
         _playerControllerHealth = FindObjectOfType<PlayerController>();
-        _enemyTargetDetecting = GetComponentInChildren<EnemyTargetDetecting>();
+        _enemyTargetDetecting = transform.parent.GetComponentInChildren<EnemyTargetDetecting>();
     }
 
     private void FixedUpdate()

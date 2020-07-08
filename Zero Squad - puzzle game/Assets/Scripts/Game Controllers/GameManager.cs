@@ -30,18 +30,18 @@ public class GameManager : SingletonDontDestroy<GameManager>
             {
                 case 1:
                     _checkPoints[0].SetActive(true);
-                    MusicAudioController.Instance.SwitchGameMusic();
+                    CheckPointNumber = 1;
                     SetCheckPointsLocation(_firstCheckPoint);
                     break;
                 case 2:
                     _checkPoints[1].SetActive(true);
-                    MusicAudioController.Instance.SwitchGameMusic(1);
+                    CheckPointNumber = 1;
                     SetCheckPointsLocation(_secondCheckPoint);
                     break;
                 case 3:
                     _checkPoints[2].GetComponent<BoxCollider>().enabled = true;
                     IsReachedFinalCheckPoint = true;
-                    MusicAudioController.Instance.SwitchGameMusic(2);
+                    CheckPointNumber = 3;
                     SetCheckPointsLocation(_thirdCheckPoint);
                     break;
             }
