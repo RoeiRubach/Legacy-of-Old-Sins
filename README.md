@@ -24,7 +24,7 @@ Beside that, we need to impress "investors" via pitch about our team, workflow a
 
 ## Project Status
 
-![Build-status](https://img.shields.io/badge/build-passing-green)
+![Build-status](https://img.shields.io/badge/build-passing-green)\
 We finished working on the project but I do plan to refactor my code.
 ```
 LAST-PROJECT-COMMIT 16-JUL-2020
@@ -47,7 +47,7 @@ Runs on Windows only
 
 ## Showcase & Screenshots
 
-[Legacy of Old Sins - Trailer](https://youtu.be/_dYMlnEp3-E)
+[Legacy of Old Sins - Trailer](https://youtu.be/_dYMlnEp3-E)\
 This trailer was made by me. I'm not a game-trailer-editor expert, just a hobby.
 
 ![Legacy of Old Sins - Main Menu](https://user-images.githubusercontent.com/44708223/87680962-bb4aad80-c786-11ea-96a0-1aba3600e40c.png)
