@@ -12,9 +12,9 @@ This is an isometric-tactical-real-time-puzzle game.\
 * [Showcase & Screenshots](#Showcase-and-Screenshots)
 * [Credits](#Credits)
 
-## General Info :mortar_board:
+## General Info
 
-As mentioned, this is our final project for our production course studies.\
+As mentioned, this is our final project for our production course studies :mortar_board:.\
 I was the programmer in the team.\
 In this course we learn what it's like to be a part of a team / indie studio and develop a game from the very beginning.
 ```
