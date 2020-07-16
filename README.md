@@ -38,7 +38,7 @@ This project was created with:
 
 ## Setup
 
-To run this project, Simply download the ZIP, extract it and run the "Legacy of Old Sins" application.
+To run this project, simply download the ZIP, extract it and run the "Legacy of Old Sins" application.
 - [x] [Legacy of Old Sins - build](https://drive.google.com/file/d/1LgQIUqSxXUw0bpfXfB_EfE8KXaptbRHY/view?usp=sharing)
 
 ```
