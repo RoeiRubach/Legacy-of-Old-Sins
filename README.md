@@ -9,7 +9,7 @@ This is an isometric-tactical-real-time-puzzle game.\
 * [Project Status](#Project-Status)
 * [Technologies](#Technologies)
 * [Setup](#Setup)
-* [Showcase & Screenshots](#Showcase-Screenshots)
+* [Showcase & Screenshots](#Showcase-and-Screenshots)
 * [Credits](#Credits)
 
 ## General Info :mortar_board:
@@ -45,7 +45,7 @@ To run this project, simply download the ZIP, extract it and run the "Legacy of 
 Runs on Windows only
 ```
 
-## Showcase & Screenshots
+## Showcase and Screenshots
 
 [Legacy of Old Sins - Trailer](https://youtu.be/_dYMlnEp3-E)\
 This trailer was made by me. I'm not a game-trailer-editor expert, just a hobby.
