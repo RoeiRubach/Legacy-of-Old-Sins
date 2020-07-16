@@ -5,7 +5,7 @@ This is an isometric-tactical-real-time-puzzle game.\
 
 ## Table of Contents
 
-* [General Info](#General Info)
+* [General Info](#General-Info-:mortar_board:)
 * [Project Status](#Project-Status)
 * [Technologies](#Technologies)
 * [Setup](#Setup)
