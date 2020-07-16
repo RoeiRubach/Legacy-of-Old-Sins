@@ -1,6 +1,7 @@
 # Legacy of Old Sins :gun: :hocho: :computer:
 
-This is an isometric-tactical-real-time-puzzle game. 3rd year Production course studies - Final Project.
+This is an isometric-tactical-real-time-puzzle game.\
+3rd year Production course studies - Final Project.
 
 ## Table of Contents
 
@@ -13,8 +14,8 @@ This is an isometric-tactical-real-time-puzzle game. 3rd year Production course 
 
 ## General Info :mortar_board:
 
-As mentioned, this is our final project for our production course studies.
-I was the programmer in the team.
+As mentioned, this is our final project for our production course studies.\
+I was the programmer in the team.\
 In this course we learn what it's like to be a part of a team / indie studio and develop a game from the very beginning.
 ```
 Division into teams, division of roles among team members, writing GDD, using Trello, working under deadlines and to have a finished game at the end.
@@ -48,7 +49,6 @@ Runs on Windows only
 
 [Legacy of Old Sins - Trailer](https://youtu.be/_dYMlnEp3-E)
 This trailer was made by me. I'm not a game-trailer-editor expert, just a hobby.
-
 
 ![Legacy of Old Sins - Main Menu](https://user-images.githubusercontent.com/44708223/87680962-bb4aad80-c786-11ea-96a0-1aba3600e40c.png)
 
